@@ -1,0 +1,5 @@
+/* 정주현: Header position:fixed 용 상단 여백 */
+.blank-top {
+  width: auto;
+  height: 50px;
+}
