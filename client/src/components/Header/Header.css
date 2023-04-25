@@ -108,6 +108,8 @@ header .nav-right {
 }
 
 .search-input {
+  position: absolute;
+  right: 0px;
   width: 300px;
   height: 30px;
   display: inline;
@@ -124,8 +126,8 @@ header .nav-right {
 .nav-search {
   height: fit-content;
   max-height: 200px;
-  position: fixed;
-  right: 100px;
+  position: absolute;
+  right: -10px;
   top: 55px;
   float: right;
   width: 320px;
@@ -171,4 +173,9 @@ header .nav-right {
   width: 50px;
   height: 50px;
   border-radius: 15px;
+}
+
+.search-wrapper {
+  float: right;
+  position: relative;
 }
