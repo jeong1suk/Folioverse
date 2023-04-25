@@ -18,7 +18,7 @@ const Header = () => {
   }
 
   return (
-    <header className='sticky-header'>
+    <header>
       <nav>
         <h1>Folioverse</h1>
         <ul className='nav-left'>
