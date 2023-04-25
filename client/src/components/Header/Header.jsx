@@ -2,6 +2,7 @@
 import { useState } from "react";
 import "./Header.css";
 import DropDownMenu from "./DropDownMenu";
+import SearchResultView from "./SearchResultView";
 
 /** 테스트용 프로필 이미지 */
 const imgUrl =
@@ -9,6 +10,8 @@ const imgUrl =
 
 const Header = () => {
   const [profileView, setProfileView] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [textFocus, setTextFocus] = useState(false);
 
   /** 로그인/로그아웃 상태 테스트용 변수 */
   const isLoginTest = true;
@@ -35,7 +38,7 @@ const Header = () => {
             onClick={profileViewHandler}
           >
             <li>
-              <img src={imgUrl} />
+              <img src={imgUrl} alt='profileImg' />
               <span>{!profileView ? "⌄" : "⌃"}</span>
             </li>
             {profileView && <DropDownMenu />}
@@ -46,6 +49,27 @@ const Header = () => {
             <li>로그인</li>
           </ul>
         )}
+        <div>
+          <input
+            type='text'
+            placeholder='Search...'
+            className='search-input'
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+            onFocus={() => {
+              setTextFocus(true);
+            }}
+            onBlur={() => {
+              setTextFocus(false);
+            }}
+          />
+          <ul className='nav-search'>
+            {searchText && textFocus && (
+              <SearchResultView searchText={searchText} />
+            )}
+          </ul>
+        </div>
       </nav>
     </header>
   );

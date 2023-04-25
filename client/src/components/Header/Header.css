@@ -106,3 +106,69 @@ header .nav-right {
   display: inline;
   color: rgb(187, 187, 187);
 }
+
+.search-input {
+  width: 300px;
+  height: 30px;
+  display: inline;
+  float: right;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.nav-search {
+  height: fit-content;
+  max-height: 200px;
+  position: fixed;
+  right: 100px;
+  top: 55px;
+  float: right;
+  width: 320px;
+  overflow-y: scroll;
+}
+
+.nav-search::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-search {
+  display: inline-block;
+}
+
+.nav-search li:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.nav-search li:last-child {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.nav-search li {
+  position: relative;
+  display: block;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  padding-left: 25px;
+  border-top: #595959 1px solid;
+}
+
+.nav-search div {
+  position: absolute;
+  top: 20%;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.nav-search img {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
