@@ -124,3 +124,22 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.moreData-wrapper {
+  width: auto;
+  height: 80px;
+  position: relative;
+}
+.moreData {
+  position: absolute;
+  top: 30px;
+  left: 48.7%;
+  width: 50px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #696969;
+  display: block;
+  font-weight: 600;
+  border: none;
+}
