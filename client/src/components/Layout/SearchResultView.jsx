@@ -24,7 +24,8 @@ function SearchResultView({ searchText }) {
     <>
       {data.map((el, idx) => {
         return (
-          (el.name.includes(searchText) || el.email.includes(searchText)) && (
+          (el.name.toUpperCase().includes(searchText.toUpperCase()) ||
+            el.email.toUpperCase().includes(searchText.toUpperCase())) && (
             <li key={idx}>
               <img src='https://i.pinimg.com/474x/76/6f/3f/766f3fe1a49605789ccedc6cf1fb6673.jpg' />
               <div>
