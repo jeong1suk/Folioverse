@@ -7,11 +7,11 @@ import Network from "../Network/Network";
 function Layout() {
   return (
     <>
+      <Header /> {/* Header 태그는 항상 맨 아래에 위치해야함. */}
       <div className='blank-top'>
         {/* blank-top div는 항상 맨 위에 위치해야함. */}
       </div>
       <Network />
-      <Header /> {/* Header 태그는 항상 맨 아래에 위치해야함. */}
     </>
   );
 }

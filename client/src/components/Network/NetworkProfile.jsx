@@ -1,3 +1,5 @@
+// 정주현
+
 import goldmedal from "/medal/gold.png";
 import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";

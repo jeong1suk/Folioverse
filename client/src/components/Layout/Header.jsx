@@ -15,7 +15,7 @@ const Header = () => {
   const [textFocus, setTextFocus] = useState(false);
 
   /** 로그인/로그아웃 상태 테스트용 변수 */
-  const isLoginTest = true;
+  const isLoginTest = false;
 
   function profileViewHandler() {
     return setProfileView(!profileView);

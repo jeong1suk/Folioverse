@@ -12,6 +12,7 @@ header {
   backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
+  z-index: 10;
 }
 
 header h1,
@@ -162,6 +163,9 @@ header .nav-right {
 }
 
 .nav-search div {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   position: absolute;
   top: 20%;
   margin-left: 20px;

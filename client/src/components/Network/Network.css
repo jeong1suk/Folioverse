@@ -1,3 +1,5 @@
+/* 정주현 */
+
 * {
   margin: 0;
   padding: 0;
@@ -40,7 +42,7 @@
   position: absolute;
   top: -18px;
   left: -20px;
-  z-index: 10;
+  z-index: 1;
   background-color: transparent;
 }
 .network-profile-box .medal-gold {
@@ -52,7 +54,7 @@
   position: absolute;
   top: -14px;
   left: -15px;
-  z-index: 10;
+  z-index: 1;
   background-color: transparent;
 }
 .network-profile-box .medal-silver {
@@ -64,7 +66,7 @@
   position: absolute;
   top: -14px;
   left: -15px;
-  z-index: 10;
+  z-index: 1;
   background-color: transparent;
 }
 .network-profile-box .medal-bronze {
