@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
