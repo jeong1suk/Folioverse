@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import passport from "passport";
 import localPassport from "./local.js";
 import User from "../../schemas/users.js";

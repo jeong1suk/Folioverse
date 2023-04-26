@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import bcrypt from "bcrypt";
 import passport from "passport";
 // import User from "../../schemas/users.js";

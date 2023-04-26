@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Router } from "express";
 import { loginAuthenticate, signJWT } from "../../service/auth/login.js";
 import dotenv from "dotenv";
@@ -6,7 +8,7 @@ dotenv.config();
 const router = Router();
 
 router.post(
-  "/login_process",
+  "/login-process",
   (req, res, next) => {
     loginAuthenticate(req, res, next);
   },
@@ -19,7 +21,7 @@ router.post(
   }
 );
 
-router.get("/islogin", (req, res) => {
+router.get("/is-login", (req, res) => {
   res.send(req.user ? true : false);
 });
 
