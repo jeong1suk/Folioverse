@@ -1,9 +1,10 @@
-import useAxiosHook from "../../CustomHooks";
+// 정주현
+
+import { useAxiosGet } from "../../CustomHooks";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-// 정주현
 function SearchResultView({ searchText }) {
-  let { data, error, loading } = useAxiosHook(`${host}/dummy/network`);
+  let { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
   if (loading) {
     return (
       <>

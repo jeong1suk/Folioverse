@@ -1,4 +1,5 @@
 // 정주현
+
 import { useState } from "react";
 import "./Header.css";
 import DropDownMenu from "./DropDownMenu";
@@ -14,7 +15,7 @@ const Header = () => {
   const [textFocus, setTextFocus] = useState(false);
 
   /** 로그인/로그아웃 상태 테스트용 변수 */
-  const isLoginTest = false;
+  const isLoginTest = true;
 
   function profileViewHandler() {
     return setProfileView(!profileView);
@@ -37,7 +38,7 @@ const Header = () => {
             }
             onClick={profileViewHandler}
           >
-            <li>
+            <li onBlur={profileViewHandler}>
               <img src={imgUrl} alt='profileImg' />
               <span>{!profileView ? "⌄" : "⌃"}</span>
             </li>
