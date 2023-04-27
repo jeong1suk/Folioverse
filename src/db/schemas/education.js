@@ -1,26 +1,25 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
 
-const EducationSchema = new Schema({
-  shortId,// 나중에 필요없으면 제거 
-  school_name: {
-    type: String,
-    required: true,
+const EducationSchema = new Schema(
+  {
+  id: {ref: 'User'},
+  school_name: { type: String, required: true },
+  major: { type: String, required: true },
+  graduate_status: { type: String, required: true },  
   },
-  major: {
-    type: String,
-    required: true,
-  },
-  graduate_status: {
-    type: String,
-    required: true,
-  },
-  created_at: {
-    timestamps: true,
-  },
-  updated_at: {
-    timestamps: true,
-  },
-});
+  {timestamps: true}
+);
 
 module.exports = EducationSchema;
+
+
+
+// Table education {
+//   id objectId [primary key]
+//   school_name varchar [not null]
+//   major varchar [not null]
+//   graduate_status varchar [not null]
+//   created_at timestamp
+//   updated_at timestamp
+// }
+

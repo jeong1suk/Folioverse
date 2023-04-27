@@ -1,19 +1,34 @@
-const { Schema } = require ("mongoose");
+const { Schema } = require("mongoose");
 
-//UserSchema 정의하기
+// UserSchema 정의하기
 const UserSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, trim: true },
     name: { type: String, required: true },
     description: { type: String, required: false, default: "설명이 아직 없습니다. 추가해 주세요." },
-    like_user: { type: String, ref : 'Users', required: true },
-    follower_user: { type: String, ref : 'Users', required: true },
-    comments: { type: String, ref : 'Comments', required: true },
-    profile_image: { type: String, required: true }, //이미지인데 왜 문자열로 받아와????
-    created_at: { timestamps: true },
-    update_at: { timestamps: true },
-  }
+    like_user: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
+    follower_user: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment', required: true }],
+    profile_image: { type: Buffer, required: true },
+  },
+  { timestamps: true }
 );
 
-module.exports = UserSchema ;
+module.exports = UserSchema;
+
+  //   Table users {
+  //   id objectId [primary key]
+  //   name varchar [not null]
+  //   email varchar [not null]
+  //   password varchar [not null]
+  //   description varchar
+  //   like_user ref[users]
+  //   follow_user ref[users]
+  //   comments ref[comments]
+  //   profile_image varchar
+  //   created_at timestamp
+  //   updated_at timestamp
+  // }
+  
+  
