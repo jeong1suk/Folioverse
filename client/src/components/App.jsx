@@ -1,11 +1,11 @@
 //담당 : 이승현
 
-import Router from "../Router";
+import Layout from "./Layout/Layout";
 
 const App = () => {
   return (
     <>
-      <Router />
+      <Layout />
     </>
   );
 };

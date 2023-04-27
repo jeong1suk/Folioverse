@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 const themeStore = (set) => ({
-  theme: true,
+  theme: false,
   toggleTheme: () => set((state) => ({ theme: !state.theme })),
 });
 
