@@ -1,33 +1,46 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useGetAxios } from "../../utils/useQuery";
+import { useGetAxios, usePostAxios } from "../../utils/useQuery";
 
 const EditProfile = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
   const { data } = useGetAxios(url + "/dummy/auth/user-info", "getMyInfo");
-  const [name, setName] = useState(null);
-  const [description, setDescription] = useState(null);
-
-  useState(() => {
-    setName(data?.name);
-    setDescription(data?.description);
-  }, [data]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const { mutate } = usePostAxios(url + "/dummy/auth/edit-profile");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, description);
+    mutate(
+      {
+        body: {
+          name,
+          description,
+        },
+      },
+      {
+        onSuccess: (data) => console.log(data),
+      }
+    );
   };
 
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setDescription(data.description);
+    }
+  }, [data]);
+
   return (
-    <>
+    <div className="dark:text-white">
       <h1 className="text-2xl border-b-2 pb-2">프로필 설정</h1>
       <form className="flex flex-row pt-5">
         <div className="basis-3/4 pr-20">
           <article>
             <label className="text-lg">이름</label>
             <input
-              className="block border w-full mx-1 mb-5 mt-1 rounded p-1"
+              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -37,7 +50,7 @@ const EditProfile = () => {
             <label className="text-lg">이메일</label>
             <input
               type="text"
-              className="block w-full mx-1 mb-5 mt-1 p-1 text-slate-500 font-thin border rounded"
+              className="block w-full mx-1 mb-5 mt-1 p-1 text-slate-500 font-thin border rounded dark:bg-neutral-300"
               defaultValue={data?.email}
               disabled
             />
@@ -45,7 +58,7 @@ const EditProfile = () => {
           <article>
             <label className="text-lg">한줄 소개</label>
             <textarea
-              className="block border w-full mx-1 mb-5 mt-1 rounded p-1"
+              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black"
               cols="30"
               rows="10"
               value={description}
@@ -53,7 +66,7 @@ const EditProfile = () => {
             ></textarea>
           </article>
           <button
-            className="border px-2 py-1 w-full rounded hover:bg-gray-100"
+            className="border px-2 py-1 w-full rounded hover:bg-gray-100 dark:hover:bg-neutral-700"
             onClick={onSubmit}
           >
             변경
@@ -69,7 +82,7 @@ const EditProfile = () => {
           </div>
         </article>
       </form>
-    </>
+    </div>
   );
 };
 

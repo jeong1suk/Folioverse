@@ -18,4 +18,20 @@ router.get("/user-info", async (req, res) => {
   res.json(data);
 });
 
+router.post("/check-password", async (req, res) => {
+  const { password } = req.body;
+  const dummyPassword = "test1234";
+  res.send(password === dummyPassword ? true : false);
+});
+
+router.post("/change-password", async (req, res) => {
+  const { password } = req.body;
+  res.json(password);
+});
+
+router.post("/edit-profile", async (req, res) => {
+  const { name, description } = req.body;
+  res.json({ name, description });
+});
+
 export default router;
