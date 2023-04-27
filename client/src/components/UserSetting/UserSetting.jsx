@@ -18,13 +18,19 @@ const UserSetting = () => {
         <nav className="border basis-1/6">
           <ul>
             <li>
-              <Link to="">프로필 설정</Link>
+              <Link className="border block" to="">
+                프로필 설정
+              </Link>
             </li>
             <li>
-              <Link to="edit-user-info">회원정보 변경</Link>
+              <Link className="border block" to="edit-user-info">
+                회원정보 변경
+              </Link>
             </li>
             <li>
-              <Link to="manage-follow">팔로우 관리</Link>
+              <Link className="border block" to="manage-follow">
+                팔로우 관리
+              </Link>
             </li>
           </ul>
         </nav>
