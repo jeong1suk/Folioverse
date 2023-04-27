@@ -13,7 +13,7 @@ const UserSetting = () => {
 
   return (
     <div className="wrapper py-2 px-12 sm:px-24 2xl:px-80">
-      <header className="flex flex-row justify-between mb-4">
+      <div className="flex flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
           <img
             className="w-[5%] rounded-full"
@@ -31,7 +31,7 @@ const UserSetting = () => {
         >
           프로필로 돌아가기
         </Link>
-      </header>
+      </div>
       <div className="flex flex-row">
         <nav className="basis-1/6 mr-5">
           <ContentTab />

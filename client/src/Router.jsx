@@ -17,7 +17,7 @@ const Router = () => {
 };
 
 const HomePage = () => {
-  return <div>홈페이지</div>;
+  return <div className="text-white">홈페이지</div>;
 };
 
 export default Router;
