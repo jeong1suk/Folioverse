@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import UserSetting from "./components/UserSetting/UserSetting";
 import DarkModeTest from "./components/DarkModeTest";
 import Layout from "./components/Layout/Layout";

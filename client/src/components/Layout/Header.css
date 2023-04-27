@@ -1,0 +1,185 @@
+/* 정주현 */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+header h1,
+li {
+  color: white;
+}
+
+header h1 {
+  float: left;
+  font-size: 30px;
+  padding: 3px 0 0 15px;
+  display: inline;
+  color: white;
+  background-color: transparent;
+}
+
+header .nav-left,
+.nav-right {
+  margin: 15px 20px 0 30px;
+  list-style: none;
+  display: inline;
+  background-color: transparent;
+}
+
+header li {
+  color: white;
+  font-size: 14x;
+  margin: 0 10px;
+  font-weight: 500;
+  display: inline-block;
+  background-color: transparent;
+}
+
+header li:hover {
+  color: #d6d6d6;
+}
+
+header .nav-left {
+  float: left;
+}
+header .nav-right {
+  float: right;
+}
+
+.nav-right-login {
+  position: relative;
+  float: right;
+  background-color: transparent;
+  margin: 7px 20px;
+}
+
+.nav-right-login-menuView {
+  font-size: 12px;
+}
+
+.nav-right-login-menuView > li:not(:first-child) {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-right: -10px;
+  padding: 10px 15px;
+  display: block;
+  color: white;
+  backdrop-filter: blur(3px);
+  clear: both;
+  border-top: #595959 1px solid;
+}
+
+.nav-right-login-menuView > li:nth-child(2) {
+  border: none;
+}
+
+.nav-right-login-menuView > li:first-child {
+  display: block;
+  float: right;
+  margin-bottom: 4px;
+}
+.nav-right-login-menuView > li:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.nav-right-login img {
+  background-color: transparent;
+  width: 35px;
+  border-radius: 25px;
+  display: inline;
+}
+
+.nav-right-login span {
+  position: relative;
+  top: -13px;
+  margin-left: 7px;
+  display: inline;
+  color: rgb(187, 187, 187);
+}
+
+.search-input {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  width: 300px;
+  height: 30px;
+  display: inline;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.nav-search {
+  height: fit-content;
+  max-height: 200px;
+  position: absolute;
+  right: -10px;
+  top: 55px;
+  float: right;
+  width: 320px;
+  overflow-y: scroll;
+}
+
+.nav-search::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-search {
+  display: inline-block;
+}
+
+.nav-search li:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.nav-search li:last-child {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.nav-search li {
+  position: relative;
+  display: block;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  padding-left: 25px;
+  border-top: #595959 1px solid;
+}
+
+.nav-search div {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  top: 20%;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.nav-search img {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.search-wrapper {
+  float: right;
+  position: relative;
+}

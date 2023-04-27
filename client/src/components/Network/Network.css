@@ -1,0 +1,145 @@
+/* 정주현 */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.network-container {
+  margin: auto;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 230px 230px 230px 230px 230px;
+}
+
+.network-profile-box:first-child,
+.network-profile-box:nth-child(2),
+.network-profile-box:nth-child(3),
+.network-profile-box:nth-child(4),
+.network-profile-box:nth-child(5) {
+  border: transparent 1px solid;
+  background-image: linear-gradient(#242424, #242424),
+    linear-gradient(to right, #74ebd5, #acb6e5);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.network-profile-box {
+  margin: auto;
+  margin-top: 20px;
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 350px;
+  background-color: #242424;
+  border: grey 1px solid;
+  border-radius: 10px;
+}
+
+.network-profile-box:first-child > .medal-gold {
+  display: block;
+  width: 40px;
+  position: absolute;
+  top: -18px;
+  left: -20px;
+  z-index: 1;
+  background-color: transparent;
+}
+.network-profile-box .medal-gold {
+  display: none;
+}
+.network-profile-box:nth-child(2) > .medal-silver {
+  display: block;
+  width: 30px;
+  position: absolute;
+  top: -14px;
+  left: -15px;
+  z-index: 1;
+  background-color: transparent;
+}
+.network-profile-box .medal-silver {
+  display: none;
+}
+.network-profile-box:nth-child(3) > .medal-bronze {
+  display: block;
+  width: 30px;
+  position: absolute;
+  top: -14px;
+  left: -15px;
+  z-index: 1;
+  background-color: transparent;
+}
+.network-profile-box .medal-bronze {
+  display: none;
+}
+
+.network-profile-box .profile-img {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 5px;
+}
+
+.network-profile-box div {
+  height: auto;
+  width: 150px;
+  overflow: hidden;
+  position: absolute;
+  top: 200px;
+  left: 25px;
+  background-color: #242424;
+}
+
+.network-profile-box h4 {
+  width: 100%;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  background-color: #242424;
+}
+
+.network-profile-box h5 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7d7c7c;
+  background-color: #242424;
+}
+
+.network-profile-box p {
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+  font-size: 13px;
+  color: #c7c7c7;
+  background-color: #242424;
+}
+
+.network-profile-box h4,
+h5,
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.moreData-wrapper {
+  width: auto;
+  height: 80px;
+  position: relative;
+}
+.moreData {
+  position: absolute;
+  top: 30px;
+  left: 48.7%;
+  width: 50px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #696969;
+  display: block;
+  font-weight: 600;
+  border: none;
+}
