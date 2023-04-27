@@ -20,7 +20,7 @@ function NetworkFilter({ sortBy, setSortBy }) {
 
   return (
     <div className={styles.filterContainer}>
-      <h2>정렬</h2>
+      <h2>필터</h2>
       <div className={styles.filterList}>
         <button
           className={notMajor ? styles.btnEnable : styles.btnDisable}
