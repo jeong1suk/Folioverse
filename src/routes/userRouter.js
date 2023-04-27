@@ -17,11 +17,12 @@ userRouter.get("/list", async function (req, res, next) {
 /** 현재 유저 확인, 발급받은 토큰이 남아있다면 JWT 토큰 유저 데이터를 받아와서 자동 로그인 하는데 사용 */
 userRouter.get("/current", async function (req, res, next) {
   try {
-    const userToken = req.headers["authorization"]?.split(" ")[1] ?? "null";
-
     // DB에서 유저 데이터를 다 받아서 로그인과 똑같은데이터를 전송
-
-    const currentUserInfo = res.status(200).send(currentUserInfo);
+    const userId = req.user["id"];
+    const currentUserInfo = await userService.getUserInfo({
+      userId,
+    });
+    res.status(200).send(currentUserInfo);
   } catch (error) {
     next(error);
   }

@@ -1,14 +1,6 @@
 import { UserModel } from "../db/schemas/user";
 import bcrypt from "bcrypt";
-
-const update = async ({ user_id, fieldToUpdate, newValue }) => {
-  const filter = { id: user_id };
-  const update = { [fieldToUpdate]: newValue };
-  const option = { returnOriginal: false };
-
-  const updatedUser = await UserModel.findOneAndUpdate(filter, update, option);
-  return updatedUser;
-};
+import { User } from "../db";
 
 const userService = {
   /** 네트워크 창 클릭 요청 시 응답.
