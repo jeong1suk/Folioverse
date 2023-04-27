@@ -6,7 +6,7 @@ function NetworkFilter({ sortBy, setSortBy }) {
   const [major, setMajor] = useState(false);
   const [juniorDev, setJuniorDev] = useState(false);
   const [seniorDev, setSeniorDev] = useState(false);
-  const [beteranDev, setBeteranDev] = useState(false);
+  const [experiencedDev, setExperiencedDev] = useState(false);
 
   useEffect(() => {
     let sort = "";
@@ -14,9 +14,9 @@ function NetworkFilter({ sortBy, setSortBy }) {
     if (major) sort = "major ";
     if (juniorDev) sort = "juniorDev ";
     if (seniorDev) sort = "seniorDev ";
-    if (beteranDev) sort = "beteranDev ";
+    if (experiencedDev) sort = "experiencedDev ";
     setSortBy(sort);
-  }, [notMajor, major, juniorDev, seniorDev, beteranDev]);
+  }, [notMajor, major, juniorDev, seniorDev, experiencedDev]);
 
   return (
     <div className={styles.filterContainer}>
@@ -29,7 +29,7 @@ function NetworkFilter({ sortBy, setSortBy }) {
             setMajor(false);
             setJuniorDev(false);
             setSeniorDev(false);
-            setBeteranDev(false);
+            setExperiencedDev(false);
           }}
         >
           비전공자
@@ -41,7 +41,7 @@ function NetworkFilter({ sortBy, setSortBy }) {
             setMajor(!major);
             setJuniorDev(false);
             setSeniorDev(false);
-            setBeteranDev(false);
+            setExperiencedDev(false);
           }}
         >
           전공자
@@ -53,7 +53,7 @@ function NetworkFilter({ sortBy, setSortBy }) {
             setNotMajor(false);
             setMajor(false);
             setSeniorDev(false);
-            setBeteranDev(false);
+            setExperiencedDev(false);
           }}
         >
           신입개발자
@@ -65,22 +65,22 @@ function NetworkFilter({ sortBy, setSortBy }) {
             setNotMajor(false);
             setMajor(false);
             setJuniorDev(false);
-            setBeteranDev(false);
+            setExperiencedDev(false);
           }}
         >
           경력개발자
         </button>
         <button
-          className={beteranDev ? styles.btnEnable : styles.btnDisable}
+          className={experiencedDev ? styles.btnEnable : styles.btnDisable}
           onClick={() => {
-            setBeteranDev(!beteranDev);
+            setExperiencedDev(!experiencedDev);
             setNotMajor(false);
             setMajor(false);
             setJuniorDev(false);
             setSeniorDev(false);
           }}
         >
-          경력개발자
+          경력개발자(N년 이상)
         </button>
       </div>
     </div>
