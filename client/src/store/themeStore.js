@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 

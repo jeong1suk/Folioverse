@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 const EditProfile = () => {
   return (
     <>
