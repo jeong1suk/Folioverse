@@ -29,8 +29,8 @@ header h1 {
   background-color: transparent;
 }
 
-header .nav-left,
-.nav-right {
+header .navLeft,
+.navRight {
   margin: 15px 20px 0 30px;
   list-style: none;
   display: inline;
@@ -50,25 +50,25 @@ header li:hover {
   color: #d6d6d6;
 }
 
-header .nav-left {
+header .navLeft {
   float: left;
 }
-header .nav-right {
+header .navRight {
   float: right;
 }
 
-.nav-right-login {
+.navRightLogin {
   position: relative;
   float: right;
   background-color: transparent;
   margin: 7px 20px;
 }
 
-.nav-right-login-menuView {
+.navRightLoginMenuView {
   font-size: 12px;
 }
 
-.nav-right-login-menuView > li:not(:first-child) {
+.navRightLoginMenuView > li:not(:first-child) {
   background-color: rgba(0, 0, 0, 0.7);
   margin-right: -10px;
   padding: 10px 15px;
@@ -79,28 +79,28 @@ header .nav-right {
   border-top: #595959 1px solid;
 }
 
-.nav-right-login-menuView > li:nth-child(2) {
+.navRightLoginMenuView > li:nth-child(2) {
   border: none;
 }
 
-.nav-right-login-menuView > li:first-child {
+.navRightLoginMenuView > li:first-child {
   display: block;
   float: right;
   margin-bottom: 4px;
 }
-.nav-right-login-menuView > li:last-child {
+.navRightLoginMenuView > li:last-child {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
-.nav-right-login img {
+.navRightLogin img {
   background-color: transparent;
   width: 35px;
   border-radius: 25px;
   display: inline;
 }
 
-.nav-right-login span {
+.navRightLogin span {
   position: relative;
   top: -13px;
   margin-left: 7px;
@@ -108,7 +108,7 @@ header .nav-right {
   color: rgb(187, 187, 187);
 }
 
-.search-input {
+.searchInput {
   position: absolute;
   top: -2px;
   right: 0px;
@@ -124,7 +124,7 @@ header .nav-right {
   color: white;
 }
 
-.nav-search {
+.navSearch {
   height: fit-content;
   max-height: 200px;
   position: absolute;
@@ -135,24 +135,24 @@ header .nav-right {
   overflow-y: scroll;
 }
 
-.nav-search::-webkit-scrollbar {
+.navSearch::-webkit-scrollbar {
   display: none;
 }
 
-.nav-search {
+.navSearch {
   display: inline-block;
 }
 
-.nav-search li:first-child {
+.navSearch li:first-child {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-.nav-search li:last-child {
+.navSearch li:last-child {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
-.nav-search li {
+.navSearch li {
   position: relative;
   display: block;
   color: white;
@@ -162,7 +162,7 @@ header .nav-right {
   border-top: #595959 1px solid;
 }
 
-.nav-search div {
+.navSearch div {
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -172,14 +172,14 @@ header .nav-right {
   display: inline-block;
 }
 
-.nav-search img {
+.navSearch img {
   display: inline-block;
   width: 50px;
   height: 50px;
   border-radius: 15px;
 }
 
-.search-wrapper {
+.searchWrapper {
   float: right;
   position: relative;
 }

@@ -1,30 +1,21 @@
 /* 정주현 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
+  background-color: black;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-.network-container {
+.networkContainer {
   margin: auto;
   width: fit-content;
   display: grid;
-  grid-template-columns: 230px 230px 230px 230px 230px;
+  grid-template-columns: 230px 230px 230px;
 }
 
-.network-profile-box:first-child,
-.network-profile-box:nth-child(2),
-.network-profile-box:nth-child(3),
-.network-profile-box:nth-child(4),
-.network-profile-box:nth-child(5) {
-  border: transparent 1px solid;
-  background-image: linear-gradient(#242424, #242424),
-    linear-gradient(to right, #74ebd5, #acb6e5);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-}
-
-.network-profile-box {
+.networkProfileBox {
   margin: auto;
   margin-top: 20px;
   display: inline-block;
@@ -33,22 +24,10 @@
   height: 350px;
   background-color: #242424;
   border: grey 1px solid;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
-.network-profile-box:first-child > .medal-gold {
-  display: block;
-  width: 40px;
-  position: absolute;
-  top: -18px;
-  left: -20px;
-  z-index: 1;
-  background-color: transparent;
-}
-.network-profile-box .medal-gold {
-  display: none;
-}
-.network-profile-box:nth-child(2) > .medal-silver {
+.networkProfileBox:first-child > .medalGold {
   display: block;
   width: 30px;
   position: absolute;
@@ -57,10 +36,10 @@
   z-index: 1;
   background-color: transparent;
 }
-.network-profile-box .medal-silver {
+.networkProfileBox .medalGold {
   display: none;
 }
-.network-profile-box:nth-child(3) > .medal-bronze {
+.networkProfileBox:nth-child(2) > .medalSilver {
   display: block;
   width: 30px;
   position: absolute;
@@ -69,11 +48,23 @@
   z-index: 1;
   background-color: transparent;
 }
-.network-profile-box .medal-bronze {
+.networkProfileBox .medalSilver {
+  display: none;
+}
+.networkProfileBox:nth-child(3) > .medalBronze {
+  display: block;
+  width: 30px;
+  position: absolute;
+  top: -14px;
+  left: -15px;
+  z-index: 1;
+  background-color: transparent;
+}
+.networkProfileBox .medalBronze {
   display: none;
 }
 
-.network-profile-box .profile-img {
+.networkProfileBox .profileImg {
   width: 180px;
   height: 180px;
   position: absolute;
@@ -82,7 +73,7 @@
   border-radius: 5px;
 }
 
-.network-profile-box div {
+.networkProfileBox div {
   height: auto;
   width: 150px;
   overflow: hidden;
@@ -92,23 +83,23 @@
   background-color: #242424;
 }
 
-.network-profile-box h4 {
+.networkProfileBox h4 {
   width: 100%;
   white-space: nowrap;
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 700;
   color: #fff;
   background-color: #242424;
 }
 
-.network-profile-box h5 {
+.networkProfileBox h5 {
   font-size: 14px;
   font-weight: 400;
   color: #7d7c7c;
   background-color: #242424;
 }
 
-.network-profile-box p {
+.networkProfileBox p {
   margin-top: 10px;
   display: inline-block;
   width: 100%;
@@ -118,14 +109,14 @@
   background-color: #242424;
 }
 
-.network-profile-box h4,
+.networkProfileBox h4,
 h5,
 p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.moreData-wrapper {
+.moreDataWrapper {
   width: auto;
   height: 80px;
   position: relative;

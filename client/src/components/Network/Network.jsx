@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
-import "./Network.css";
+import styles from "./Network.module.css";
 import NetworkProfile from "./NetworkProfile";
 const host = import.meta.env.VITE_SERVER_HOST;
 
@@ -12,11 +12,11 @@ function Network() {
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(50);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setVisibleData(data.slice(0, 50));
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      setVisibleData(data.slice(0, 50));
+    }
+  }, [data]);
 
   useEffect(() => {
     setVisibleData((prevVisibleData) => [
@@ -29,8 +29,8 @@ function Network() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className='network-center-frame'>
-      <div className='network-container'>
+    <div className={styles.networkCenterFrame}>
+      <div className={styles.networkContainer}>
         {visibleData.map((user) => {
           return (
             <NetworkProfile
@@ -42,10 +42,9 @@ function Network() {
           );
         })}
       </div>
-      (
-      <div className='moreData-wrapper'>
+      <div className={styles.moreDataWrapper}>
         <button
-          className='moreData'
+          className={styles.moreData}
           onClick={() => {
             let curVal = listCur;
             let prevVal = listPrev;
@@ -56,7 +55,6 @@ function Network() {
           More
         </button>
       </div>
-      )
     </div>
   );
 }
