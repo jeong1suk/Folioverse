@@ -13,7 +13,7 @@ function Network() {
   const [visibleData, setVisibleData] = useState([]);
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(30);
-  const [sortBy, setSortBy] = useState([]); // array로 수정
+  const [sortBy, setSortBy] = useState(""); // array로 수정
 
   useEffect(() => {
     if (data) {
@@ -22,17 +22,21 @@ function Network() {
     }
   }, [data, listCur]);
 
+  useEffect(() => {
+    console.log(sortBy);
+  }, [sortBy]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <>
       <div className={styles.networkCenterFrame}>
-        <NetworkFilter />
+        <NetworkFilter sortBy={sortBy} setSortBy={setSortBy} />
         <div className={styles.networkContainer}>
           {visibleData.map((user, idx) => {
             {
-              /* 라우터 설정 필요 */
+              /* 유저 페이지로 라우터 설정 필요 */
             }
             return (
               <NetworkProfile
