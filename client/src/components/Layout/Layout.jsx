@@ -8,7 +8,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className='blank-top' style={{ height: "50px" }}></div>
+      <div className="blank-top" style={{ height: "50px" }}></div>
       <Network />
     </>
   );

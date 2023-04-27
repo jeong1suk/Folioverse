@@ -25,7 +25,7 @@ const Header = () => {
     <header>
       <nav>
         <h1>Folioverse</h1>
-        <ul className='nav-left'>
+        <ul className="nav-left">
           {isLoginTest && <li>마이페이지</li>}
           <li>네트워크</li>
         </ul>
@@ -39,22 +39,22 @@ const Header = () => {
             onClick={profileViewHandler}
           >
             <li onBlur={profileViewHandler}>
-              <img src={imgUrl} alt='profileImg' />
+              <img src={imgUrl} alt="profileImg" />
               <span>{!profileView ? "⌄" : "⌃"}</span>
             </li>
             {profileView && <DropDownMenu />}
           </ul>
         ) : (
-          <ul className='nav-right'>
+          <ul className="nav-right">
             <li>회원가입</li>
             <li>로그인</li>
           </ul>
         )}
-        <div className='search-wrapper'>
+        <div className="search-wrapper">
           <input
-            type='text'
-            placeholder='Search...'
-            className='search-input'
+            type="text"
+            placeholder="Search..."
+            className="search-input"
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
@@ -65,7 +65,7 @@ const Header = () => {
               setTextFocus(false);
             }}
           />
-          <ul className='nav-search'>
+          <ul className="nav-search">
             {searchText && textFocus && (
               <SearchResultView searchText={searchText} />
             )}

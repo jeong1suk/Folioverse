@@ -29,8 +29,8 @@ function Network() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className='network-center-frame'>
-      <div className='network-container'>
+    <div className="network-center-frame">
+      <div className="network-container">
         {visibleData.map((user) => {
           return (
             <NetworkProfile
@@ -43,9 +43,9 @@ function Network() {
         })}
       </div>
       (
-      <div className='moreData-wrapper'>
+      <div className="moreData-wrapper">
         <button
-          className='moreData'
+          className="moreData"
           onClick={() => {
             let curVal = listCur;
             let prevVal = listPrev;
