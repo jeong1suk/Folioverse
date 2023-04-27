@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-router-dom";
 import styles from "./SignUp.module.css";
+import Header from "../Layout/Header";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -52,15 +53,16 @@ function SignUp() {
 
   return (
     <div>
+      <Header />
       <form className={styles.root}>
-        <h1 className={styles.container}>Sign Up</h1>
+        <h1 className={styles.container}>FolioVerse</h1>
         <div className={styles.container}>
           <p className={styles.p}>Welcome to Folioverse</p>
           <p className={styles.p}>Let's begin the adventure</p>
         </div>
 
         <div className={styles.container}>
-          <p>Enter your email*</p>
+          <p className={styles.p}>Enter your email*</p>
           <input
             className={styles.input}
             type="email"
@@ -95,11 +97,12 @@ function SignUp() {
               onChange={handleConfirmPasswordChange}
             />
           )}
-          {passwordMatch ? (
-            <p className={styles.text}>Passwords match</p>
-          ) : (
-            <p className={styles.text}>Passwords do not match</p>
-          )}
+          {isFormValid &&
+            (passwordMatch ? (
+              <p className={styles.text}>Passwords match</p>
+            ) : (
+              <p className={styles.text}>Passwords do not match</p>
+            ))}
           <p></p>
           {isFormValid && passwordMatch && (
             <button className={styles.button}>Sign Up</button>

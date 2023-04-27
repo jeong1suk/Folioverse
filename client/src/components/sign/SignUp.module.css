@@ -3,6 +3,10 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
+.root {
+  padding-top: 100px;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -12,11 +16,12 @@
 }
 .text {
   color: gray;
-  margin-bottom: 20px;
+  margin: 20px 10% 16px;
 }
 
 .input {
   padding: 8px;
+  margin-left: 10%;
   margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -38,5 +43,5 @@
 
 .p {
   width: 500px;
-  margin: 20px;
+  margin: 20px 10% 16px;
 }
