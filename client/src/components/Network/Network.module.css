@@ -1,6 +1,11 @@
 /* 정주현 */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 
+.networkCenterFrame,
+.networkContainer {
+  background-color: #1a1a1a;
+}
+
 /* Network.jsx */
 .networkCenterFrame {
   display: grid;
@@ -10,13 +15,11 @@
   height: auto;
   margin: 0;
   padding: 0;
-  background-color: #1a1a1a;
   font-family: "Noto Sans KR", sans-serif;
   position: relative;
 }
 
 .networkContainer {
-  background-color: #1a1a1a;
   display: grid;
   margin: auto;
   grid-template-columns: 400px 400px 400px;
@@ -41,7 +44,7 @@
   height: auto;
   background-color: transparent;
   border-radius: 5px;
-  color: white;
+  color: #fff;
 }
 
 .filterContainer h2 {
@@ -55,8 +58,10 @@
 .btnDisable {
   margin: 3px 5px 3px 5px;
   background-color: transparent;
-  color: white;
-  padding: 3px 10px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #fff;
+  padding: 3px 14px;
   border-radius: 20px;
   border: #7d7d7d 1px solid;
 }
@@ -64,8 +69,10 @@
 .btnEnable {
   margin: 3px 5px 3px 5px;
   background-color: #3d3d3d;
-  color: white;
-  padding: 3px 10px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #fff;
+  padding: 3px 14px;
   border-radius: 20px;
   border: #5581ab 2px solid;
 }
@@ -77,8 +84,8 @@
   position: relative;
   width: 330px;
   height: 400px;
-  background-color: #242424;
-  border: #474747 1px solid;
+  background-color: #1e1e1e;
+  border: #393939 1px solid;
   border-radius: 5px;
 }
 
@@ -91,9 +98,11 @@
   z-index: 1;
   background-color: transparent;
 }
+
 .networkProfileBox .medalGold {
   display: none;
 }
+
 .networkProfileBox:nth-child(2) > .medalSilver {
   display: block;
   width: 30px;
@@ -103,9 +112,11 @@
   z-index: 1;
   background-color: transparent;
 }
+
 .networkProfileBox .medalSilver {
   display: none;
 }
+
 .networkProfileBox:nth-child(3) > .medalBronze {
   display: block;
   width: 30px;
@@ -115,6 +126,7 @@
   z-index: 1;
   background-color: transparent;
 }
+
 .networkProfileBox .medalBronze {
   display: none;
 }
@@ -136,7 +148,7 @@
   top: 220px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #242424;
+  background-color: #1e1e1e;
 }
 
 .networkProfileBox h4 {
@@ -151,7 +163,7 @@
   width: 100%;
   font-size: 13px;
   font-weight: 400;
-  color: #7d7c7c;
+  color: #cccccc;
 }
 
 .networkProfileBox p {
@@ -160,7 +172,7 @@
   width: 100%;
   height: 35px;
   font-size: 15px;
-  color: #c7c7c7;
+  color: #e0e0e0;
 }
 
 .networkProfileBox h4,
@@ -168,7 +180,7 @@ h5,
 p {
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #242424;
+  background-color: #1e1e1e;
 }
 
 .linkBtn {

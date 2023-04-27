@@ -6,8 +6,9 @@ header {
 }
 
 header {
+  padding-top: 5px;
   width: 100%;
-  height: 50px;
+  height: 60px;
   background-color: rgba(26, 26, 26, 0.7);
   backdrop-filter: blur(10px);
   position: fixed;
@@ -58,6 +59,7 @@ header li:hover {
 header .navLeft {
   float: left;
 }
+
 header .navRight {
   float: right;
 }
@@ -93,6 +95,7 @@ header .navRight {
   float: right;
   margin-bottom: 4px;
 }
+
 .navRightLoginMenuView > li:last-child {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -152,6 +155,7 @@ header .navRight {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
+
 .navSearch li:last-child {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
