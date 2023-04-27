@@ -1,6 +1,5 @@
 // 정주현
 
-import "./Header.css";
 import Header from "./Header";
 import Network from "../Network/Network";
 

@@ -1,7 +1,7 @@
 // 정주현
 
 import { useState } from "react";
-import "./Header.css";
+import styles from "./Header.module.css";
 import DropDownMenu from "./DropDownMenu";
 import SearchResultView from "./SearchResultView";
 
@@ -25,7 +25,7 @@ const Header = () => {
     <header>
       <nav>
         <h1>Folioverse</h1>
-        <ul className='nav-left'>
+        <ul className={styles.navLeft}>
           {isLoginTest && <li>마이페이지</li>}
           <li>네트워크</li>
         </ul>
@@ -33,8 +33,8 @@ const Header = () => {
           <ul
             className={
               profileView
-                ? "nav-right-login nav-right-login-menuView"
-                : "nav-right-login"
+                ? `${styles.navRightLogin} ${styles.navRightLoginMenuView}`
+                : `${styles.navRightLogin}`
             }
             onClick={profileViewHandler}
           >
@@ -45,16 +45,16 @@ const Header = () => {
             {profileView && <DropDownMenu />}
           </ul>
         ) : (
-          <ul className='nav-right'>
+          <ul className={styles.navRight}>
             <li>회원가입</li>
             <li>로그인</li>
           </ul>
         )}
-        <div className='search-wrapper'>
+        <div className={styles.searchWrapper}>
           <input
             type='text'
             placeholder='Search...'
-            className='search-input'
+            className={styles.searchInput}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
@@ -65,7 +65,7 @@ const Header = () => {
               setTextFocus(false);
             }}
           />
-          <ul className='nav-search'>
+          <ul className={styles.navSearch}>
             {searchText && textFocus && (
               <SearchResultView searchText={searchText} />
             )}
