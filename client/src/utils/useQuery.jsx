@@ -4,8 +4,7 @@ import axios from "axios";
 export const useGetAxios = (link, key, queryOptions = {}) => {
   const queryFunc = async () => {
     const response = await axios.get(link);
-    const { data } = response;
-    return data;
+    return response.data;
   };
 
   return useQuery([key, link], queryFunc, {
