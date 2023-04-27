@@ -22,10 +22,6 @@ function Network() {
     }
   }, [data, listCur]);
 
-  useEffect(() => {
-    console.log(sortBy);
-  }, [sortBy]);
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
