@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();

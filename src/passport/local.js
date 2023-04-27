@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Strategy } from "passport-local";
 import bcrypt from "bcrypt";
 import User from "../../schemas/users.js";
