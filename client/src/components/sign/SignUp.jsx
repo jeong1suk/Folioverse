@@ -54,48 +54,57 @@ function SignUp() {
     <div>
       <form className={styles.root}>
         <h1 className={styles.container}>Sign Up</h1>
-        <p className={styles.p}>User</p>
-        <input className={styles.input} type="text" placeholder="User" />
-        <p>Email</p>
-        <input
-          className={styles.input}
-          type="email"
-          placeholder="Email"
-          onChange={handleEmailChange}
-        />
-        {!isEmailValid && (
-          <form className={styles.text}>이메일 형식이 올바르지 않습니다.</form>
-        )}
-        <p></p>
-        {isEmailValid && (
+        <div className={styles.container}>
+          <p className={styles.p}>Welcome to Folioverse</p>
+          <p className={styles.p}>Let's begin the adventure</p>
+        </div>
+
+        <div className={styles.container}>
+          <p>Enter your email*</p>
           <input
             className={styles.input}
-            type="password"
-            placeholder="Password"
-            onChange={handlePasswordChange}
+            type="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
           />
-        )}
-        {!isPasswordValid && isEmailValid && (
-          <form className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</form>
-        )}
-        <p></p>
-        {isFormValid && (
-          <input
-            className={styles.input}
-            type="password"
-            placeholder="Password"
-            onChange={handleConfirmPasswordChange}
-          />
-        )}
-        {passwordMatch ? (
-          <p className={styles.text}>Passwords match</p>
-        ) : (
-          <p className={styles.text}>Passwords do not match</p>
-        )}
-        <p></p>
-        {isFormValid && passwordMatch && (
-          <button className={styles.button}>Sign Up</button>
-        )}
+          {!isEmailValid && (
+            <form className={styles.text}>
+              이메일 형식이 올바르지 않습니다.
+            </form>
+          )}
+          <p></p>
+          {isEmailValid && (
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Password"
+              onChange={handlePasswordChange}
+            />
+          )}
+          {!isPasswordValid && isEmailValid && (
+            <form className={styles.text}>
+              비밀번호를 4글자 이상 넣어주세요.
+            </form>
+          )}
+          <p></p>
+          {isFormValid && (
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Password"
+              onChange={handleConfirmPasswordChange}
+            />
+          )}
+          {passwordMatch ? (
+            <p className={styles.text}>Passwords match</p>
+          ) : (
+            <p className={styles.text}>Passwords do not match</p>
+          )}
+          <p></p>
+          {isFormValid && passwordMatch && (
+            <button className={styles.button}>Sign Up</button>
+          )}
+        </div>
       </form>
     </div>
   );
