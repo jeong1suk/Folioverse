@@ -13,6 +13,18 @@ import dummyRouter from "./routes/dummy/index.js";
 app.use("/api/auth", authRouter);
 app.use("/api/dummy", dummyRouter);
 
+// import userRouter from "./routes/userRouter";
+// import projectRouter from "./routes/projectRouter";
+// import certificateRouter from "./routes/certificateRouter";
+// import awardRouter from "./routes/awardRouter";
+// import educationRouter from "./routes/educationRouter";
+
+// app.use("/user", checkToken, userRouter);
+// app.use("/project", checkToken, userRouter);
+// app.use("/education", checkToken, userRouter);
+// app.use("/certification", checkToken, userRouter);
+// app.use("/award", checkToken, userRouter);
+
 app.use((err, req, res, next) => {
   console.error(err);
 });

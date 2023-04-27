@@ -2,6 +2,7 @@ import { Router } from "express";
 import { loginAuthenticate, signJWT } from "../../service/auth/login.js";
 import dotenv from "dotenv";
 dotenv.config();
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -11,9 +12,9 @@ router.post(
     loginAuthenticate(req, res, next);
   },
   async (req, res) => {
-    const { email } = req.user;
     const payload = { email };
     const token = signJWT(payload);
+    console.log(token);
 
     res.json({ token });
   }
