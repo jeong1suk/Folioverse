@@ -9,6 +9,7 @@ const host = import.meta.env.VITE_SERVER_HOST;
 function Network() {
   const { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
   const [visibleData, setVisibleData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(50);
 

@@ -39,7 +39,7 @@ const Header = () => {
             onClick={profileViewHandler}
           >
             <li onBlur={profileViewHandler}>
-              <img src={imgUrl} alt='profileImg' />
+              <img src={imgUrl} alt="profileImg" />
               <span>{!profileView ? "⌄" : "⌃"}</span>
             </li>
             {profileView && <DropDownMenu />}
@@ -52,8 +52,8 @@ const Header = () => {
         )}
         <div className={styles.searchWrapper}>
           <input
-            type='text'
-            placeholder='Search...'
+            type="text"
+            placeholder="Search..."
             className={styles.searchInput}
             onChange={(e) => {
               setSearchText(e.target.value);

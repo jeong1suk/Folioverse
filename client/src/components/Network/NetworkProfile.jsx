@@ -7,20 +7,20 @@ import bronzemedal from "/medal/bronze.png";
 function NetworkProfile({ name, email, description }) {
   return (
     <div className={styles.networkProfileBox}>
-      <img src={goldmedal} alt='gold medal' className={styles.medalGold} />
+      <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
       <img
         src={silvermedal}
-        alt='silver medal'
+        alt="silver medal"
         className={styles.medalSilver}
       />
       <img
         src={bronzemedal}
-        alt='bronze medal'
+        alt="bronze medal"
         className={styles.medalBronze}
       />
       <img
-        src='https://www.ddengle.com/files/attach/images/11334861/457/305/015/836501b8c2508005ec25765ef8268523.jpg'
-        alt='profileImg'
+        src="https://www.ddengle.com/files/attach/images/11334861/457/305/015/836501b8c2508005ec25765ef8268523.jpg"
+        alt="profileImg"
         className={styles.profileImg}
       />
       <div>
