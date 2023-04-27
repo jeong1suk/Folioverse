@@ -1,13 +1,13 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useGetAxios } from "../../utils/useQuery";
+import { useQueryGet } from "../../utils/useQuery";
 
 const ManageFollow = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
   const [tab, setTab] = useState(true);
   const [getUrl, setGetUrl] = useState(url + "/dummy/mvp/follow/1");
-  const { data } = useGetAxios(getUrl, "getFollow");
+  const { data } = useQueryGet(getUrl, "getFollow");
 
   useEffect(() => {
     setGetUrl(
@@ -49,7 +49,7 @@ const ManageFollow = () => {
       <section>
         <ul>
           {data?.map((item) => (
-            <li key={item.id}>
+            <li className="text-black dark:text-white" key={item.id}>
               <span className="mr-5">이름 : {item.name}</span>
               <span>이메일: {item.email}</span>
             </li>

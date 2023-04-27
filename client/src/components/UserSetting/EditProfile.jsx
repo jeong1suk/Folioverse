@@ -1,14 +1,14 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useGetAxios, usePostAxios } from "../../utils/useQuery";
+import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
 
 const EditProfile = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
-  const { data } = useGetAxios(url + "/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet(url + "/dummy/auth/user-info", "getMyInfo");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const { mutate } = usePostAxios(url + "/dummy/auth/edit-profile");
+  const { mutate } = useQueryFetch(url + "/dummy/auth/edit-profile", "post");
 
   const onSubmit = (e) => {
     e.preventDefault();

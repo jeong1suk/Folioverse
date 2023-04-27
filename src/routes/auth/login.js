@@ -1,8 +1,9 @@
 //담당 : 이승현
 
 import { Router } from "express";
-import { loginAuthenticate, signJWT } from "../../service/auth/login.js";
+import { loginAuthenticate } from "../../service/auth/login.js";
 import dotenv from "dotenv";
+import checkToken from "../../middlewares/checkToken.js";
 dotenv.config();
 
 const router = Router();
@@ -13,15 +14,12 @@ router.post(
     loginAuthenticate(req, res, next);
   },
   async (req, res) => {
-    const { email } = req.user;
-    const payload = { email };
-    const token = signJWT(payload);
-
+    const { token } = req.user;
     res.json({ token });
   }
 );
 
-router.get("/is-login", (req, res) => {
+router.get("/is-login", checkToken, (req, res) => {
   res.send(req.user ? true : false);
 });
 

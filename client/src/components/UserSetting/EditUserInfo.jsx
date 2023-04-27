@@ -1,13 +1,13 @@
 //담당 : 이승현
 
 import { useState } from "react";
-import { usePostAxios } from "../../utils/useQuery";
+import { useQueryFetch } from "../../utils/useQuery";
 
 const EditUserInfo = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
-  const { mutate } = usePostAxios(url + "/dummy/auth/check-password");
+  const { mutate } = useQueryFetch(url + "/dummy/auth/check-password", "post");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +53,7 @@ const EditUserInfo = () => {
 
 const EditContent = ({ content, setContent }) => {
   const url = import.meta.env.VITE_SERVER_HOST;
-  const { mutate } = usePostAxios(url + "/dummy/auth/change-password");
+  const { mutate } = useQueryFetch(url + "/dummy/auth/change-password", "post");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 

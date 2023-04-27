@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
-export const useGetAxios = (link, key, queryOptions = {}) => {
+export const useQueryGet = (link, key, queryOptions = {}) => {
   const queryFunc = async () => {
     const response = await axios.get(link);
     return response.data;
@@ -14,11 +14,9 @@ export const useGetAxios = (link, key, queryOptions = {}) => {
   });
 };
 
-export const usePostAxios = (link) => {
+export const useQueryFetch = (link, method) => {
   const mutation = useMutation(async (req) => {
-    const response = await axios.post(link, req.body, {
-      ...req.responseType,
-    });
+    const response = await axios[method](link, req.body);
     return response.data;
   });
 
