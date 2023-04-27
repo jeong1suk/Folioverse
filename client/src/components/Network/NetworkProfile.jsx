@@ -1,8 +1,11 @@
 // 정주현
+
 import styles from "./Network.module.css";
 import goldmedal from "/medal/gold.png";
 import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";
+import profileDefaultDark from "/profile/profile-dark.png";
+import profileDefaultLight from "/profile/profile-light.png";
 
 function NetworkProfile({ name, email, description }) {
   return (
@@ -19,7 +22,7 @@ function NetworkProfile({ name, email, description }) {
         className={styles.medalBronze}
       />
       <img
-        src="https://www.ddengle.com/files/attach/images/11334861/457/305/015/836501b8c2508005ec25765ef8268523.jpg"
+        src={profileDefaultDark}
         alt="profileImg"
         className={styles.profileImg}
       />
