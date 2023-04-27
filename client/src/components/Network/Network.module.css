@@ -17,7 +17,8 @@
 
 .networkProfileBox {
   margin: auto;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: inline-block;
   position: relative;
   width: 200px;

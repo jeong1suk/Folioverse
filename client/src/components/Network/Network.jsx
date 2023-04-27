@@ -8,23 +8,17 @@ const host = import.meta.env.VITE_SERVER_HOST;
 
 function Network() {
   const { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
+  const [complete, setComplete] = useState(false);
   const [visibleData, setVisibleData] = useState([]);
-  const [filterData, setFilterData] = useState([]);
   const [listPrev, setListPrev] = useState(0);
-  const [listCur, setListCur] = useState(50);
+  const [listCur, setListCur] = useState(30);
 
   useEffect(() => {
     if (data) {
-      setVisibleData(data.slice(0, 50));
+      setVisibleData(data.slice(0, listCur));
+      setComplete(true);
     }
-  }, [data]);
-
-  useEffect(() => {
-    setVisibleData((prevVisibleData) => [
-      ...prevVisibleData,
-      ...data.slice(listPrev, listCur),
-    ]);
-  }, [data, listCur, listPrev]);
+  }, [data, listCur]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -43,19 +37,19 @@ function Network() {
           );
         })}
       </div>
-      <div className={styles.moreDataWrapper}>
-        <button
-          className={styles.moreData}
-          onClick={() => {
-            let curVal = listCur;
-            let prevVal = listPrev;
-            setListCur(curVal + 50);
-            setListPrev(prevVal + 50);
-          }}
-        >
-          More
-        </button>
-      </div>
+      {complete && visibleData.length < data.length && (
+        <div className={styles.moreDataWrapper}>
+          <button
+            className={styles.moreData}
+            onClick={() => {
+              setListPrev(listCur);
+              setListCur(listCur + 30);
+            }}
+          >
+            More
+          </button>
+        </div>
+      )}
     </div>
   );
 }
