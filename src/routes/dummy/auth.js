@@ -8,7 +8,7 @@ router.get("/islogin", async (req, res) => {
   res.json(data);
 });
 
-router.get("/user_info", async (req, res) => {
+router.get("/user-info", async (req, res) => {
   const data = {
     id: 1,
     name: "test",
