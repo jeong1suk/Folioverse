@@ -12,11 +12,11 @@ function Network() {
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(50);
 
-  useEffect(() => {
-    if (data) {
-      setVisibleData(data.slice(0, 50));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setVisibleData(data.slice(0, 50));
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     setVisibleData((prevVisibleData) => [
@@ -42,6 +42,7 @@ function Network() {
           );
         })}
       </div>
+      (
       <div className='moreData-wrapper'>
         <button
           className='moreData'
@@ -55,6 +56,7 @@ function Network() {
           More
         </button>
       </div>
+      )
     </div>
   );
 }
