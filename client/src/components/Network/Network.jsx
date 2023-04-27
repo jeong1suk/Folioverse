@@ -12,6 +12,7 @@ function Network() {
   const [visibleData, setVisibleData] = useState([]);
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(30);
+  const [sortBy, setSortBy] = useState([]); // array로 수정
 
   useEffect(() => {
     if (data) {
@@ -26,29 +27,31 @@ function Network() {
   return (
     <div className={styles.networkCenterFrame}>
       <div className={styles.networkContainer}>
-        {visibleData.map((user) => {
+        {visibleData.map((user, idx) => {
+          {
+            /* 라우터 설정 필요 */
+          }
           return (
             <NetworkProfile
               name={user.name}
               email={user.email}
               description={user.description}
-              key={user.id}
+              profileUrl={`/network/${user.id}`}
+              key={idx}
             />
           );
         })}
       </div>
       {complete && visibleData.length < data.length && (
-        <div className={styles.moreDataWrapper}>
-          <button
-            className={styles.moreData}
-            onClick={() => {
-              setListPrev(listCur);
-              setListCur(listCur + 30);
-            }}
-          >
-            More
-          </button>
-        </div>
+        <button
+          className={styles.moreData}
+          onClick={() => {
+            setListPrev(listCur);
+            setListCur(listCur + 30);
+          }}
+        >
+          More
+        </button>
       )}
     </div>
   );

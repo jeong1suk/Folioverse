@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Header.module.css";
 import DropDownMenu from "./DropDownMenu";
 import SearchResultView from "./SearchResultView";
+import logoPng from "/logo/logo-dark.png";
 
 /** 테스트용 프로필 이미지 */
 const imgUrl =
@@ -24,7 +25,9 @@ const Header = () => {
   return (
     <header>
       <nav>
-        <h1>Folioverse</h1>
+        <h1>
+          <img src={logoPng} alt="logo" className={styles.logo} />
+        </h1>
         <ul className={styles.navLeft}>
           {isLoginTest && <li>마이페이지</li>}
           <li>네트워크</li>

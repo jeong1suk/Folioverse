@@ -6,8 +6,9 @@ import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";
 import profileDefaultDark from "/profile/profile-dark.png";
 import profileDefaultLight from "/profile/profile-light.png";
+import { Link } from "react-router-dom";
 
-function NetworkProfile({ name, email, description }) {
+function NetworkProfile({ name, email, description, profileUrl }) {
   return (
     <div className={styles.networkProfileBox}>
       <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
@@ -31,6 +32,9 @@ function NetworkProfile({ name, email, description }) {
         <h5>{email}</h5>
         <p>{description}</p>
       </div>
+      <Link to={profileUrl} className={styles.linkBtn}>
+        Profile
+      </Link>
     </div>
   );
 }

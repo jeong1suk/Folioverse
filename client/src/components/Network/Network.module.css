@@ -2,30 +2,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 
 .networkCenterFrame {
+  width: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: #1a1a1a;
   font-family: "Noto Sans KR", sans-serif;
 }
-
 .networkContainer {
   margin: auto;
   width: fit-content;
   display: grid;
-  grid-template-columns: 230px 230px 230px;
+  grid-template-columns: 400px 400px 400px;
 }
 
 .networkProfileBox {
   margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 50px;
   display: inline-block;
   position: relative;
-  width: 200px;
-  height: 350px;
+  width: 330px;
+  height: 400px;
   background-color: #242424;
-  border: grey 1px solid;
+  border: #474747 1px solid;
   border-radius: 5px;
+}
+
+.networkProfileBox:last-child {
+  margin-bottom: 30px;
 }
 
 .networkProfileBox:first-child > .medalGold {
@@ -69,18 +73,18 @@
   width: 180px;
   height: 180px;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  border-radius: 5px;
+  top: 20px;
+  left: 75px;
+  border-radius: 15px;
 }
 
 .networkProfileBox div {
-  height: auto;
-  width: 150px;
+  height: 100px;
+  width: 240px;
   overflow: hidden;
   position: absolute;
-  top: 200px;
-  left: 25px;
+  top: 220px;
+  left: 45px;
   background-color: #242424;
 }
 
@@ -94,6 +98,7 @@
 }
 
 .networkProfileBox h5 {
+  width: 100%;
   font-size: 14px;
   font-weight: 400;
   color: #7d7c7c;
@@ -117,21 +122,35 @@ p {
   text-overflow: ellipsis;
 }
 
-.moreDataWrapper {
-  width: auto;
-  height: 80px;
-  position: relative;
-}
 .moreData {
+  overflow: none;
+  text-align: center;
   position: absolute;
-  top: 30px;
-  left: 48.7%;
-  width: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
   height: 35px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #696969;
-  display: block;
-  font-weight: 600;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #242424;
+  color: #7d7c7c;
+  font-weight: 300;
   border: none;
+}
+
+.linkBtn {
+  position: absolute;
+  top: 340px;
+  left: 125px;
+  background-color: #3e668c;
+  border-radius: 5px;
+  padding: 8px 15px;
+  border: none;
+  color: #ebebeb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.linkBtn:hover {
+  background-color: #5581ab;
+  color: #ebebeb;
 }
