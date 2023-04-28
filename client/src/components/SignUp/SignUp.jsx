@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Form } from "react-router-dom";
+import { useAxiosGet } from "../../CustomHooks";
 import styles from "./SignUp.module.css";
-import Header from "../Layout/Header";
+const host = import.meta.env.VITE_SERVER_HOST;
 
 function SignUp() {
+  // const { data, error, loading } = useAxiosGet(`${host}/dummy/sign-up`);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
 
+  const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -53,7 +56,6 @@ function SignUp() {
 
   return (
     <div>
-      <Header />
       <form className={styles.root}>
         <h1 className={styles.container}>FolioVerse</h1>
         <div className={styles.container}>
@@ -62,6 +64,7 @@ function SignUp() {
         </div>
 
         <div className={styles.container}>
+          <input type="text" placeholder="User" onChange={handleNameChange} />
           <p className={styles.p}>Enter your email*</p>
           <input
             className={styles.input}
@@ -74,7 +77,7 @@ function SignUp() {
               이메일 형식이 올바르지 않습니다.
             </form>
           )}
-          <p></p>
+          <br />
           {isEmailValid && (
             <input
               className={styles.input}
@@ -88,7 +91,7 @@ function SignUp() {
               비밀번호를 4글자 이상 넣어주세요.
             </form>
           )}
-          <p></p>
+          <br />
           {isFormValid && (
             <input
               className={styles.input}
@@ -103,7 +106,7 @@ function SignUp() {
             ) : (
               <p className={styles.text}>Passwords do not match</p>
             ))}
-          <p></p>
+          <br />
           {isFormValid && passwordMatch && (
             <button className={styles.button}>Sign Up</button>
           )}
