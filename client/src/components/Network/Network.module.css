@@ -91,7 +91,6 @@
   position: relative;
   width: 330px;
   height: 400px;
-  background-color: #1e1e1e;
   border: #393939 1px solid;
   border-radius: 5px;
 }
@@ -188,7 +187,6 @@ h5,
 p {
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #1e1e1e;
 }
 
 .linkBtn {
