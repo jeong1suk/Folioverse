@@ -2,11 +2,15 @@
 
 import express from "express";
 import cors from "cors";
+import { initializePassport } from "./passport/index";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+const passport = initializePassport();
+app.use(passport.initialize());
 
 app.get("/", (req, res) => res.send("Hello, Express"));
 

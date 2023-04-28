@@ -7,7 +7,7 @@ const Education = () => {
   return (
     <ul>
       {dummy.map((item) => (
-        <li key={item._id} className="text-black border">
+        <li key={item._id} className="text-black border p-3 rounded mt-2">
           <p>{item.name}</p>
           <p>{item.major}</p>
           <p>{item.graduation}</p>
