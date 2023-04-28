@@ -1,4 +1,4 @@
-import { AwardModel } from "../schemas/award.js";
+import { AwardModel } from "../schemas/Award.js";
 
 class Award {
   static async create({ newAward }) {
@@ -7,12 +7,22 @@ class Award {
   }
 
   static async findAll() {
-    const awards = await AwardModel.find({});
-    return awards;
+    const award = await AwardModel.find({});
+    return award;
   }
 
-  static async update({ award_id, fieldToUpdate, newValue }) {
-    const filter = { id: award_id };
+  static async findAllByUserId(user_id) {
+    const award = await AwardModel.find(user_id);
+    return award;
+  }
+
+  static async findById(_id) {
+    const award = await AwardModel.findById(_id);
+    return award;
+  }
+
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -24,9 +34,8 @@ class Award {
     return updatedAward;
   }
 
-  static async delete({ award_id }) {
-    const filter = { id: award_id };
-    const deletedAward = await AwardModel.deleteOne(filter);
+  static async delete(_id) {
+    const deletedAward = await AwardModel.deleteOne(_id);
     return deletedAward;
   }
 }

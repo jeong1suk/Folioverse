@@ -7,12 +7,22 @@ class Project {
   }
 
   static async findAll() {
-    const users = await ProjectModel.find({});
-    return users;
+    const project = await ProjectModel.find({});
+    return project;
   }
 
-  static async update({ user_id, fieldToUpdate, newValue }) {
-    const filter = { id: user_id };
+  static async findAllByUserId(user_id) {
+    const project = await ProjectModel.find(user_id);
+    return project;
+  }
+
+  static async findById(_id) {
+    const project = await ProjectModel.findById(_id);
+    return project;
+  }
+
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -24,9 +34,8 @@ class Project {
     return updatedProject;
   }
 
-  static async delete({ user_id }) {
-    const filter = { id: user_id };
-    const deletedProject = await ProjectModel.deleteOne(filter);
+  static async delete(_id) {
+    const deletedProject = await ProjectModel.deleteOne(_id);
     return deletedProject;
   }
 }
