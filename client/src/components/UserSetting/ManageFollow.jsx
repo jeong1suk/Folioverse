@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../utils/useQuery";
 
 const ManageFollow = () => {
-  const url = import.meta.env.VITE_SERVER_HOST;
   const [tab, setTab] = useState(true);
-  const [getUrl, setGetUrl] = useState(url + "/dummy/mvp/follow/1");
+  const [getUrl, setGetUrl] = useState("/dummy/mvp/follow/1");
   const { data } = useQueryGet(getUrl, "getFollow");
 
   useEffect(() => {
-    setGetUrl(
-      tab ? url + "/dummy/mvp/follow/1" : url + "/dummy/mvp/followed/1"
-    );
+    setGetUrl(tab ? "/dummy/mvp/follow/1" : "/dummy/mvp/followed/1");
   }, [tab]);
 
   return (
