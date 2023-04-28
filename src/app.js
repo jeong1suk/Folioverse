@@ -2,7 +2,7 @@
 
 import express from "express";
 import cors from "cors";
-import { initializePassport } from "./passport/index";
+import { initializePassport } from "./passport/index.js";
 
 const app = express();
 

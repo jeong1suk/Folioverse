@@ -11,12 +11,10 @@ const UserSchema = new Schema(
       required: false,
       default: "설명이 아직 없습니다. 추가해 주세요.",
     },
-    like_user: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
-    follower_user: [
-      { type: Schema.Types.ObjectId, ref: "User", required: true },
-    ],
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment", required: true }],
-    profile_image: { type: Buffer, required: true },
+    like_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    follower_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    profile_image: { type: Buffer },
   },
   { timestamps: true }
 );
