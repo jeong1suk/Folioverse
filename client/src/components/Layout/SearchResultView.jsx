@@ -1,9 +1,12 @@
 // 정주현
 
+import { Link } from "react-router-dom";
 import { useAxiosGet } from "../../CustomHooks";
+import profileDefaultDark from "/profile/profile-dark.png";
+import profileDefaultLight from "/profile/profile-light.png";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function SearchResultView({ searchText }) {
+function SearchResultView({ searchText, setFocus }) {
   let { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
   if (loading) {
     return (
@@ -26,12 +29,14 @@ function SearchResultView({ searchText }) {
         return (
           (el.name.toUpperCase().includes(searchText.toUpperCase()) ||
             el.email.toUpperCase().includes(searchText.toUpperCase())) && (
-            <li key={idx}>
-              <img src="https://i.pinimg.com/474x/76/6f/3f/766f3fe1a49605789ccedc6cf1fb6673.jpg" />
-              <div>
-                {el.name}
-                <br></br>({el.email})
-              </div>
+            <li key={idx} onClick={() => setFocus(false)}>
+              <Link to={`/network/profile/${el.id}`}>
+                <img src={profileDefaultDark} alt="profile" />
+                <div>
+                  {el.name}
+                  <br></br>({el.email})
+                </div>
+              </Link>
             </li>
           )
         );

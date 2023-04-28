@@ -7,7 +7,10 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="blank-top" style={{ height: "50px" }}></div>
+      <div
+        className="blank-top"
+        style={{ height: "70px", backgroundColor: "#1a1a1a" }}
+      ></div>
       <Router />
     </>
   );
