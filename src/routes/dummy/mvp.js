@@ -6,30 +6,30 @@ const router = Router();
 router.get("/education", async (req, res) => {
   const data = [
     {
-      id: 1,
+      _id: 1,
       name: "test school1",
       major: "test major1",
       graduation: "test graduation1",
     },
     {
-      id: 2,
+      _id: 2,
       name: "test school2",
       major: "test major2",
       graduation: "test graduation2",
     },
     {
-      id: 3,
+      _id: 3,
       name: "test school3",
       major: "test major3",
     },
     {
-      id: 4,
+      _id: 4,
       name: "test school4",
       major: "test major4",
       graduation: "test graduation4",
     },
     {
-      id: 5,
+      _id: 5,
       name: "test school5",
       major: "test major5",
       graduation: "test graduation5",
@@ -41,28 +41,29 @@ router.get("/education", async (req, res) => {
 router.get("/award", async (req, res) => {
   const data = [
     {
-      id: 1,
+      _id: 1,
       name: "test award1",
-      description: "test description1",
+      date: "test date1",
     },
     {
-      id: 2,
+      _id: 2,
       name: "test award2",
-      description: "test description2",
+      date: "test date2",
     },
     {
-      id: 3,
+      _id: 3,
       name: "test award3",
+      date: "test date3",
     },
     {
-      id: 4,
+      _id: 4,
       name: "test award4",
-      description: "test description4",
+      date: "test date4",
     },
     {
-      id: 5,
+      _id: 5,
       name: "test award5",
-      description: "test description5",
+      date: "test date5",
     },
   ];
   res.json(data);
@@ -71,56 +72,76 @@ router.get("/award", async (req, res) => {
 router.get("/project", async (req, res) => {
   const data = [
     {
-      id: 1,
+      _id: 1,
       name: "test project1",
       description: "test description1",
+      date: "test date1",
+      techStack: "test Stack1",
       refLink: "test link1",
     },
     {
-      id: 2,
+      _id: 2,
       name: "test project2",
+      date: "test date2",
+      techStack: "test Stack2",
       refLink: "test link2",
     },
     {
-      id: 3,
+      _id: 3,
       name: "test project3",
       description: "test description3",
+      date: "test date3",
+      techStack: "test Stack3",
     },
     {
-      id: 4,
+      _id: 4,
       name: "test project4",
+      date: "test date4",
+      techStack: "test Stack4",
     },
     {
-      id: 5,
+      _id: 5,
       name: "test project5",
       description: "test description5",
+      date: "test date5",
+      techStack: "test Stack5",
       refLink: "test link5",
     },
   ];
   res.json(data);
 });
 
-router.get("/license", async (req, res) => {
+router.get("/certificate", async (req, res) => {
   const data = [
     {
-      id: 1,
-      name: "test license1",
+      _id: 1,
+      name: "test certificate1",
+      date: "test date1",
+      agency: "test agency1",
     },
     {
-      id: 2,
-      name: "test license2",
+      _id: 2,
+      name: "test certificate2",
+      date: "test date2",
+      agency: "test agency2",
     },
     {
-      id: 3,
-      name: "test license3",
+      _id: 3,
+      name: "test certificate3",
+      date: "test date3",
+      agency: "test agency3",
     },
     {
-      id: 4,
-      name: "test license4",
+      _id: 4,
+      name: "test certificate4",
+      date: "test date4",
+      agency: "test agency4",
     },
     {
-      id: 5,
-      name: "test license5",
+      _id: 5,
+      name: "test certificate5",
+      date: "test date5",
+      agency: "test agency5",
     },
   ];
   res.json(data);
@@ -196,6 +217,82 @@ router.get("/followed/:id", async (req, res) => {
     },
   ];
   res.json(data);
+});
+
+router.put("/test-education", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-project", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-award", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-certificate", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-education", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-project", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-award", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-certificate", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.delete("/test-education/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-project/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-award/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-certificate/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
 });
 
 export default router;

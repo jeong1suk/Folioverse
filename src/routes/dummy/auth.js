@@ -1,7 +1,10 @@
 //담당 : 이승현
 
 import { Router } from "express";
+import multer from "multer";
 const router = Router();
+
+const upload = multer({ dest: "uploads/" });
 
 router.get("/islogin", async (req, res) => {
   const data = true;
@@ -29,9 +32,12 @@ router.post("/change-password", async (req, res) => {
   res.json(password);
 });
 
-router.post("/edit-profile", async (req, res) => {
+router.post("/edit-profile", upload.single("image"), async (req, res) => {
   const { name, description } = req.body;
-  res.json({ name, description });
+  console.log("Received fields:", req.body);
+  console.log("Received file:", req.file);
+
+  res.send(true);
 });
 
 export default router;
