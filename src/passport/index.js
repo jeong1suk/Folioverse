@@ -2,7 +2,7 @@
 
 import passport from "passport";
 import localPassport from "./local.js";
-import User from "../../schemas/users.js";
+import { UserModel } from "../db/schemas/user.js";
 
 export const initializePassport = () => {
   passport.serializeUser((user, done) => {
@@ -11,7 +11,7 @@ export const initializePassport = () => {
 
   passport.deserializeUser(async (email, done) => {
     try {
-      const result = await User.findOne({ email });
+      const result = await UserModel.findOne({ email });
       done(null, result);
     } catch (err) {
       done(err);
