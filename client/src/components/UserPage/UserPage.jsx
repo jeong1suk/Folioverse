@@ -1,7 +1,9 @@
 //담당 : 이승현
 
+import { useNavigate } from "react-router-dom";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
+import { useEffect } from "react";
 
 const mvpList = [
   {
@@ -23,6 +25,13 @@ const mvpList = [
 ];
 
 const UserPage = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/error/auth");
+    }
+  }, []);
+
   return (
     <div className="p-5 flex flex-row">
       <Profile />

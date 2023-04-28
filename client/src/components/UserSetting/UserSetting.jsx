@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { Link, Route, Routes, useParams } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
@@ -13,10 +13,17 @@ const UserSetting = () => {
   const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
   const theme = useThemeStore((state) => !state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList[theme ? "remove" : "add"]("dark");
   }, [theme]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/error/auth");
+    }
+  }, []);
 
   return (
     <div className="py-2 px-12 sm:px-24 2xl:px-80 dark:bg-neutral-800 min-h-screen">
