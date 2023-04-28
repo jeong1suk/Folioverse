@@ -8,8 +8,8 @@ const userRouter = Router();
 userRouter.get("/list", async function (req, res, next) {
   try {
     // 전체 유저 목록을 얻음
+    console.log(req.user);
     const users = await userService.getUsers();
-    // console.log(users);
     const sortedUsers = users.sort((a, b) => {
       return a.follower_user.length, -b.follower_user.length;
     });
