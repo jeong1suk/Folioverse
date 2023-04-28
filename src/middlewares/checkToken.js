@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const checkToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"].split(" ")[1];
+  const authHeader = req.headers.authorization;
 
   if (!authHeader) {
     return res.send(false);

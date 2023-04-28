@@ -2,7 +2,7 @@
 import { useQueryGet } from "./../../../utils/useQuery";
 
 const Award = ({ setEditState, award, setAward, setMethod, setDeleteLink }) => {
-  const { data } = useQueryGet("/dummy/mvp/award", "getAward");
+  const { data } = useQueryGet("/award", "getAward");
 
   const onEdit = (item) => {
     setEditState(true);

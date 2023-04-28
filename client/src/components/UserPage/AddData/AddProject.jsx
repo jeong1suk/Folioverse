@@ -61,16 +61,16 @@ const AddProject = ({ project, setProject }) => {
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
         placeholder="기술 스택"
-        onChange={(e) => setProject({ ...project, techStack: e.target.value })}
-        value={project.techStack}
+        onChange={(e) => setProject({ ...project, tech_stack: e.target.value })}
+        value={project.tech_stack}
         maxLength={20}
       />
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
         placeholder="참조 링크"
-        onChange={(e) => setProject({ ...project, refLink: e.target.value })}
-        value={project.refLink}
+        onChange={(e) => setProject({ ...project, link: e.target.value })}
+        value={project.link}
         maxLength={20}
       />
     </>

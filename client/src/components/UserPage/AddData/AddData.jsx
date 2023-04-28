@@ -29,16 +29,16 @@ const AddData = ({
   useEffect(() => {
     switch (title) {
       case "학력":
-        setLink("/dummy/mvp/test-education");
+        setLink("/education");
         break;
       case "프로젝트":
-        setLink("/dummy/mvp/test-project");
+        setLink("/project");
         break;
       case "수상 이력":
-        setLink("/dummy/mvp/test-award");
+        setLink("/award");
         break;
       case "자격증":
-        setLink("/dummy/mvp/test-certificate");
+        setLink("/certificate");
         break;
     }
   }, [editState, addState]);

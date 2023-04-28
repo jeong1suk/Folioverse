@@ -15,8 +15,7 @@ awardRouter.put("/", async function (req, res, next) {
 
     const newAward = await awardService.addAward({
       user_id,
-      name,
-      date,
+      data: { name, date },
     });
 
     res.status(201).json(newAward);

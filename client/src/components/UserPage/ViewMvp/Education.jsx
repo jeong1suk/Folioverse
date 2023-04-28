@@ -9,15 +9,15 @@ const Education = ({
   setMethod,
   setDeleteLink,
 }) => {
-  const { data } = useQueryGet("/dummy/mvp/education", "getEducation");
+  const { data } = useQueryGet("/education", "getEducation");
 
   const onEdit = (item) => {
     setEditState(true);
     setEducation({
       ...educatoin,
-      name: item.name,
+      school_name: item.school_name,
       major: item.major,
-      graduation: item.graduation,
+      graduate_status: item.graduate_status,
       _id: item._id,
     });
     setMethod("patch");
@@ -30,7 +30,7 @@ const Education = ({
           <div>
             <p className="flex justify-between mb-2">
               <span className="text-lg dark:text-white">
-                {item.name}({item.graduation})
+                {item.school_name}({item.graduate_status})
               </span>
               <button
                 className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
