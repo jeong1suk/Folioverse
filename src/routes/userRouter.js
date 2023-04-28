@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { v4 as uuidv4 } from "uuid";
 import { userService } from "../service/userService.js";
+import checkToken from "../middlewares/checkToken.js";
 
 const userRouter = Router();
 
@@ -8,7 +8,7 @@ const userRouter = Router();
 userRouter.get("/list", async function (req, res, next) {
   try {
     // 전체 유저 목록을 얻음
-    console.log(req.user);
+    // 전체 유저 리스트를 받는데 토큰을 굳이 받아야 하나....
     const users = await userService.getUsers();
     const sortedUsers = users.sort((a, b) => {
       return a.follower_user.length, -b.follower_user.length;
@@ -20,13 +20,13 @@ userRouter.get("/list", async function (req, res, next) {
 });
 
 /** 현재 유저 확인, 발급받은 토큰이 남아있다면 JWT 토큰 유저 데이터를 받아와서 자동 로그인 하는데 사용 */
-userRouter.get("/current", async function (req, res, next) {
+userRouter.get("/current", checkToken, async function (req, res, next) {
   try {
+    // 토큰 이용해서 로그인한 유저의 id를 안 상태
     // DB에서 유저 데이터를 다 받아서 로그인과 똑같은데이터를 전송
-    const userId = req.user["id"];
-    const currentUserInfo = await userService.getUserInfo({
-      userId,
-    });
+    const _id = req.user._id;
+    const currentUserInfo = await userService.getUserInfo({ _id });
+
     res.status(200).send(currentUserInfo);
   } catch (error) {
     next(error);
@@ -34,7 +34,7 @@ userRouter.get("/current", async function (req, res, next) {
 });
 
 /** 회원 정보 수정 */
-userRouter.put("/:id", async function (req, res, next) {
+userRouter.patch("/:id", checkToken, async function (req, res, next) {
   try {
     // URI로부터 유저 id를 추출함.
     const userId = req.params.id;
@@ -60,11 +60,13 @@ userRouter.put("/:id", async function (req, res, next) {
   }
 });
 
-/** 유저 정보 조회 */
+/** 유저 정보 조회, 현재 로그인한 유저가 있는 경우 응답은 따로 있기 때문에
+ *  다른 유저 정보를 조회하는 경우가 사용할 것 같음
+ */
 userRouter.get("/:id", async function (req, res, next) {
   try {
-    const userId = req.params.id;
-    const currentUserInfo = await userService.getUserInfo({ userId });
+    const _id = req.params.id;
+    const currentUserInfo = await userService.getUserInfo({ _id });
 
     if (currentUserInfo.errorMessage) {
       throw new Error(currentUserInfo.errorMessage);

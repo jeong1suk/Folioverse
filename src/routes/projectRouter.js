@@ -1,14 +1,13 @@
 import { Router } from "express";
-import { v4 as uuidv4 } from "uuid";
 import { projectService } from "../service/projectService.js";
 
 const projectRouter = Router();
 
 /** 해당 유저 project 추가 */
-projectRouter.post("/register", async function (req, res, next) {
+projectRouter.put("/", async function (req, res, next) {
   try {
-    // 토큰에서 받아올 수 있게 수정
-    const user_id = req.user["user_id"];
+    // 토큰에서 받아온 user_id
+    const user_id = req.user._id;
 
     // req (request) 에서 데이터 가져오기
     const name = req.body.name;
@@ -18,11 +17,8 @@ projectRouter.post("/register", async function (req, res, next) {
     const tech_stack = req.body.tech_stack;
     const link = req.body.link;
 
-    // id는 유니크 값 부여
-    const id = uuidv4();
-
     const data = { name, date, division, description, tech_stack, link };
-    const newProject = await projectService.addProject({ id, user_id, data });
+    const newProject = await projectService.addProject({ user_id, data });
 
     res.status(201).json(newProject);
   } catch (error) {
@@ -30,11 +26,11 @@ projectRouter.post("/register", async function (req, res, next) {
   }
 });
 
-// 해당 유저 project 조회(전체)
-projectRouter.get("/list", async function (req, res, next) {
+// 로그인한 유저 project 조회(전체)
+projectRouter.get("/", async function (req, res, next) {
   try {
-    const user_id = req.user["user_id"];
-    const project = await projectService.getUserprojectInfo({
+    const user_id = req.user._id;
+    const project = await projectService.getUserProjectInfo({
       user_id,
     });
 
@@ -51,8 +47,9 @@ projectRouter.get("/list", async function (req, res, next) {
 // 해당 project 조회
 projectRouter.get("/:id", async function (req, res, next) {
   try {
+    // 프로젝트 id
     const _id = req.params.id;
-    const project = await projectService.getprojectInfo({
+    const project = await projectService.getProjectInfo({
       _id,
     });
 
@@ -67,9 +64,9 @@ projectRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 project 수정
-projectRouter.put("/:id", async function (req, res, next) {
+projectRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const date = req.body.date ?? null;
     const name = req.body.name ?? null;
@@ -78,12 +75,12 @@ projectRouter.put("/:id", async function (req, res, next) {
     const tech_stack = req.body.tech_stack ?? null;
     const link = req.body.link ?? null;
 
-    const toUpname = { name, date, division, description, tech_stack, link };
+    const toUpdate = { name, date, division, description, tech_stack, link };
 
     // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-    const project = await projectService.upnameProject({
+    const project = await projectService.updateProject({
       _id,
-      toUpname,
+      toUpdate,
     });
 
     if (project.errorMessage) {
@@ -101,7 +98,7 @@ projectRouter.delete("/:id", async function (req, res, next) {
   try {
     const _id = req.params.id;
 
-    const project = await projectService.deleteproject(_id);
+    const project = await projectService.deleteProject(_id);
 
     if (project.errorMessage) {
       throw new Error(project.errorMessage);

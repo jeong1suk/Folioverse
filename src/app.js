@@ -27,11 +27,11 @@ import awardRouter from "./routes/awardRouter.js";
 import educationRouter from "./routes/educationRouter.js";
 import checkToken from "./middlewares/checkToken.js";
 
-app.use("/user", checkToken, userRouter);
-app.use("/project", checkToken, projectRouter);
-app.use("/education", checkToken, educationRouter);
-app.use("/certificate", checkToken, certificateRouter);
-app.use("/award", checkToken, awardRouter);
+app.use("/api/user", userRouter);
+app.use("/api/project", checkToken, projectRouter);
+app.use("/api/education", checkToken, educationRouter);
+app.use("/api/certificate", checkToken, certificateRouter);
+app.use("/api/award", checkToken, awardRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);

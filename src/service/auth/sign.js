@@ -7,7 +7,7 @@ import { signJWT } from "./login.js";
 
 export const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  await UserModel.create({
+  const user = await UserModel.create({
     email,
     password: hashedPassword,
     name,
@@ -18,8 +18,9 @@ export const createUser = async (email, password, name) => {
       if (err || !user) {
         reject(err || info);
       } else {
-        const { email } = user;
-        const payload = { email };
+        // user
+        const { _id, email } = user;
+        const payload = { _id, email };
         const token = signJWT(payload);
         resolve(token);
       }

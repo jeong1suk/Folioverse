@@ -1,4 +1,4 @@
-import { CertificateModel } from "../schemas/certificate.js";
+import { CertificateModel } from "../schemas/Certificate.js";
 
 class Certificate {
   static async create({ newCertificate }) {
@@ -7,12 +7,22 @@ class Certificate {
   }
 
   static async findAll() {
-    const certificates = await CertificateModel.find({});
-    return certificates;
+    const certificate = await CertificateModel.find({});
+    return certificate;
   }
 
-  static async update({ certificate_id, fieldToUpdate, newValue }) {
-    const filter = { id: certificate_id };
+  static async findAllByUserId(user_id) {
+    const certificate = await CertificateModel.find(user_id);
+    return certificate;
+  }
+
+  static async findById(_id) {
+    const certificate = await CertificateModel.findById(_id);
+    return certificate;
+  }
+
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -24,9 +34,8 @@ class Certificate {
     return updatedCertificate;
   }
 
-  static async delete({ certificate_id }) {
-    const filter = { id: certificate_id };
-    const deletedCertificate = await CertificateModel.deleteOne(filter);
+  static async delete(_id) {
+    const deletedCertificate = await CertificateModel.deleteOne(_id);
     return deletedCertificate;
   }
 }

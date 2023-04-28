@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     like_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     follower_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-    profile_image: { type: Buffer },
+    profile_image: { type: String },
   },
   { timestamps: true }
 );

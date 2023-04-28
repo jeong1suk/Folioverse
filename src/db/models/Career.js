@@ -1,4 +1,4 @@
-import { CareerModel } from "../schemas/career.js";
+import { CareerModel } from "../schemas/Career.js";
 
 class Career {
   static async create({ newCareer }) {
@@ -7,12 +7,22 @@ class Career {
   }
 
   static async findAll() {
-    const careers = await CareerModel.find({});
-    return careers;
+    const career = await CareerModel.find({});
+    return career;
   }
 
-  static async update({ career_id, fieldToUpdate, newValue }) {
-    const filter = { id: career_id };
+  static async findAllByUserId(user_id) {
+    const career = await CareerModel.find(user_id);
+    return career;
+  }
+
+  static async findById(_id) {
+    const career = await CareerModel.findById(_id);
+    return career;
+  }
+
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -24,9 +34,8 @@ class Career {
     return updatedCareer;
   }
 
-  static async delete({ career_id }) {
-    const filter = { id: career_id };
-    const deletedCareer = await CareerModel.deleteOne(filter);
+  static async delete(_id) {
+    const deletedCareer = await CareerModel.deleteOne(_id);
     return deletedCareer;
   }
 }
