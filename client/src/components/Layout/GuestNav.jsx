@@ -6,6 +6,8 @@ import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
 
 function GuestNav() {
+  const [profileView, setProfileView] = useState(false); // 프로필 드랍다운 메뉴 true/false
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
   return (
     <ul className={styles.navRight}>
       <SearchInput login={false} />
@@ -14,6 +16,7 @@ function GuestNav() {
           src={darkModeImg}
           alt="darkModeImg"
           className={styles.darkModeImg}
+          onClick={toggleTheme}
         ></img>
       </li>
       <li>

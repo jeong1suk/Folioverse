@@ -34,7 +34,7 @@ const Header = () => {
         <ul className={styles.navLeft}>
           {isLogin && (
             <li>
-              <Link to={`/mypage`}>마이페이지</Link>
+              <Link to={`/my-page`}>마이페이지</Link>
             </li>
           )}
           <li>
