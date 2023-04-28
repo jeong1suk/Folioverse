@@ -1,4 +1,5 @@
-import { useState } from "react";
+//담당 : 이승현
+
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart } from "chart.js/auto";
 

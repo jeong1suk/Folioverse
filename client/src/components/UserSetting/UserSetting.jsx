@@ -10,8 +10,7 @@ import useThemeStore from "../../store/themeStore";
 import UserStats from "./Chart";
 
 const UserSetting = () => {
-  const url = import.meta.env.VITE_SERVER_HOST;
-  const { data } = useQueryGet(url + "/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
   const theme = useThemeStore((state) => !state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 

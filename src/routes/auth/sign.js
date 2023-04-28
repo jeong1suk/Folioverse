@@ -6,9 +6,9 @@ import { Router } from "express";
 
 const router = Router();
 
-// router.post("/signup", checkDuplicate, async (req, res, next) => {
+// router.post("/signup", checkDuplicate, async (req, res) => {
 //   const { email, password, name } = req.body;
-//   const token = await createUser(email, password, name, next);
+//   const token = await createUser(email, password, name);
 //   res.json({ token });
 // });
 

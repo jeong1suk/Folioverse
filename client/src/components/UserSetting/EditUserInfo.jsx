@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { useQueryFetch } from "../../utils/useQuery";
 
 const EditUserInfo = () => {
-  const url = import.meta.env.VITE_SERVER_HOST;
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
-  const { mutate } = useQueryFetch(url + "/dummy/auth/check-password", "post");
+  const { mutate } = useQueryFetch("/dummy/auth/check-password", "post");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -52,9 +51,7 @@ const EditUserInfo = () => {
 };
 
 const EditContent = ({ content, setContent }) => {
-  const url = import.meta.env.VITE_SERVER_HOST;
-
-  const { mutate } = useQueryFetch(url + "/dummy/auth/change-password", "post");
+  const { mutate } = useQueryFetch("/dummy/auth/change-password", "post");
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");

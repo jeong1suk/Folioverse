@@ -4,14 +4,12 @@ import { useEffect, useState } from "react";
 import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
 
 const EditProfile = () => {
-  const url = import.meta.env.VITE_SERVER_HOST;
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isValid, setIsValid] = useState(true);
 
-  const { mutate } = useQueryFetch(url + "/dummy/auth/edit-profile", "post");
-  const { data } = useQueryGet(url + "/dummy/auth/user-info", "getMyInfo");
+  const { mutate } = useQueryFetch("/dummy/auth/edit-profile", "post");
+  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
 
   const onSubmit = (e) => {
     e.preventDefault();
