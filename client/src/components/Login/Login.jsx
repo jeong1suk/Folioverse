@@ -82,33 +82,25 @@ function SignUp() {
             onChange={handleEmailChange}
           />
           {!isEmailValid && (
-            <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
+            <p className={styles.text}>이메일 형식이 올바르지 않습니다.</p>
           )}
           <br />
-          {isEmailValid && (
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-              onChange={handlePasswordChange}
-            />
-          )}
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
           {!isPasswordValid && isEmailValid && (
-            <div className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</div>
+            <p className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</p>
           )}
           <br />
-          {isFormValid && (
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-              onChange={handleConfirmPasswordChange}
-            />
-          )}
-          {isFormValid && passwordMatch && (
+          {isFormValid ? (
             <button className={styles.button} onClick={handleSubmit}>
-              Login Up
+              Login
             </button>
+          ) : (
+            <button className={styles.button}>Login</button>
           )}
         </div>
       </form>

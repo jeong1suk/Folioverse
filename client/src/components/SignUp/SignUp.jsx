@@ -77,7 +77,13 @@ function SignUp() {
         </div>
 
         <div className={styles.container}>
-          <input type="text" placeholder="User" onChange={handleNameChange} />
+          <br />
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="User"
+            onChange={handleNameChange}
+          />
           <p className={styles.p}>Enter your email*</p>
           <input
             className={styles.input}
