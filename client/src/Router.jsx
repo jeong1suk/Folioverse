@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import UserSetting from "./components/UserSetting/UserSetting";
 import DarkModeTest from "./components/DarkModeTest";
 import Network from "./components/Network/Network";
+import SignUp from "./components/SignUp/SignUp";
+import Login from "./components/Login/Login";
+import UserPage from "./components/UserPage/UserPage";
 
 const Router = () => {
   return (
@@ -12,6 +15,9 @@ const Router = () => {
       <Route path="/network" element={<Network />} />
       <Route path="/user-setting/*" element={<UserSetting />} />
       <Route path="/dark-mode" element={<DarkModeTest />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/my-page" element={<UserPage />} />
     </Routes>
   );
 };

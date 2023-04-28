@@ -2,12 +2,11 @@
 
 import { Strategy } from "passport-local";
 import bcrypt from "bcrypt";
-import User from "../../schemas/users.js";
+import { UserModel } from "../db/schemas/user.js";
 
 const verifyCallback = async (email, password, done) => {
   try {
-    const user = await User.findOne({ email });
-
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return done(null, false, { message: "존재하지 않는 계정입니다" });
     }
