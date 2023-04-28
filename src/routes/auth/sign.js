@@ -1,10 +1,8 @@
 //담당 : 이승현
 
 import { Router } from "express";
-// import checkDuplicate from "../../middlewares/checkDuplicate.js";
-import dotenv from "dotenv";
-// import { createUser } from "../../service/auth/sign.js";
-dotenv.config();
+// import checkDuplicate from "../../middlewares/checkDuplicate";
+// import { createUser } from "./../../service/auth/sign";
 
 const router = Router();
 
