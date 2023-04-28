@@ -6,7 +6,7 @@ const checkToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).send({ message: "인증 토큰이 없습니다" });
+    return res.send(false);
   }
 
   jwt.verify(authHeader, process.env.JWT_SECRET, (err, decoded) => {

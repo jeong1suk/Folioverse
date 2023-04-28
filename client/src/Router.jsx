@@ -7,6 +7,7 @@ import Network from "./components/Network/Network";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import UserPage from "./components/UserPage/UserPage";
+import ErrPage from "./components/ErrPage";
 
 const Router = () => {
   return (
@@ -18,12 +19,13 @@ const Router = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/my-page" element={<UserPage />} />
+      <Route path="/error/*" element={<ErrPage />} />
     </Routes>
   );
 };
 
 const HomePage = () => {
-  return <div className="text-white">홈페이지</div>;
+  return <div className="text-black dark:text-white">홈페이지</div>;
 };
 
 export default Router;
