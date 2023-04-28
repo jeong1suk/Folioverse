@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Form } from "react-router-dom";
+import { useAxiosGet } from "../../CustomHooks";
 import styles from "./SignUp.module.css";
-import Header from "../Layout/Header";
+// const host = import.meta.env.VITE_SERVER_HOST;
 
 function SignUp() {
+  // const { data, error, loading } = useAxiosGet(`${host}/dummy/sign-up`);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -53,7 +55,6 @@ function SignUp() {
 
   return (
     <div>
-      <Header />
       <form className={styles.root}>
         <h1 className={styles.container}>FolioVerse</h1>
         <div className={styles.container}>
