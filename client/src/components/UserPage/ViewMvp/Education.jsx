@@ -1,14 +1,6 @@
 //담당 : 이승현
 
-const dummy = [
-  { _id: "id값", name: "학교명임", major: "전공임", graduation: "박사졸업" },
-  {
-    _id: "awt45tawrfawet",
-    name: "학교명임2",
-    major: "전공임2",
-    graduation: "석사졸업",
-  },
-];
+import { useQueryGet } from "../../../utils/useQuery";
 
 const Education = ({
   setEditState,
@@ -17,6 +9,8 @@ const Education = ({
   setMethod,
   setDeleteLink,
 }) => {
+  const { data } = useQueryGet("/dummy/mvp/education", "getEducation");
+
   const onEdit = (item) => {
     setEditState(true);
     setEducation({
@@ -31,21 +25,23 @@ const Education = ({
   };
   return (
     <ul>
-      {dummy.map((item) => (
+      {data?.map((item) => (
         <li key={item._id} className="text-black border p-3 rounded mt-2">
           <div>
             <p className="flex justify-between mb-2">
-              <span className="text-lg">
+              <span className="text-lg dark:text-white">
                 {item.name}({item.graduation})
               </span>
               <button
-                className="text-blue-400 p-1 rounded hover:bg-neutral-100"
+                className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
                 onClick={() => onEdit(item)}
               >
                 수정
               </button>
             </p>
-            <p className="mb-2 text-neutral-500">전공 : {item.major}</p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              전공 : {item.major}
+            </p>
           </div>
         </li>
       ))}

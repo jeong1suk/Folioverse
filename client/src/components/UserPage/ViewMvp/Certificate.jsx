@@ -1,8 +1,6 @@
 //담당 : 이승현
 
-const dummy = [
-  { _id: "id값", name: "자격증이름임", date: "취득일임", agency: "발급기관임" },
-];
+import { useQueryGet } from "../../../utils/useQuery";
 
 const Certificate = ({
   setEditState,
@@ -11,6 +9,8 @@ const Certificate = ({
   setMethod,
   setDeleteLink,
 }) => {
+  const { data } = useQueryGet("/dummy/mvp/certificate", "getCertificate");
+
   const onEdit = (item) => {
     setEditState(true);
     setCertificate({
@@ -25,20 +25,24 @@ const Certificate = ({
   };
   return (
     <ul>
-      {dummy.map((item) => (
+      {data?.map((item) => (
         <li key={item._id} className="text-black border p-3 rounded mt-2">
           <div>
             <p className="flex justify-between mb-2">
-              <span className="text-lg">{item.name}</span>
+              <span className="text-lg dark:text-white">{item.name}</span>
               <button
-                className="text-blue-400 p-1 rounded hover:bg-neutral-100"
+                className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
                 onClick={() => onEdit(item)}
               >
                 수정
               </button>
             </p>
-            <p className="mb-2 text-neutral-500">취득일 : {item.date}</p>
-            <p className="mb-2 text-neutral-500">발급 기관 : {item.agency}</p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              취득일 : {item.date}
+            </p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              발급 기관 : {item.agency}
+            </p>
           </div>
         </li>
       ))}

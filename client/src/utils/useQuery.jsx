@@ -19,11 +19,11 @@ export const useQueryGet = (link, key, queryOptions = {}) => {
   });
 };
 
-export const useQueryFetch = (link, method) => {
+export const useQueryFetch = (link, method, config = {}) => {
   const token = localStorage.getItem("token") ?? null;
   const mutation = useMutation(async (req) => {
     const response = await axios[method](host + link, req?.body, {
-      headers: { Authorization: token },
+      headers: { Authorization: token, ...config.headers },
     });
     return response.data;
   });

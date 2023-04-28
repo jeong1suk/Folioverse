@@ -102,11 +102,14 @@ const AddData = ({
             setCertificate={setCertificate}
           />
         ))}
-      <button className="border rounded py-1 px-2 mr-2 mt-2" onClick={onSubmit}>
+      <button
+        className="border rounded py-1 px-2 mr-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
+        onClick={onSubmit}
+      >
         확인
       </button>
       <button
-        className="border rounded py-1 px-2"
+        className="border rounded py-1 px-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
         onClick={(e) => {
           e.preventDefault();
           setAddState(false);
@@ -118,7 +121,7 @@ const AddData = ({
       <button
         className={`${
           !editState && "hidden"
-        } border rounded py-1 px-2 ml-2 mt-2`}
+        } border rounded py-1 px-2 ml-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700`}
         onClick={(e) => {
           e.preventDefault();
           handleDelete();

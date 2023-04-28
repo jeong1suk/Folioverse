@@ -1,16 +1,6 @@
 //담당 : 이승현
 
-const dummy = [
-  {
-    _id: "id값",
-    name: "프로젝트명임",
-    division: "팀 프로젝트",
-    description: "플젝내용임",
-    date: "플젝기간임",
-    techStack: "기술스택임",
-    refLink: "링크임",
-  },
-];
+import { useQueryGet } from "../../../utils/useQuery";
 
 const Project = ({
   setEditState,
@@ -19,6 +9,8 @@ const Project = ({
   setMethod,
   setDeleteLink,
 }) => {
+  const { data } = useQueryGet("/dummy/mvp/project", "getProject");
+
   const onEdit = (item) => {
     setEditState(true);
     setProject({
@@ -36,26 +28,32 @@ const Project = ({
   };
   return (
     <ul>
-      {dummy.map((item) => (
+      {data?.map((item) => (
         <li key={item._id} className="text-black border p-3 rounded mt-2">
           <div>
             <p className="flex justify-between mb-2">
-              <span className="text-lg">
+              <span className="text-lg dark:text-white">
                 {item.name}({item.division})
               </span>
               <button
-                className="text-blue-400 p-1 rounded hover:bg-neutral-100"
+                className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
                 onClick={() => onEdit(item)}
               >
                 수정
               </button>
             </p>
-            <p className="mb-2 text-neutral-500">내용 : {item.description}</p>
-            <p className="mb-2 text-neutral-500">기간 : {item.date}</p>
-            <p className="mb-2 text-neutral-500">
-              기술 스택 : {item.tech_stak}
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              내용 : {item.description}
             </p>
-            <p className="mb-2 text-neutral-500">참조 링크 : {item.link}</p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              기간 : {item.date}
+            </p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              기술 스택 : {item.techStack}
+            </p>
+            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
+              참조 링크 : {item.refLink}
+            </p>
           </div>
         </li>
       ))}

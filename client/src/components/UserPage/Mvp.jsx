@@ -56,7 +56,7 @@ const Mvp = ({ title }) => {
 
   return (
     <section className="border rounded p-5 mb-5">
-      <h1 className="text-xl font-bold">{title}</h1>
+      <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
         {(title === "학력" && (
           <Education
@@ -99,7 +99,7 @@ const Mvp = ({ title }) => {
         onClick={onAdd}
         className={`${
           (addState || editState) && "hidden"
-        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100`}
+        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700`}
       >
         +
       </button>

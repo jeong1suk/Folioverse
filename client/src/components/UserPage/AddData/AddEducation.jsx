@@ -36,7 +36,7 @@ const AddEducation = ({ education, setEducation }) => {
           checked={education.graduation === "재학중"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">재학중</label>
+        <label className="m-1 dark:text-neutral-300">재학중</label>
         <input
           className="m-1"
           name="degree"
@@ -45,7 +45,7 @@ const AddEducation = ({ education, setEducation }) => {
           checked={education.graduation === "학사졸업"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">학사졸업</label>
+        <label className="m-1 dark:text-neutral-300">학사졸업</label>
         <input
           className="m-1"
           name="degree"
@@ -54,7 +54,7 @@ const AddEducation = ({ education, setEducation }) => {
           checked={education.graduation === "석사졸업"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">석사졸업</label>
+        <label className="m-1 dark:text-neutral-300">석사졸업</label>
         <input
           className="m-1"
           name="degree"
@@ -63,7 +63,7 @@ const AddEducation = ({ education, setEducation }) => {
           checked={education.graduation === "박사졸업"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">박사졸업</label>
+        <label className="m-1 dark:text-neutral-300">박사졸업</label>
         <input
           className="m-1"
           name="degree"
@@ -72,7 +72,7 @@ const AddEducation = ({ education, setEducation }) => {
           checked={education.graduation === "중퇴"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">중퇴</label>
+        <label className="m-1 dark:text-neutral-300">중퇴</label>
       </div>
     </>
   );

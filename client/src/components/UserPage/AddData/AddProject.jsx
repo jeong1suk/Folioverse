@@ -28,7 +28,7 @@ const AddProject = ({ project, setProject }) => {
           checked={project.division === "개인 프로젝트"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">개인 프로젝트</label>
+        <label className="m-1 dark:text-neutral-300">개인 프로젝트</label>
         <input
           className="m-1"
           name="degree"
@@ -37,7 +37,7 @@ const AddProject = ({ project, setProject }) => {
           checked={project.division === "팀 프로젝트"}
           onChange={handleRadioClick}
         />
-        <label className="m-1">팀 프로젝트</label>
+        <label className="m-1 dark:text-neutral-300">팀 프로젝트</label>
       </div>
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
