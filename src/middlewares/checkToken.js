@@ -6,6 +6,7 @@ dotenv.config();
 
 const checkToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
 
   if (!authHeader) {
     return res.status(401).send({ message: "인증 토큰이 없습니다" });

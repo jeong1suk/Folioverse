@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 //CertificateSchema 정의하기
 const CertificateSchema = new Schema({
@@ -6,7 +6,9 @@ const CertificateSchema = new Schema({
   agency: { type: String, required: true },
 });
 
-module.exports = CertificateSchema;
+const CertificateModel = model("Certificate", CertificateSchema);
+
+export { CertificateModel };
 
 // Table career {
 //   id objectId [primary key]
