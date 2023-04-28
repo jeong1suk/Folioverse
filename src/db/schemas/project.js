@@ -2,13 +2,10 @@ import { Schema, model } from "mongoose";
 
 const ProjectSchema = new Schema(
   {
+    user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
     name: { type: String, required: true },
     disvison: { type: String, required: true },
-    description: {
-      type: String,
-      required: false,
-      default: "설명이 아직 없습니다. 추가해 주세요.",
-    },
+    description: { type: String },
     date: { type: String },
     tech_stack: { type: String },
     link: { type: String },
