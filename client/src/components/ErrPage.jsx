@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { useParams } from "react-router-dom";
 
 const ErrPage = () => {

@@ -20,6 +20,7 @@ export const useQueryGet = (link, key, queryOptions = {}) => {
 };
 
 export const useQueryFetch = (link, method) => {
+  const token = localStorage.getItem("token") ?? null;
   const mutation = useMutation(async (req) => {
     const response = await axios[method](host + link, req?.body, {
       headers: { Authorization: token },
@@ -32,5 +33,22 @@ export const useQueryFetch = (link, method) => {
     isLoading: mutation.isLoading,
     error: mutation.error,
     mutate: mutation.mutate,
+  };
+};
+
+export const useQueryDelete = (link) => {
+  const token = localStorage.getItem("token") ?? null;
+  const mutation = useMutation(async () => {
+    const response = await axios.delete(host + link, {
+      headers: { Authorization: token },
+    });
+    return response.data;
+  });
+
+  return {
+    data: mutation,
+    isLoading: mutation.isLoading,
+    error: mutation.error,
+    deleteMutate: mutation.mutate,
   };
 };

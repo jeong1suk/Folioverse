@@ -198,4 +198,80 @@ router.get("/followed/:id", async (req, res) => {
   res.json(data);
 });
 
+router.put("/test-education", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-project", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-award", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.put("/test-certificate", (req, res) => {
+  console.log("put 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-education", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-project", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-award", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.patch("/test-certificate", (req, res) => {
+  console.log("patch 입니다");
+  console.log(req.body);
+  res.send(true);
+});
+
+router.delete("/test-education/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-project/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-award/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
+router.delete("/test-certificate/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  console.log("삭제 입니다");
+  res.send(true);
+});
+
 export default router;
