@@ -14,9 +14,9 @@ export const createUser = async (email, password, name) => {
   });
 
   return new Promise((resolve, reject) => {
-    passport.authenticate("local", { session: false }, (err, user) => {
+    passport.authenticate("local", { session: false }, (err, user, info) => {
       if (err || !user) {
-        reject(err);
+        reject(err || info);
       } else {
         const { email } = user;
         const payload = { email };
