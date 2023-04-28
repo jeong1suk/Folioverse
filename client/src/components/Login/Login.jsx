@@ -1,49 +1,110 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useAxiosGet } from "../../CustomHooks";
 import styles from "./Login.module.css";
+// const host = import.meta.env.VITE_SERVER_HOST;
 
-function Login() {
+function SignUp() {
+  // const { data, error, loading } = useAxiosGet(`${host}/dummy/sign-up`);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(false);
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
+  const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    if (e.target.value === confirmPassword) {
+      setPasswordMatch(true);
+    } else {
+      setPasswordMatch(false);
+    }
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      history.push("/");
-    } catch (error) {
-      alert(error.message);
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    if (e.target.value === password) {
+      setPasswordMatch(true);
+    } else {
+      setPasswordMatch(false);
     }
   };
 
+  const validateEmail = (email) => {
+    return email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const isEmailValid = validateEmail(email);
+  const isPasswordValid = password.length >= 4;
+
+  const isFormValid = isEmailValid && isPasswordValid;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    // 회원가입 로직 구현
+  };
+
   return (
-    <>
-      <div>
-        <h2>LOGIN</h2>
-        <p></p>
-        <button className={styles.btnLogin} onClick={change_to_login}>
-          LOGIN
-        </button>
-      </div>
-      <div className={styles.colsMdSignUp}>
-        <div className={styles.contBaOpcitiy}>
-          <h2>SIGN UP</h2>
-          <p></p>
-          <button className={styles.btnSignUp} onClick={change_to_sign_up}>
-            SIGN UP
-          </button>
+    <div>
+      <form className={styles.root}>
+        <h1 className={styles.container}>FolioVerse</h1>
+        <div className={styles.container}>
+          <p className={styles.p}>Welcome to Folioverse</p>
+          <p className={styles.p}>Let's begin the adventure</p>
         </div>
-      </div>
-    </>
+
+        <div className={styles.container}>
+          <p className={styles.p}>Enter your email*</p>
+          <input
+            className={styles.input}
+            type="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
+          />
+          {!isEmailValid && (
+            <form className={styles.text}>
+              이메일 형식이 올바르지 않습니다.
+            </form>
+          )}
+          <br />
+          {isEmailValid && (
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Password"
+              onChange={handlePasswordChange}
+            />
+          )}
+          {!isPasswordValid && isEmailValid && (
+            <form className={styles.text}>
+              비밀번호를 4글자 이상 넣어주세요.
+            </form>
+          )}
+          <br />
+          {isFormValid && (
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Password"
+              onChange={handleConfirmPasswordChange}
+            />
+          )}
+          {isFormValid && passwordMatch && (
+            <button className={styles.button}>Sign Up</button>
+          )}
+        </div>
+      </form>
+    </div>
   );
 }
 
-export default Login;
+export default SignUp;
