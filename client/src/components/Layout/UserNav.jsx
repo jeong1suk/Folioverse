@@ -10,7 +10,7 @@ import darkModeImg from "/dark-mode.png";
 import useThemeStore from "../../store/themeStore";
 
 function UserNav() {
-  const [profileView, setProfileView] = useState(false); // 프로필 드랍다운 메뉴 true/false
+  const [profileView, setProfileView] = useState(false);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
   function profileViewHandler() {
     return setProfileView(!profileView);
