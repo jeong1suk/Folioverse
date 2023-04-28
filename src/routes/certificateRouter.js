@@ -16,9 +16,7 @@ certificateRouter.put("/", async function (req, res, next) {
 
     const newCertificate = await certificateService.addCertificate({
       user_id,
-      name,
-      date,
-      agency,
+      data: { name, date, agency },
     });
 
     res.status(201).json(newCertificate);
