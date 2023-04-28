@@ -9,7 +9,7 @@ function Layout() {
       <Header />
       <div
         className="blank-top"
-        style={{ height: "50px", backgroundColor: "#1a1a1a" }}
+        style={{ height: "60px", backgroundColor: "#1a1a1a" }}
       ></div>
       <Router />
     </>

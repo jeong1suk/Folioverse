@@ -1,3 +1,5 @@
+// 정주현
+
 import { useEffect, useState } from "react";
 import styles from "./Network.module.css";
 
@@ -27,9 +29,6 @@ function NetworkFilter({ sortBy, setSortBy }) {
           onClick={() => {
             setNotMajor(!notMajor);
             setMajor(false);
-            setJuniorDev(false);
-            setSeniorDev(false);
-            setExperiencedDev(false);
           }}
         >
           비전공자
@@ -39,19 +38,15 @@ function NetworkFilter({ sortBy, setSortBy }) {
           onClick={() => {
             setNotMajor(false);
             setMajor(!major);
-            setJuniorDev(false);
-            setSeniorDev(false);
-            setExperiencedDev(false);
           }}
         >
           전공자
         </button>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         <button
           className={juniorDev ? styles.btnEnable : styles.btnDisable}
           onClick={() => {
             setJuniorDev(!juniorDev);
-            setNotMajor(false);
-            setMajor(false);
             setSeniorDev(false);
             setExperiencedDev(false);
           }}
@@ -62,8 +57,6 @@ function NetworkFilter({ sortBy, setSortBy }) {
           className={seniorDev ? styles.btnEnable : styles.btnDisable}
           onClick={() => {
             setSeniorDev(!seniorDev);
-            setNotMajor(false);
-            setMajor(false);
             setJuniorDev(false);
             setExperiencedDev(false);
           }}
@@ -74,14 +67,20 @@ function NetworkFilter({ sortBy, setSortBy }) {
           className={experiencedDev ? styles.btnEnable : styles.btnDisable}
           onClick={() => {
             setExperiencedDev(!experiencedDev);
-            setNotMajor(false);
-            setMajor(false);
             setJuniorDev(false);
             setSeniorDev(false);
           }}
         >
-          경력개발자(N년 이상)
+          숙련개발자(8년 이상)
         </button>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>기술스택 : </span>
+        <button className={styles.btnDisable}>드롭다운메뉴 여기추가</button>
+        <br></br>
+        {/* 예시코드(삭제예정) */}
+        <button className={styles.selectedStack}>
+          Javascript&nbsp;&nbsp;x
+        </button>
+        {/* 예시코드(삭제예정) */}
       </div>
     </div>
   );
