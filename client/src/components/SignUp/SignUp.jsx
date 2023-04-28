@@ -69,14 +69,14 @@ function SignUp() {
 
   return (
     <div>
-      <form className={styles.root}>
-        <h1 className={styles.container}>FolioVerse</h1>
-        <div className={styles.container}>
+      <form className={styles.container}>
+        <h1>FolioVerse</h1>
+        <div>
           <p className={styles.p}>Welcome to Folioverse</p>
           <p className={styles.p}>Let's begin the adventure</p>
         </div>
 
-        <div className={styles.container}>
+        <div>
           <br />
           <input
             className={styles.input}

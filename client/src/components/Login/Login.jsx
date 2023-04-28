@@ -1,31 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAxiosGet } from "../../CustomHooks";
 import styles from "./Login.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function SignUp() {
-  // const { data, error, loading } = useAxiosGet(`${host}/dummy/sign-up`);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     if (e.target.value === confirmPassword) {
-      setPasswordMatch(true);
-    } else {
-      setPasswordMatch(false);
-    }
-  };
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    if (e.target.value === password) {
       setPasswordMatch(true);
     } else {
       setPasswordMatch(false);
@@ -65,46 +53,51 @@ function SignUp() {
   };
 
   return (
-    <div>
-      <form className={styles.root}>
-        <h1 className={styles.container}>FolioVerse</h1>
-        <div className={styles.container}>
-          <p className={styles.p}>Welcome to Folioverse</p>
-          <p className={styles.p}>Let's begin the adventure</p>
-        </div>
-
-        <div className={styles.container}>
-          <p className={styles.p}>Enter your email*</p>
+    <>
+      <div className={styles.container}>
+        <h1 className={styles.fvhead}>FolioVerse</h1>
+      </div>
+      <div className={styles.container}>
+        <form className={styles.form}>
+          <label className={styles.label}>Username or email address</label>
           <input
-            className={styles.input}
+            className={styles.inputTxt}
             type="email"
-            placeholder="Email"
             onChange={handleEmailChange}
           />
-          {!isEmailValid && (
-            <p className={styles.text}>이메일 형식이 올바르지 않습니다.</p>
-          )}
-          <br />
+          <div className={styles.inlineBlock}>
+            <label htmlFor="password" className={styles.label}>
+              Password:
+            </label>
+          </div>
+          <div className={styles.inlineBlock}>
+            <p>
+              <a href="#" className={styles.link}>
+                <button className={styles.btn}>비밀번호 재설정</button>
+              </a>
+            </p>
+          </div>
           <input
-            className={styles.input}
+            className={styles.inputPwd}
             type="password"
-            placeholder="Password"
             onChange={handlePasswordChange}
           />
-          {!isPasswordValid && isEmailValid && (
-            <p className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</p>
-          )}
-          <br />
-          {isFormValid ? (
-            <button className={styles.button} onClick={handleSubmit}>
-              Login
-            </button>
-          ) : (
-            <button className={styles.button}>Login</button>
-          )}
+
+          <button className={styles.btn} type="submit" onClick={handleSubmit}>
+            로그인
+          </button>
+        </form>
+
+        <div className={styles.alternativeLogin}>
+          <p className={styles.alternativeLoginP}>또는</p>
+          <button className={styles.btn}>구글 로그인</button>
         </div>
-      </form>
-    </div>
+      </div>
+      <div className={styles.container}>
+        <p className={styles.fvhead}>Welcome to Folioverse</p>
+        <p className={styles.fvhead}>Let's begin the adventure</p>
+      </div>
+    </>
   );
 }
 
