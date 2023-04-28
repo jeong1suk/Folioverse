@@ -1,5 +1,5 @@
-import { UserModel } from "../schemas/user";
- 
+import { UserModel } from "../schemas/user.js";
+
 class User {
   static async create({ newUser }) {
     const createdNewUser = await UserModel.create(newUser);
@@ -45,11 +45,11 @@ export { User };
 
 // const User = mongoose.model('User', UserSchema);
 
-// User.fgeerasdfsad = async (query, page, perPage) => {  
-// console.log(1)  
-  
+// User.fgeerasdfsad = async (query, page, perPage) => {
+// console.log(1)
+
 //   const [total, posts] = await Promise.all([
-    
+
 //     Post.countDocuments(query),
 //     Post
 //       .find(query)
@@ -60,7 +60,7 @@ export { User };
 //   ]);
 
 //   const totalPage = Math.ceil(total / perPage);
-  
+
 //   return [posts, totalPage];
 // }
 

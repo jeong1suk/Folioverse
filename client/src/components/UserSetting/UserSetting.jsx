@@ -5,32 +5,37 @@ import EditProfile from "./EditProfile";
 import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
 import { useEffect } from "react";
-import { useGetAxios } from "./../../utils/useQuery";
+import { useQueryGet } from "./../../utils/useQuery";
+import useThemeStore from "../../store/themeStore";
+import UserStats from "./Chart";
 
 const UserSetting = () => {
-  const url = import.meta.env.VITE_SERVER_HOST;
-  const { data } = useGetAxios(url + "/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
+  const theme = useThemeStore((state) => !state.theme);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+
+  useEffect(() => {
+    document.body.classList[theme ? "remove" : "add"]("dark");
+  }, [theme]);
 
   return (
-    <div className="wrapper py-2 px-12 sm:px-24 2xl:px-80">
+    <div className="py-2 px-12 sm:px-24 2xl:px-80 dark:bg-neutral-800 min-h-screen">
       <div className="flex flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
-          <img
-            className="w-[5%] rounded-full"
-            src="/cat.png"
-            alt="프로필 사진"
-          />
+          <img className="w-16 rounded-full" src="/cat.png" alt="프로필 사진" />
           <div className="my-auto ml-3">
-            <h3 className="block text-xl font-bold">{data?.name}</h3>
-            <span>{data?.email}</span>
+            <h3 className="block text-xl font-bold dark:text-white">
+              {data?.name}
+            </h3>
+            <span className="dark:text-white">{data?.email}</span>
           </div>
         </div>
-        <Link
-          className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200"
-          to="/"
+        <button
+          className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:hover:bg-neutral-700"
+          onClick={toggleTheme}
         >
-          프로필로 돌아가기
-        </Link>
+          프로필로 돌아가기(지금은 다크모드 버튼)
+        </button>
       </div>
       <div className="flex flex-row">
         <nav className="basis-1/6 mr-5">
@@ -41,6 +46,7 @@ const UserSetting = () => {
             <Route path="" element={<EditProfile />} />
             <Route path="edit-user-info" element={<EditUserInfo />} />
             <Route path="manage-follow" element={<ManageFollow />} />
+            <Route path="user-stats" element={<UserStats />} />
           </Routes>
         </main>
       </div>
@@ -73,7 +79,7 @@ const ContentTab = () => {
           />
         </svg>
       ),
-      backgroundColor: params["*"] === "" && "bg-gray-100",
+      backgroundColor: params["*"] === "" && "bg-gray-100 dark:bg-neutral-700",
     },
     {
       id: 2,
@@ -100,7 +106,8 @@ const ContentTab = () => {
           />
         </svg>
       ),
-      backgroundColor: params["*"] === "edit-user-info" && "bg-gray-100",
+      backgroundColor:
+        params["*"] === "edit-user-info" && "bg-gray-100 dark:bg-neutral-700",
     },
     {
       id: 3,
@@ -122,16 +129,40 @@ const ContentTab = () => {
           />
         </svg>
       ),
-      backgroundColor: params["*"] === "manage-follow" && "bg-gray-100",
+      backgroundColor:
+        params["*"] === "manage-follow" && "bg-gray-100 dark:bg-neutral-700",
+    },
+    {
+      id: 4,
+      title: "통계",
+      link: "user-stats",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+          />
+        </svg>
+      ),
+      backgroundColor:
+        params["*"] === "chart" && "bg-gray-100 dark:bg-neutral-700",
     },
   ];
 
   return (
     <ul>
       {tabList.map((item) => (
-        <li key={item.id}>
+        <li key={item.id} className="text-black dark:text-white">
           <Link
-            className={`${item.backgroundColor} block p-2 flex flex-row hover:bg-gray-200 rounded`}
+            className={`${item.backgroundColor} block p-2 flex flex-row hover:bg-gray-200 dark:hover:bg-neutral-700 rounded`}
             to={item.link}
           >
             <span className="mr-2">{item.icon}</span>
