@@ -15,17 +15,17 @@ const Mvp = ({ title }) => {
   const [deleteLink, setDeleteLink] = useState("");
   const [method, setMethod] = useState("");
   const [education, setEducation] = useState({
-    name: "",
+    school_name: "",
     major: "",
-    graduation: "재학중",
+    graduate_status: "재학중",
   });
   const [project, setProject] = useState({
     name: "",
     division: "개인 프로젝트",
     description: "",
     date: "",
-    techStack: "",
-    refLink: "",
+    tech_stack: "",
+    link: "",
   });
   const [award, setAward] = useState({
     name: "",
@@ -39,15 +39,20 @@ const Mvp = ({ title }) => {
 
   const onAdd = () => {
     setAddState(true);
-    setEducation({ ...education, name: "", major: "", graduation: "재학중" });
+    setEducation({
+      ...education,
+      school_name: "",
+      major: "",
+      graduate_status: "재학중",
+    });
     setProject({
       ...project,
       name: "",
       division: "개인 프로젝트",
       description: "",
       date: "",
-      techStack: "",
-      refLink: "",
+      tech_stack: "",
+      link: "",
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });

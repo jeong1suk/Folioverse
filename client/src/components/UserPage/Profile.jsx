@@ -6,12 +6,13 @@ import useThemeStore from "../../store/themeStore";
 import { useEffect } from "react";
 
 const Profile = () => {
-  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet("/user/current", "getMyInfo");
   const theme = useThemeStore((state) => !state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   useEffect(() => {
     document.body.classList[theme ? "remove" : "add"]("dark");
+    console.log(data);
   }, [theme]);
 
   return (

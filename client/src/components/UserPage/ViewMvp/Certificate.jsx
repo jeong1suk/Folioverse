@@ -9,7 +9,7 @@ const Certificate = ({
   setMethod,
   setDeleteLink,
 }) => {
-  const { data } = useQueryGet("/dummy/mvp/certificate", "getCertificate");
+  const { data } = useQueryGet("/certificate", "getCertificate");
 
   const onEdit = (item) => {
     setEditState(true);

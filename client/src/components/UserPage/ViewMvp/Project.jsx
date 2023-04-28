@@ -9,7 +9,7 @@ const Project = ({
   setMethod,
   setDeleteLink,
 }) => {
-  const { data } = useQueryGet("/dummy/mvp/project", "getProject");
+  const { data } = useQueryGet("/project", "getProject");
 
   const onEdit = (item) => {
     setEditState(true);
@@ -19,8 +19,8 @@ const Project = ({
       division: item.division,
       description: item.description,
       date: item.date,
-      techStack: item.techStack,
-      refLink: item.refLink,
+      tech_stack: item.tech_stack,
+      link: item.link,
       _id: item._id,
     });
     setMethod("patch");
@@ -49,10 +49,10 @@ const Project = ({
               기간 : {item.date}
             </p>
             <p className="mb-2 text-neutral-500 dark:text-neutral-300">
-              기술 스택 : {item.techStack}
+              기술 스택 : {item.tech_stack}
             </p>
             <p className="mb-2 text-neutral-500 dark:text-neutral-300">
-              참조 링크 : {item.refLink}
+              참조 링크 : {item.link}
             </p>
           </div>
         </li>
