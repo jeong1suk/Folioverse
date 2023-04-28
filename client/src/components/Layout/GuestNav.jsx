@@ -17,7 +17,7 @@ function GuestNav() {
         ></img>
       </li>
       <li>
-        <Link to={"/register"}>회원가입</Link>
+        <Link to={"/sign-up"}>회원가입</Link>
       </li>
       <li>
         <Link to={"/login"}>로그인</Link>
