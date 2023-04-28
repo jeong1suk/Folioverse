@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const checkToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"].split(" ")[1];
-  console.log(authHeader);
+  const authHeader = req.headers.authorization;
 
   if (!authHeader) {
     return res.status(401).send({ message: "인증 토큰이 없습니다" });
