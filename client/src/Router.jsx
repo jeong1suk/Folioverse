@@ -6,7 +6,6 @@ import DarkModeTest from "./components/DarkModeTest";
 import Network from "./components/Network/Network";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
-
 import UserPage from "./components/UserPage/UserPage";
 
 const Router = () => {
@@ -17,8 +16,8 @@ const Router = () => {
       <Route path="/user-setting/*" element={<UserSetting />} />
       <Route path="/dark-mode" element={<DarkModeTest />} />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/my-page" element={<UserPage />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/my-page" element={<UserPage />} />
     </Routes>
   );
 };
