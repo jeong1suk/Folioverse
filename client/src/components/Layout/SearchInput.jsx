@@ -19,6 +19,9 @@ function SearchInput({ login }) {
         onFocus={() => {
           setTextFocus(true);
         }}
+        onBlur={() => {
+          setTextFocus(false);
+        }}
       />
       <ul
         className={login ? styles.searchResultList : styles.gSearchResultList}

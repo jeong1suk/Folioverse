@@ -1,5 +1,5 @@
 // 정주현
-
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 function UserDownMenu() {
@@ -10,8 +10,12 @@ function UserDownMenu() {
   }
   return (
     <ul className={styles.profileDownMenu}>
-      <li>회원설정</li>
-      <li>마이페이지</li>
+      <li>
+        <Link to="/user-setting">회원설정</Link>
+      </li>
+      <li>
+        <Link to="/my-page">마이페이지</Link>
+      </li>
       <li onClick={logout}>로그아웃</li>
     </ul>
   );

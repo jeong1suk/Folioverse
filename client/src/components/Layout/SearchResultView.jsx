@@ -29,7 +29,7 @@ function SearchResultView({ searchText, setFocus }) {
         return (
           (el.name.toUpperCase().includes(searchText.toUpperCase()) ||
             el.email.toUpperCase().includes(searchText.toUpperCase())) && (
-            <li key={idx} onClick={() => setFocus(false)}>
+            <li key={idx}>
               <Link to={`/network/profile/${el.id}`}>
                 <img src={profileDefaultDark} alt="profile" />
                 <div>
