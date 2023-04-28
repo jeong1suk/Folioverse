@@ -18,6 +18,9 @@ export const loginAuthenticate = (req, res, next) => {
         if (err) {
           return next(err);
         }
+        const { email } = req.user;
+        const payload = { email };
+        req.user.token = signJWT(payload);
         next();
       });
     }
