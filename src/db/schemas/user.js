@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 // UserSchema 정의하기
 const UserSchema = new Schema(
@@ -21,7 +21,9 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = UserSchema;
+const UserModel = model("User", UserSchema);
+
+export { UserModel };
 
 //   Table users {
 //   id objectId [primary key]

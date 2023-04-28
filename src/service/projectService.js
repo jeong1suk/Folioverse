@@ -1,4 +1,4 @@
-import { Project } from "../db";
+import { Project } from "../db/index.js";
 
 const projectService = {
   addProject: async ({ id, user_id, data }) => {

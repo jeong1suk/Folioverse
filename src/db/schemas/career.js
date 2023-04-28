@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 //CareerSchema 정의하기
 const CareerSchema = new Schema({
@@ -6,7 +6,9 @@ const CareerSchema = new Schema({
   job: { type: String, required: true },
 });
 
-module.exports = CareerSchema;
+const CareerModel = model("Career", CareerSchema);
+
+export { CareerModel };
 
 // Table career {
 //   id objectId [primary key]

@@ -1,4 +1,4 @@
-import { Award } from "../db";
+import { Award } from "../db/index.js";
 
 const awardService = {
   addAward: async ({ id, user_id, date, name }) => {

@@ -1,4 +1,4 @@
-import { Education } from "../db";
+import { Education } from "../db/index.js";
 
 const educationService = {
   addEducation: async ({

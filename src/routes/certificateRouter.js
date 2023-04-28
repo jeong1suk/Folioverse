@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { certificateService } from "../service/certificateService";
+import { v4 as uuidv4 } from "uuid";
+import { certificateService } from "../service/certificateService.js";
 
 const certificateRouter = Router();
 

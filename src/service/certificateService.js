@@ -1,4 +1,4 @@
-import { Certificate } from "../db";
+import { Certificate } from "../db/index.js";
 
 const certificateService = {
   addCertificate: async ({ id, user_id, date, agency }) => {

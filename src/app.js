@@ -16,17 +16,18 @@ import dummyRouter from "./routes/dummy/index.js";
 app.use("/api/auth", authRouter);
 app.use("/api/dummy", dummyRouter);
 
-import userRouter from "./routes/userRouter";
-import projectRouter from "./routes/projectRouter";
-import certificateRouter from "./routes/certificateRouter";
-import awardRouter from "./routes/awardRouter";
-import educationRouter from "./routes/educationRouter";
+import userRouter from "./routes/userRouter.js";
+import projectRouter from "./routes/projectRouter.js";
+import certificateRouter from "./routes/certificateRouter.js";
+import awardRouter from "./routes/awardRouter.js";
+import educationRouter from "./routes/educationRouter.js";
+import checkToken from "./middlewares/checkToken.js";
 
 app.use("/user", checkToken, userRouter);
-app.use("/project", checkToken, userRouter);
-app.use("/education", checkToken, userRouter);
-app.use("/certification", checkToken, userRouter);
-app.use("/award", checkToken, userRouter);
+app.use("/project", checkToken, projectRouter);
+app.use("/education", checkToken, educationRouter);
+app.use("/certificate", checkToken, certificateRouter);
+app.use("/award", checkToken, awardRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);

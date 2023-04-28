@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 //CommentsSchema 정의하기
 const CommentsSchema = new Schema({
@@ -8,7 +8,9 @@ const CommentsSchema = new Schema({
   content: { type: String, required: true },
 });
 
-module.exports = CommentsSchema;
+const CommentsModel = model("Comments", CommentsSchema);
+
+export { CommentsModel };
 
 // Table comments {
 //   id objectId [primary key]

@@ -1,4 +1,4 @@
-import { Career } from "../db";
+import { Career } from "../db/index.js";
 
 const careerService = {
   addCareer: async ({ id, user_id, yearly, job }) => {

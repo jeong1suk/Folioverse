@@ -1,6 +1,6 @@
-import { UserModel } from "../db/schemas/user";
+import { UserModel } from "../db/schemas/user.js";
 import bcrypt from "bcrypt";
-import { User } from "../db";
+// import { User } from "../db";
 
 const userService = {
   /** 네트워크 창 클릭 요청 시 응답.

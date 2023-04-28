@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 //AwardSchema 정의하기
 const AwardSchema = new Schema(
@@ -9,7 +9,9 @@ const AwardSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = AwardSchema;
+const AwardModel = model("Award", AwardSchema);
+
+export { AwardModel };
 
 // Table award {
 //   id objectId [primary key]

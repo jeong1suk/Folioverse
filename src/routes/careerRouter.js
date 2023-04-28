@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { careerService } from "../service/careerService";
+import { v4 as uuidv4 } from "uuid";
+import { careerService } from "../service/careerService.js";
 
 const careerRouter = Router();
 

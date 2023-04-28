@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const ProjectSchema = new Schema(
   {
@@ -9,14 +9,16 @@ const ProjectSchema = new Schema(
       required: false,
       default: "설명이 아직 없습니다. 추가해 주세요.",
     },
-    date: { type: string },
+    date: { type: String },
     tech_stack: { type: String },
     link: { type: String },
   },
   { timestamps: true }
 );
 
-module.exports = ProjectSchema;
+const ProjectModel = model("Project", ProjectSchema);
+
+export { ProjectModel };
 
 // Table project {
 //   id objecrId [primary key]

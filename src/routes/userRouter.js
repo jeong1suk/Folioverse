@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { userService } from "../service/userService";
+import { v4 as uuidv4 } from "uuid";
+import { userService } from "../service/userService.js";
 
 const userRouter = Router();
 

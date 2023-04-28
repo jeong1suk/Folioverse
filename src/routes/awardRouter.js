@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { awardService } from "../service/awardService";
+import { awardService } from "../service/awardService.js";
 
 const awardRouter = Router();
 

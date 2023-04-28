@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 //FollowSchema 정의하기
 const FollowSchema = new Schema({
@@ -7,10 +7,12 @@ const FollowSchema = new Schema({
   like_user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-module.exports = FollowSchema;
+const FollowModel = model("Follow", FollowSchema);
+
+export { FollowModel };
 
 // Table follow {
 //   id objectId [primary key]
-//   target_user ref[users]
+//   target_Follow ref[users]
 //   follow_user ref[users]
 // }
