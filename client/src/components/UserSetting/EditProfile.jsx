@@ -7,23 +7,32 @@ const EditProfile = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [imageFile, setImageFile] = useState(null);
 
-  const { mutate } = useQueryFetch("/dummy/auth/edit-profile", "post");
+  const { mutate } = useQueryFetch("/dummy/auth/edit-profile", "post", {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    mutate(
-      {
-        body: {
-          name,
-          description,
-        },
-      },
-      {
-        onSuccess: (data) => console.log(data),
-      }
-    );
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    mutate(formData, {
+      onSuccess: (data) => console.log(data),
+    });
+  };
+
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
   };
 
   useEffect(() => {
@@ -86,9 +95,19 @@ const EditProfile = () => {
           <h3 className="text-lg mb-3">프로필 사진</h3>
           <div className="grid justify-items-center relative">
             <img className="rounded-full" src="/cat.png" alt="프로필 사진" />
-            <button className="border absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100">
-              수정
-            </button>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              id="imageUpload"
+              onChange={onImageChange}
+            />
+            <label
+              htmlFor="imageUpload"
+              className="border absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100 cursor-pointer"
+            >
+              사진 변경
+            </label>
           </div>
         </article>
       </form>

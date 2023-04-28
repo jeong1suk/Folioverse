@@ -18,7 +18,7 @@ router.post(
 );
 
 router.get("/is-login", checkToken, (req, res) => {
-  res.send(req.user ? true : false);
+  res.send(true);
 });
 
 router.get("/logout", (req, res, next) => {
