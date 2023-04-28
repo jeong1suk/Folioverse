@@ -4,6 +4,8 @@ import styles from "./Header.module.css";
 import darkModeImg from "/dark-mode.png";
 import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import useThemeStore from "../../store/themeStore";
 
 function GuestNav() {
   const [profileView, setProfileView] = useState(false); // 프로필 드랍다운 메뉴 true/false
