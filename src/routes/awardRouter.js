@@ -4,7 +4,7 @@ import { awardService } from "../service/AwardService.js";
 const awardRouter = Router();
 
 /** 해당 유저 Award 추가 */
-awardRouter.post("/", async function (req, res, next) {
+awardRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
@@ -26,7 +26,7 @@ awardRouter.post("/", async function (req, res, next) {
 });
 
 // 해당 유저 Award 조회(전체)
-awardRouter.get("/list", async function (req, res, next) {
+awardRouter.get("/", async function (req, res, next) {
   try {
     const user_id = req.user._id;
     const award = await awardService.getUserAwardInfo({
@@ -62,9 +62,9 @@ awardRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 Award 수정
-awardRouter.put("/:id", async function (req, res, next) {
+awardRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const yearly = req.body.yearly ?? null;
     const job = req.body.job ?? null;

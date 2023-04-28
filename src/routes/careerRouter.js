@@ -4,7 +4,7 @@ import { careerService } from "../service/careerService.js";
 const careerRouter = Router();
 
 /** 해당 유저 career 추가 */
-careerRouter.post("/", async function (req, res, next) {
+careerRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
@@ -26,7 +26,7 @@ careerRouter.post("/", async function (req, res, next) {
 });
 
 // 해당 유저 career 조회(전체)
-careerRouter.get("/list", async function (req, res, next) {
+careerRouter.get("/", async function (req, res, next) {
   try {
     const user_id = req.user._id;
     const career = await careerService.getUserCareerInfo({
@@ -62,9 +62,9 @@ careerRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 career 수정
-careerRouter.put("/:id", async function (req, res, next) {
+careerRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const yearly = req.body.yearly ?? null;
     const job = req.body.job ?? null;

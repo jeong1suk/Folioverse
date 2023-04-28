@@ -4,7 +4,7 @@ import { certificateService } from "../service/certificateService.js";
 const certificateRouter = Router();
 
 /** 해당 유저 certificate 추가 */
-certificateRouter.post("/", async function (req, res, next) {
+certificateRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
@@ -26,7 +26,7 @@ certificateRouter.post("/", async function (req, res, next) {
 });
 
 // 해당 유저 certificate 조회(전체)
-certificateRouter.get("/list", async function (req, res, next) {
+certificateRouter.get("/", async function (req, res, next) {
   try {
     const user_id = req.user._id;
     const certificate = await certificateService.getUserCertificateInfo({
@@ -62,9 +62,9 @@ certificateRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 certificate 수정
-certificateRouter.put("/:id", async function (req, res, next) {
+certificateRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const date = req.body.date ?? null;
     const agency = req.body.agency ?? null;

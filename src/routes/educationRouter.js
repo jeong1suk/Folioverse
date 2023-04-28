@@ -4,7 +4,7 @@ import { educationService } from "../service/EducationService.js";
 const educationRouter = Router();
 
 /** 해당 유저 Education 추가 */
-educationRouter.post("/", async function (req, res, next) {
+educationRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
@@ -24,7 +24,7 @@ educationRouter.post("/", async function (req, res, next) {
 });
 
 // 해당 유저 Education 조회(전체)
-educationRouter.get("/list", async function (req, res, next) {
+educationRouter.get("/", async function (req, res, next) {
   try {
     const user_id = req.user._id;
     const Education = await educationService.getUserEducationInfo({
@@ -60,9 +60,9 @@ educationRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 Education 수정
-educationRouter.put("/:id", async function (req, res, next) {
+educationRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const school_name = req.body.school_name ?? null;
     const major = req.body.major ?? null;

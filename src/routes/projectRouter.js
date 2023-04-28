@@ -4,7 +4,7 @@ import { projectService } from "../service/projectService.js";
 const projectRouter = Router();
 
 /** 해당 유저 project 추가 */
-projectRouter.post("/", async function (req, res, next) {
+projectRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아온 user_id
     const user_id = req.user._id;
@@ -26,10 +26,10 @@ projectRouter.post("/", async function (req, res, next) {
   }
 });
 
-// 해당 유저 project 조회(전체)
-projectRouter.get("/list/:user_id", async function (req, res, next) {
+// 로그인한 유저 project 조회(전체)
+projectRouter.get("/", async function (req, res, next) {
   try {
-    const user_id = req.params.user_id;
+    const user_id = req.user._id;
     const project = await projectService.getUserProjectInfo({
       user_id,
     });
@@ -64,9 +64,9 @@ projectRouter.get("/:id", async function (req, res, next) {
 });
 
 // 해당 project 수정
-projectRouter.put("/:id", async function (req, res, next) {
+projectRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.params.id;
+    const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const date = req.body.date ?? null;
     const name = req.body.name ?? null;

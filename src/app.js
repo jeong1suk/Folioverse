@@ -27,7 +27,7 @@ import awardRouter from "./routes/awardRouter.js";
 import educationRouter from "./routes/educationRouter.js";
 import checkToken from "./middlewares/checkToken.js";
 
-app.use("/api/user", checkToken, userRouter);
+app.use("/api/user", userRouter);
 app.use("/api/project", checkToken, projectRouter);
 app.use("/api/education", checkToken, educationRouter);
 app.use("/api/certificate", checkToken, certificateRouter);

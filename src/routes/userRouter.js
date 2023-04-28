@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userService } from "../service/userService.js";
+import checkToken from "../middlewares/checkToken.js";
 
 const userRouter = Router();
 
@@ -19,12 +20,13 @@ userRouter.get("/list", async function (req, res, next) {
 });
 
 /** 현재 유저 확인, 발급받은 토큰이 남아있다면 JWT 토큰 유저 데이터를 받아와서 자동 로그인 하는데 사용 */
-userRouter.get("/current", async function (req, res, next) {
+userRouter.get("/current", checkToken, async function (req, res, next) {
   try {
     // 토큰 이용해서 로그인한 유저의 id를 안 상태
     // DB에서 유저 데이터를 다 받아서 로그인과 똑같은데이터를 전송
     const _id = req.user._id;
     const currentUserInfo = await userService.getUserInfo({ _id });
+
     res.status(200).send(currentUserInfo);
   } catch (error) {
     next(error);
@@ -32,7 +34,7 @@ userRouter.get("/current", async function (req, res, next) {
 });
 
 /** 회원 정보 수정 */
-userRouter.put("/:id", async function (req, res, next) {
+userRouter.patch("/:id", checkToken, async function (req, res, next) {
   try {
     // URI로부터 유저 id를 추출함.
     const userId = req.params.id;
