@@ -1,13 +1,13 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useGetAxios } from "../../utils/useQuery";
+import { useQueryGet } from "../../utils/useQuery";
 
 const ManageFollow = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
   const [tab, setTab] = useState(true);
   const [getUrl, setGetUrl] = useState(url + "/dummy/mvp/follow/1");
-  const { data } = useGetAxios(getUrl, "getFollow");
+  const { data } = useQueryGet(getUrl, "getFollow");
 
   useEffect(() => {
     setGetUrl(
@@ -47,16 +47,28 @@ const ManageFollow = () => {
         </ul>
       </nav>
       <section>
-        <ul>
-          {data?.map((item) => (
-            <li key={item.id}>
-              <span className="mr-5">이름 : {item.name}</span>
-              <span>이메일: {item.email}</span>
-            </li>
+        <ul className="grid grid-cols-4 gap-4 mt-4">
+          {data?.map((user) => (
+            <UserCard user={user} key={user.id} />
           ))}
         </ul>
       </section>
     </div>
+  );
+};
+
+const UserCard = ({ user }) => {
+  return (
+    <li className="border p-4 rounded">
+      <img className="rounded-full w-16 mx-auto my-2" src="/cat.png" />
+      <p className="text-center text-black dark:text-white">{user.name}</p>
+      <p className="text-center text-sm text-neutral-400">{user.email}</p>
+      <p className="text-center mt-2">
+        <a className="text-blue-400 text-xs" href="#">
+          프로필 보기
+        </a>
+      </p>
+    </li>
   );
 };
 

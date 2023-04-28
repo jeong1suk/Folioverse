@@ -5,12 +5,13 @@ import EditProfile from "./EditProfile";
 import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
 import { useEffect } from "react";
-import { useGetAxios } from "./../../utils/useQuery";
+import { useQueryGet } from "./../../utils/useQuery";
 import useThemeStore from "../../store/themeStore";
+import UserStats from "./Chart";
 
 const UserSetting = () => {
   const url = import.meta.env.VITE_SERVER_HOST;
-  const { data } = useGetAxios(url + "/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet(url + "/dummy/auth/user-info", "getMyInfo");
   const theme = useThemeStore((state) => !state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
@@ -46,6 +47,7 @@ const UserSetting = () => {
             <Route path="" element={<EditProfile />} />
             <Route path="edit-user-info" element={<EditUserInfo />} />
             <Route path="manage-follow" element={<ManageFollow />} />
+            <Route path="user-stats" element={<UserStats />} />
           </Routes>
         </main>
       </div>
@@ -130,6 +132,29 @@ const ContentTab = () => {
       ),
       backgroundColor:
         params["*"] === "manage-follow" && "bg-gray-100 dark:bg-neutral-700",
+    },
+    {
+      id: 4,
+      title: "통계",
+      link: "user-stats",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+          />
+        </svg>
+      ),
+      backgroundColor:
+        params["*"] === "chart" && "bg-gray-100 dark:bg-neutral-700",
     },
   ];
 
