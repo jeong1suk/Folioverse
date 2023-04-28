@@ -34,6 +34,11 @@ const certificateService = {
       const errorMessage = "작성하신 기록이 없습니다. 다시 한 번 확인해주세요.";
       return { errorMessage };
     }
+    if (toUpdate.name) {
+      const fieldToUpdate = "name";
+      const newValue = toUpdate.name;
+      certificate = await Certificate.update({ _id, fieldToUpdate, newValue });
+    }
     if (toUpdate.date) {
       const fieldToUpdate = "date";
       const newValue = toUpdate.date;
