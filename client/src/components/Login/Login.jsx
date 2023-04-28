@@ -1,7 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAxiosGet } from "../../CustomHooks";
 import styles from "./Login.module.css";
-// const host = import.meta.env.VITE_SERVER_HOST;
+const host = import.meta.env.VITE_SERVER_HOST;
 
 function SignUp() {
   // const { data, error, loading } = useAxiosGet(`${host}/dummy/sign-up`);
@@ -10,6 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
@@ -42,8 +45,16 @@ function SignUp() {
 
   const isFormValid = isEmailValid && isPasswordValid;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const result = await axios.post(host + "/auth/login-process", {
+      email,
+      password,
+    });
+
+    localStorage.setItem("token", result.data.token);
+    navigate("/");
 
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -71,9 +82,7 @@ function SignUp() {
             onChange={handleEmailChange}
           />
           {!isEmailValid && (
-            <form className={styles.text}>
-              이메일 형식이 올바르지 않습니다.
-            </form>
+            <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
           )}
           <br />
           {isEmailValid && (
@@ -85,9 +94,7 @@ function SignUp() {
             />
           )}
           {!isPasswordValid && isEmailValid && (
-            <form className={styles.text}>
-              비밀번호를 4글자 이상 넣어주세요.
-            </form>
+            <div className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</div>
           )}
           <br />
           {isFormValid && (
@@ -99,7 +106,9 @@ function SignUp() {
             />
           )}
           {isFormValid && passwordMatch && (
-            <button className={styles.button}>Sign Up</button>
+            <button className={styles.button} onClick={handleSubmit}>
+              Login Up
+            </button>
           )}
         </div>
       </form>

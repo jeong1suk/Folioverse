@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useAxiosGet } from "../../CustomHooks";
 import styles from "./SignUp.module.css";
+import { useNavigate } from "react-router-dom";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function SignUp() {
@@ -10,6 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const navigate = useNavigate();
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -43,8 +46,18 @@ function SignUp() {
 
   const isFormValid = isEmailValid && isPasswordValid;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const result = await axios.post(host + "/auth/signup", {
+      name,
+      email,
+      password,
+    });
+
+    localStorage.setItem("token", result.data.token);
+
+    navigate("/");
 
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -73,9 +86,7 @@ function SignUp() {
             onChange={handleEmailChange}
           />
           {!isEmailValid && (
-            <form className={styles.text}>
-              이메일 형식이 올바르지 않습니다.
-            </form>
+            <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
           )}
           <br />
           {isEmailValid && (
@@ -87,9 +98,7 @@ function SignUp() {
             />
           )}
           {!isPasswordValid && isEmailValid && (
-            <form className={styles.text}>
-              비밀번호를 4글자 이상 넣어주세요.
-            </form>
+            <div className={styles.text}>비밀번호를 4글자 이상 넣어주세요.</div>
           )}
           <br />
           {isFormValid && (
@@ -108,7 +117,9 @@ function SignUp() {
             ))}
           <br />
           {isFormValid && passwordMatch && (
-            <button className={styles.button}>Sign Up</button>
+            <button className={styles.button} onClick={handleSubmit}>
+              Sign Up
+            </button>
           )}
         </div>
       </form>
