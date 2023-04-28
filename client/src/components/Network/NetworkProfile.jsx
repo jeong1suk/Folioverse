@@ -8,7 +8,7 @@ import profileDefaultDark from "/profile/profile-dark.png";
 import profileDefaultLight from "/profile/profile-light.png";
 import { Link } from "react-router-dom";
 
-function NetworkProfile({ name, email, description, profileUrl }) {
+function NetworkProfile({ name, email, description, profileUrl, profileImg }) {
   return (
     <div className={styles.networkProfileBox}>
       <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
@@ -23,16 +23,16 @@ function NetworkProfile({ name, email, description, profileUrl }) {
         className={styles.medalBronze}
       />
       <img
-        src={profileDefaultDark}
+        src={profileImg ? profileImg : profileDefaultDark}
         alt="profileImg"
         className={styles.profileImg}
       />
       <div>
         <h4>{name}</h4>
         <h5>{email}</h5>
-        <p>{description}</p>
+        <p>{description ? description : "자기소개가 없습니다"}</p>
       </div>
-      <Link to={profileUrl} className={styles.linkBtn}>
+      <Link to={`${profileUrl}`} className={styles.linkBtn}>
         Profile
       </Link>
     </div>

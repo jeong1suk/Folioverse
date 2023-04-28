@@ -10,7 +10,7 @@ import GuestNav from "./GuestNav";
 
 const Header = () => {
   /** 로그인/로그아웃 상태 테스트용 변수 */
-  const isLoginTest = false;
+  const isLoginTest = true;
 
   return (
     <header>

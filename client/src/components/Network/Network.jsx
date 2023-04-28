@@ -5,6 +5,7 @@ import { useAxiosGet } from "../../CustomHooks";
 import styles from "./Network.module.css";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
+import { useParams } from "react-router-dom";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function Network() {
@@ -14,7 +15,9 @@ function Network() {
   const [listPrev, setListPrev] = useState(0);
   const [listCur, setListCur] = useState(30);
   const [sortBy, setSortBy] = useState(""); // array로 수정
+  const { id } = useParams();
 
+  console.log(id);
   useEffect(() => {
     if (data) {
       setVisibleData(data.slice(0, listCur));
@@ -39,7 +42,8 @@ function Network() {
                 name={user.name}
                 email={user.email}
                 description={user.description}
-                profileUrl={`/network/${user.id}`}
+                profileUrl={`/network/${user._id}`}
+                profileImg={user.profile_image}
                 key={idx}
               />
             );

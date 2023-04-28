@@ -146,6 +146,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .networkProfileBox div {
