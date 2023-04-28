@@ -126,4 +126,76 @@ router.get("/license", async (req, res) => {
   res.json(data);
 });
 
+router.get("/follow/:id", async (req, res) => {
+  const { id } = req.params;
+  const data = [
+    {
+      id: 1,
+      email: "follow1@gmail.com",
+      name: "follow1",
+      description: "follow description1",
+    },
+    {
+      id: 2,
+      email: "follow2@gmail.com",
+      name: "follow2",
+      description: "follow description2",
+    },
+    {
+      id: 3,
+      email: "follow3@gmail.com",
+      name: "follow3",
+    },
+    {
+      id: 4,
+      email: "follow4@gmail.com",
+      name: "follow4",
+      description: "follow description4",
+    },
+    {
+      id: 5,
+      email: "follow5@gmail.com",
+      name: "follow5",
+      description: "follow description5",
+    },
+  ];
+  res.json(data);
+});
+
+router.get("/followed/:id", async (req, res) => {
+  const { id } = req.params;
+  const data = [
+    {
+      id: 1,
+      email: "followed1@gmail.com",
+      name: "followed1",
+      description: "followed description1",
+    },
+    {
+      id: 2,
+      email: "followed2@gmail.com",
+      name: "followed2",
+      description: "followed description2",
+    },
+    {
+      id: 3,
+      email: "followed3@gmail.com",
+      name: "followed3",
+    },
+    {
+      id: 4,
+      email: "followed4@gmail.com",
+      name: "followed4",
+      description: "followed description4",
+    },
+    {
+      id: 5,
+      email: "followed5@gmail.com",
+      name: "followed5",
+      description: "followed description5",
+    },
+  ];
+  res.json(data);
+});
+
 export default router;

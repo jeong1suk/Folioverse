@@ -1,11 +1,10 @@
-//담당 : 이승현
-
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
 const checkToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const authHeader = req.headers["authorization"].split(" ")[1];
+  console.log(authHeader);
 
   if (!authHeader) {
     return res.status(401).send({ message: "인증 토큰이 없습니다" });
