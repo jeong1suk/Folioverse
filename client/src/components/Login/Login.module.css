@@ -8,9 +8,6 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  /* position: relative; */
-  /* display: flex; */
-  /* flex-direction: column; */
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
@@ -58,7 +55,11 @@
   margin-bottom: 10px;
 }
 
-.btn[type="submit"]:hover .btn:hover {
+.btn[type="submit"]:hover {
+  background-color: #333;
+}
+
+.btn:hover {
   background-color: #333;
 }
 
@@ -71,10 +72,6 @@
 }
 .alternativeLoginP {
   margin-bottom: 10px;
-}
-
-.inlineBlock {
-  display: flex inline-block;
 }
 
 .label {

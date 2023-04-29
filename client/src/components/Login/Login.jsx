@@ -97,7 +97,7 @@ function Login() {
           <button className={styles.btn}>구글 로그인</button>
         </div>
         <p>
-          <Link href="/resetPassword" className={styles.link}>
+          <Link to="/resetPassword" className={styles.link}>
             <button className={styles.btn}>비밀번호 재설정</button>
           </Link>
         </p>
