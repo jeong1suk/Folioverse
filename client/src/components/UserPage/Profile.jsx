@@ -2,18 +2,9 @@
 
 import { Link } from "react-router-dom";
 import { useQueryGet } from "../../utils/useQuery";
-import useThemeStore from "../../store/themeStore";
-import { useEffect } from "react";
 
 const Profile = () => {
   const { data } = useQueryGet("/user/current", "getMyInfo");
-  const theme = useThemeStore((state) => !state.theme);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
-
-  useEffect(() => {
-    document.body.classList[theme ? "remove" : "add"]("dark");
-    console.log(data);
-  }, [theme]);
 
   return (
     <aside className="basis-1/5 border rounded p-5 h-fit">
@@ -32,9 +23,6 @@ const Profile = () => {
         >
           Edit
         </Link>
-      </p>
-      <p className="text-center text-sm mt-3 text-blue-400">
-        <button onClick={toggleTheme}>다크모드 임시버튼</button>
       </p>
     </aside>
   );

@@ -9,12 +9,8 @@ const EditProfile = () => {
   const [isValid, setIsValid] = useState(true);
   const [imageFile, setImageFile] = useState(null);
 
-  const { mutate } = useQueryFetch("/dummy/auth/edit-profile", "post", {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet("/user/current", "getMyInfo");
+  const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,9 +20,12 @@ const EditProfile = () => {
     if (imageFile) {
       formData.append("image", imageFile);
     }
-    mutate(formData, {
-      onSuccess: (data) => console.log(data),
-    });
+    mutate(
+      { body: formData, file: formData.image },
+      {
+        onSuccess: () => queryClient.invalidateQueries("getMyInfo"),
+      }
+    );
   };
 
   const onImageChange = (e) => {

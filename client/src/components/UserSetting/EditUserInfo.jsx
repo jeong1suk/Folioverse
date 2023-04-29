@@ -1,20 +1,20 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useQueryFetch } from "../../utils/useQuery";
+import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
 
 const EditUserInfo = () => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
-  const { mutate } = useQueryFetch("/dummy/auth/check-password", "post");
+  const { mutate } = useQueryFetch(`/auth/check-password`, "patch");
 
   const onSubmit = (e) => {
     e.preventDefault();
     mutate(
-      { body: { password: password } },
+      { body: { password } },
       {
         onSuccess: (data) => {
-          data && setContent(true), setPassword("");
+          data && setContent(true);
         },
       }
     );

@@ -6,18 +6,11 @@ import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
 import { useEffect } from "react";
 import { useQueryGet } from "./../../utils/useQuery";
-import useThemeStore from "../../store/themeStore";
 import UserStats from "./Chart";
 
 const UserSetting = () => {
-  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
-  const theme = useThemeStore((state) => !state.theme);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+  const { data } = useQueryGet("/user/current", "getMyInfo");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.body.classList[theme ? "remove" : "add"]("dark");
-  }, [theme]);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -37,12 +30,12 @@ const UserSetting = () => {
             <span className="dark:text-white">{data?.email}</span>
           </div>
         </div>
-        <button
+        <Link
+          to="/my-page"
           className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:hover:bg-neutral-700"
-          onClick={toggleTheme}
         >
-          프로필로 돌아가기(지금은 다크모드 버튼)
-        </button>
+          프로필로 돌아가기
+        </Link>
       </div>
       <div className="flex flex-row">
         <nav className="basis-1/6 mr-5">

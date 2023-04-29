@@ -33,7 +33,7 @@ const UserPage = () => {
   }, []);
 
   return (
-    <div className="p-5 flex flex-row dark:bg-neutral-800">
+    <div className="p-5 flex flex-row dark:bg-neutral-800 min-h-screen">
       <Profile />
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (

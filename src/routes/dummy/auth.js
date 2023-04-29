@@ -34,7 +34,7 @@ router.post("/change-password", async (req, res) => {
 
 router.post("/edit-profile", upload.single("image"), async (req, res) => {
   const { name, description } = req.body;
-  console.log("Received fields:", req.body);
+  console.log("Received fields:", name, description);
   console.log("Received file:", req.file);
 
   res.send(true);

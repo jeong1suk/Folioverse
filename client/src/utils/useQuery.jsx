@@ -19,11 +19,11 @@ export const useQueryGet = (link, key, queryOptions = {}) => {
   });
 };
 
-export const useQueryFetch = (link, method, config = {}) => {
+export const useQueryFetch = (link, method, options = {}) => {
   const token = localStorage.getItem("token") ?? null;
   const mutation = useMutation(async (req) => {
     const response = await axios[method](host + link, req?.body, {
-      headers: { Authorization: token, ...config.headers },
+      headers: { Authorization: token, ...options.headers },
     });
     return response.data;
   });
@@ -38,9 +38,10 @@ export const useQueryFetch = (link, method, config = {}) => {
 
 export const useQueryDelete = (link) => {
   const token = localStorage.getItem("token") ?? null;
-  const mutation = useMutation(async () => {
+  const mutation = useMutation(async (body) => {
     const response = await axios.delete(host + link, {
       headers: { Authorization: token },
+      body,
     });
     return response.data;
   });
