@@ -14,7 +14,7 @@ const EditProfile = () => {
       "Content-Type": "multipart/form-data",
     },
   });
-  const { data } = useQueryGet("/dummy/auth/user-info", "getMyInfo");
+  const { data } = useQueryGet("/user/current", "getMyInfo");
 
   const onSubmit = (e) => {
     e.preventDefault();

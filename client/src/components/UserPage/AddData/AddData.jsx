@@ -6,6 +6,7 @@ import AddCertificate from "./AddCertificate";
 import AddEducation from "./AddEducation";
 import AddProject from "./AddProject";
 import { useQueryDelete, useQueryFetch } from "../../../utils/useQuery";
+import { useQueryClient } from "react-query";
 
 const AddData = ({
   editState,
@@ -45,44 +46,77 @@ const AddData = ({
 
   const { mutate } = useQueryFetch(link, method);
   const { deleteMutate } = useQueryDelete(link + deleteLink);
+  const queryClient = useQueryClient();
 
   const onSubmit = (e) => {
+    e.preventDefault();
     switch (title) {
       case "학력":
-        mutate({ body: education }, { onSuccess: (data) => console.log(data) });
+        mutate(
+          { body: education },
+          { onSuccess: () => queryClient.invalidateQueries("getEducation") }
+        );
         break;
       case "프로젝트":
-        mutate({ body: project }, { onSuccess: (data) => console.log(data) });
+        mutate(
+          { body: project },
+          { onSuccess: () => queryClient.invalidateQueries("getProject") }
+        );
         break;
       case "수상 이력":
-        mutate({ body: award }, { onSuccess: (data) => console.log(data) });
+        mutate(
+          { body: award },
+          { onSuccess: () => queryClient.invalidateQueries("getAward") }
+        );
         break;
       case "자격증":
         mutate(
           { body: certificate },
-          { onSuccess: (data) => console.log(data) }
+          { onSuccess: () => queryClient.invalidateQueries("getCertificate") }
         );
         break;
     }
+    setEditState(false);
     setAddState(false);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = (e) => {
+    e.preventDefault();
     switch (title) {
       case "학력":
-        deleteMutate({ onSuccess: (data) => console.log(data) });
+        deleteMutate(
+          { body: education },
+          {
+            onSuccess: () => queryClient.invalidateQueries("getEducation"),
+          }
+        );
         break;
       case "프로젝트":
-        deleteMutate({ onSuccess: (data) => console.log(data) });
+        deleteMutate(
+          { body: project },
+          {
+            onSuccess: () => queryClient.invalidateQueries("getProject"),
+          }
+        );
         break;
       case "수상 이력":
-        deleteMutate({ onSuccess: (data) => console.log(data) });
+        deleteMutate(
+          { body: award },
+          {
+            onSuccess: () => queryClient.invalidateQueries("getAward"),
+          }
+        );
         break;
       case "자격증":
-        deleteMutate({ onSuccess: (data) => console.log(data) });
+        deleteMutate(
+          { body: certificate },
+          {
+            onSuccess: () => queryClient.invalidateQueries("getCertificate"),
+          }
+        );
         break;
     }
-    setAddState(false);
+    setEditState(false);
   };
 
   return (
@@ -122,10 +156,7 @@ const AddData = ({
         className={`${
           !editState && "hidden"
         } border rounded py-1 px-2 ml-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700`}
-        onClick={(e) => {
-          e.preventDefault();
-          handleDelete();
-        }}
+        onClick={handleDelete}
       >
         삭제
       </button>
