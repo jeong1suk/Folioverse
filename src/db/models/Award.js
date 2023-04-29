@@ -1,4 +1,4 @@
-import { AwardModel } from "../schemas/Award.js";
+import { AwardModel } from "../schemas/award.js";
 
 class Award {
   static async create({ newAward }) {
