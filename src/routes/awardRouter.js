@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { awardService } from "../service/AwardService.js";
+import { awardService } from "../service/awardService.js";
 
 const awardRouter = Router();
 
