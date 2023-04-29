@@ -66,7 +66,7 @@ function SignUp() {
 
     localStorage.setItem("token", result.data.token);
 
-    navigate("/");
+    location.href = "/";
 
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -100,28 +100,24 @@ function SignUp() {
           )}
           <br />
           {isEmailValid && <label className={styles.label}>Password</label>}
-          {isEmailValid && (
-            <input
-              className={styles.inputPwd}
-              type="password"
-              placeholder="Password"
-              onChange={handlePasswordChange}
-            />
-          )}
+          <input
+            className={styles.inputPwd}
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
           {!isPasswordValid && isEmailValid && (
             <div className={styles.text}>
-              숫자, 문자 포함 8글자 이상 입력해주세요.
+              숫자, 문자, 특수문자 포함 8글자 이상 입력해주세요.
             </div>
           )}
           <br />
-          {isFormValid && (
-            <input
-              className={styles.inputPwd}
-              type="password"
-              placeholder="Password"
-              onChange={handleConfirmPasswordChange}
-            />
-          )}
+          <input
+            className={styles.inputPwd}
+            type="password"
+            placeholder="Password check"
+            onChange={handleConfirmPasswordChange}
+          />
           {isFormValid &&
             (passwordMatch ? (
               <p className={styles.text}>Passwords match</p>
@@ -129,11 +125,9 @@ function SignUp() {
               <p className={styles.text}>Passwords do not match</p>
             ))}
           <br />
-          {isFormValid && passwordMatch && (
-            <button className={styles.btn} type="submit" onClick={handleSubmit}>
-              회원가입
-            </button>
-          )}
+          <button className={styles.btn} type="submit" onClick={handleSubmit}>
+            회원가입
+          </button>
         </form>
       </div>
 

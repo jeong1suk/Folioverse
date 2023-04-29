@@ -31,7 +31,8 @@ function Login() {
   };
 
   const validatePassword = (password) => {
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/; // 최소 8자, 숫자와 문자 모두 포함
+    const regex =
+      /^(?=.[a-zA-Z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{6,18}$/; // 최소 8자, 숫자와 문자 특수문자 모두 포함
     return regex.test(password);
   };
 
@@ -49,7 +50,7 @@ function Login() {
     });
 
     localStorage.setItem("token", result.data.token);
-    navigate("/");
+    location.href = "/";
 
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -82,12 +83,7 @@ function Login() {
             onChange={handlePasswordChange}
           />
 
-          <button
-            className={styles.btn}
-            type="submit"
-            onClick={handleSubmit}
-            disabled={!isFormValid}
-          >
+          <button className={styles.btn} type="submit" onClick={handleSubmit}>
             로그인
           </button>
         </form>
@@ -96,11 +92,6 @@ function Login() {
           <p className={styles.alternativeLoginP}>또는</p>
           <button className={styles.btn}>구글 로그인</button>
         </div>
-        <p>
-          <Link to="/resetPassword" className={styles.link}>
-            <button className={styles.btn}>비밀번호 재설정</button>
-          </Link>
-        </p>
       </div>
     </>
   );
