@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { userService } from "../service/userService.js";
 import checkToken from "../middlewares/checkToken.js";
+import multer from "multer";
 
 const userRouter = Router();
+const upload = multer({ dest: "uploads/" });
 
 /** 네트워크 클릭시 전체 유저 목록 가져오기 */
 userRouter.get("/list", async function (req, res, next) {
@@ -34,31 +36,36 @@ userRouter.get("/current", checkToken, async function (req, res, next) {
 });
 
 /** 회원 정보 수정 */
-userRouter.patch("/:id", checkToken, async function (req, res, next) {
-  try {
-    // URI로부터 유저 id를 추출함.
-    const userId = req.params.id;
-    // body data 로부터 업데이트할 유저 정보를 추출함.
-    const name = req.body.name ?? null;
-    const email = req.body.email ?? null;
-    const password = req.body.password ?? null;
-    const description = req.body.description ?? null;
-    const profileImage = req.body.profileImage ?? null;
+userRouter.patch(
+  "/:id",
+  checkToken,
+  upload.single("image"),
+  async function (req, res, next) {
+    try {
+      // URI로부터 유저 id를 추출함.
+      const userId = req.params.id;
+      // body data 로부터 업데이트할 유저 정보를 추출함.
+      const name = req.body.name ?? null;
+      const email = req.body.email ?? null;
+      const password = req.body.password ?? null;
+      const description = req.body.description ?? null;
+      const profileImage = req.body.profileImage ?? null;
 
-    const toUpdate = { name, email, password, description, profileImage };
+      const toUpdate = { name, email, password, description, profileImage };
 
-    // 해당 유저 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-    const updatedUser = await userService.setUser({ userId, toUpdate });
+      // 해당 유저 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
+      const updatedUser = await userService.setUser({ userId, toUpdate });
 
-    if (updatedUser.errorMessage) {
-      throw new Error(updatedUser.errorMessage);
+      if (updatedUser.errorMessage) {
+        throw new Error(updatedUser.errorMessage);
+      }
+
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      next(error);
     }
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 /** 유저 정보 조회, 현재 로그인한 유저가 있는 경우 응답은 따로 있기 때문에
  *  다른 유저 정보를 조회하는 경우가 사용할 것 같음
