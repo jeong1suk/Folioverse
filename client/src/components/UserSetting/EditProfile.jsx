@@ -12,27 +12,47 @@ const EditProfile = ({ data }) => {
   const [imageFile, setImageFile] = useState(null);
 
   const queryClient = useQueryClient();
-  const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
+  const { mutate: updateProfile } = useQueryFetch(
+    `/user/${data?._id}`,
+    "patch"
+  );
+  const { mutate: uploadImage } = useQueryFetch(`/image`, "patch");
 
   const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
+
+    const updateProfileData = {
+      body: { name, description },
+    };
+
     if (imageFile) {
+      const formData = new FormData();
       formData.append("image", imageFile);
-    }
-    mutate(
-      { body: formData, file: formData.image },
-      {
+
+      uploadImage(
+        { body: formData, file: formData.image },
+        {
+          onSuccess: (data) => {
+            updateProfileData.body.profile_image = data.imageUrl;
+            updateProfile(updateProfileData, {
+              onSuccess: () => {
+                queryClient.invalidateQueries("getMyInfo");
+                setToast("프로필이 수정되었습니다", true);
+              },
+            });
+          },
+        }
+      );
+    } else {
+      updateProfile(updateProfileData, {
         onSuccess: () => {
           queryClient.invalidateQueries("getMyInfo");
           setToast("프로필이 수정되었습니다", true);
         },
-      }
-    );
+      });
+    }
   };
 
   const onImageChange = (e) => {
@@ -100,7 +120,11 @@ const EditProfile = ({ data }) => {
         <article className=" basis-1/4">
           <h3 className="text-lg mb-3">프로필 사진</h3>
           <div className="grid justify-items-center relative">
-            <img className="rounded-full" src="/cat.png" alt="프로필 사진" />
+            <img
+              className="rounded-full"
+              src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+              alt="프로필 사진"
+            />
             <input
               type="file"
               accept="image/*"
