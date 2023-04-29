@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function SignUp() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -98,4 +98,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;
