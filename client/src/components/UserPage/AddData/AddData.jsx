@@ -7,6 +7,7 @@ import AddEducation from "./AddEducation";
 import AddProject from "./AddProject";
 import { useQueryDelete, useQueryFetch } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
+import useToastStore from "../../../store/toastStore";
 
 const AddData = ({
   editState,
@@ -48,6 +49,8 @@ const AddData = ({
   const { deleteMutate } = useQueryDelete(link + deleteLink);
   const queryClient = useQueryClient();
 
+  const setToast = useToastStore((state) => state.setToast);
+
   const onSubmit = (e) => {
     e.preventDefault();
     switch (title) {
@@ -76,6 +79,10 @@ const AddData = ({
         );
         break;
     }
+    setToast(
+      addState ? "데이터가 추가되었습니다" : "데이터가 수정되었습니다",
+      true
+    );
     setEditState(false);
     setAddState(false);
   };
@@ -116,6 +123,7 @@ const AddData = ({
         );
         break;
     }
+    setToast("데이터가 삭제되었습니다", true);
     setEditState(false);
   };
 

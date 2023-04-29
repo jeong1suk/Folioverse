@@ -1,8 +1,10 @@
 //담당 : 이승현
 
-import { useEffect, useState } from "react";
-import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
+import { useEffect, useRef, useState } from "react";
+import { useQueryFetch } from "../../utils/useQuery";
 import { useQueryDelete } from "../../utils/useQuery";
+import useToastStore from "../../store/toastStore";
+import useModalStore from "../../store/modalStore";
 
 const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
@@ -54,13 +56,16 @@ const EditUserInfo = ({ data }) => {
 
 const EditContent = ({ content, setContent, data }) => {
   const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
-  const { deleteMutate } = useQueryDelete(`/auth/${data?._id}`);
+  const formRef = useRef();
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [passwordVaild, setPasswordVaild] = useState(true);
   const [password2Vaild, setPassword2Vaild] = useState(true);
   const [isValid, setIsValid] = useState(false);
+
+  const setToast = useToastStore((state) => state.setToast);
+  const setModal = useModalStore((state) => state.setModal);
 
   const passwordValidator = (password) =>
     RegExp(
@@ -69,14 +74,16 @@ const EditContent = ({ content, setContent, data }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    mutate({ body: { password } });
-    setContent(false);
-  };
 
-  const deleteUser = () => {
-    deleteMutate();
-    localStorage.removeItem("token");
-    location.href = "/";
+    mutate(
+      { body: { password } },
+      {
+        onSuccess: () => {
+          setToast("비밀번호가 변경되었습니다", true);
+          formRef.current.reset();
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -96,7 +103,7 @@ const EditContent = ({ content, setContent, data }) => {
 
   return (
     <div className={`${!content && "hidden"}`}>
-      <form>
+      <form ref={formRef}>
         <h3 className="text-xl mb-3">비밀번호 변경</h3>
         <label>새 비밀번호</label>
         <input
@@ -109,6 +116,7 @@ const EditContent = ({ content, setContent, data }) => {
           } block border w-full mb-5 mt-1 rounded p-1 dark:text-black`}
           type="password"
           placeholder="••••••••"
+          autoComplete="off"
           onChange={(e) => setPassword(e.target.value)}
         />
         <p className={`${passwordVaild && "hidden"} text-red-500 mb-5`}>
@@ -125,6 +133,7 @@ const EditContent = ({ content, setContent, data }) => {
           } block border w-full mb-5 mt-1 rounded p-1 dark:text-black`}
           type="password"
           placeholder="••••••••"
+          autoComplete="off"
           onChange={(e) => setPassword2(e.target.value)}
         />
         <p className={`${password2Vaild && "hidden"} text-red-500 mb-5`}>
@@ -144,7 +153,9 @@ const EditContent = ({ content, setContent, data }) => {
         <h3 className="text-xl mb-3">회원 탈퇴</h3>
         <button
           className="p-2 text-white rounded bg-red-500 hover:bg-red-600"
-          onClick={deleteUser}
+          onClick={() => {
+            setModal(data?._id);
+          }}
         >
           정말 회원에서 탈퇴하시겠습니까?
         </button>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
+import useToastStore from "../../store/toastStore";
 
 const EditProfile = ({ data }) => {
   const [name, setName] = useState("");
@@ -12,6 +13,8 @@ const EditProfile = ({ data }) => {
 
   const queryClient = useQueryClient();
   const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
+
+  const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +27,10 @@ const EditProfile = ({ data }) => {
     mutate(
       { body: formData, file: formData.image },
       {
-        onSuccess: () => queryClient.invalidateQueries("getMyInfo"),
+        onSuccess: () => {
+          queryClient.invalidateQueries("getMyInfo");
+          setToast("프로필이 수정되었습니다", true);
+        },
       }
     );
   };
