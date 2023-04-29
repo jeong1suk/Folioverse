@@ -48,8 +48,6 @@ function SignUp() {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-
-    // 회원가입 로직 구현
   };
 
   return (
@@ -57,6 +55,7 @@ function SignUp() {
       <div className={styles.container}>
         <h1 className={styles.fvhead}>FolioVerse</h1>
       </div>
+
       <div className={styles.container}>
         <form className={styles.form}>
           <label className={styles.label}>Username or email address</label>
@@ -69,13 +68,6 @@ function SignUp() {
             <label htmlFor="password" className={styles.label}>
               Password:
             </label>
-          </div>
-          <div className={styles.inlineBlock}>
-            <p>
-              <a href="#" className={styles.link}>
-                <button className={styles.btn}>비밀번호 재설정</button>
-              </a>
-            </p>
           </div>
           <input
             className={styles.inputPwd}
@@ -92,6 +84,11 @@ function SignUp() {
           <p className={styles.alternativeLoginP}>또는</p>
           <button className={styles.btn}>구글 로그인</button>
         </div>
+        <p>
+          <a href="/resetPwd" className={styles.link}>
+            <button className={styles.btn}>비밀번호 재설정</button>
+          </a>
+        </p>
       </div>
       <div className={styles.container}>
         <p className={styles.fvhead}>Welcome to Folioverse</p>

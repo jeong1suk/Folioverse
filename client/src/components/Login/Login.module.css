@@ -46,9 +46,9 @@
 }
 
 .btn {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px 10px;
   border: none;
+  border-radius: 5px;
   background-color: #000;
   color: #fff;
   cursor: pointer;
@@ -72,7 +72,7 @@
 }
 
 .inlineBlock {
-  display: inline-block;
+  display: flex inline-block;
 }
 
 .label {
