@@ -23,13 +23,13 @@ function SearchInput({ login }) {
           setTextFocus(false);
         }}
       />
-      <ul
+      {/* <ul
         className={login ? styles.searchResultList : styles.gSearchResultList}
       >
         {searchText && textFocus && (
           <SearchResultView setFocus={setTextFocus} searchText={searchText} />
         )}
-      </ul>
+      </ul> */}
     </>
   );
 }
