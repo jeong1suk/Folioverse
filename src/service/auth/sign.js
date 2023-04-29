@@ -27,3 +27,8 @@ export const createUser = async (email, password, name) => {
     })({ body: { email, password } });
   });
 };
+
+export const deleteUser = async (_id) => {
+  const user = await UserModel.deleteOne({ _id });
+  return user;
+};

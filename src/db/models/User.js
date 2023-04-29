@@ -21,8 +21,8 @@ class User {
     return users;
   }
 
-  static async update({ user_id, fieldToUpdate, newValue }) {
-    const filter = { id: user_id };
+  static async update({ userId, fieldToUpdate, newValue }) {
+    const filter = { _id: userId };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
