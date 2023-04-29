@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import useToastStore from "../../store/toastStore";
 
 const Toast = () => {

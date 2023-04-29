@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Router } from "express";
 import { loginAuthenticate } from "../../service/auth/login.js";
 import dotenv from "dotenv";

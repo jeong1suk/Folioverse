@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Layout from "./Layout/Layout";
 import useThemeStore from "../store/themeStore";
 import Toast from "./Notification/Toast";
-import DeleteModal from "./Notification/DeleteModal";
+import Modal from "./Notification/Modal/Modal";
 
 const App = () => {
   const theme = useThemeStore((state) => !state.theme);
@@ -17,7 +17,7 @@ const App = () => {
     <>
       <Layout />
       <Toast />
-      <DeleteModal />
+      <Modal />
     </>
   );
 };
