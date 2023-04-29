@@ -2,9 +2,7 @@
 
 import { Router } from "express";
 import { loginAuthenticate } from "../../service/auth/login.js";
-import dotenv from "dotenv";
 import checkToken from "../../middlewares/checkToken.js";
-dotenv.config();
 
 const router = Router();
 

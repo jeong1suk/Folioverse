@@ -2,9 +2,12 @@ import AWS from "aws-sdk";
 import multer from "multer";
 import multerS3 from "multer-s3";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 AWS.config.update({
-  accessKeyId: "AKIA4DBADYT5MW2GWRUR",
-  secretAccessKey: "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",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: "ap-northeast-2",
 });
 
