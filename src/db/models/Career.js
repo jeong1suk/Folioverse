@@ -1,4 +1,4 @@
-import { CareerModel } from "../schemas/Career.js";
+import { CareerModel } from "../schemas/career.js";
 
 class Career {
   static async create({ newCareer }) {
