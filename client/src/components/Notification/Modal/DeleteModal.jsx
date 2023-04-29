@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQueryDelete } from "../../../utils/useQuery";
 
-const DeleteModal = ({ id }) => {
+const DeleteModal = ({ id, toggleOpen }) => {
   const [isValid, setIsVaid] = useState(false);
   const [input, setInput] = useState("");
   const { deleteMutate } = useQueryDelete(`/auth/${id}`);
