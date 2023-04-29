@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
+import { useQueryDelete } from "../../utils/useQuery";
 
 const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
@@ -53,6 +54,7 @@ const EditUserInfo = ({ data }) => {
 
 const EditContent = ({ content, setContent, data }) => {
   const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
+  const { deleteMutate } = useQueryDelete(`/auth/${data?._id}`);
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -69,6 +71,12 @@ const EditContent = ({ content, setContent, data }) => {
     e.preventDefault();
     mutate({ body: { password } });
     setContent(false);
+  };
+
+  const deleteUser = () => {
+    deleteMutate();
+    localStorage.removeItem("token");
+    location.href = "/";
   };
 
   useEffect(() => {
@@ -134,7 +142,10 @@ const EditContent = ({ content, setContent, data }) => {
       </form>
       <article className="mt-5">
         <h3 className="text-xl mb-3">회원 탈퇴</h3>
-        <button className="p-2 text-white rounded bg-red-500 hover:bg-red-600">
+        <button
+          className="p-2 text-white rounded bg-red-500 hover:bg-red-600"
+          onClick={deleteUser}
+        >
           정말 회원에서 탈퇴하시겠습니까?
         </button>
       </article>

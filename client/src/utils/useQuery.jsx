@@ -38,7 +38,7 @@ export const useQueryFetch = (link, method, options = {}) => {
 
 export const useQueryDelete = (link) => {
   const token = localStorage.getItem("token") ?? null;
-  const mutation = useMutation(async (body) => {
+  const mutation = useMutation(async (body = null) => {
     const response = await axios.delete(host + link, {
       headers: { Authorization: token },
       body,
