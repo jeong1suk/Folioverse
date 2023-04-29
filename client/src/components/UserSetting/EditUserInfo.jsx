@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
 
-const EditUserInfo = () => {
+const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
   const { mutate } = useQueryFetch(`/auth/check-password`, "patch");
@@ -18,6 +18,7 @@ const EditUserInfo = () => {
         },
       }
     );
+    setPassword("");
   };
 
   return (
@@ -43,15 +44,15 @@ const EditUserInfo = () => {
               </button>
             </form>
           </article>
-          <EditContent content={content} setContent={setContent} />
+          <EditContent content={content} setContent={setContent} data={data} />
         </div>
       </section>
     </div>
   );
 };
 
-const EditContent = ({ content, setContent }) => {
-  const { mutate } = useQueryFetch("/dummy/auth/change-password", "post");
+const EditContent = ({ content, setContent, data }) => {
+  const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -66,7 +67,7 @@ const EditContent = ({ content, setContent }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    mutate({ body: { password } }, { onSuccess: (data) => console.log(data) });
+    mutate({ body: { password } });
     setContent(false);
   };
 

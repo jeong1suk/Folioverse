@@ -43,8 +43,11 @@ const UserSetting = () => {
         </nav>
         <main className="wrapper basis-4/6">
           <Routes>
-            <Route path="" element={<EditProfile />} />
-            <Route path="edit-user-info" element={<EditUserInfo />} />
+            <Route path="" element={<EditProfile data={data} />} />
+            <Route
+              path="edit-user-info"
+              element={<EditUserInfo data={data} />}
+            />
             <Route path="manage-follow" element={<ManageFollow />} />
             <Route path="user-stats" element={<UserStats />} />
           </Routes>
