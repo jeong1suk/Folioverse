@@ -1,3 +1,5 @@
+// 정원석
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +55,7 @@ function Login() {
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.fvhead}>FolioVerse</h1>
+        <p className={styles.fvhead}>Sign in to Folioverse</p>
       </div>
 
       <div className={styles.container}>
@@ -89,10 +91,6 @@ function Login() {
             <button className={styles.btn}>비밀번호 재설정</button>
           </a>
         </p>
-      </div>
-      <div className={styles.container}>
-        <p className={styles.fvhead}>Welcome to Folioverse</p>
-        <p className={styles.fvhead}>Let's begin the adventure</p>
       </div>
     </>
   );
