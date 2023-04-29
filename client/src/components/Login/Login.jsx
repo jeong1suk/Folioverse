@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
@@ -30,8 +30,13 @@ function Login() {
       );
   };
 
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/; // 최소 8자, 숫자와 문자 모두 포함
+    return regex.test(password);
+  };
+
   const isEmailValid = validateEmail(email);
-  const isPasswordValid = password.length >= 4;
+  const isPasswordValid = validatePassword(password);
 
   const isFormValid = isEmailValid && isPasswordValid;
 
@@ -66,7 +71,7 @@ function Login() {
             type="email"
             onChange={handleEmailChange}
           />
-          <div className={styles.inlineBlock}>
+          <div>
             <label htmlFor="password" className={styles.label}>
               Password:
             </label>
@@ -77,7 +82,12 @@ function Login() {
             onChange={handlePasswordChange}
           />
 
-          <button className={styles.btn} type="submit" onClick={handleSubmit}>
+          <button
+            className={styles.btn}
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!isFormValid}
+          >
             로그인
           </button>
         </form>
@@ -87,9 +97,9 @@ function Login() {
           <button className={styles.btn}>구글 로그인</button>
         </div>
         <p>
-          <a href="/resetPwd" className={styles.link}>
+          <Link href="/resetPassword" className={styles.link}>
             <button className={styles.btn}>비밀번호 재설정</button>
-          </a>
+          </Link>
         </p>
       </div>
     </>
