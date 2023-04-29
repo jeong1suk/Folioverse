@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
+import { useQueryClient } from "react-query";
 
 const EditProfile = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,7 @@ const EditProfile = () => {
   const [isValid, setIsValid] = useState(true);
   const [imageFile, setImageFile] = useState(null);
 
+  const queryClient = useQueryClient();
   const { data } = useQueryGet("/user/current", "getMyInfo");
   const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
 
