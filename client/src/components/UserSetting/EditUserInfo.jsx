@@ -10,6 +10,7 @@ const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
   const { mutate } = useQueryFetch(`/auth/check-password`, "patch");
+  const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const EditUserInfo = ({ data }) => {
       { body: { password } },
       {
         onSuccess: (data) => {
-          data && setContent(true);
+          data ? setContent(true) : setToast("비밀번호를 확인해주세요", false);
         },
       }
     );
@@ -32,10 +33,12 @@ const EditUserInfo = ({ data }) => {
           <article className={`${content && "hidden"}`}>
             <label className="text-lg block">현재 비밀번호를 입력하세요</label>
             <form>
+              <input type="text" className="hidden" autoComplete="username" />
               <input
                 className="border mx-1 mt-3 rounded p-1 text-black focus:outline-gray-300"
                 type="password"
                 placeholder="••••••••"
+                autoComplete="new-password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
@@ -154,7 +157,7 @@ const EditContent = ({ content, setContent, data }) => {
         <button
           className="p-2 text-white rounded bg-red-500 hover:bg-red-600"
           onClick={() => {
-            setModal(data?._id);
+            setModal(data?._id, "delete");
           }}
         >
           정말 회원에서 탈퇴하시겠습니까?

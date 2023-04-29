@@ -1,8 +1,12 @@
 //담당 : 이승현
+
+import { useLocation } from "react-router-dom";
 import { useQueryGet } from "./../../../utils/useQuery";
 
 const Award = ({ setEditState, award, setAward, setMethod, setDeleteLink }) => {
   const { data } = useQueryGet("/award", "getAward");
+  const location = useLocation();
+  const { pathname } = location;
 
   const onEdit = (item) => {
     setEditState(true);
@@ -23,7 +27,9 @@ const Award = ({ setEditState, award, setAward, setMethod, setDeleteLink }) => {
             <p className="flex justify-between mb-2">
               <span className="text-lg dark:text-white">{item.name}</span>
               <button
-                className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
+                  pathname !== "/my-page" && "hidden"
+                }`}
                 onClick={() => onEdit(item)}
               >
                 수정

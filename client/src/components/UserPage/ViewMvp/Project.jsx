@@ -1,5 +1,6 @@
 //담당 : 이승현
 
+import { useLocation } from "react-router-dom";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Project = ({
@@ -10,6 +11,8 @@ const Project = ({
   setDeleteLink,
 }) => {
   const { data } = useQueryGet("/project", "getProject");
+  const location = useLocation();
+  const { pathname } = location;
 
   const onEdit = (item) => {
     setEditState(true);
@@ -36,7 +39,9 @@ const Project = ({
                 {item.name}({item.division})
               </span>
               <button
-                className="text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
+                  pathname !== "/my-page" && "hidden"
+                }`}
                 onClick={() => onEdit(item)}
               >
                 수정

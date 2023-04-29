@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Router } from "express";
 import checkToken from "../../middlewares/checkToken.js";
 import { checkPassword } from "../../service/auth/check.js";

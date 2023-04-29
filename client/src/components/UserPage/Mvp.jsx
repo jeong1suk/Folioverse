@@ -6,10 +6,14 @@ import Award from "./ViewMvp/Award";
 import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
+import { useLocation } from "react-router-dom";
 
 const Mvp = ({ title }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
+
+  const location = useLocation();
+  const { pathname } = location;
 
   const [link, setLink] = useState("");
   const [deleteLink, setDeleteLink] = useState("");
@@ -103,7 +107,7 @@ const Mvp = ({ title }) => {
       <button
         onClick={onAdd}
         className={`${
-          (addState || editState) && "hidden"
+          (addState || editState || pathname !== "/my-page") && "hidden"
         } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700`}
       >
         +
