@@ -46,9 +46,9 @@ const userService = {
       user = await User.update({ userId, fieldToUpdate, newValue });
     }
 
-    if (toUpdate.profileImage) {
-      const fieldToUpdate = "profileImage";
-      const newValue = toUpdate.profileImage;
+    if (toUpdate.profile_image) {
+      const fieldToUpdate = "profile_image";
+      const newValue = toUpdate.profile_image;
       user = await User.update({ userId, fieldToUpdate, newValue });
     }
 

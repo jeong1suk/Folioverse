@@ -7,6 +7,7 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
+import SpeedDial from "./SpeedDial";
 
 const Mvp = ({ title }) => {
   const [addState, setAddState] = useState(false);
@@ -131,6 +132,7 @@ const Mvp = ({ title }) => {
         certificate={certificate}
         setCertificate={setCertificate}
       />
+      {pathname === "/my-page" && <SpeedDial />}
     </section>
   );
 };
