@@ -47,7 +47,7 @@ const AddProject = ({ project, setProject }) => {
           setProject({ ...project, description: e.target.value })
         }
         value={project.description}
-        maxLength={20}
+        maxLength={1000}
       />
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
@@ -55,7 +55,7 @@ const AddProject = ({ project, setProject }) => {
         placeholder="프로젝트 기간"
         onChange={(e) => setProject({ ...project, date: e.target.value })}
         value={project.date}
-        maxLength={20}
+        maxLength={50}
       />
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
@@ -63,7 +63,7 @@ const AddProject = ({ project, setProject }) => {
         placeholder="기술 스택"
         onChange={(e) => setProject({ ...project, tech_stack: e.target.value })}
         value={project.tech_stack}
-        maxLength={20}
+        maxLength={500}
       />
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
@@ -71,7 +71,7 @@ const AddProject = ({ project, setProject }) => {
         placeholder="참조 링크"
         onChange={(e) => setProject({ ...project, link: e.target.value })}
         value={project.link}
-        maxLength={20}
+        maxLength={500}
       />
     </>
   );

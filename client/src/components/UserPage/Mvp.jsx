@@ -7,7 +7,8 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
-import SpeedDial from "./SpeedDial";
+import SpeedDial from "./SpeedDial/SpeedDial";
+import PdfReader from "./SpeedDial/PdfReader";
 
 const Mvp = ({ title }) => {
   const [addState, setAddState] = useState(false);
@@ -133,6 +134,9 @@ const Mvp = ({ title }) => {
         setCertificate={setCertificate}
       />
       {pathname === "/my-page" && <SpeedDial />}
+      <div style={{ position: "absolute", left: "-9999px" }}>
+        <PdfReader />
+      </div>
     </section>
   );
 };
