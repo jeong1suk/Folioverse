@@ -1,3 +1,5 @@
+// 정주현
+
 import SearchResultView from "./SearchResultView";
 import styles from "./Header.module.css";
 import { useState } from "react";
