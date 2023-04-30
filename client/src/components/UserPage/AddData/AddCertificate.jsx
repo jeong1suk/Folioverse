@@ -1,22 +1,32 @@
 //담당 : 이승현
 
-const AddCertificate = ({ certificate, setCertificate }) => {
+import { useEffect } from "react";
+
+const AddCertificate = ({ certificate, setCertificate, setIsValid }) => {
+  useEffect(() => {
+    if (certificate.name && certificate.date && certificate.agency) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [certificate.name, certificate.date, certificate.agency]);
+
   return (
     <>
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
-        placeholder="자격증 명"
+        placeholder="자격증 명(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, name: e.target.value })
         }
         value={certificate.name}
-        maxLength={20}
+        maxLength={30}
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
-        placeholder="취득일"
+        placeholder="취득일(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, date: e.target.value })
         }
@@ -24,9 +34,9 @@ const AddCertificate = ({ certificate, setCertificate }) => {
         maxLength={20}
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
-        placeholder="발급 기관"
+        placeholder="발급 기관(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, agency: e.target.value })
         }

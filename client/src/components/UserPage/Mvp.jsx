@@ -7,9 +7,10 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
-import SpeedDial from "./SpeedDial";
+import SpeedDial from "./SpeedDial/SpeedDial";
+import PdfReader from "./SpeedDial/PdfReader";
 
-const Mvp = ({ title }) => {
+const Mvp = ({ myData, title }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -65,7 +66,7 @@ const Mvp = ({ title }) => {
   };
 
   return (
-    <section className="border rounded p-5 mb-5">
+    <section className="border rounded p-5 mb-5 dark:border-cyan-950">
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
         {(title === "학력" && (
@@ -109,7 +110,7 @@ const Mvp = ({ title }) => {
         onClick={onAdd}
         className={`${
           (addState || editState || pathname !== "/my-page") && "hidden"
-        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700`}
+        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:border-cyan-950`}
       >
         +
       </button>
@@ -133,6 +134,9 @@ const Mvp = ({ title }) => {
         setCertificate={setCertificate}
       />
       {pathname === "/my-page" && <SpeedDial />}
+      <div style={{ position: "absolute", left: "-9999px" }}>
+        <PdfReader myData={myData} />
+      </div>
     </section>
   );
 };

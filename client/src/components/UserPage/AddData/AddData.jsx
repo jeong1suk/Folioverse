@@ -51,6 +51,8 @@ const AddData = ({
 
   const setToast = useToastStore((state) => state.setToast);
 
+  const [isValid, setIsValid] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
     switch (title) {
@@ -130,44 +132,58 @@ const AddData = ({
   return (
     <form className={`${!addState && !editState && "hidden"} mt-3`}>
       {(title === "학력" && (
-        <AddEducation education={education} setEducation={setEducation} />
+        <AddEducation
+          setIsValid={setIsValid}
+          education={education}
+          setEducation={setEducation}
+        />
       )) ||
         (title === "프로젝트" && (
-          <AddProject project={project} setProject={setProject} />
+          <AddProject
+            setIsValid={setIsValid}
+            project={project}
+            setProject={setProject}
+          />
         )) ||
         (title === "수상 이력" && (
-          <AddAward award={award} setAward={setAward} />
+          <AddAward setIsValid={setIsValid} award={award} setAward={setAward} />
         )) ||
         (title === "자격증" && (
           <AddCertificate
+            setIsValid={setIsValid}
             certificate={certificate}
             setCertificate={setCertificate}
           />
         ))}
-      <button
-        className="border rounded py-1 px-2 mr-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-        onClick={onSubmit}
-      >
-        확인
-      </button>
-      <button
-        className="border rounded py-1 px-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-        onClick={(e) => {
-          e.preventDefault();
-          setAddState(false);
-          setEditState(false);
-        }}
-      >
-        취소
-      </button>
-      <button
-        className={`${
-          !editState && "hidden"
-        } border rounded py-1 px-2 ml-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700`}
-        onClick={handleDelete}
-      >
-        삭제
-      </button>
+      <div className="mt-2">
+        <button
+          className={`text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ${
+            !isValid && "bg-slate-100 dark:bg-slate-700 cursor-not-allowed"
+          }`}
+          onClick={onSubmit}
+          disabled={!isValid}
+        >
+          확인
+        </button>
+        <button
+          className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+          onClick={(e) => {
+            e.preventDefault();
+            setAddState(false);
+            setEditState(false);
+          }}
+        >
+          취소
+        </button>
+        <button
+          className={`${
+            !editState && "hidden"
+          } text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900`}
+          onClick={handleDelete}
+        >
+          삭제
+        </button>
+      </div>
     </form>
   );
 };

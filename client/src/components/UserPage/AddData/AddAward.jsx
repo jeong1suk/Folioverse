@@ -1,23 +1,35 @@
 //담당 : 이승현
 
-const AddAward = ({ award, setAward }) => {
+import { useEffect } from "react";
+
+const AddAward = ({ award, setAward, setIsValid }) => {
+  useEffect(() => {
+    if (award.name && award.date) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [award.name, award.date]);
+
   return (
     <>
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
-        placeholder="수상 내역"
+        placeholder="수상 내역(필수)"
         onChange={(e) => setAward({ ...award, name: e.target.value })}
         value={award.name}
         maxLength={20}
+        required
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
-        placeholder="수상 날짜"
+        placeholder="수상 날짜(필수)"
         onChange={(e) => setAward({ ...award, date: e.target.value })}
         value={award.date}
         maxLength={20}
+        required
       />
     </>
   );

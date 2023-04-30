@@ -8,7 +8,9 @@ Chart.register(CategoryScale);
 const UserStats = () => {
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 mb-5">통계</h1>
+      <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-cyan-950">
+        통계
+      </h1>
       <div>
         <UserChart />
       </div>

@@ -1,4 +1,8 @@
+//담당 : 이승현
+
 import { useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const SpeedDial = () => {
   const [state, setState] = useState(false);
@@ -18,6 +22,7 @@ const SpeedDial = () => {
         <button
           type="button"
           className="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
+          onClick={downloadPortfolioAsPDF}
         >
           <svg
             aria-hidden="true"
@@ -32,7 +37,7 @@ const SpeedDial = () => {
               fillRule="evenodd"
             ></path>
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
             PDF로 다운로드
           </span>
         </button>
@@ -50,7 +55,7 @@ const SpeedDial = () => {
             <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"></path>
             <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"></path>
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
             새 항목 추가
           </span>
         </button>
@@ -81,6 +86,43 @@ const SpeedDial = () => {
       </button>
     </div>
   );
+};
+
+const downloadPortfolioAsPDF = async () => {
+  const portfolioContent = document.querySelector(".pdf-area");
+
+  try {
+    html2canvas(portfolioContent).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const contentWidth = 190;
+      const contentHeight = (canvas.height * contentWidth) / canvas.width;
+
+      let yPosition = 0;
+
+      while (yPosition < contentHeight) {
+        pdf.addImage(
+          imgData,
+          "PNG",
+          10,
+          10 - yPosition,
+          contentWidth,
+          contentHeight
+        );
+        yPosition += pageHeight - 20;
+
+        if (yPosition < contentHeight) {
+          pdf.addPage();
+        }
+      }
+
+      pdf.save("portfolio.pdf");
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
 };
 
 export default SpeedDial;

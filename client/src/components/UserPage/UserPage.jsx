@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
 import { useEffect } from "react";
+import { useQueryGet } from "../../utils/useQuery";
 
 const mvpList = [
   {
@@ -32,12 +33,14 @@ const UserPage = () => {
     }
   }, []);
 
+  const { data: myData } = useQueryGet("/user/current", "getMyInfo");
+
   return (
     <div className="p-5 flex flex-row dark:bg-neutral-800 min-h-screen">
-      <Profile />
+      <Profile myData={myData} />
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (
-          <Mvp key={item.id} title={item.title} />
+          <Mvp myData={myData} key={item.id} title={item.title} />
         ))}
       </main>
     </div>

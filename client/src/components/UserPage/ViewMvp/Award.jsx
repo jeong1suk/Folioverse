@@ -3,7 +3,14 @@
 import { useLocation } from "react-router-dom";
 import { useQueryGet } from "./../../../utils/useQuery";
 
-const Award = ({ setEditState, award, setAward, setMethod, setDeleteLink }) => {
+const Award = ({
+  setEditState,
+  award,
+  setAward,
+  setMethod,
+  setDeleteLink,
+  isPdf,
+}) => {
   const { data } = useQueryGet("/award", "getAward");
   const location = useLocation();
   const { pathname } = location;
@@ -22,21 +29,39 @@ const Award = ({ setEditState, award, setAward, setMethod, setDeleteLink }) => {
   return (
     <ul>
       {data?.map((item) => (
-        <li key={item._id} className="text-black border p-3 rounded mt-2">
+        <li
+          key={item._id}
+          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+        >
           <div>
             <p className="flex justify-between mb-2">
-              <span className="text-lg dark:text-white">{item.name}</span>
+              <span
+                className={`text-lg dark:text-${!isPdf && "white"} leading-10`}
+              >
+                {item.name}
+              </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  pathname !== "/my-page" && "hidden"
+                  (pathname !== "/my-page" && "hidden", isPdf && "hidden")
                 }`}
                 onClick={() => onEdit(item)}
               >
                 수정
               </button>
             </p>
-            <p className="mb-2 text-neutral-500 dark:text-neutral-300">
-              수상 날짜 : {item.date}
+            <p
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
+              } leading-10`}
+            >
+              수상 날짜
+            </p>
+            <p
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
+              } leading-10`}
+            >
+              {item.date}
             </p>
           </div>
         </li>

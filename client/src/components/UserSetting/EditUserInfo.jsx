@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useQueryPatch } from "../../utils/useQuery";
-import { useQueryDelete } from "../../utils/useQuery";
 import useToastStore from "../../store/toastStore";
 import useModalStore from "../../store/modalStore";
 
@@ -29,7 +28,9 @@ const EditUserInfo = ({ data }) => {
 
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2">회원 정보 수정</h1>
+      <h1 className="text-2xl border-b-2 pb-2 dark:border-cyan-950">
+        회원 정보 수정
+      </h1>
       <section className="pt-5">
         <div className="pr-20">
           <article className={`${content && "hidden"}`}>
@@ -37,7 +38,7 @@ const EditUserInfo = ({ data }) => {
             <form>
               <input type="text" className="hidden" autoComplete="username" />
               <input
-                className="border mx-1 mt-3 rounded p-1 text-black focus:outline-gray-300"
+                className="border mx-1 mt-3 rounded p-1 text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="new-password"
@@ -45,7 +46,7 @@ const EditUserInfo = ({ data }) => {
                 value={password}
               />
               <button
-                className="border py-1 px-3 rounded hover:bg-gray-100 dark:hover:bg-neutral-700"
+                className="border py-1 px-3 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
                 onClick={onSubmit}
               >
                 확인
@@ -59,7 +60,7 @@ const EditUserInfo = ({ data }) => {
   );
 };
 
-const EditContent = ({ content, setContent, data }) => {
+const EditContent = ({ content, data }) => {
   const { mutate } = useQueryPatch(`/user/${data?._id}`, "patch");
   const formRef = useRef();
 
@@ -102,7 +103,8 @@ const EditContent = ({ content, setContent, data }) => {
     }
   }, [password, password2]);
 
-  const defaultInputStyle = "focus:outline-neutral-300 focus:outline-gray-300";
+  const defaultInputStyle =
+    "focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300";
   const validInputStyle = "border-green-500 outline-green-500";
   const invalidInputStyle = "border-red-500 outline-red-500";
 
@@ -146,8 +148,8 @@ const EditContent = ({ content, setContent, data }) => {
         </p>
         <button
           className={`${
-            !isValid && "bg-gray-100 dark:bg-neutral-700 cursor-not-allowed"
-          } border py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-neutral-700`}
+            !isValid && "bg-gray-100 dark:bg-neutral-600 cursor-not-allowed"
+          } border py-1 px-2 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950`}
           onClick={onSubmit}
           disabled={!isValid}
         >

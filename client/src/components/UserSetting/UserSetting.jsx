@@ -32,7 +32,7 @@ const UserSetting = () => {
         </div>
         <Link
           to="/my-page"
-          className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:hover:bg-neutral-700"
+          className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
         >
           프로필로 돌아가기
         </Link>
