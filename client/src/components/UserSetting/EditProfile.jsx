@@ -11,6 +11,8 @@ const EditProfile = ({ data }) => {
   const [isValid, setIsValid] = useState(true);
   const [imageFile, setImageFile] = useState(null);
 
+  const [previewUrl, setPreviewUrl] = useState(null);
+
   const queryClient = useQueryClient();
   const { mutate: updateProfile } = useQueryPatch(
     `/user/${data?._id}`,
@@ -58,6 +60,7 @@ const EditProfile = ({ data }) => {
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImageFile(e.target.files[0]);
+      setPreviewUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -124,7 +127,11 @@ const EditProfile = ({ data }) => {
           <div className="grid justify-items-center relative">
             <img
               className="rounded-full"
-              src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+              src={
+                previewUrl
+                  ? previewUrl
+                  : `${data?.profile_image ?? "profile/profile-dark.png"}`
+              }
               alt="프로필 사진"
             />
             <input

@@ -22,7 +22,11 @@ const UserSetting = () => {
     <div className="py-2 px-12 sm:px-24 2xl:px-80 dark:bg-neutral-800 min-h-screen">
       <div className="flex flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
-          <img className="w-16 rounded-full" src="/cat.png" alt="프로필 사진" />
+          <img
+            className="w-24 rounded-full"
+            src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+            alt="프로필 사진"
+          />
           <div className="my-auto ml-3">
             <h3 className="block text-xl font-bold dark:text-white">
               {data?.name}
