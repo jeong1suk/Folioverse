@@ -47,9 +47,10 @@ const DeleteModal = ({ id, toggleOpen }) => {
         아래에 "계정 삭제" 를 입력하세요
       </label>
       <input
-        className="border block w-80 my-3 mx-auto rounded p-1 focus:outline-neutral-300"
+        className={`block w-full p-1 rounded m-3 focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300`}
         type="text"
         onChange={(e) => setInput(e.target.value)}
+        maxLength={5}
       />
       <button
         data-modal-hide="popup-modal"

@@ -3,9 +3,11 @@
 import { useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import useModalStore from "../../../store/modalStore";
 
-const SpeedDial = () => {
+const SpeedDial = ({ id }) => {
   const [state, setState] = useState(false);
+  const setModal = useModalStore((state) => state.setModal);
 
   return (
     <div
@@ -44,19 +46,25 @@ const SpeedDial = () => {
         <button
           type="button"
           className="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
+          onClick={() => setModal(id, "post")}
         >
           <svg
-            aria-hidden="true"
-            className="w-6 h-6 mx-auto mt-px"
-            fill="currentColor"
-            viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6 mx-auto mt-px"
           >
-            <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"></path>
-            <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"></path>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+            />
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
-            새 항목 추가
+
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
+            게시글 작성
           </span>
         </button>
       </div>

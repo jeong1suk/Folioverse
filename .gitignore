@@ -133,3 +133,4 @@ src/db/models/models.js
 src/db/models/models.js
 src/db/schemas/schemas.js
 .DS_Store
+.git

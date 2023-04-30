@@ -19,7 +19,7 @@ const Profile = ({ myData }) => {
   }, [pathname, myData, others]);
 
   return (
-    <aside className="basis-1/5 border rounded p-5 h-fit relative dark:border-cyan-950">
+    <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
       <MessageIcon pathname={pathname} id={data?._id} name={data?.name} />
       <img
         className="w-20 rounded-full mx-auto mb-5"
