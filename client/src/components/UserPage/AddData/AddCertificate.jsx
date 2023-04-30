@@ -1,12 +1,22 @@
 //담당 : 이승현
 
-const AddCertificate = ({ certificate, setCertificate }) => {
+import { useEffect } from "react";
+
+const AddCertificate = ({ certificate, setCertificate, setIsValid }) => {
+  useEffect(() => {
+    if (certificate.name && certificate.date && certificate.agency) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [certificate.name, certificate.date, certificate.agency]);
+
   return (
     <>
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
-        placeholder="자격증 명"
+        placeholder="자격증 명(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, name: e.target.value })
         }
@@ -16,7 +26,7 @@ const AddCertificate = ({ certificate, setCertificate }) => {
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
-        placeholder="취득일"
+        placeholder="취득일(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, date: e.target.value })
         }
@@ -26,7 +36,7 @@ const AddCertificate = ({ certificate, setCertificate }) => {
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
-        placeholder="발급 기관"
+        placeholder="발급 기관(필수)"
         onChange={(e) =>
           setCertificate({ ...certificate, agency: e.target.value })
         }

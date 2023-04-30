@@ -1,6 +1,8 @@
 //담당 : 이승현
 
-const AddProject = ({ project, setProject }) => {
+import { useEffect } from "react";
+
+const AddProject = ({ project, setProject, setIsValid }) => {
   const handleRadioClick = (e) => {
     const { value } = e.target;
     setProject({
@@ -9,35 +11,70 @@ const AddProject = ({ project, setProject }) => {
     });
   };
 
+  const handleLiClick = (e) => {
+    const radioButton = e.currentTarget.querySelector('input[type="radio"]');
+    if (radioButton && !radioButton.checked) {
+      radioButton.click();
+    }
+  };
+
+  useEffect(() => {
+    if (project.name && project.division) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [project.name, project.division]);
+
   return (
     <>
-      <div>
+      <div className="flex flex-row items-center mb-4">
         <input
-          className="border p-2 mb-4 rounded focus:outline-gray-300 w-1/2"
+          className="border p-2 mr-2 rounded focus:outline-gray-300 w-1/2"
           type="text"
-          placeholder="프로젝트 이름"
+          placeholder="프로젝트 이름(필수)"
           onChange={(e) => setProject({ ...project, name: e.target.value })}
           value={project.name}
           maxLength={20}
         />
-        <input
-          className="m-1"
-          name="degree"
-          type="radio"
-          value="개인 프로젝트"
-          checked={project.division === "개인 프로젝트"}
-          onChange={handleRadioClick}
-        />
-        <label className="m-1 dark:text-neutral-300">개인 프로젝트</label>
-        <input
-          className="m-1"
-          name="degree"
-          type="radio"
-          value="팀 프로젝트"
-          checked={project.division === "팀 프로젝트"}
-          onChange={handleRadioClick}
-        />
-        <label className="m-1 dark:text-neutral-300">팀 프로젝트</label>
+        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <li
+            className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+            onClick={handleLiClick}
+          >
+            <div className="flex items-center pl-3">
+              <input
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                name="degree"
+                type="radio"
+                value="개인 프로젝트"
+                checked={project.division === "개인 프로젝트"}
+                onChange={handleRadioClick}
+              />
+              <label className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                개인 프로젝트
+              </label>
+            </div>
+          </li>
+          <li
+            className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+            onClick={handleLiClick}
+          >
+            <div className="flex items-center pl-3">
+              <input
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                name="degree"
+                type="radio"
+                value="팀 프로젝트"
+                checked={project.division === "팀 프로젝트"}
+                onChange={handleRadioClick}
+              />
+              <label className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                팀 프로젝트
+              </label>
+            </div>
+          </li>
+        </ul>
       </div>
       <textarea
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
