@@ -11,14 +11,4 @@ const LikeModel = model("Like", LikeSchema);
 
 export { LikeModel };
 
-// Table like {
-//   id objectId [primary key]
-//   target_user ref[users]
-//   like_user ref[users]
-// }
 
-// Table follow {
-//   id objectId [primary key]
-//   target_user ref[users]
-//   follow_user ref[users]
-// }

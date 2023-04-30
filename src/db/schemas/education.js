@@ -14,11 +14,3 @@ const EducationModel = model("Education", EducationSchema);
 
 export { EducationModel };
 
-// Table education {
-//   id objectId [primary key]
-//   school_name varchar [not null]
-//   major varchar [not null]
-//   graduate_status varchar [not null]
-//   created_at timestamp
-//   updated_at timestamp
-// }

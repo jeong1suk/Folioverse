@@ -11,8 +11,4 @@ const FollowModel = model("Follow", FollowSchema);
 
 export { FollowModel };
 
-// Table follow {
-//   id objectId [primary key]
-//   target_Follow ref[users]
-//   follow_user ref[users]
-// }
+
