@@ -9,8 +9,6 @@ function UserNav() {
   function profileViewHandler() {
     return setProfileView(!profileView);
   }
-
-  console.log(profileView);
   return (
     <div className="h-[40px] w-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2">
       <img

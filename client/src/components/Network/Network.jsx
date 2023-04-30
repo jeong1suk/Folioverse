@@ -1,6 +1,6 @@
 // 정주현
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
@@ -9,7 +9,7 @@ const host = import.meta.env.VITE_SERVER_HOST;
 function Network() {
   const { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
   const [listCur, setListCur] = useState(30);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState([]);
 
   // data가 불러와지지 않았을 때
   if (loading) return <div>Loading...</div>;
