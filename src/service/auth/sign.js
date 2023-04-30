@@ -7,7 +7,7 @@ import { signJWT } from "./login.js";
 
 export const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await UserModel.create({
+  await UserModel.create({
     email,
     password: hashedPassword,
     name,
@@ -30,5 +30,10 @@ export const createUser = async (email, password, name) => {
 
 export const deleteUser = async (_id) => {
   const user = await UserModel.deleteOne({ _id });
-  return user;
+  return user.deletedCount ? true : false;
+};
+
+export const checkDuplicate = async (email) => {
+  const result = await UserModel.find({ email });
+  return result.length > 0;
 };

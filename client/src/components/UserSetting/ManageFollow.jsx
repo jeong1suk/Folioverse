@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../utils/useQuery";
 
 const ManageFollow = () => {
-  const [tab, setTab] = useState(true);
+  const [tab, setTab] = useState(0);
   const [getUrl, setGetUrl] = useState("/dummy/mvp/follow/1");
   const { data } = useQueryGet(getUrl, "getFollow");
 
   useEffect(() => {
-    setGetUrl(tab ? "/dummy/mvp/follow/1" : "/dummy/mvp/followed/1");
+    setGetUrl(tab === 0 ? "/dummy/mvp/follow/1" : "/dummy/mvp/followed/1");
   }, [tab]);
 
   return (
@@ -19,24 +19,24 @@ const ManageFollow = () => {
         <ul className="flex flex-row">
           <li
             className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 ${
-              tab && "bg-gray-100 dark:bg-neutral-700 border-b-0"
+              tab === 0 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
             }`}
           >
             <button
               className="w-full text-black dark:text-white"
-              onClick={() => setTab(true)}
+              onClick={() => setTab(0)}
             >
               내가 팔로우한 유저
             </button>
           </li>
           <li
             className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 ${
-              !tab && "bg-gray-100 dark:bg-neutral-700 border-b-0"
+              tab === 1 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
             }`}
           >
             <button
               className="w-full text-black dark:text-white"
-              onClick={() => setTab(false)}
+              onClick={() => setTab(1)}
             >
               나를 팔로우한 유저
             </button>

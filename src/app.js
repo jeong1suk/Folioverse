@@ -2,7 +2,7 @@
 
 import express from "express";
 import cors from "cors";
-import { initializePassport } from "./passport/index.js";
+import { initializePassport } from "./middlewares/passport/index.js";
 
 const app = express();
 
@@ -37,6 +37,12 @@ app.use("/api/award", checkToken, awardRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message || "내부 서버 오류",
+    },
+  });
 });
 
 app.listen(3000, () => {

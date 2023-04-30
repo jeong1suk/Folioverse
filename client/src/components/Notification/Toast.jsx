@@ -17,12 +17,14 @@ const Toast = () => {
     >
       <div
         className={`inline-flex items-center justify-center flex-shrink-0 w-8 h-8 ${
-          type ? "text-green-500" : "text-orange-500"
-        } ${type ? "bg-green-100" : "bg-orange-100"} rounded-lg ${
-          type ? "dark:bg-green-800" : "dark:bg-orange-700"
-        } ${type ? "dark:text-green-200" : "dark:text-orange-200"}`}
+          type === "success" ? "text-green-500" : "text-orange-500"
+        } ${type === "success" ? "bg-green-100" : "bg-orange-100"} rounded-lg ${
+          type === "success" ? "dark:bg-green-800" : "dark:bg-orange-700"
+        } ${
+          type === "success" ? "dark:text-green-200" : "dark:text-orange-200"
+        }`}
       >
-        {type ? <SuccessIcon /> : <WarningIcon />}
+        {type === "success" ? <SuccessIcon /> : <WarningIcon />}
       </div>
       <div className="ml-3 text-sm font-normal">{content}</div>
       <button

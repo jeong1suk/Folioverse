@@ -7,9 +7,16 @@ const DeleteModal = ({ id, toggleOpen }) => {
   const { deleteMutate } = useQueryDelete(`/auth/${id}`);
 
   const deleteUser = () => {
-    deleteMutate();
-    localStorage.removeItem("token");
-    location.href = "/";
+    deleteMutate(null, {
+      onSuccess: (data) => {
+        if (data.result) {
+          localStorage.removeItem("token");
+          location.href = "/";
+        } else {
+          console.log("회원 탈퇴에 실패하였습니다.");
+        }
+      },
+    });
   };
 
   useEffect(() => {

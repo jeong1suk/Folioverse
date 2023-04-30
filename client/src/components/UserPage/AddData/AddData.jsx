@@ -5,7 +5,7 @@ import AddAward from "./AddAward";
 import AddCertificate from "./AddCertificate";
 import AddEducation from "./AddEducation";
 import AddProject from "./AddProject";
-import { useQueryDelete, useQueryFetch } from "../../../utils/useQuery";
+import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../../store/toastStore";
 
@@ -45,7 +45,7 @@ const AddData = ({
     }
   }, [editState, addState]);
 
-  const { mutate } = useQueryFetch(link, method);
+  const { mutate } = useQueryPatch(link, method);
   const { deleteMutate } = useQueryDelete(link + deleteLink);
   const queryClient = useQueryClient();
 
@@ -81,7 +81,7 @@ const AddData = ({
     }
     setToast(
       addState ? "데이터가 추가되었습니다" : "데이터가 수정되었습니다",
-      true
+      "success"
     );
     setEditState(false);
     setAddState(false);
@@ -123,7 +123,7 @@ const AddData = ({
         );
         break;
     }
-    setToast("데이터가 삭제되었습니다", true);
+    setToast("데이터가 삭제되었습니다", "success");
     setEditState(false);
   };
 

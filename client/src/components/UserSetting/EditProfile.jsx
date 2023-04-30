@@ -1,7 +1,7 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useQueryFetch, useQueryGet } from "../../utils/useQuery";
+import { useQueryPatch, useQueryGet } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
 
@@ -12,11 +12,11 @@ const EditProfile = ({ data }) => {
   const [imageFile, setImageFile] = useState(null);
 
   const queryClient = useQueryClient();
-  const { mutate: updateProfile } = useQueryFetch(
+  const { mutate: updateProfile } = useQueryPatch(
     `/user/${data?._id}`,
     "patch"
   );
-  const { mutate: uploadImage } = useQueryFetch(`/image`, "patch");
+  const { mutate: uploadImage } = useQueryPatch(`/image`, "patch");
 
   const setToast = useToastStore((state) => state.setToast);
 
@@ -39,7 +39,7 @@ const EditProfile = ({ data }) => {
             updateProfile(updateProfileData, {
               onSuccess: () => {
                 queryClient.invalidateQueries("getMyInfo");
-                setToast("프로필이 수정되었습니다", true);
+                setToast("프로필이 수정되었습니다", "success");
               },
             });
           },
@@ -49,7 +49,7 @@ const EditProfile = ({ data }) => {
       updateProfile(updateProfileData, {
         onSuccess: () => {
           queryClient.invalidateQueries("getMyInfo");
-          setToast("프로필이 수정되었습니다", true);
+          setToast("프로필이 수정되었습니다", "success");
         },
       });
     }

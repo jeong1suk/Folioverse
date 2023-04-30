@@ -4,13 +4,18 @@ import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
 const host = import.meta.env.VITE_SERVER_HOST;
+const token = localStorage.getItem("token") ?? null;
+
+const api = axios.create({
+  baseURL: host,
+  headers: {
+    Authorization: token,
+  },
+});
 
 export const useQueryGet = (link, key, queryOptions = {}) => {
-  const token = localStorage.getItem("token") ?? null;
   const queryFunc = async () => {
-    const response = await axios.get(host + link, {
-      headers: { Authorization: token },
-    });
+    const response = await api.get(link);
     return response.data;
   };
 
@@ -21,11 +26,10 @@ export const useQueryGet = (link, key, queryOptions = {}) => {
   });
 };
 
-export const useQueryFetch = (link, method, options = {}) => {
-  const token = localStorage.getItem("token") ?? null;
+export const useQueryPatch = (link, method, options = {}) => {
   const mutation = useMutation(async (req) => {
-    const response = await axios[method](host + link, req?.body, {
-      headers: { Authorization: token, ...options.headers },
+    const response = await api[method](link, req?.body, {
+      headers: { ...options.headers },
     });
     return response.data;
   });
@@ -39,10 +43,8 @@ export const useQueryFetch = (link, method, options = {}) => {
 };
 
 export const useQueryDelete = (link) => {
-  const token = localStorage.getItem("token") ?? null;
   const mutation = useMutation(async (body = null) => {
-    const response = await axios.delete(host + link, {
-      headers: { Authorization: token },
+    const response = await api.delete(link, {
       body,
     });
     return response.data;
