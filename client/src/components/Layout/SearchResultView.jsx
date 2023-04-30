@@ -9,18 +9,18 @@ function SearchResultView({ inputValue }) {
   let { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
 
   const liStyle =
-    "text-[#000] dark:text-[white] bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)] text-center";
+    "text-[#000] dark:text-[#fff] bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]";
 
   if (loading) {
-    return <li className={liStyle}>Loading...</li>;
+    return <li className={`${liStyle} text-center`}>Loading...</li>;
   }
 
   if (error) {
-    return <li className={liStyle}>Error!</li>;
+    return <li className={`${liStyle} text-center`}>Error!</li>;
   }
 
   if (!data) {
-    return <li className={liStyle}>데이터 응답실패!</li>;
+    return <li className={`${liStyle} text-center`}>데이터 응답실패!</li>;
   }
 
   function listHandler(data) {
@@ -33,7 +33,7 @@ function SearchResultView({ inputValue }) {
       filteredData.map((el, idx) => (
         <li
           key={idx}
-          className="w-[300px] overflow-hidden bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)] px-5 py-[15px] opacity-80 m-auto text-[#000] dark:text-[#fff]"
+          className={`w-[300px] overflow-hidden px-5 py-[15px] opacity-80 m-auto ${liStyle}`}
         >
           <Link to={`/user-page/${el._id}`} className="top-[50%] block">
             <img
@@ -49,7 +49,7 @@ function SearchResultView({ inputValue }) {
         </li>
       ))
     ) : (
-      <li className={liStyle}>결과가 없습니다.</li>
+      <li className={`${liStyle} text-center`}>결과가 없습니다.</li>
     );
   }
 
