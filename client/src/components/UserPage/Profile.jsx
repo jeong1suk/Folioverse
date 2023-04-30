@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import useUserStore from "../../store/userStore";
 import useModalStore from "../../store/modalStore";
 
-const Profile = () => {
+const Profile = ({ myData }) => {
   const location = useLocation();
   const { pathname } = location;
   const [data, setData] = useState(null);
   const userId = useUserStore((state) => state.id);
-  const { data: myData } = useQueryGet("/user/current", "getMyInfo");
+
   const { data: others } = useQueryGet(`/user/${userId}`, "getOther");
 
   useEffect(() => {
@@ -19,9 +19,12 @@ const Profile = () => {
   }, [pathname, myData, others]);
 
   return (
-    <aside className="basis-1/5 border rounded p-5 h-fit relative">
+    <aside className="basis-1/5 border rounded p-5 h-fit relative dark:border-cyan-950">
       <MessageIcon pathname={pathname} id={data?._id} name={data?.name} />
-      <img className="w-20 rounded-full mx-auto mb-5" src="/cat.png" />
+      <img
+        className="w-20 rounded-full mx-auto mb-5"
+        src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+      />
       <p className="text-center text-xl font-bold dark:text-white">
         {data?.name}
       </p>

@@ -30,7 +30,10 @@ const Education = ({
   return (
     <ul>
       {data?.map((item) => (
-        <li key={item._id} className="text-black border p-3 rounded mt-2">
+        <li
+          key={item._id}
+          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+        >
           <div>
             <p className="flex justify-between mb-2">
               <span

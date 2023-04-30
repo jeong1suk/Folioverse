@@ -37,7 +37,7 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
   return (
     <>
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
         placeholder="학교 이름(필수)"
         onChange={(e) => {
@@ -47,7 +47,7 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
         maxLength={20}
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
+        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         type="text"
         placeholder="전공(필수)"
         onChange={(e) => {
@@ -56,16 +56,19 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
         value={education.major}
         maxLength={20}
       />
-      <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-neutral-800 dark:border-cyan-950 dark:text-white">
         {radioOptions.map((option) => (
           <li
             key={option.value}
-            className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+            className={`w-full dark:border-cyan-950 ${
+              option.value !== "중퇴" &&
+              "border-b border-gray-200 sm:border-b-0 sm:border-r"
+            }`}
             onClick={handleLiClick}
           >
             <div className="flex items-center pl-3">
               <input
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark :focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 name="degree"
                 type="radio"
                 value={option.value}

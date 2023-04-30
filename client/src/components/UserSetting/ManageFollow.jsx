@@ -14,11 +14,13 @@ const ManageFollow = () => {
 
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2">팔로우 관리</h1>
+      <h1 className="text-2xl border-b-2 pb-2 dark:border-cyan-950">
+        팔로우 관리
+      </h1>
       <nav className="mt-3">
         <ul className="flex flex-row">
           <li
-            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 ${
+            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:border-cyan-950 ${
               tab === 0 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
             }`}
           >
@@ -30,7 +32,7 @@ const ManageFollow = () => {
             </button>
           </li>
           <li
-            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 ${
+            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:border-cyan-950 ${
               tab === 1 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
             }`}
           >
@@ -56,7 +58,7 @@ const ManageFollow = () => {
 
 const UserCard = ({ user }) => {
   return (
-    <li className="border p-4 rounded">
+    <li className="border p-4 rounded dark:border-cyan-950">
       <img className="rounded-full w-16 mx-auto my-2" src="/cat.png" />
       <p className="text-center text-black dark:text-white">{user.name}</p>
       <p className="text-center text-sm text-neutral-400">{user.email}</p>

@@ -37,7 +37,7 @@ const SpeedDial = () => {
               fillRule="evenodd"
             ></path>
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
             PDF로 다운로드
           </span>
         </button>
@@ -55,7 +55,7 @@ const SpeedDial = () => {
             <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"></path>
             <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"></path>
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
             새 항목 추가
           </span>
         </button>
