@@ -3,6 +3,7 @@
 import DeleteModal from "./DeleteModal";
 import useModalStore from "../../../store/modalStore";
 import MessageModal from "./MessageModal";
+import PostModal from "./PostModal";
 
 const Modal = () => {
   const isOpen = useModalStore((state) => state.isOpen);
@@ -42,11 +43,13 @@ const Modal = () => {
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          {type === "delete" ? (
+          {(type === "delete" && (
             <DeleteModal toggleOpen={toggleOpen} id={id} />
-          ) : (
-            <MessageModal toggleOpen={toggleOpen} id={id} name={name} />
-          )}
+          )) ||
+            (type === "message" && (
+              <MessageModal id={id} name={name} toggleOpen={toggleOpen} />
+            )) ||
+            (type === "post" && <PostModal id={id} toggleOpen={toggleOpen} />)}
         </div>
       </div>
     </div>

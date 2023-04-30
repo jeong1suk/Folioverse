@@ -44,6 +44,7 @@ const EditUserInfo = ({ data }) => {
                 autoComplete="new-password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                maxLength={20}
               />
               <button
                 className="border py-1 px-3 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
@@ -125,6 +126,7 @@ const EditContent = ({ content, data }) => {
           placeholder="••••••••"
           autoComplete="off"
           onChange={(e) => setPassword(e.target.value)}
+          maxLength={20}
         />
         <p className={`${passwordVaild && "hidden"} text-red-500 mb-5`}>
           비밀번호 형식을 확인하세요
@@ -142,6 +144,7 @@ const EditContent = ({ content, data }) => {
           placeholder="••••••••"
           autoComplete="off"
           onChange={(e) => setPassword2(e.target.value)}
+          maxLength={20}
         />
         <p className={`${password2Vaild && "hidden"} text-red-500 mb-5`}>
           비밀번호가 일치하지 않습니다

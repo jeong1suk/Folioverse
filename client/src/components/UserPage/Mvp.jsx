@@ -9,10 +9,16 @@ import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PdfReader from "./SpeedDial/PdfReader";
+import mvpSelectStore from "../../store/mvpSelectStore";
 
 const Mvp = ({ myData, title }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
+
+  const educationState = mvpSelectStore((state) => state.education);
+  const projectState = mvpSelectStore((state) => state.project);
+  const awardState = mvpSelectStore((state) => state.award);
+  const certificateState = mvpSelectStore((state) => state.certificate);
 
   const location = useLocation();
   const { pathname } = location;
@@ -66,7 +72,14 @@ const Mvp = ({ myData, title }) => {
   };
 
   return (
-    <section className="border rounded p-5 mb-5 dark:border-cyan-950">
+    <section
+      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${
+        (title === "학력" && !educationState && "hidden") ||
+        (title === "프로젝트" && !projectState && "hidden") ||
+        (title === "수상 이력" && !awardState && "hidden") ||
+        (title === "자격증" && !certificateState && "hidden")
+      }`}
+    >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
         {(title === "학력" && (
@@ -133,10 +146,6 @@ const Mvp = ({ myData, title }) => {
         certificate={certificate}
         setCertificate={setCertificate}
       />
-      {pathname === "/my-page" && <SpeedDial />}
-      <div style={{ position: "absolute", left: "-9999px" }}>
-        <PdfReader myData={myData} />
-      </div>
     </section>
   );
 };

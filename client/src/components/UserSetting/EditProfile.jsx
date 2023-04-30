@@ -90,6 +90,7 @@ const EditProfile = ({ data }) => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              maxLength={50}
             />
           </article>
           <article>
@@ -107,9 +108,11 @@ const EditProfile = ({ data }) => {
               className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
               name="description"
               cols="30"
-              rows="10"
+              rows="3"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              maxLength={100}
+              placeholder="100자 이내로 작성하세요"
             ></textarea>
           </article>
           <button
