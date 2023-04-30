@@ -47,11 +47,18 @@ const Award = ({
               </button>
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
+              } leading-10`}
+            >
+              수상 날짜
+            </p>
+            <p
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              수상 날짜 : {item.date}
+              {item.date}
             </p>
           </div>
         </li>

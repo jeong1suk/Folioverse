@@ -49,18 +49,32 @@ const Certificate = ({
               </button>
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
-                !isPdf && "neutral-300"
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
               } leading-10`}
             >
-              취득일 : {item.date}
+              취득일
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              발급 기관 : {item.agency}
+              {item.date}
+            </p>
+            <p
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
+              } leading-10`}
+            >
+              발급 기관
+            </p>
+            <p
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
+              } leading-10`}
+            >
+              {item.agency}
             </p>
           </div>
         </li>

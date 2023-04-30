@@ -48,11 +48,11 @@ const Education = ({
               </button>
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
+              className={`ml-2 mb-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              전공 : {item.major}
+              {item.major}
             </p>
           </div>
         </li>

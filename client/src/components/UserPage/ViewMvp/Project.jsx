@@ -38,6 +38,14 @@ const Project = ({
     return link;
   };
 
+  const renderLink = (link) => {
+    return (
+      <a href={formatLink(link)} target="_blank">
+        <span className="ml-2 text-blue-500">{link}</span>
+      </a>
+    );
+  };
+
   return (
     <ul>
       {data?.map((item) => (
@@ -59,35 +67,63 @@ const Project = ({
               </button>
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
-                !isPdf && "neutral-300"
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
               } leading-10`}
             >
-              내용 : {item.description}
+              프로젝트 내용
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
-              } leading-10`}
+              } leading-10 whitespace-pre-wrap`}
             >
-              기간 : {item.date}
+              {item.description}
             </p>
             <p
-              className={`mb-2 text-neutral-500 dark:text-${
-                !isPdf && "neutral-300"
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
               } leading-10`}
             >
-              기술 스택 : {item.tech_stack}
+              기간
             </p>
             <p
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
+              } leading-10`}
+            >
+              {item.date}
+            </p>
+            <p
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
+              } leading-10`}
+            >
+              기술 스택
+            </p>
+            <p
+              className={`mb-2 ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
+              } leading-10 whitespace-pre-wrap`}
+            >
+              {item.tech_stack}
+            </p>
+            <div
               className={`mb-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              <a href={formatLink(item.link)} target="_blank">
-                참조 링크 : <span className="text-blue-500">{item.link}</span>
-              </a>
-            </p>
+              <span
+                className={`text-sm text-neutral-400 dark:text-${
+                  !isPdf && "neutral-600"
+                } leading-10`}
+              >
+                참조 링크
+              </span>
+              {item.link.split("\n").map((link) => (
+                <div key={link}>{renderLink(link)}</div>
+              ))}
+            </div>
           </div>
         </li>
       ))}

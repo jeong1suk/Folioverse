@@ -11,7 +11,7 @@ const AddCertificate = ({ certificate, setCertificate }) => {
           setCertificate({ ...certificate, name: e.target.value })
         }
         value={certificate.name}
-        maxLength={20}
+        maxLength={30}
       />
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"

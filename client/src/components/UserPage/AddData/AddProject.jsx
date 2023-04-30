@@ -13,7 +13,7 @@ const AddProject = ({ project, setProject }) => {
     <>
       <div>
         <input
-          className="border p-2 mb-4 rounded focus:outline-gray-300"
+          className="border p-2 mb-4 rounded focus:outline-gray-300 w-1/2"
           type="text"
           placeholder="프로젝트 이름"
           onChange={(e) => setProject({ ...project, name: e.target.value })}
@@ -39,16 +39,17 @@ const AddProject = ({ project, setProject }) => {
         />
         <label className="m-1 dark:text-neutral-300">팀 프로젝트</label>
       </div>
-      <input
+      <textarea
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
-        type="text"
         placeholder="프로젝트 내용"
+        cols="30"
+        rows="10"
         onChange={(e) =>
           setProject({ ...project, description: e.target.value })
         }
         value={project.description}
         maxLength={1000}
-      />
+      ></textarea>
       <input
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
         type="text"
@@ -57,22 +58,24 @@ const AddProject = ({ project, setProject }) => {
         value={project.date}
         maxLength={50}
       />
-      <input
+      <textarea
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
-        type="text"
+        cols="30"
+        rows="3"
         placeholder="기술 스택"
         onChange={(e) => setProject({ ...project, tech_stack: e.target.value })}
         value={project.tech_stack}
         maxLength={500}
-      />
-      <input
+      ></textarea>
+      <textarea
         className="block border w-full p-2 mb-4 rounded focus:outline-gray-300"
-        type="text"
+        cols="30"
+        rows="3"
         placeholder="참조 링크"
         onChange={(e) => setProject({ ...project, link: e.target.value })}
         value={project.link}
         maxLength={500}
-      />
+      ></textarea>
     </>
   );
 };
