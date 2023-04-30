@@ -2,7 +2,7 @@
 
 import passport from "passport";
 import localPassport from "./local.js";
-import { UserModel } from "../db/schemas/user.js";
+import { UserModel } from "../../db/schemas/user.js";
 
 export const initializePassport = () => {
   passport.serializeUser((user, done) => {

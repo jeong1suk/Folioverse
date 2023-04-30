@@ -1,7 +1,7 @@
 //담당 : 이승현
 
 import { useEffect, useRef, useState } from "react";
-import { useQueryFetch } from "../../utils/useQuery";
+import { useQueryPatch } from "../../utils/useQuery";
 import { useQueryDelete } from "../../utils/useQuery";
 import useToastStore from "../../store/toastStore";
 import useModalStore from "../../store/modalStore";
@@ -9,7 +9,7 @@ import useModalStore from "../../store/modalStore";
 const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
-  const { mutate } = useQueryFetch(`/auth/check-password`, "patch");
+  const { mutate } = useQueryPatch(`/auth/check-password`, "post");
   const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
@@ -18,7 +18,9 @@ const EditUserInfo = ({ data }) => {
       { body: { password } },
       {
         onSuccess: (data) => {
-          data ? setContent(true) : setToast("비밀번호를 확인해주세요", false);
+          data
+            ? setContent(true)
+            : setToast("비밀번호를 확인해주세요", "warning");
         },
       }
     );
@@ -58,7 +60,7 @@ const EditUserInfo = ({ data }) => {
 };
 
 const EditContent = ({ content, setContent, data }) => {
-  const { mutate } = useQueryFetch(`/user/${data?._id}`, "patch");
+  const { mutate } = useQueryPatch(`/user/${data?._id}`, "patch");
   const formRef = useRef();
 
   const [password, setPassword] = useState("");
@@ -82,7 +84,7 @@ const EditContent = ({ content, setContent, data }) => {
       { body: { password } },
       {
         onSuccess: () => {
-          setToast("비밀번호가 변경되었습니다", true);
+          setToast("비밀번호가 변경되었습니다", "success");
           formRef.current.reset();
         },
       }

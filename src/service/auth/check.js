@@ -1,10 +1,6 @@
 //담당 : 이승현
+import { verifyPassword } from "../../utils/verifyPassword.js";
 
-import { userService } from "../userService.js";
-import bcrypt from "bcrypt";
-
-export const checkPassword = async (_id, password) => {
-  const user = await userService.getUserInfo({ _id });
-  const result = await bcrypt.compare(password, user.password);
-  return result;
+export const checkPassword = async (user, password) => {
+  return await verifyPassword(password, user.password);
 };
