@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useQueryGet } from "../../../utils/useQuery";
+import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
+import { useQueryClient } from "react-query";
 
 const MessageBoxModal = ({ id }) => {
   const { data } = useQueryGet("/message", "getMessage");
+  const { deleteMutate } = useQueryDelete("/message");
   const [message, setMessage] = useState(null);
+  const queryClient = useQueryClient();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -21,6 +24,14 @@ const MessageBoxModal = ({ id }) => {
     } else {
       setExpandedMessageId(id);
     }
+  };
+
+  const onDelete = (_id) => {
+    deleteMutate(_id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getMessage");
+      },
+    });
   };
 
   return (
@@ -41,7 +52,7 @@ const MessageBoxModal = ({ id }) => {
                 >
                   <span>{item.title}</span>
                   <div className="flex flew-row">
-                    <span>보낸 사람 : {item.sendUser}</span>
+                    <span>보낸 사람 : {item.sendUserName}</span>
                     <svg
                       data-accordion-icon
                       className="w-6 h-6 shrink-0"
