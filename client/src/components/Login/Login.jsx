@@ -32,7 +32,7 @@ function Login() {
   // 정규표현식 이해 안됨.
   const validatePassword = (password) => {
     const regex =
-      /^(?=.[a-zA-Z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{6,18}$/; // 최소 8자, 숫자와 문자 특수문자 모두 포함
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/; // 최소 8자, 숫자와 문자 특수문자 모두 포함
     return regex.test(password);
     // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/;
   };
@@ -45,18 +45,18 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await axios.post(host + "/auth/login-process", {
-      email,
-      password,
-    });
+    try {
+      const result = await axios.post(host + "/auth/login-process", {
+        email,
+        password,
+      });
 
-    localStorage.setItem("token", result.data.token);
-    location.href = "/";
+      localStorage.setItem("token", result.data.token);
+      location.href = "/";
+    } catch (err) {
+      console.log(err.response.err.message);
+    }
     // 로그인에서는 db에 있는 이메일 존재하는지 확인 & 존재한다면 이메일의 비밀번호랑 비교
-    // if (password !== confirmPassword) {
-    //   alert("비밀번호가 일치하지 않습니다.");
-    //   return;
-    // }
   };
 
   return (
@@ -100,7 +100,7 @@ function Login() {
 
         <div className={styles.alternativeLogin}>
           <p className={styles.alternativeLoginP}>또는</p>
-          <button className={styles.btn}>구글 로그인</button>
+          <button className={styles.btnSocial}>구글 로그인</button>
         </div>
       </div>
     </>
