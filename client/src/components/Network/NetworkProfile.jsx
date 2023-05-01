@@ -4,13 +4,17 @@ import styles from "./Network.module.css";
 import goldmedal from "/medal/gold.png";
 import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";
-import profileDefaultLight from "/profile/profile-light.png";
+import darkModeProfile from "/profile/profile-dark.png";
+import lightModeProfile from "/profile/profile-light.png";
 import { useNavigate } from "react-router-dom";
 ``;
 import useUserStore from "../../store/userStore";
+import useThemeStore from "../../store/themeStore";
 
 function NetworkProfile({ name, email, description, profileId, profileImg }) {
   const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+  const isDarkMode = useThemeStore((state) => state.theme);
+  const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
 
   const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ function NetworkProfile({ name, email, description, profileId, profileImg }) {
         className={styles.medalBronze}
       />
       <img
-        src={profileImg ? profileImg : profileDefaultLight}
+        src={profileImg ? profileImg : profileDefault}
         alt="profileImg"
         className={`${darkMode} w-[180px] h-[180px] absolute -translate-x-2/4 object-cover rounded-[15px] left-2/4 top-5`}
       />

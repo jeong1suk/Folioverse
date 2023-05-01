@@ -53,15 +53,16 @@ function NetworkFilter({ sortBy, setSortBy }) {
           value="경력개발자"
           onClick={handleFilter}
         >
-          경력개발자
+          경력개발자(1년 이상)
         </button>
         <button
           className={sortBy.includes("숙련개발자") ? btnEnabled : btnDisabled}
           value="숙련개발자"
           onClick={handleFilter}
         >
-          숙련개발자(8년 이상)
+          숙련개발자(5년 이상)
         </button>
+        {/* 프론트, 백엔드, 풀스택 추가 */}
       </div>
       <div className="mt-[10px]">
         {sortBy.length > 0 &&

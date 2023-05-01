@@ -1,6 +1,6 @@
 // 정주현
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
@@ -17,7 +17,6 @@ function Network() {
 
   // visibleData변수에 data에서 listCur만큼 slice한 값을 추가s
   const visibleData = data.slice(0, listCur);
-  console.log(data);
 
   return (
     <>

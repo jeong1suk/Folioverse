@@ -3,16 +3,26 @@
 import { useState } from "react";
 import UserDownMenu from "./UserDownMenu";
 import darkModeProfile from "/profile/profile-dark.png";
+import lightModeProfile from "/profile/profile-light.png";
+import { useQueryGet } from "../../utils/useQuery";
+import useThemeStore from "../../store/themeStore";
 
 function UserNav() {
   const [profileView, setProfileView] = useState(false);
+  const isDarkMode = useThemeStore((state) => state.theme);
+  const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
+
+  const data = useQueryGet("/user/current", "getMyInfo");
+  const profileImg = data.data?.profile_image;
+
   function profileViewHandler() {
     return setProfileView(!profileView);
   }
+
   return (
     <div className="h-[40px] w-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2">
       <img
-        src={darkModeProfile}
+        src={profileImg ? profileImg : profileDefault}
         className={`w-[40px] h-[40px] rounded-[10px] invert-[20%] dark:invert-[0%]`}
         onClick={profileViewHandler}
       />

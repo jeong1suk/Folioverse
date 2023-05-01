@@ -39,7 +39,7 @@ function SearchResultView({ inputValue }) {
             <img
               src={el.profile_image || profileDefaultDark}
               alt="profile"
-              className="w-[40px] h-[40px] ml-1 rounded-[5px] inline-block relative top-[50%] translate-y-[-50%] "
+              className="w-[40px] h-[40px] ml-1 object-cover rounded-[5px] inline-block relative top-[50%] translate-y-[-50%] "
             />
             <div className="w-[190px] overflow-hidden inline-block ml-5 relative top-[50%]">
               <h4>{el.name}</h4>

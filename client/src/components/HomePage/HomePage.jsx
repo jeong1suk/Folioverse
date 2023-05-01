@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import FirstGreet from "./FirstGreet";
 import SecondSlide from "./SecondProfile";
 import firstimg from "/homepage/1.png";
+import FourthFolioSlide from "./FourthFolioSlide";
 function HomePage() {
   const bgRef = useRef(null);
 
@@ -15,6 +16,7 @@ function HomePage() {
   });
 
   useEffect(() => {
+    scrollTo(0, 0);
     observer.observe(bgRef.current);
   }, []);
   return (
@@ -29,10 +31,10 @@ function HomePage() {
         <FirstGreet />
         <SecondSlide />
         <div className="font-bold text-[50px] text-white m-auto">
-          유저페이지 소개
+          유저페이지 소개 (유저페이지 컨텐츠 추가 후 내용추가)
         </div>
         <div className="font-bold text-[50px] text-white m-auto">
-          포트폴리오 슬라이드쇼
+          <FourthFolioSlide />
         </div>
         <div className="font-bold text-[50px] text-white m-auto">Footer</div>
       </div>
