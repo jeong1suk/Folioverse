@@ -6,12 +6,20 @@ import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";
 import profileDefaultLight from "/profile/profile-light.png";
 import { useNavigate } from "react-router-dom";
+``;
+import useUserStore from "../../store/userStore";
 
 function NetworkProfile({ name, email, description, profileId, profileImg }) {
   const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
 
   const navigate = useNavigate();
+
+  const setId = useUserStore((state) => state.setId);
+  const id = useUserStore((state) => state.id);
+
   const handleNav = () => {
+    setId(profileId);
+    console.log(id);
     navigate(`/user-page`);
   };
 
