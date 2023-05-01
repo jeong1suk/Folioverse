@@ -29,11 +29,12 @@ function Login() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
-
+  // 정규표현식 이해 안됨.
   const validatePassword = (password) => {
     const regex =
       /^(?=.[a-zA-Z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{6,18}$/; // 최소 8자, 숫자와 문자 특수문자 모두 포함
     return regex.test(password);
+    // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/;
   };
 
   const isEmailValid = validateEmail(email);
@@ -51,11 +52,11 @@ function Login() {
 
     localStorage.setItem("token", result.data.token);
     location.href = "/";
-
-    if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
-    }
+    // 로그인에서는 db에 있는 이메일 존재하는지 확인 & 존재한다면 이메일의 비밀번호랑 비교
+    // if (password !== confirmPassword) {
+    //   alert("비밀번호가 일치하지 않습니다.");
+    //   return;
+    // }
   };
 
   return (
