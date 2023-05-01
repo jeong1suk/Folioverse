@@ -17,10 +17,12 @@ app.get("/", (req, res) => res.send("Hello, Express"));
 import authRouter from "./routes/auth/index.js";
 import dummyRouter from "./routes/dummy/index.js";
 import imageRouter from "./routes/imageRouter.js";
+import postRouter from "./routes/postRouter.js";
 
 app.use("/api/auth", authRouter);
 app.use("/api/dummy", dummyRouter);
-app.use("/api/image", imageRouter);
+app.use("/api/image", checkToken, imageRouter);
+app.use("/api/post", checkToken, postRouter);
 
 import userRouter from "./routes/userRouter.js";
 import projectRouter from "./routes/projectRouter.js";
