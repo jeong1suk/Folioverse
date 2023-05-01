@@ -14,7 +14,7 @@ class Message {
   }
 
   static async findAllByUserId(user_id) {
-    const message = await MessageModel.find({ user_id });
+    const message = await MessageModel.find({ targetUser: user_id });
     return message;
   }
 

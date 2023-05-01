@@ -9,6 +9,7 @@ import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
+import useModalStore from "../../store/modalStore";
 
 const mvpList = [
   {
@@ -46,6 +47,7 @@ const UserPage = () => {
         <Profile myData={data} />
         <MvpSelector />
         <PostList id={data?._id} />
+        <MessageBoxButton id={data?._id} />
       </div>
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (
@@ -57,6 +59,20 @@ const UserPage = () => {
         <PdfReader myData={data} />
       </div>
     </div>
+  );
+};
+
+const MessageBoxButton = ({ id }) => {
+  const setModal = useModalStore((state) => state.setModal);
+  return (
+    <button
+      className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
+      onClick={() => {
+        setModal(id, "messageBox");
+      }}
+    >
+      쪽지함 열기
+    </button>
   );
 };
 
