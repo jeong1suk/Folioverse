@@ -3,7 +3,7 @@
 import { create } from "zustand";
 
 const userStore = (set) => ({
-  id: "",
+  id: "644b8c05eb6346d15ad96670",
   setId: (userId) => {
     set((state) => ({ id: userId }));
   },
