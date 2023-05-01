@@ -7,7 +7,7 @@ class Post {
   }
 
   static async findAllByUserId(user_id) {
-    const post = await PostModel.find(user_id);
+    const post = await PostModel.find({ user_id });
     return post;
   }
 
