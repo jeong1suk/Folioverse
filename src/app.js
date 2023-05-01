@@ -18,11 +18,15 @@ import authRouter from "./routes/auth/index.js";
 import dummyRouter from "./routes/dummy/index.js";
 import imageRouter from "./routes/imageRouter.js";
 import postRouter from "./routes/postRouter.js";
+import othersRouter from "./extra/others.js";
+import messageRouter from "./routes/messageRouter.js";
 
 app.use("/api/auth", authRouter);
 app.use("/api/dummy", dummyRouter);
 app.use("/api/image", checkToken, imageRouter);
-app.use("/api/post", checkToken, postRouter);
+app.use("/api/post", postRouter);
+app.use("/api/others", othersRouter);
+app.use("/api/message", checkToken, messageRouter);
 
 import userRouter from "./routes/userRouter.js";
 import projectRouter from "./routes/projectRouter.js";

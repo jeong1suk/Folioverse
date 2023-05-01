@@ -5,6 +5,7 @@ import useModalStore from "../../../store/modalStore";
 import MessageModal from "./MessageModal";
 import WritePostModal from "./WritePostModal";
 import PostModal from "./PostModal";
+import MessageBoxModal from "./MessageBoxModal";
 
 const Modal = () => {
   const isOpen = useModalStore((state) => state.isOpen);
@@ -51,7 +52,8 @@ const Modal = () => {
               <MessageModal id={id} name={name} toggleOpen={toggleOpen} />
             )) ||
             (type === "write" && <WritePostModal toggleOpen={toggleOpen} />) ||
-            (type === "post" && <PostModal id={id} toggleOpen={toggleOpen} />)}
+            (type === "post" && <PostModal id={id} />) ||
+            (type === "messageBox" && <MessageBoxModal id={id} />)}
         </div>
       </div>
     </div>

@@ -8,8 +8,8 @@ const projectService = {
     return creatednewProject;
   },
 
-  getUserProjectInfo: async (user_id) => {
-    const projects = await Project.findAllByUserId(user_id);
+  getUserProjectInfo: async ({ user_id }) => {
+    const projects = await Project.findAllByUserId({ user_id });
     if (!projects) {
       const errorMessage = "작성하신 기록이 없습니다. 다시 한 번 확인해주세요.";
       return { errorMessage };

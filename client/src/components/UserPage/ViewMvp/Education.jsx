@@ -1,12 +1,9 @@
 //담당 : 이승현
 
-import { useLocation } from "react-router-dom";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Education = ({ setEditState, education, setEducation, isPdf }) => {
   const { data } = useQueryGet("/education", "getEducation");
-  const location = useLocation();
-  const { pathname } = location;
 
   const onEdit = (item) => {
     setEditState(true);
@@ -18,6 +15,7 @@ const Education = ({ setEditState, education, setEducation, isPdf }) => {
       _id: item._id,
     });
   };
+
   return (
     <ul>
       {data?.map((item) => (
@@ -34,7 +32,7 @@ const Education = ({ setEditState, education, setEducation, isPdf }) => {
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  (pathname !== "/my-page" && "hidden", isPdf && "hidden")
+                  isPdf ? " hidden" : ""
                 }`}
                 onClick={() => onEdit(item)}
               >

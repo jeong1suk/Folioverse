@@ -8,8 +8,8 @@ const awardService = {
     return creatednewAward;
   },
 
-  getUserAwardInfo: async (user_id) => {
-    const awards = await Award.findAllByUserId(user_id);
+  getUserAwardInfo: async ({ user_id }) => {
+    const awards = await Award.findAllByUserId({ user_id });
     if (!awards) {
       const errorMessage = "작성하신 기록이 없습니다. 다시 한 번 확인해주세요.";
       return { errorMessage };
