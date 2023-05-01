@@ -17,6 +17,9 @@ function UserDownMenu() {
       <li className={liStyle}>
         <Link to="/my-page">마이페이지</Link>
       </li>
+      <li className={liStyle}>
+        <Link to="/">쪽지함</Link>
+      </li>
       <li onClick={logout} className={liStyle}>
         로그아웃
       </li>

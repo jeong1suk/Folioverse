@@ -7,7 +7,7 @@ import NetworkFilter from "./NetworkFilter";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function Network() {
-  const { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
+  const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const [listCur, setListCur] = useState(30);
   const [sortBy, setSortBy] = useState([]);
 
@@ -17,6 +17,7 @@ function Network() {
 
   // visibleData변수에 data에서 listCur만큼 slice한 값을 추가s
   const visibleData = data.slice(0, listCur);
+  console.log(data);
 
   return (
     <>
@@ -31,7 +32,7 @@ function Network() {
               name={user.name}
               email={user.email}
               description={user.description}
-              profileUrl={`/user-page/?id=${user._id}`}
+              profileId={`${user._id}`}
               profileImg={user.profile_image}
               key={idx}
             />
