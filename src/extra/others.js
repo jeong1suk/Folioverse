@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Router } from "express";
 import { educationService } from "../service/educationService.js";
 import { projectService } from "../service/projectService.js";

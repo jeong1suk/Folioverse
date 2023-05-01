@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 const OthersProject = ({ project }) => {
   const formatLink = (link) => {
     if (!/^https?:\/\//i.test(link)) {

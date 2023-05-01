@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { useState } from "react";
 import mvpSelectStore from "../../store/mvpSelectStore";
 

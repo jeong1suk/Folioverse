@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { PostModel } from "../schemas/post.js";
 
 class Post {

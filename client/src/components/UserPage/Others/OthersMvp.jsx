@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import OthersAward from "./OthersMvp/OthersAward";
 import OthersCertificate from "./OthersMvp/OthersCertificate";
 import OthersEducation from "./OthersMvp/OthersEducation";

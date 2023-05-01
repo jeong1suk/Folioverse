@@ -1,10 +1,12 @@
 //담당 : 이승현
 
+import { useEffect } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 import PostList from "../PostList";
 import useUserStore from "./../../../store/userStore.js";
 import OthersMvp from "./OthersMvp";
 import OthersProfile from "./OthersProfile";
+import { useNavigate } from "react-router-dom";
 
 const mvpList = [
   {
@@ -27,8 +29,22 @@ const mvpList = [
 
 const OthersPage = () => {
   const id = useUserStore((state) => state.id);
+  const isToken = localStorage.getItem("token");
+  const navigate = useNavigate();
   const { data } = useQueryGet(`/others/${id}`, "getOthersData");
   const { data: userData } = useQueryGet(`/user/${id}`, "getOthersInfo");
+  const { data: myData } = isToken
+    ? useQueryGet("/user/current", "getMyInfo")
+    : { data: null };
+
+  useEffect(() => {
+    if (!id) {
+      location.href = "/";
+    }
+    if (isToken) {
+      myData?._id === id && navigate("/my-page");
+    }
+  }, []);
 
   return (
     <div className="p-5 flex flex-row dark:bg-neutral-800 min-h-screen">
