@@ -6,7 +6,7 @@ import profileDefaultDark from "/profile/profile-dark.png";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function SearchResultView({ inputValue }) {
-  let { data, error, loading } = useAxiosGet(`${host}/dummy/network`);
+  let { data, error, loading } = useAxiosGet(`${host}/user/list`);
 
   const liStyle =
     "text-[#000] dark:text-[#fff] bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]";
