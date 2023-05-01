@@ -2,45 +2,31 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const navigate = useNavigate();
+  const [errMessage, setErrMessage] = useState("");
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    if (e.target.value === confirmPassword) {
-      setPasswordMatch(true);
-    } else {
-      setPasswordMatch(false);
-    }
   };
 
   const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+    return email.toLowerCase().match(/^[^\s@]+@[^\s@]+.[^\s@]+$/);
   };
-  // 정규표현식 이해 안됨.
+
   const validatePassword = (password) => {
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/; // 최소 8자, 숫자와 문자 특수문자 모두 포함
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d@$!%*#?&].{6,18}$/;
     return regex.test(password);
-    // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/;
   };
 
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
-
-  const isFormValid = isEmailValid && isPasswordValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,35 +40,38 @@ function Login() {
       localStorage.setItem("token", result.data.token);
       location.href = "/";
     } catch (err) {
-      console.log(err.response.err.message);
+      setErrMessage(err.response.data.message);
     }
-    // 로그인에서는 db에 있는 이메일 존재하는지 확인 & 존재한다면 이메일의 비밀번호랑 비교
   };
 
   return (
     <>
       <div className={styles.container}>
-        <p className={styles.fvhead}>Sign in to Folioverse</p>
+        <p className={styles.fvhead}>폴리오버스로 출발하기</p>
       </div>
 
       <div className={styles.container}>
         <form className={styles.form}>
-          <label className={styles.label}>Username or email address</label>
+          <label className={styles.label}>이메일</label>
           <input
             className={styles.inputTxt}
             type="email"
+            placeholder="이메일"
             onChange={handleEmailChange}
           />
           <div>
             <label htmlFor="password" className={styles.label}>
-              Password:
+              비밀번호:
             </label>
           </div>
           <input
             className={styles.inputPwd}
             type="password"
+            placeholder="비밀번호"
             onChange={handlePasswordChange}
           />
+
+          {errMessage && <div className={styles.container}>{errMessage}</div>}
 
           <button
             className={`${styles.btn} ${

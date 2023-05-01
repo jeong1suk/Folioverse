@@ -58,6 +58,9 @@
 .btnActive:hover {
   background-color: blue;
 }
+.btnDisabled:hover {
+  cursor: wait;
+}
 
 .btnSocial:hover {
   background-color: #333;
