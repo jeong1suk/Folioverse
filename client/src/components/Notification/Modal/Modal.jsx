@@ -3,6 +3,7 @@
 import DeleteModal from "./DeleteModal";
 import useModalStore from "../../../store/modalStore";
 import MessageModal from "./MessageModal";
+import WritePostModal from "./WritePostModal";
 import PostModal from "./PostModal";
 
 const Modal = () => {
@@ -48,6 +49,9 @@ const Modal = () => {
           )) ||
             (type === "message" && (
               <MessageModal id={id} name={name} toggleOpen={toggleOpen} />
+            )) ||
+            (type === "write" && (
+              <WritePostModal id={id} toggleOpen={toggleOpen} />
             )) ||
             (type === "post" && <PostModal id={id} toggleOpen={toggleOpen} />)}
         </div>

@@ -8,7 +8,7 @@ const MvpSelector = () => {
       <button
         data-dropdown-toggle="dropdownSearch"
         data-dropdown-placement="bottom"
-        className="w-full text-black border dark:border-cyan-900 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center justify-center dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:focus:ring-black"
+        className="w-full text-black border dark:border-0 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center justify-center dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:focus:ring-black"
         type="button"
         onClick={() => setOpenList(!openList)}
       >
