@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 
-const MessageBoxModal = ({ id }) => {
+const MessageBoxModal = () => {
   const { data } = useQueryGet("/message", "getMessage");
   const { deleteMutate } = useQueryDelete("/message");
   const [message, setMessage] = useState(null);
   const queryClient = useQueryClient();
+  const [alert, setAlert] = useState(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -30,6 +31,7 @@ const MessageBoxModal = ({ id }) => {
     deleteMutate(_id, {
       onSuccess: () => {
         queryClient.invalidateQueries("getMessage");
+        setAlert(true);
       },
     });
   };
@@ -91,26 +93,39 @@ const MessageBoxModal = ({ id }) => {
         ) : (
           <div>받은 쪽지가 없습니다</div>
         )}
+        <div
+          className={`${
+            !alert && "hidden"
+          } flex p-4 mb-5 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 m-2`}
+          role="alert"
+        >
+          <div className="ml-3 text-sm font-medium">쪽지가 삭제되었습니다</div>
+          <button
+            type="button"
+            className="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+            data-dismiss-target="#alert-3"
+            aria-label="Close"
+            onClick={() => setAlert(false)}
+          >
+            <span className="sr-only">Close</span>
+            <svg
+              aria-hidden="true"
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </>
   );
 };
-
-const dummyMessage = [
-  {
-    _id: 0,
-    title: "ㅎㅇ",
-    description: "ㅋㅋㅋㅋ",
-    date: "2023-05-01",
-    user: "엘리스",
-  },
-  {
-    _id: 1,
-    title: "ㅋㅋㅋ",
-    description: "ㅎㅇㅎㅇㅎㅇ",
-    date: "2023-05-02",
-    user: "리스",
-  },
-];
 
 export default MessageBoxModal;

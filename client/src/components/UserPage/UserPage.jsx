@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
 import { useEffect } from "react";
-import { useQueryGet } from "../../utils/useQuery";
+import { useQueryGet, useQueryGetRefetch } from "../../utils/useQuery";
 import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
+import useToastStore from "../../store/toastStore";
+import { useQueryClient } from "react-query";
 
 const mvpList = [
   {
@@ -31,9 +33,30 @@ const mvpList = [
 ];
 
 const UserPage = () => {
+  const setToast = useToastStore((state) => state.setToast);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data } = useQueryGet("/user/current", "getMyInfo");
+  const { data: refetchMessageData, dataChanged } = useQueryGetRefetch(
+    "/message",
+    "getRefetchMessage"
+  );
+
+  useEffect(() => {
+    if (dataChanged) {
+      queryClient.invalidateQueries("getMessage");
+      setToast(
+        `${
+          refetchMessageData.result[refetchMessageData.result.length - 1]
+            .sendUserName
+        } 님에게 쪽지가 왔습니다`,
+        "message",
+        refetchMessageData.result[refetchMessageData.result.length - 1]
+          .sendUserProfileImage
+      );
+    }
+  }, [dataChanged]);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {

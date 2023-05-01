@@ -6,8 +6,9 @@ const toastStore = (set) => ({
   content: "",
   type: "success",
   isOpen: false,
-  setToast: (content, type) => {
-    set(() => ({ content, type, isOpen: true }));
+  profileImage: "",
+  setToast: (content, type, profileImage) => {
+    set(() => ({ content, type, profileImage, isOpen: true }));
   },
   closeToast: () => set(() => ({ isOpen: false })),
 });
