@@ -4,10 +4,10 @@ import { useQueryDelete } from "../../../utils/useQuery";
 const DeleteModal = ({ id, toggleOpen }) => {
   const [isValid, setIsVaid] = useState(false);
   const [input, setInput] = useState("");
-  const { deleteMutate } = useQueryDelete(`/auth/${id}`);
+  const { deleteMutate } = useQueryDelete(`/auth`);
 
   const deleteUser = () => {
-    deleteMutate(null, {
+    deleteMutate(id, {
       onSuccess: (data) => {
         if (data.result) {
           localStorage.removeItem("token");

@@ -14,14 +14,14 @@ router.get("/", async (req, res) => {
 router.put("/", async (req, res) => {
   const { _id } = req.user;
   const { body } = req;
-  const result = await postService.uploadPost({ _id, body });
+  const result = await postService.uploadPost(_id, body);
   res.status(200).json({ result });
 });
 
 router.patch("/", async (req, res) => {
   const { _id } = req.body;
   const { body } = req;
-  const result = await postService.updatePost({ _id, body });
+  const result = await postService.updatePost(_id, body);
   res.status(200).json({ result });
 });
 

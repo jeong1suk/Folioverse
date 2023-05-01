@@ -3,14 +3,7 @@
 import { useLocation } from "react-router-dom";
 import { useQueryGet } from "../../../utils/useQuery";
 
-const Project = ({
-  setEditState,
-  project,
-  setProject,
-  setMethod,
-  setDeleteLink,
-  isPdf,
-}) => {
+const Project = ({ setEditState, project, setProject, isPdf }) => {
   const { data } = useQueryGet("/project", "getProject");
   const location = useLocation();
   const { pathname } = location;
@@ -27,8 +20,6 @@ const Project = ({
       link: item.link,
       _id: item._id,
     });
-    setMethod("patch");
-    setDeleteLink(`/${item._id}`);
   };
 
   const formatLink = (link) => {
