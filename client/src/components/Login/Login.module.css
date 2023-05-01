@@ -55,7 +55,7 @@
   margin-bottom: 10px;
 }
 
-.btn[type="submit"]:hover {
+.btnActive:hover {
   background-color: #333;
 }
 

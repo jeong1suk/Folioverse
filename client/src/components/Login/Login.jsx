@@ -84,7 +84,16 @@ function Login() {
             onChange={handlePasswordChange}
           />
 
-          <button className={styles.btn} type="submit" onClick={handleSubmit}>
+          <button
+            className={`${styles.btn} ${
+              isEmailValid && isPasswordValid
+                ? styles.btnActive
+                : styles.btnDisabled
+            }`}
+            type="submit"
+            disabled={!isEmailValid || !isPasswordValid}
+            onClick={handleSubmit}
+          >
             로그인
           </button>
         </form>
