@@ -3,14 +3,7 @@
 import { useLocation } from "react-router-dom";
 import { useQueryGet } from "../../../utils/useQuery";
 
-const Education = ({
-  setEditState,
-  education,
-  setEducation,
-  setMethod,
-  setDeleteLink,
-  isPdf,
-}) => {
+const Education = ({ setEditState, education, setEducation, isPdf }) => {
   const { data } = useQueryGet("/education", "getEducation");
   const location = useLocation();
   const { pathname } = location;
@@ -24,8 +17,6 @@ const Education = ({
       graduate_status: item.graduate_status,
       _id: item._id,
     });
-    setMethod("patch");
-    setDeleteLink(`/${item._id}`);
   };
   return (
     <ul>

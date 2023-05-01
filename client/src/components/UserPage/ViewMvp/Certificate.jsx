@@ -3,14 +3,7 @@
 import { useLocation } from "react-router-dom";
 import { useQueryGet } from "../../../utils/useQuery";
 
-const Certificate = ({
-  setEditState,
-  certificate,
-  setCertificate,
-  setMethod,
-  setDeleteLink,
-  isPdf,
-}) => {
+const Certificate = ({ setEditState, certificate, setCertificate, isPdf }) => {
   const { data } = useQueryGet("/certificate", "getCertificate");
 
   const location = useLocation();
@@ -25,8 +18,6 @@ const Certificate = ({
       agency: item.agency,
       _id: item._id,
     });
-    setMethod("patch");
-    setDeleteLink(`/${item._id}`);
   };
   return (
     <ul>

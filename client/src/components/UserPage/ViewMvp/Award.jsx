@@ -3,14 +3,7 @@
 import { useLocation } from "react-router-dom";
 import { useQueryGet } from "./../../../utils/useQuery";
 
-const Award = ({
-  setEditState,
-  award,
-  setAward,
-  setMethod,
-  setDeleteLink,
-  isPdf,
-}) => {
+const Award = ({ setEditState, award, setAward, isPdf }) => {
   const { data } = useQueryGet("/award", "getAward");
   const location = useLocation();
   const { pathname } = location;
@@ -23,8 +16,6 @@ const Award = ({
       date: item.date,
       _id: item._id,
     });
-    setMethod("patch");
-    setDeleteLink(`/${item._id}`);
   };
   return (
     <ul>

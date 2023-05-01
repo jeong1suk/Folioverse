@@ -1,7 +1,7 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useQueryPatch, useQueryGet } from "../../utils/useQuery";
+import { useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
 

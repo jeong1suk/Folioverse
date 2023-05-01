@@ -6,6 +6,11 @@ class Post {
     return createdNewPost;
   }
 
+  static async findById(_id) {
+    const post = await PostModel.findById(_id);
+    return post;
+  }
+
   static async findAllByUserId(user_id) {
     const post = await PostModel.find({ user_id });
     return post;
@@ -25,7 +30,7 @@ class Post {
   }
 
   static async delete(_id) {
-    const deletedPost = await PostModel.deleteOne(_id);
+    const deletedPost = await PostModel.deleteOne({ _id });
     return deletedPost;
   }
 }

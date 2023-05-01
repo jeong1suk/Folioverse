@@ -7,9 +7,9 @@ const toastStore = (set) => ({
   type: "success",
   isOpen: false,
   setToast: (content, type) => {
-    set((state) => ({ content, type, isOpen: true }));
+    set(() => ({ content, type, isOpen: true }));
   },
-  closeToast: () => set((state) => ({ isOpen: false })),
+  closeToast: () => set(() => ({ isOpen: false })),
 });
 
 const useToastStore = create(toastStore);

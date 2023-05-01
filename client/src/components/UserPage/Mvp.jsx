@@ -7,11 +7,9 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
-import SpeedDial from "./SpeedDial/SpeedDial";
-import PdfReader from "./SpeedDial/PdfReader";
 import mvpSelectStore from "../../store/mvpSelectStore";
 
-const Mvp = ({ myData, title }) => {
+const Mvp = ({ title }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -24,8 +22,6 @@ const Mvp = ({ myData, title }) => {
   const { pathname } = location;
 
   const [link, setLink] = useState("");
-  const [deleteLink, setDeleteLink] = useState("");
-  const [method, setMethod] = useState("");
   const [education, setEducation] = useState({
     school_name: "",
     major: "",
@@ -68,7 +64,6 @@ const Mvp = ({ myData, title }) => {
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });
-    setMethod("put");
   };
 
   return (
@@ -87,8 +82,6 @@ const Mvp = ({ myData, title }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
-            setMethod={setMethod}
-            setDeleteLink={setDeleteLink}
           />
         )) ||
           (title === "프로젝트" && (
@@ -96,8 +89,6 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
             />
           )) ||
           (title === "수상 이력" && (
@@ -105,8 +96,6 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
             />
           )) ||
           (title === "자격증" && (
@@ -114,8 +103,6 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
             />
           ))}
       </article>
@@ -134,8 +121,6 @@ const Mvp = ({ myData, title }) => {
         addState={addState}
         setAddState={setAddState}
         link={link}
-        deleteLink={deleteLink}
-        method={method}
         setLink={setLink}
         education={education}
         setEducation={setEducation}

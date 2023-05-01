@@ -50,7 +50,7 @@ const UserPage = () => {
       </div>
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (
-          <Mvp myData={myData} key={item.id} title={item.title} />
+          <Mvp key={item.id} title={item.title} />
         ))}
       </main>
       {pathname === "/my-page" && <SpeedDial id={myData?._id} />}

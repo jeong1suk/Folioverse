@@ -43,10 +43,8 @@ export const useQueryPatch = (link, method, options = {}) => {
 };
 
 export const useQueryDelete = (link) => {
-  const mutation = useMutation(async (body = null) => {
-    const response = await api.delete(link, {
-      body,
-    });
+  const mutation = useMutation(async (_id) => {
+    const response = await api.delete(`${link}/${_id}`);
     return response.data;
   });
 
