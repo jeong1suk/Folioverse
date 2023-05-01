@@ -1,24 +1,24 @@
 //담당 : 이승현
 
-import { Link, useLocation } from "react-router-dom";
-import useModalStore from "../../store/modalStore";
+import useModalStore from "../../../store/modalStore.js";
 
-const Profile = ({ myData }) => {
-  const location = useLocation();
-  const { pathname } = location;
-
+const OthersProfile = ({ data }) => {
+  const isToken = localStorage.getItem("token");
   return (
     <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
+      <div className={isToken ? "block" : "hidden"}>
+        <MessageIcon id={data?._id} name={data?.name} />
+      </div>
       <img
         className="w-20 rounded-full mx-auto mb-5"
-        src={`${myData?.profile_image ?? "profile/profile-dark.png"}`}
+        src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
       />
       <p className="text-center text-xl font-bold dark:text-white">
-        {myData?.name}
+        {data?.name}
       </p>
-      <p className="text-center text-neutral-500">{myData?.email}</p>
+      <p className="text-center text-neutral-500">{data?.email}</p>
       <p className="text-center dark:text-neutral-200 my-3">
-        {myData?.description}
+        {data?.description}
       </p>
       <div className="flex flex-row text-neutral-500 my-5">
         <div className="basis-1/2 text-center">
@@ -30,21 +30,14 @@ const Profile = ({ myData }) => {
           <div>좋아요</div>
         </div>
       </div>
-      <p className="text-center text-sm mt-3 text-blue-400">
-        <Link
-          className={`hover:bg-neutral-100 dark:hover:bg-neutral-700 p-5 rounded ${
-            pathname !== "/my-page" && "hidden"
-          }`}
-          to="/user-setting"
-        >
-          Edit
-        </Link>
-      </p>
+      <div className={`${isToken ? "block" : "hidden"} flex justify-center`}>
+        <ButtonGroup />
+      </div>
     </aside>
   );
 };
 
-const MessageIcon = ({ pathname, id, name, isLogin }) => {
+const MessageIcon = ({ id, name }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <svg
@@ -53,9 +46,7 @@ const MessageIcon = ({ pathname, id, name, isLogin }) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={`${
-        (pathname === "/my-page" || !isLogin) && "hidden"
-      } absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600`}
+      className="absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
       onClick={() => setModal(id, "message", name)}
     >
       <path
@@ -110,4 +101,4 @@ const ButtonGroup = () => {
   );
 };
 
-export default Profile;
+export default OthersProfile;

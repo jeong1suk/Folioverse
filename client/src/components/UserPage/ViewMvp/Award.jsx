@@ -1,12 +1,9 @@
 //담당 : 이승현
 
-import { useLocation } from "react-router-dom";
 import { useQueryGet } from "./../../../utils/useQuery";
 
 const Award = ({ setEditState, award, setAward, isPdf }) => {
   const { data } = useQueryGet("/award", "getAward");
-  const location = useLocation();
-  const { pathname } = location;
 
   const onEdit = (item) => {
     setEditState(true);
@@ -33,7 +30,7 @@ const Award = ({ setEditState, award, setAward, isPdf }) => {
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  (pathname !== "/my-page" && "hidden", isPdf && "hidden")
+                  isPdf ? " hidden" : ""
                 }`}
                 onClick={() => onEdit(item)}
               >

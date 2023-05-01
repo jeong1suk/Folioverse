@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useModalStore from "../../store/modalStore";
 
 const PostList = ({ id }) => {

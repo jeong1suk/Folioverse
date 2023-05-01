@@ -5,14 +5,19 @@ import {
   useQueryPatch,
 } from "./../../../utils/useQuery";
 import { useQueryClient } from "react-query";
+import { useLocation } from "react-router-dom";
 
-const PostModal = () => {
+const PostModal = ({ id }) => {
   const [expandedPostId, setExpandedPostId] = useState(null);
-  const { data } = useQueryGet("/post", "getPost");
+  const { data } = useQueryGet(`/post/${id}`, "getPost");
   const [posts, setPosts] = useState(null);
   const { deleteMutate } = useQueryDelete("/post");
   const { mutate: editMutate } = useQueryPatch("/post", "patch");
   const queryClient = useQueryClient();
+
+  const location = useLocation();
+  const { pathname } = location;
+  const isMyPost = pathname === "/my-page";
 
   const [alert, setAlert] = useState(false);
   const [msg, setMsg] = useState("");
@@ -150,7 +155,11 @@ const PostModal = () => {
                     </button>
                   </div>
                 </div>
-                <div className={`${edit && "hidden"} text-center pb-3`}>
+                <div
+                  className={`${
+                    (edit || !isMyPost) && "hidden"
+                  } text-center pb-3`}
+                >
                   <button
                     className="border px-2 py-1 rounded mx-2 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-600"
                     onClick={() => setEdit(true)}

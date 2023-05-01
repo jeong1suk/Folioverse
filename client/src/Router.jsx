@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import UserPage from "./components/UserPage/UserPage";
 import ErrPage from "./components/ErrPage";
+import OthersPage from "./components/UserPage/Others/OthersPage";
 
 const Router = () => {
   return (
@@ -19,7 +20,7 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/my-page" element={<UserPage />} />
       <Route path="/error/*" element={<ErrPage />} />
-      <Route path="/user-page" element={<UserPage />} />
+      <Route path="/user-page" element={<OthersPage />} />
     </Routes>
   );
 };

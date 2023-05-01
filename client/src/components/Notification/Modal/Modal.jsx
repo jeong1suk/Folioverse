@@ -51,7 +51,7 @@ const Modal = () => {
               <MessageModal id={id} name={name} toggleOpen={toggleOpen} />
             )) ||
             (type === "write" && <WritePostModal toggleOpen={toggleOpen} />) ||
-            (type === "post" && <PostModal id={id} toggleOpen={toggleOpen} />)}
+            (type === "post" && <PostModal id={id} />)}
         </div>
       </div>
     </div>
