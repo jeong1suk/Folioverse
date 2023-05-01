@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useQueryGet } from "./../../../utils/useQuery";
 
 const PostModal = () => {
   const [expandedPostId, setExpandedPostId] = useState(null);
+  const { data } = useQueryGet("/post", "getPost");
 
   const handleToggle = (id) => {
     if (expandedPostId === id) {
@@ -15,7 +17,7 @@ const PostModal = () => {
     <>
       <h1 className="pt-5 pl-5 dark:text-neutral-200 text-xl">글 목록</h1>
       <div data-accordion="collapse" className="pt-3">
-        {dummyPost.map((item) => (
+        {data?.map((item) => (
           <div key={item.id}>
             <h2>
               <button
