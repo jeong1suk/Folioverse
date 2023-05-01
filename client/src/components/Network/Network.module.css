@@ -1,98 +1,7 @@
 /* 정주현 */
-.networkCenterFrame,
-.networkContainer {
-  background-color: #1a1a1a;
-}
 
-/* Network.jsx */
-.networkCenterFrame {
-  display: grid;
-  grid-template-rows: repeat(3);
-  gap: 20px;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  font-family: "Noto Sans KR", sans-serif;
-  position: relative;
-}
-
-.networkContainer {
-  display: grid;
-  margin: auto;
-  grid-template-columns: 400px 400px 400px;
-  margin-bottom: 40px;
-}
-
-.moreData {
-  background-color: #212121;
-  text-align: center;
-  color: #7d7c7c;
-  font-weight: 300;
-  font-size: 20px;
-  padding: 5px;
-}
-
-/* NetworkFilter.jsx */
-.filterContainer {
-  margin: auto;
-  margin-top: 10px;
-  padding: 10px;
-  width: 1150px;
-  height: auto;
-  background-color: transparent;
-  border-radius: 5px;
-  color: #fff;
-}
-
-.filterContainer h2 {
-  margin-left: 10px;
-}
-
-.filterList {
-  margin-top: 5px;
-}
-
-.btnDisable {
-  box-sizing: border-box;
-  margin: 3px;
-  background-color: transparent;
-  font-weight: 300;
-  font-size: 14px;
-  color: #fff;
-  padding: 3px 14px;
-  border-radius: 20px;
-  border: #7d7d7d 2px solid;
-}
-
-.btnEnable {
-  box-sizing: border-box;
-  margin: 3px;
-  background-color: #3d3d3d;
-  font-weight: 300;
-  font-size: 14px;
-  color: #fff;
-  padding: 3px 14px;
-  border-radius: 20px;
-  border: #5581ab 2px solid;
-}
-
-.selectedStack {
-  background-color: #3e3e3e;
-  padding: 2px 5px;
-  font-size: 12px;
-  border-radius: 3px;
-}
-
-/* NetworkProfile.jsx */
 .networkProfileBox {
-  margin: auto;
-  margin-top: 30px;
-  position: relative;
-  width: 330px;
-  height: 400px;
-  border: #393939 1px solid;
-  border-radius: 5px;
+  border: #cccccc 1px solid;
 }
 
 .networkProfileBox:first-child > .medalGold {
@@ -137,72 +46,11 @@
   display: none;
 }
 
-.networkProfileBox .profileImg {
-  width: 180px;
-  height: 180px;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 15px;
-  object-fit: cover;
+.disabledFilterBorder {
+  box-sizing: border-box;
+  border: 1px solid #7d7d7d;
 }
-
-.networkProfileBox div {
-  height: 100px;
-  width: 240px;
-  position: absolute;
-  top: 220px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #1e1e1e;
-}
-
-.networkProfileBox h4 {
-  width: 100%;
-  white-space: nowrap;
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.networkProfileBox h5 {
-  width: 100%;
-  font-size: 13px;
-  font-weight: 400;
-  color: #cccccc;
-}
-
-.networkProfileBox p {
-  margin-top: 10px;
-  display: inline-block;
-  width: 100%;
-  height: 35px;
-  font-size: 15px;
-  color: #e0e0e0;
-}
-
-.networkProfileBox h4,
-h5,
-p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.linkBtn {
-  position: absolute;
-  top: 340px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #3e668c;
-  border-radius: 5px;
-  padding: 8px 15px;
-  border: none;
-  color: #ebebeb;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.linkBtn:hover {
-  background-color: #5581ab;
-  color: #ebebeb;
+.enabledFilterBorder {
+  box-sizing: border-box;
+  border: 1px solid #59a9ff;
 }
