@@ -26,7 +26,7 @@ app.use("/api/dummy", dummyRouter);
 app.use("/api/image", checkToken, imageRouter);
 app.use("/api/post", postRouter);
 app.use("/api/others", othersRouter);
-app.use("/api/message", messageRouter);
+app.use("/api/message", checkToken, messageRouter);
 
 import userRouter from "./routes/userRouter.js";
 import projectRouter from "./routes/projectRouter.js";
