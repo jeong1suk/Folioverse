@@ -8,6 +8,7 @@ import { useQueryGet } from "../../utils/useQuery";
 import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
+import PostList from "./PostList";
 
 const mvpList = [
   {
@@ -45,6 +46,7 @@ const UserPage = () => {
       <div className="basis-1/5">
         <Profile myData={myData} />
         <MvpSelector />
+        <PostList id={myData?._id} />
       </div>
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (
