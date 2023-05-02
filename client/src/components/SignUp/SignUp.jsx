@@ -12,6 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -53,19 +54,25 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await axios.post(host + "/auth/signup", {
-      name,
-      email,
-      password,
-    });
+    try {
+      const result = await axios.post(host + "/auth/signup", {
+        name,
+        email,
+        password,
+      });
 
-    localStorage.setItem("token", result.data.token);
+      localStorage.setItem("token", result.data.token);
 
-    location.href = "/";
+      location.href = "/";
+    } catch (err) {
+      // console.log(err.response.data.message);
+      setErrMessage(err.response.data.message);
+    }
 
     // 회원가입 시 name, 이메일 형식, 비밀번호 형식이 다를 시 경고문구 처리
   };
 
+  const isSumbitDisabled = !(isEmailValid && isPasswordValid && passwordMatch);
   return (
     <>
       <div className={styles.container}>
@@ -87,7 +94,7 @@ function SignUp() {
             type="email"
             onChange={handleEmailChange}
           />
-          {!isEmailValid && (
+          {errMessage && (
             <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
           )}
           <br />
@@ -98,7 +105,7 @@ function SignUp() {
             placeholder="Password"
             onChange={handlePasswordChange}
           />
-          {!isPasswordValid && isEmailValid && (
+          {!isPasswordValid && isEmailValid && errMessage && (
             <div className={styles.text}>
               숫자, 문자, 특수문자 포함 6글자 이상 입력해주세요.
             </div>
@@ -111,13 +118,20 @@ function SignUp() {
             onChange={handleConfirmPasswordChange}
           />
           {isFormValid &&
+            errMessage &&
             (passwordMatch ? (
-              <p className={styles.text}>비밀번호 확인.</p>
+              <p className={styles.text}>비밀번호 일치.</p>
             ) : (
               <p className={styles.text}>비밀번호가 맞지 않습니다.</p>
             ))}
           <br />
-          <button className={styles.btn} type="submit" onClick={handleSubmit}>
+          {errMessage && <div className={styles.inputErr}>{errMessage}</div>}
+          <button
+            className={styles.btn}
+            type="submit"
+            onClick={handleSubmit}
+            disabled={isSumbitDisabled}
+          >
             회원가입
           </button>
         </form>
