@@ -9,7 +9,7 @@ import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 
-const Mvp = ({ title }) => {
+const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -68,7 +68,7 @@ const Mvp = ({ title }) => {
 
   return (
     <section
-      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${
+      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
@@ -82,6 +82,7 @@ const Mvp = ({ title }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
+            othersData={othersData}
           />
         )) ||
           (title === "프로젝트" && (
@@ -89,6 +90,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
+              othersData={othersData}
             />
           )) ||
           (title === "수상 이력" && (
@@ -96,6 +98,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
+              othersData={othersData}
             />
           )) ||
           (title === "자격증" && (
@@ -103,6 +106,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
+              othersData={othersData}
             />
           ))}
       </article>

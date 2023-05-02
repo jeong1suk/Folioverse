@@ -6,6 +6,7 @@ const Toast = () => {
   const isOpen = useToastStore((state) => state.isOpen);
   const type = useToastStore((state) => state.type);
   const content = useToastStore((state) => state.content);
+  const profileImage = useToastStore((state) => state.profileImage);
   const closeToast = useToastStore((state) => state.closeToast);
 
   return (
@@ -17,14 +18,22 @@ const Toast = () => {
     >
       <div
         className={`inline-flex items-center justify-center flex-shrink-0 w-8 h-8 ${
-          type === "success" ? "text-green-500" : "text-orange-500"
-        } ${type === "success" ? "bg-green-100" : "bg-orange-100"} rounded-lg ${
-          type === "success" ? "dark:bg-green-800" : "dark:bg-orange-700"
-        } ${
-          type === "success" ? "dark:text-green-200" : "dark:text-orange-200"
+          type === "success"
+            ? "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200"
+            : type === "warning"
+            ? "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200"
+            : "text-gray-500 bg-transparent dark:text-gray-200"
         }`}
       >
-        {type === "success" ? <SuccessIcon /> : <WarningIcon />}
+        {(type === "success" && <SuccessIcon />) ||
+          (type === "warning" && <WarningIcon />) ||
+          (type === "message" && (
+            <img
+              className="rounded-full"
+              src={profileImage ?? "/profile/profile-dark.png"}
+              alt="profileImage"
+            />
+          ))}
       </div>
       <div className="ml-3 text-sm font-normal">{content}</div>
       <button

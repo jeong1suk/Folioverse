@@ -1,9 +1,16 @@
 //담당 : 이승현
 
+import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
-const Project = ({ setEditState, project, setProject, isPdf }) => {
+const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
   const { data } = useQueryGet("/project", "getProject");
+
+  const [projectData, setProjectData] = useState(null);
+
+  useEffect(() => {
+    setProjectData(othersData ?? data);
+  }, [othersData, data]);
 
   const onEdit = (item) => {
     setEditState(true);
@@ -36,7 +43,7 @@ const Project = ({ setEditState, project, setProject, isPdf }) => {
 
   return (
     <ul>
-      {data?.map((item) => (
+      {projectData?.map((item) => (
         <li
           key={item._id}
           className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
@@ -50,7 +57,7 @@ const Project = ({ setEditState, project, setProject, isPdf }) => {
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  isPdf ? " hidden" : ""
+                  isPdf || othersData ? " hidden" : ""
                 }`}
                 onClick={() => onEdit(item)}
               >

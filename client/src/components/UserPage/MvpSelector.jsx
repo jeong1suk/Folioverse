@@ -78,7 +78,7 @@ const MvpSelectBox = ({ openList }) => {
     <div
       className={`${
         !openList && "hidden"
-      } bg-white rounded shadow w-60 dark:bg-neutral-700 mx-auto mt-2`}
+      } bg-white rounded shadow w-60 dark:bg-neutral-700 mt-2 w-full`}
     >
       <ul
         className="px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
