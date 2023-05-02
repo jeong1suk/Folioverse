@@ -1,6 +1,7 @@
 //담당 : 이승현
 
 import Award from "../ViewMvp/Award";
+import Career from "../ViewMvp/Career";
 import Certificate from "../ViewMvp/Certificate";
 import Education from "../ViewMvp/Education";
 import Project from "../ViewMvp/Project";
@@ -19,6 +20,8 @@ const PdfReader = ({ myInfo }) => {
       </div>
       <h2 className="text-xl my-5">학력</h2>
       <Education isPdf={true} />
+      <h2 className="text-xl my-5">직업 및 경력</h2>
+      <Career isPdf={true} />
       <h2 className="text-xl my-5">프로젝트</h2>
       <Project isPdf={true} />
       <h2 className="text-xl my-5">수상 이력</h2>

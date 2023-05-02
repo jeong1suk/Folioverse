@@ -105,7 +105,7 @@ const AddProject = ({ project, setProject, setIsValid }) => {
         className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
         cols="30"
         rows="3"
-        placeholder="참조 링크"
+        placeholder="참조 링크(줄바꿈으로 구분)"
         onChange={(e) => setProject({ ...project, link: e.target.value })}
         value={project.link}
         maxLength={500}
