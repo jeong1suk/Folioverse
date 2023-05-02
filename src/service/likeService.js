@@ -33,8 +33,6 @@ const LikeService = {
 
     const likes = await Like.findByOne({user_id:userId, target_user: targetUserId});
     const targetUser = await User.findById({user_id: targetUserId});
-    console.log(likes)
-    console.log(targetUser)
 
     if (likes) {
       const deletelike = await Like.deleteAndpull(likes._id, targetUser);

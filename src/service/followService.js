@@ -2,26 +2,40 @@ import { Follow } from "../db/index.js";
 import { User } from "../db/index.js";
 
 const FollowService = {
-
-  countFollow: async ({ userId, targetUserId }) => {
-    // like_user와 target_user가 모두 존재하는지 확인
-
+  //로그인한 유저인지, 아닌지 판별
+  getFollow: async ({ userId, targetUserId }) => {
+    // follow_user와 target_user가 모두 존재하는지 확인
     const user = await User.findById(userId);
-    const targetUser = await User.findById(targetUserId);
-
-
-    if (!user || !targetUser) {
-      throw new Error('로그인을 해주세요.');
+    
+    if (!user) {
+      const errorMessage = '로그인이 필요한 서비스입니다.'
+      return errorMessage
     }
+  },
 
-    // 좋아요 정보를 조회
-    const likes = await Like.findByOne(user._id, targetUser._id);
+  // 팔로우한 기록이 없는경우
+  countUp: async ({userId, targetUserId}) => {
+    const user = await User.findById({user_id: userId});
+    const targetUser = await User.findById({user_id: targetUserId});
 
-    if (!likes) {
-     Follow.saveAndpush(user._id, targetUser)
-    } else {
-      // 이미 좋아요한 기록이 있는 경우
-      Follow.deleteAndpull(likes._id, targetUser)
+    const follows = await Follow.findByOne({user_id :user._id, target_user: targetUser._id});
+
+
+    if (!follows) {
+      const countfollow = await Follow.saveAndpush({user_id :user._id, target_user: targetUser});
+      return countfollow;
+    }
+  },
+
+  // 이미 팔로우한 기록이 있는 경우
+  countDown: async({userId, targetUserId}) => {
+
+    const follows = await Follow.findByOne({user_id:userId, target_user: targetUserId});
+    const targetUser = await User.findById({user_id: targetUserId});
+
+    if (follows) {
+      const deletefollow = await Follow.deleteAndpull(follows._id, targetUser);
+      return deletefollow;
     }
   }
 };
