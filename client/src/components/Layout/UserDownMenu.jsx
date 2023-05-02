@@ -7,8 +7,8 @@ function UserDownMenu() {
     window.location.reload();
     window.location.href = "/";
   }
-  const liStyle =
-    "px-[15px] py-[10px] text-[#000] dark:text-[#fff] bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]";
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
+  const liStyle = `px-[15px] py-[10px] ${fontColorA} bg-[#d6d6d6] dark:bg-[rgba(26,26,26,9)]`;
   return (
     <>
       <li className={liStyle}>
