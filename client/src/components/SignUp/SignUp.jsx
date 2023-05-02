@@ -68,8 +68,6 @@ function SignUp() {
       // console.log(err.response.data.message);
       setErrMessage(err.response.data.message);
     }
-
-    // 회원가입 시 name, 이메일 형식, 비밀번호 형식이 다를 시 경고문구 처리
   };
 
   const isSumbitDisabled = !(isEmailValid && isPasswordValid && passwordMatch);
@@ -85,46 +83,46 @@ function SignUp() {
           <input
             className={styles.inputTxt}
             type="text"
-            placeholder="User"
+            placeholder="이름"
             onChange={handleNameChange}
           />
           <label className={styles.label}>이메일:</label>
           <input
             className={styles.inputTxt}
             type="email"
+            placeholder="이메일"
             onChange={handleEmailChange}
           />
-          {errMessage && (
+          {!isEmailValid && (
             <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
           )}
-          <br />
-          {isEmailValid && <label className={styles.label}>Password</label>}
+
+          <label className={styles.label}>비밀번호:</label>
           <input
             className={styles.inputPwd}
             type="password"
-            placeholder="Password"
+            placeholder="비밀번호"
             onChange={handlePasswordChange}
           />
-          {!isPasswordValid && isEmailValid && errMessage && (
+          {!isPasswordValid && (
             <div className={styles.text}>
               숫자, 문자, 특수문자 포함 6글자 이상 입력해주세요.
             </div>
           )}
-          <br />
+
+          <label className={styles.label}>비밀번호 확인:</label>
           <input
             className={styles.inputPwd}
             type="password"
-            placeholder="Password check"
+            placeholder="비밀번호 확인"
             onChange={handleConfirmPasswordChange}
           />
-          {isFormValid &&
-            errMessage &&
-            (passwordMatch ? (
-              <p className={styles.text}>비밀번호 일치.</p>
-            ) : (
-              <p className={styles.text}>비밀번호가 맞지 않습니다.</p>
-            ))}
-          <br />
+          {passwordMatch ? (
+            <p className={styles.text}></p>
+          ) : (
+            <p className={styles.text}>비밀번호가 맞지 않습니다.</p>
+          )}
+
           {errMessage && <div className={styles.inputErr}>{errMessage}</div>}
           <button
             className={styles.btn}
