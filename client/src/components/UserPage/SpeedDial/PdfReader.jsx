@@ -5,16 +5,16 @@ import Certificate from "../ViewMvp/Certificate";
 import Education from "../ViewMvp/Education";
 import Project from "../ViewMvp/Project";
 
-const PdfReader = ({ myData }) => {
+const PdfReader = ({ myInfo }) => {
   return (
     <div className="pdf-area" style={{ width: "540pt" }}>
       <div className="border rounded p-3 border-black">
-        <h1 className="text-xl my-2">{myData?.name} 님의 포트폴리오</h1>
+        <h1 className="text-xl my-2">{myInfo?.name} 님의 포트폴리오</h1>
         <p className="leading-10 ml-2 text-sm text-neutral-400">
-          {myData?.email}
+          {myInfo?.email}
         </p>
         <p className="leading-10 ml-2 text-neutral-500">
-          {myData?.description}
+          {myInfo?.description}
         </p>
       </div>
       <h2 className="text-xl my-5">학력</h2>

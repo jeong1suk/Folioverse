@@ -1,9 +1,22 @@
 //담당 : 이승현
 
+import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
-const Certificate = ({ setEditState, certificate, setCertificate, isPdf }) => {
+const Certificate = ({
+  setEditState,
+  certificate,
+  setCertificate,
+  isPdf,
+  othersData,
+}) => {
   const { data } = useQueryGet("/certificate", "getCertificate");
+
+  const [ceriticateData, setCertificateData] = useState(null);
+
+  useEffect(() => {
+    setCertificateData(othersData ?? data);
+  }, [othersData, data]);
 
   const onEdit = (item) => {
     setEditState(true);
@@ -17,7 +30,7 @@ const Certificate = ({ setEditState, certificate, setCertificate, isPdf }) => {
   };
   return (
     <ul>
-      {data?.map((item) => (
+      {ceriticateData?.map((item) => (
         <li
           key={item._id}
           className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
@@ -31,7 +44,7 @@ const Certificate = ({ setEditState, certificate, setCertificate, isPdf }) => {
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  isPdf ? " hidden" : ""
+                  isPdf || othersData ? " hidden" : ""
                 }`}
                 onClick={() => onEdit(item)}
               >

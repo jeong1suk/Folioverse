@@ -133,7 +133,7 @@ const EditProfile = ({ data }) => {
               src={
                 previewUrl
                   ? previewUrl
-                  : `${data?.profile_image ?? "profile/profile-dark.png"}`
+                  : `${data?.profile_image ?? "/profile/profile-dark.png"}`
               }
               alt="프로필 사진"
             />

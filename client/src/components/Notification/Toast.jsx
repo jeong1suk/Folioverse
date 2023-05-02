@@ -30,8 +30,8 @@ const Toast = () => {
           (type === "message" && (
             <img
               className="rounded-full"
-              src={profileImage ?? "profile/profile-dark.png"}
-              alt=""
+              src={profileImage ?? "/profile/profile-dark.png"}
+              alt="profileImage"
             />
           ))}
       </div>

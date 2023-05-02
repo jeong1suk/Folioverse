@@ -1,17 +1,15 @@
 //담당 : 이승현
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
 import { useEffect } from "react";
-import { useQueryGet, useQueryGetRefetch } from "../../utils/useQuery";
+import { useQueryGet } from "../../utils/useQuery";
 import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
-import useToastStore from "../../store/toastStore";
-import { useQueryClient } from "react-query";
 
 const mvpList = [
   {
@@ -33,30 +31,25 @@ const mvpList = [
 ];
 
 const UserPage = () => {
-  const setToast = useToastStore((state) => state.setToast);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const params = useParams();
+  const { id } = params;
 
-  const { data } = useQueryGet("/user/current", "getMyInfo");
-  const { data: refetchMessageData, dataChanged } = useQueryGetRefetch(
-    "/message",
-    "getRefetchMessage"
-  );
+  const isToken = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (dataChanged) {
-      queryClient.invalidateQueries("getMessage");
-      setToast(
-        `${
-          refetchMessageData.result[refetchMessageData.result.length - 1]
-            .sendUserName
-        } 님에게 쪽지가 왔습니다`,
-        "message",
-        refetchMessageData.result[refetchMessageData.result.length - 1]
-          .sendUserProfileImage
-      );
-    }
-  }, [dataChanged]);
+  const myInfoQuery = useQueryGet("/user/current", "getMyInfo", {
+    enabled: !!isToken,
+  });
+  const othersDataQuery = useQueryGet(`/others/${id}`, "getOthersData", {
+    enabled: !!id,
+  });
+  const othersInfoQuery = useQueryGet(`/user/${id}`, "getOthersInfo", {
+    enabled: !!id,
+  });
+
+  const { data: myInfo } = myInfoQuery;
+  const { data: othersData } = othersDataQuery;
+  const { data: othersInfo } = othersInfoQuery;
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -64,22 +57,34 @@ const UserPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isToken && id) {
+      myInfo?._id === id && navigate("/my-page");
+    }
+  }, [params]);
+
   return (
     <div className="p-5 flex flex-row dark:bg-neutral-800 min-h-screen">
       <div className="basis-1/5">
-        <Profile myData={data} />
-        <MvpSelector />
-        <PostList id={data?._id} />
-        <MessageBoxButton id={data?._id} />
+        <Profile myInfo={myInfo} othersInfo={othersInfo} />
+        <div className={id ? "hidden" : ""}>
+          <MvpSelector />
+        </div>
+        <PostList id={id ?? myInfo?._id} />
+        <div className={id ? "hidden" : ""}>
+          <MessageBoxButton id={myInfo?._id} />
+        </div>
       </div>
       <main className="basis-4/5 ml-5">
         {mvpList.map((item) => (
-          <Mvp key={item.id} title={item.title} />
+          <Mvp key={item.id} title={item.title} othersData={othersData} />
         ))}
       </main>
-      {<SpeedDial id={data?._id} />}
+      <div className={id ? "hidden" : ""}>
+        <SpeedDial id={myInfo?._id} />
+      </div>
       <div style={{ position: "absolute", left: "-9999px" }}>
-        <PdfReader myData={data} />
+        <PdfReader myInfo={myInfo} />
       </div>
     </div>
   );

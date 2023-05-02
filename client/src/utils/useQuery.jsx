@@ -62,6 +62,7 @@ export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
   const prevDataRef = useRef(null);
 
   const queryFunc = async () => {
+    if (!token) return null;
     const response = await api.get(link);
     return response.data;
   };

@@ -9,7 +9,7 @@ import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 
-const Mvp = ({ title }) => {
+const Mvp = ({ title, othersData }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -82,6 +82,7 @@ const Mvp = ({ title }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
+            othersData={othersData?.education}
           />
         )) ||
           (title === "프로젝트" && (
@@ -89,6 +90,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
+              othersData={othersData?.project}
             />
           )) ||
           (title === "수상 이력" && (
@@ -96,6 +98,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
+              othersData={othersData?.award}
             />
           )) ||
           (title === "자격증" && (
@@ -103,6 +106,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
+              othersData={othersData?.certificate}
             />
           ))}
       </article>
