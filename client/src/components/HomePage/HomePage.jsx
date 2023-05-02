@@ -31,9 +31,6 @@ function HomePage() {
         <FirstGreet />
         <SecondSlide />
         <div className="font-bold text-[50px] text-white m-auto">
-          유저페이지 소개 (유저페이지 컨텐츠 추가 후 내용추가)
-        </div>
-        <div className="font-bold text-[50px] text-white m-auto">
           <FourthFolioSlide />
         </div>
         <div className="font-bold text-[50px] text-white m-auto">Footer</div>

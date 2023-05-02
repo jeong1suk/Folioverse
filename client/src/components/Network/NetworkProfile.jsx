@@ -6,8 +6,7 @@ import silvermedal from "/medal/silver.png";
 import bronzemedal from "/medal/bronze.png";
 import darkModeProfile from "/profile/profile-dark.png";
 import lightModeProfile from "/profile/profile-light.png";
-import { useNavigate } from "react-router-dom";
-``;
+import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../../store/userStore";
 import useThemeStore from "../../store/themeStore";
 
@@ -66,13 +65,13 @@ function NetworkProfile({ name, email, description, profileId, profileImg }) {
           {description ? description : "자기소개가 없습니다"}
         </p>
       </div>
-      <button
+      <Link
         className={`absolute -translate-x-2/4 bg-[#69b1ff] text-white dark:bg-[#3e668c] dark:text-[#ebebeb] px-[15px] py-2 rounded-[5px] border-[none]
         left-2/4 top-[340px] hover:bg-[#5581ab] hover:text-[#ebebeb] dark:hover:bg-[#2c4e6e] dark:hover:text-white transition ease-in-out duration-[0.3s]`}
-        onClick={handleNav}
+        to={`/user-page/${profileId}`}
       >
         프로필
-      </button>
+      </Link>
     </div>
   );
 }
