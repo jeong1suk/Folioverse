@@ -11,25 +11,6 @@ import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
 
-const mvpList = [
-  {
-    id: 1,
-    title: "학력",
-  },
-  {
-    id: 2,
-    title: "프로젝트",
-  },
-  {
-    id: 3,
-    title: "수상 이력",
-  },
-  {
-    id: 4,
-    title: "자격증",
-  },
-];
-
 const UserPage = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -88,13 +69,14 @@ const UserPage = () => {
           </div>
           <div className="basis-1/2 ml-1">
             <Mvp
-              title={"수상 이력"}
-              othersData={othersData?.award}
+              title={"직업 및 경력"}
+              othersData={othersData?.career}
               customClass="h-full"
             />
           </div>
         </div>
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
+        <Mvp title={"수상 이력"} othersData={othersData?.award} />
         <Mvp title={"자격증"} othersData={othersData?.certificate} />
       </main>
       <div className={id ? "hidden" : ""}>

@@ -8,6 +8,7 @@ import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
+import Career from "./ViewMvp/Career";
 
 const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
@@ -15,6 +16,7 @@ const Mvp = ({ title, othersData, customClass }) => {
 
   const educationState = mvpSelectStore((state) => state.education);
   const projectState = mvpSelectStore((state) => state.project);
+  const careerState = mvpSelectStore((state) => state.career);
   const awardState = mvpSelectStore((state) => state.award);
   const certificateState = mvpSelectStore((state) => state.certificate);
 
@@ -34,6 +36,13 @@ const Mvp = ({ title, othersData, customClass }) => {
     date: "",
     tech_stack: "",
     link: "",
+  });
+  const [career, setCareer] = useState({
+    job: "",
+    yearly: 0,
+    isWeb: true,
+    position: "",
+    tech_stack: [],
   });
   const [award, setAward] = useState({
     name: "",
@@ -64,12 +73,21 @@ const Mvp = ({ title, othersData, customClass }) => {
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });
+    setCareer({
+      ...career,
+      job: "",
+      yearly: 0,
+      isWeb: true,
+      position: "",
+      tech_stack: [],
+    });
   };
 
   return (
     <section
       className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
+        (title === "직업 및 경력" && !careerState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
         (title === "자격증" && !certificateState && "hidden")
@@ -108,6 +126,14 @@ const Mvp = ({ title, othersData, customClass }) => {
               setCertificate={setCertificate}
               othersData={othersData}
             />
+          )) ||
+          (title === "직업 및 경력" && (
+            <Career
+              setEditState={setEditState}
+              career={career}
+              setCareer={setCareer}
+              othersData={othersData}
+            />
           ))}
       </article>
       <button
@@ -128,6 +154,8 @@ const Mvp = ({ title, othersData, customClass }) => {
         setLink={setLink}
         education={education}
         setEducation={setEducation}
+        career={career}
+        setCareer={setCareer}
         project={project}
         setProject={setProject}
         award={award}
