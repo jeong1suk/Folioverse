@@ -1,4 +1,5 @@
-import { useState } from "react";
+//담당 : 이승현
+
 import useModalStore from "../../store/modalStore";
 
 const PostList = ({ id }) => {

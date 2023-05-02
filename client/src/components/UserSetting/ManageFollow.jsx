@@ -2,15 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../utils/useQuery";
+import { Link } from "react-router-dom";
 
 const ManageFollow = () => {
   const [tab, setTab] = useState(0);
-  const [getUrl, setGetUrl] = useState("/dummy/mvp/follow/1");
+  const [getUrl, setGetUrl] = useState("/user/list");
   const { data } = useQueryGet(getUrl, "getFollow");
-
-  useEffect(() => {
-    setGetUrl(tab === 0 ? "/dummy/mvp/follow/1" : "/dummy/mvp/followed/1");
-  }, [tab]);
 
   return (
     <div className="dark:text-white">
@@ -48,7 +45,7 @@ const ManageFollow = () => {
       <section>
         <ul className="grid grid-cols-4 gap-4 mt-4">
           {data?.map((user) => (
-            <UserCard user={user} key={user.id} />
+            <UserCard user={user} key={user._id} />
           ))}
         </ul>
       </section>
@@ -59,13 +56,16 @@ const ManageFollow = () => {
 const UserCard = ({ user }) => {
   return (
     <li className="border p-4 rounded dark:border-cyan-950">
-      <img className="rounded-full w-16 mx-auto my-2" src="/cat.png" />
+      <img
+        className="rounded-full w-16 mx-auto my-2"
+        src={user.profile_image ?? "/profile/profile-dark.png"}
+      />
       <p className="text-center text-black dark:text-white">{user.name}</p>
       <p className="text-center text-sm text-neutral-400">{user.email}</p>
       <p className="text-center mt-2">
-        <a className="text-blue-400 text-xs" href="#">
+        <Link to={`/user-page/${user._id}`} className="text-blue-400 text-xs">
           프로필 보기
-        </a>
+        </Link>
       </p>
     </li>
   );

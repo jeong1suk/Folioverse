@@ -8,8 +8,8 @@ const educationService = {
     return creatednewEducation;
   },
 
-  getUserEducationInfo: async (user_id) => {
-    const educations = await Education.findAllByUserId(user_id);
+  getUserEducationInfo: async ({ user_id }) => {
+    const educations = await Education.findAllByUserId({ user_id });
     if (!educations) {
       const errorMessage = "작성하신 기록이 없습니다. 다시 한 번 확인해주세요.";
       return { errorMessage };

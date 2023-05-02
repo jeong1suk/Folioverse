@@ -1,20 +1,22 @@
 //담당 : 이승현
 
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Certificate = ({
   setEditState,
   certificate,
   setCertificate,
-  setMethod,
-  setDeleteLink,
   isPdf,
+  othersData,
 }) => {
   const { data } = useQueryGet("/certificate", "getCertificate");
 
-  const location = useLocation();
-  const { pathname } = location;
+  const [ceriticateData, setCertificateData] = useState(null);
+
+  useEffect(() => {
+    setCertificateData(othersData ?? data);
+  }, [othersData, data]);
 
   const onEdit = (item) => {
     setEditState(true);
@@ -25,12 +27,10 @@ const Certificate = ({
       agency: item.agency,
       _id: item._id,
     });
-    setMethod("patch");
-    setDeleteLink(`/${item._id}`);
   };
   return (
     <ul>
-      {data?.map((item) => (
+      {ceriticateData?.map((item) => (
         <li
           key={item._id}
           className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
@@ -44,7 +44,7 @@ const Certificate = ({
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
-                  (pathname !== "/my-page" && "hidden", isPdf && "hidden")
+                  isPdf || othersData ? " hidden" : ""
                 }`}
                 onClick={() => onEdit(item)}
               >

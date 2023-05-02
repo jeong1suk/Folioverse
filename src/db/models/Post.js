@@ -1,9 +1,16 @@
+//담당 : 이승현
+
 import { PostModel } from "../schemas/post.js";
 
 class Post {
   static async create({ newPost }) {
     const createdNewPost = await PostModel.create(newPost);
     return createdNewPost;
+  }
+
+  static async findById(_id) {
+    const post = await PostModel.findById(_id);
+    return post;
   }
 
   static async findAllByUserId(user_id) {
@@ -25,7 +32,7 @@ class Post {
   }
 
   static async delete(_id) {
-    const deletedPost = await PostModel.deleteOne(_id);
+    const deletedPost = await PostModel.deleteOne({ _id });
     return deletedPost;
   }
 }

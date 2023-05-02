@@ -7,11 +7,9 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
-import SpeedDial from "./SpeedDial/SpeedDial";
-import PdfReader from "./SpeedDial/PdfReader";
 import mvpSelectStore from "../../store/mvpSelectStore";
 
-const Mvp = ({ myData, title }) => {
+const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -24,8 +22,6 @@ const Mvp = ({ myData, title }) => {
   const { pathname } = location;
 
   const [link, setLink] = useState("");
-  const [deleteLink, setDeleteLink] = useState("");
-  const [method, setMethod] = useState("");
   const [education, setEducation] = useState({
     school_name: "",
     major: "",
@@ -68,12 +64,11 @@ const Mvp = ({ myData, title }) => {
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });
-    setMethod("put");
   };
 
   return (
     <section
-      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${
+      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
@@ -87,8 +82,7 @@ const Mvp = ({ myData, title }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
-            setMethod={setMethod}
-            setDeleteLink={setDeleteLink}
+            othersData={othersData}
           />
         )) ||
           (title === "프로젝트" && (
@@ -96,8 +90,7 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
             />
           )) ||
           (title === "수상 이력" && (
@@ -105,8 +98,7 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
             />
           )) ||
           (title === "자격증" && (
@@ -114,8 +106,7 @@ const Mvp = ({ myData, title }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
             />
           ))}
       </article>
@@ -134,8 +125,6 @@ const Mvp = ({ myData, title }) => {
         addState={addState}
         setAddState={setAddState}
         link={link}
-        deleteLink={deleteLink}
-        method={method}
         setLink={setLink}
         education={education}
         setEducation={setEducation}

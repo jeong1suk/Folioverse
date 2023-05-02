@@ -1,37 +1,31 @@
 //담당 : 이승현
 
-import { Link, useLocation } from "react-router-dom";
-import { useQueryGet } from "../../utils/useQuery";
-import { useEffect, useState } from "react";
-import useUserStore from "../../store/userStore";
+import { Link } from "react-router-dom";
 import useModalStore from "../../store/modalStore";
 
-const Profile = ({ myData }) => {
-  const location = useLocation();
-  const { pathname } = location;
-  const [data, setData] = useState(null);
-  const userId = useUserStore((state) => state.id);
-
-  const { data: others } = useQueryGet(`/user/${userId}`, "getOther");
-
-  useEffect(() => {
-    setData(pathname === "/my-page" ? myData : others);
-  }, [pathname, myData, others]);
+const Profile = ({ myInfo, othersInfo }) => {
+  const isToken = localStorage.getItem("token");
+  const profileSrc = othersInfo
+    ? othersInfo?.profile_image
+    : myInfo?.profile_image;
+  const name = othersInfo ? othersInfo?.name : myInfo?.name;
+  const email = othersInfo ? othersInfo?.email : myInfo?.email;
+  const description = othersInfo
+    ? othersInfo?.description
+    : myInfo?.description;
 
   return (
     <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
-      <MessageIcon pathname={pathname} id={data?._id} name={data?.name} />
+      <div className={othersInfo && isToken ? "block" : "hidden"}>
+        <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
+      </div>
       <img
         className="w-20 rounded-full mx-auto mb-5"
-        src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+        src={profileSrc ?? "/profile/profile-dark.png"}
       />
-      <p className="text-center text-xl font-bold dark:text-white">
-        {data?.name}
-      </p>
-      <p className="text-center text-neutral-500">{data?.email}</p>
-      <p className="text-center dark:text-neutral-200 my-3">
-        {data?.description}
-      </p>
+      <p className="text-center text-xl font-bold dark:text-white">{name}</p>
+      <p className="text-center text-neutral-500">{email}</p>
+      <p className="text-center dark:text-neutral-200 my-3">{description}</p>
       <div className="flex flex-row text-neutral-500 my-5">
         <div className="basis-1/2 text-center">
           <div>10</div>
@@ -42,26 +36,28 @@ const Profile = ({ myData }) => {
           <div>좋아요</div>
         </div>
       </div>
-      <div
-        className={`${pathname === "/my-page" && "hidden"} flex justify-center`}
-      >
-        <ButtonGroup />
-      </div>
       <p className="text-center text-sm mt-3 text-blue-400">
         <Link
           className={`hover:bg-neutral-100 dark:hover:bg-neutral-700 p-5 rounded ${
-            pathname !== "/my-page" && "hidden"
+            othersInfo && "hidden"
           }`}
           to="/user-setting"
         >
           Edit
         </Link>
       </p>
+      <div
+        className={`${
+          othersInfo && isToken ? "block" : "hidden"
+        } flex justify-center`}
+      >
+        <ButtonGroup />
+      </div>
     </aside>
   );
 };
 
-const MessageIcon = ({ pathname, id, name }) => {
+const MessageIcon = ({ id, name }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <svg
@@ -70,9 +66,7 @@ const MessageIcon = ({ pathname, id, name }) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={`${
-        pathname === "/my-page" && "hidden"
-      } absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600`}
+      className="absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
       onClick={() => setModal(id, "message", name)}
     >
       <path

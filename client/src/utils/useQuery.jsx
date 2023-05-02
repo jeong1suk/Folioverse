@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 
 const host = import.meta.env.VITE_SERVER_HOST;
 const token = localStorage.getItem("token") ?? null;
@@ -43,10 +44,8 @@ export const useQueryPatch = (link, method, options = {}) => {
 };
 
 export const useQueryDelete = (link) => {
-  const mutation = useMutation(async (body = null) => {
-    const response = await api.delete(link, {
-      body,
-    });
+  const mutation = useMutation(async (_id) => {
+    const response = await api.delete(`${link}/${_id}`);
     return response.data;
   });
 
@@ -56,4 +55,35 @@ export const useQueryDelete = (link) => {
     error: mutation.error,
     deleteMutate: mutation.mutate,
   };
+};
+
+export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
+  const [dataChanged, setDataChanged] = useState(false);
+  const prevDataRef = useRef(null);
+
+  const queryFunc = async () => {
+    if (!token) return null;
+    const response = await api.get(link);
+    return response.data;
+  };
+
+  const { data, isLoading, error } = useQuery([key, host + link], queryFunc, {
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 3,
+    refetchInterval: 1000,
+    ...queryOptions,
+    onSuccess: (newData) => {
+      if (
+        prevDataRef.current &&
+        JSON.stringify(prevDataRef.current) !== JSON.stringify(newData)
+      ) {
+        setDataChanged(true);
+      } else {
+        setDataChanged(false);
+      }
+      prevDataRef.current = newData;
+    },
+  });
+
+  return { data, isLoading, error, dataChanged };
 };

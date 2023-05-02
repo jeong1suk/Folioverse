@@ -16,8 +16,6 @@ const AddData = ({
   setAddState,
   title,
   link,
-  deleteLink,
-  method,
   setLink,
   education,
   setEducation,
@@ -45,8 +43,9 @@ const AddData = ({
     }
   }, [editState, addState]);
 
-  const { mutate } = useQueryPatch(link, method);
-  const { deleteMutate } = useQueryDelete(link + deleteLink);
+  const { mutate } = useQueryPatch(link, "put");
+  const { mutate: editMutate } = useQueryPatch(link, "patch");
+  const { deleteMutate } = useQueryDelete(link);
   const queryClient = useQueryClient();
 
   const setToast = useToastStore((state) => state.setToast);
@@ -55,74 +54,68 @@ const AddData = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    switch (title) {
-      case "학력":
-        mutate(
-          { body: education },
-          { onSuccess: () => queryClient.invalidateQueries("getEducation") }
-        );
-        break;
-      case "프로젝트":
-        mutate(
-          { body: project },
-          { onSuccess: () => queryClient.invalidateQueries("getProject") }
-        );
-        break;
-      case "수상 이력":
-        mutate(
-          { body: award },
-          { onSuccess: () => queryClient.invalidateQueries("getAward") }
-        );
-        break;
-      case "자격증":
-        mutate(
-          { body: certificate },
-          { onSuccess: () => queryClient.invalidateQueries("getCertificate") }
-        );
-        break;
+
+    const handdleMutate = (func, msg, stateFunc) => {
+      switch (title) {
+        case "학력":
+          func(
+            { body: education },
+            { onSuccess: () => queryClient.invalidateQueries("getEducation") }
+          );
+          break;
+        case "프로젝트":
+          func(
+            { body: project },
+            { onSuccess: () => queryClient.invalidateQueries("getProject") }
+          );
+          break;
+        case "수상 이력":
+          func(
+            { body: award },
+            { onSuccess: () => queryClient.invalidateQueries("getAward") }
+          );
+          break;
+        case "자격증":
+          func(
+            { body: certificate },
+            { onSuccess: () => queryClient.invalidateQueries("getCertificate") }
+          );
+          break;
+      }
+      setToast(msg, "success");
+
+      stateFunc(false);
+    };
+
+    if (addState) {
+      handdleMutate(mutate, "데이터가 추가되었습니다", setAddState);
+    } else {
+      handdleMutate(editMutate, "데이터가 수정되었습니다", setEditState);
     }
-    setToast(
-      addState ? "데이터가 추가되었습니다" : "데이터가 수정되었습니다",
-      "success"
-    );
-    setEditState(false);
-    setAddState(false);
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
     switch (title) {
       case "학력":
-        deleteMutate(
-          { body: education },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getEducation"),
-          }
-        );
+        deleteMutate(education._id, {
+          onSuccess: () => queryClient.invalidateQueries("getEducation"),
+        });
         break;
       case "프로젝트":
-        deleteMutate(
-          { body: project },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getProject"),
-          }
-        );
+        deleteMutate(project._id, {
+          onSuccess: () => queryClient.invalidateQueries("getProject"),
+        });
         break;
       case "수상 이력":
-        deleteMutate(
-          { body: award },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getAward"),
-          }
-        );
+        deleteMutate(award._id, {
+          onSuccess: () => queryClient.invalidateQueries("getAward"),
+        });
         break;
       case "자격증":
-        deleteMutate(
-          { body: certificate },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getCertificate"),
-          }
-        );
+        deleteMutate(certificate._id, {
+          onSuccess: () => queryClient.invalidateQueries("getCertificate"),
+        });
         break;
     }
     setToast("데이터가 삭제되었습니다", "success");
