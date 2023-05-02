@@ -1,31 +1,50 @@
-import React, { useEffect, useState } from "react";
+//담당 : 이승현
+
+import React, { useEffect } from "react";
 import ReactSelect from "react-select";
 import useThemeStore from "./../../../store/themeStore";
 
-const AddCareer = ({ career, setCareer, setIsValid }) => {
+const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
   const theme = useThemeStore((state) => !state.theme);
-  const [isDeveloper, setIsDeveloper] = useState(false);
-  const [nonDeveloperJob, setNonDeveloperJob] = useState("");
-  const [nonWebDeveloper, setNonWebDeveloper] = useState("");
-  const [isWeb, setIsWeb] = useState("");
+
+  useEffect(() => {
+    setCareer({
+      ...career,
+      job: "",
+      yearly: "",
+      isWeb: true,
+      position: "",
+      tech_stack: [],
+    });
+  }, [resetCount]);
 
   const handleSelectChange = (selectedOption, actionMeta) => {
     const { name } = actionMeta;
     const value = selectedOption.value;
 
     if (name === "job") {
-      setIsDeveloper(value === "개발자");
-      setCareer({ ...career, job: value });
+      setCareer((prevCareer) => ({
+        ...prevCareer,
+        job: value,
+        isWeb: value === "개발자" ? prevCareer.isWeb : false,
+        position:
+          value === "개발자" && prevCareer.isWeb === false
+            ? prevCareer.position
+            : "",
+      }));
     } else if (name === "yearly") {
-      setCareer({ ...career, yearly: value });
+      setCareer((prevCareer) => ({ ...prevCareer, yearly: value }));
     } else if (name === "isWeb") {
-      setIsWeb(value);
-      setCareer({ ...career, isWeb: value === "web" });
+      setCareer((prevCareer) => ({
+        ...prevCareer,
+        isWeb: value === "web",
+        position: value === "web" ? prevCareer.position : "",
+      }));
     } else if (name === "tech_stack") {
       const skills = selectedOption
         ? selectedOption.map((skill) => skill.value)
         : [];
-      setCareer({ ...career, tech_stack: skills });
+      setCareer((prevCareer) => ({ ...prevCareer, tech_stack: skills }));
     }
   };
 
@@ -36,18 +55,6 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
       setIsValid(false);
     }
   }, [career.job, career.yearly]);
-
-  useEffect(() => {
-    console.log(career);
-  }, [career]);
-
-  useEffect(() => {
-    setCareer({ ...career, job: nonDeveloperJob });
-  }, [nonDeveloperJob]);
-
-  useEffect(() => {
-    setCareer({ ...career, position: nonWebDeveloper });
-  }, [nonWebDeveloper]);
 
   const isEdgeOption = (index, optionsLength) => {
     return index === 0 || index === optionsLength - 1;
@@ -144,10 +151,12 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
     <>
       <div className="items-center mb-4">
         <ReactSelect
+          key={resetCount}
           options={jobOptions}
           styles={customStyles}
           name="job"
           onChange={handleSelectChange}
+          value={jobOptions.find((option) => option.value === career.job)}
           placeholder="직업 유형 선택"
           isSearchable={true}
           theme={(theme) => ({
@@ -167,18 +176,25 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
             className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
             type="text"
             placeholder="직업명을 작성하세요"
-            value={nonDeveloperJob}
-            onChange={(e) => setNonDeveloperJob(e.target.value)}
+            defaultValue={""}
+            onChange={(e) =>
+              setCareer((prevCareer) => ({
+                ...prevCareer,
+                job: e.target.value,
+              }))
+            }
           />
         </div>
       )}
 
       <div className="items-center mb-4">
         <ReactSelect
+          key={resetCount}
           options={yearlyOptions}
           styles={customStyles}
           name="yearly"
           onChange={handleSelectChange}
+          value={yearlyOptions.find((option) => option.value === career.yearly)}
           placeholder="경력 선택"
           isSearchable={true}
           theme={(theme) => ({
@@ -192,48 +208,61 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
         />
       </div>
 
-      {isDeveloper && (
-        <div className="items-center mb-4">
-          <ReactSelect
-            options={developmentTypeOptions}
-            styles={customStyles}
-            name="isWeb"
-            onChange={handleSelectChange}
-            placeholder="개발 유형 선택"
-            isSearchable={true}
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 0,
-              colors: {
-                ...theme.colors,
-                neutral0: "transparent",
-              },
-            })}
-          />
-        </div>
+      {career.job === "개발자" && (
+        <ReactSelect
+          key={resetCount}
+          options={developmentTypeOptions}
+          styles={customStyles}
+          name="isWeb"
+          onChange={handleSelectChange}
+          value={developmentTypeOptions.find(
+            (option) => option.value === (career.isWeb ? "web" : "noWeb")
+          )}
+          placeholder="Select development type"
+          isSearchable={true}
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+              neutral0: "transparent",
+            },
+          })}
+        />
       )}
 
-      {career.job === "개발자" && isWeb === "noWeb" && (
-        <div className="items-center mb-4 px-2">
+      {career.job === "개발자" && !career.isWeb && (
+        <div className="items-center mt-4 mb-4 px-2">
           <input
             className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
             type="text"
             placeholder="개발 직군을 입력하세요"
-            value={nonWebDeveloper}
-            onChange={(e) => setNonWebDeveloper(e.target.value)}
+            value={
+              career.job === "개발자" && !career.isWeb ? career.position : ""
+            }
+            onChange={(e) =>
+              setCareer((prevCareer) => ({
+                ...prevCareer,
+                position: e.target.value,
+              }))
+            }
           />
         </div>
       )}
 
-      {isWeb && isWeb !== "noWeb" && (
-        <div className="items-center mb-4">
+      {career.job === "개발자" && career.isWeb && (
+        <div className="items-center mt-4 mb-4">
           <ReactSelect
+            key={resetCount}
             options={positionOptions}
             styles={customStyles}
             onChange={(selectedOption) => {
               setCareer({ ...career, position: selectedOption.value });
             }}
-            placeholder="포지션 선택"
+            value={positionOptions.find(
+              (option) => option.value === career.position
+            )}
+            placeholder="Choose a position"
             isSearchable={true}
             theme={(theme) => ({
               ...theme,
@@ -247,9 +276,10 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
         </div>
       )}
 
-      {isDeveloper && (
+      {career.job === "개발자" && (
         <div className="items-center mb-4">
           <ReactSelect
+            key={resetCount}
             options={skillStackOptions}
             styles={customStyles}
             onChange={handleSelectChange}
@@ -257,6 +287,9 @@ const AddCareer = ({ career, setCareer, setIsValid }) => {
             isMulti
             name="tech_stack"
             isSearchable={true}
+            value={career.tech_stack.map((skill) =>
+              skillStackOptions.find((option) => option.value === skill)
+            )}
             theme={(theme) => ({
               ...theme,
               borderRadius: 0,
@@ -280,13 +313,12 @@ const jobOptions = [
 
 const yearlyOptions = [
   { value: "", label: "경력 선택" },
-  { value: "0", label: "신입(1년 미만)" },
-  { value: "1", label: "경력(1년 이상)" },
-  { value: "2", label: "경력(5년 이상)" },
+  { value: "신입 - 1년 미만", label: "신입 - 1년 미만" },
+  { value: "경력 - 1년 이상", label: "경력 - 1년 이상" },
+  { value: "경력 - 5년 이상", label: "경력 - 5년 이상" },
 ];
 
 const developmentTypeOptions = [
-  { value: "", label: "개발 유형 선택" },
   { value: "web", label: "웹 개발자" },
   { value: "noWeb", label: "웹 이외 개발자" },
 ];

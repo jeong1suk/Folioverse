@@ -44,6 +44,21 @@ const careerService = {
       const newValue = toUpdate.job;
       career = await Career.update({ _id, fieldToUpdate, newValue });
     }
+    if (toUpdate.isWeb || !toUpdate.isWeb) {
+      const fieldToUpdate = "isWeb";
+      const newValue = toUpdate.isWeb;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.position || !toUpdate.position) {
+      const fieldToUpdate = "position";
+      const newValue = toUpdate.position;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.tech_stack || !toUpdate.tech_stack) {
+      const fieldToUpdate = "tech_stack";
+      const newValue = toUpdate.tech_stack;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
     return career;
   },
 

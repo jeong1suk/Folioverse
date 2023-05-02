@@ -28,6 +28,7 @@ const AddData = ({
   setAward,
   certificate,
   setCertificate,
+  resetCount,
 }) => {
   useEffect(() => {
     switch (title) {
@@ -153,6 +154,7 @@ const AddData = ({
             setIsValid={setIsValid}
             career={career}
             setCareer={setCareer}
+            resetCount={resetCount}
           />
         )) ||
         (title === "프로젝트" && (
