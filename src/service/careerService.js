@@ -1,7 +1,7 @@
 import { Career } from "../db/index.js";
 
 const careerService = {
-  addCareer: async ({ user_id, data }) => {
+  addCareer: async ({ user_id, ...data }) => {
     // 따로 확인할 조건이 없어보여 컬렉션 추가 코드만 작성
     const newCareer = { user_id, ...data };
     const creatednewCareer = await Career.create({ newCareer });
