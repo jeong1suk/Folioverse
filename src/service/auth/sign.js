@@ -9,7 +9,11 @@ import { signJWT } from "./login.js";
 
 const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  await UserModel.create({ email, password: hashedPassword, name });
+  const user = await UserModel.create({
+    email,
+    password: hashedPassword,
+    name,
+  });
 
   return new Promise((resolve, reject) => {
     passport.authenticate("local", { session: false }, (err, user, info) => {

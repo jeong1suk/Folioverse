@@ -8,13 +8,12 @@ const UserSchema = new Schema(
     name: { type: String, required: true },
     description: {
       type: String,
-      required: false,
-      default: "설명이 아직 없습니다. 추가해 주세요.",
     },
     like_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     follower_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     profile_image: { type: String },
+    metrics: [{ type: Schema.Types.ObjectId, ref: "DailyMetrics" }],
   },
   { timestamps: true }
 );
