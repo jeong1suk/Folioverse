@@ -8,6 +8,7 @@ import AddProject from "./AddProject";
 import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../../store/toastStore";
+import AddCareer from "./AddCareer";
 
 const AddData = ({
   editState,
@@ -19,6 +20,8 @@ const AddData = ({
   setLink,
   education,
   setEducation,
+  career,
+  setCareer,
   project,
   setProject,
   award,
@@ -30,6 +33,9 @@ const AddData = ({
     switch (title) {
       case "학력":
         setLink("/education");
+        break;
+      case "직업 및 경력":
+        setLink("/career");
         break;
       case "프로젝트":
         setLink("/project");
@@ -61,6 +67,12 @@ const AddData = ({
           func(
             { body: education },
             { onSuccess: () => queryClient.invalidateQueries("getEducation") }
+          );
+          break;
+        case "직업 및 경력":
+          func(
+            { body: career },
+            { onSuccess: () => queryClient.invalidateQueries("getCareer") }
           );
           break;
         case "프로젝트":
@@ -102,6 +114,11 @@ const AddData = ({
           onSuccess: () => queryClient.invalidateQueries("getEducation"),
         });
         break;
+      case "직업 및 경력":
+        deleteMutate(career._id, {
+          onSuccess: () => queryClient.invalidateQueries("getCareer"),
+        });
+        break;
       case "프로젝트":
         deleteMutate(project._id, {
           onSuccess: () => queryClient.invalidateQueries("getProject"),
@@ -131,6 +148,13 @@ const AddData = ({
           setEducation={setEducation}
         />
       )) ||
+        (title === "직업 및 경력" && (
+          <AddCareer
+            setIsValid={setIsValid}
+            career={career}
+            setCareer={setCareer}
+          />
+        )) ||
         (title === "프로젝트" && (
           <AddProject
             setIsValid={setIsValid}

@@ -38,11 +38,13 @@ const MvpSelector = () => {
 
 const MvpSelectBox = ({ openList }) => {
   const education = mvpSelectStore((state) => state.education);
+  const career = mvpSelectStore((state) => state.career);
   const project = mvpSelectStore((state) => state.project);
   const award = mvpSelectStore((state) => state.award);
   const certificate = mvpSelectStore((state) => state.certificate);
 
   const toggleEducation = mvpSelectStore((state) => state.toggleEducation);
+  const toggleCareer = mvpSelectStore((state) => state.toggleCareer);
   const toggleProject = mvpSelectStore((state) => state.toggleProject);
   const toggleAward = mvpSelectStore((state) => state.toggleAward);
   const toggleCertificate = mvpSelectStore((state) => state.toggleCertificate);
@@ -56,18 +58,24 @@ const MvpSelectBox = ({ openList }) => {
     },
     {
       id: 1,
+      title: "직업 및 경력",
+      value: career,
+      toggle: toggleCareer,
+    },
+    {
+      id: 2,
       title: "프로젝트",
       value: project,
       toggle: toggleProject,
     },
     {
-      id: 2,
+      id: 3,
       title: "수상 이력",
       value: award,
       toggle: toggleAward,
     },
     {
-      id: 3,
+      id: 4,
       title: "자격증",
       value: certificate,
       toggle: toggleCertificate,
