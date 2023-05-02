@@ -70,8 +70,8 @@ function Login() {
             placeholder="비밀번호"
             onChange={handlePasswordChange}
           />
-
-          {errMessage && <div className={styles.container}>{errMessage}</div>}
+          <br />
+          {errMessage && <div className={styles.inputErr}>{errMessage}</div>}
 
           <button
             className={`${styles.btn} ${
