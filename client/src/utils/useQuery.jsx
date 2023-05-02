@@ -75,7 +75,9 @@ export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
     onSuccess: (newData) => {
       if (
         prevDataRef.current &&
-        JSON.stringify(prevDataRef.current) !== JSON.stringify(newData)
+        prevDataRef.current.result &&
+        newData.result &&
+        prevDataRef.current.result.length < newData.result.length
       ) {
         setDataChanged(true);
       } else {
