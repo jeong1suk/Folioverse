@@ -2,15 +2,21 @@
 
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 
 const host = import.meta.env.VITE_SERVER_HOST;
+const token = localStorage.getItem("token") ?? null;
+
+const api = axios.create({
+  baseURL: host,
+  headers: {
+    Authorization: token,
+  },
+});
 
 export const useQueryGet = (link, key, queryOptions = {}) => {
-  const token = localStorage.getItem("token") ?? null;
   const queryFunc = async () => {
-    const response = await axios.get(host + link, {
-      headers: { Authorization: token },
-    });
+    const response = await api.get(link);
     return response.data;
   };
 
@@ -21,11 +27,10 @@ export const useQueryGet = (link, key, queryOptions = {}) => {
   });
 };
 
-export const useQueryFetch = (link, method, options = {}) => {
-  const token = localStorage.getItem("token") ?? null;
+export const useQueryPatch = (link, method, options = {}) => {
   const mutation = useMutation(async (req) => {
-    const response = await axios[method](host + link, req?.body, {
-      headers: { Authorization: token, ...options.headers },
+    const response = await api[method](link, req?.body, {
+      headers: { ...options.headers },
     });
     return response.data;
   });
@@ -39,12 +44,8 @@ export const useQueryFetch = (link, method, options = {}) => {
 };
 
 export const useQueryDelete = (link) => {
-  const token = localStorage.getItem("token") ?? null;
-  const mutation = useMutation(async (body = null) => {
-    const response = await axios.delete(host + link, {
-      headers: { Authorization: token },
-      body,
-    });
+  const mutation = useMutation(async (_id) => {
+    const response = await api.delete(`${link}/${_id}`);
     return response.data;
   });
 
@@ -54,4 +55,35 @@ export const useQueryDelete = (link) => {
     error: mutation.error,
     deleteMutate: mutation.mutate,
   };
+};
+
+export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
+  const [dataChanged, setDataChanged] = useState(false);
+  const prevDataRef = useRef(null);
+
+  const queryFunc = async () => {
+    if (!token) return null;
+    const response = await api.get(link);
+    return response.data;
+  };
+
+  const { data, isLoading, error } = useQuery([key, host + link], queryFunc, {
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 3,
+    refetchInterval: 1000,
+    ...queryOptions,
+    onSuccess: (newData) => {
+      if (
+        prevDataRef.current &&
+        JSON.stringify(prevDataRef.current) !== JSON.stringify(newData)
+      ) {
+        setDataChanged(true);
+      } else {
+        setDataChanged(false);
+      }
+      prevDataRef.current = newData;
+    },
+  });
+
+  return { data, isLoading, error, dataChanged };
 };

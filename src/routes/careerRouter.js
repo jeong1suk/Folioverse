@@ -9,14 +9,9 @@ careerRouter.put("/", async function (req, res, next) {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
 
-    // req (request) 에서 데이터 가져오기
-    const yearly = req.body.yearly;
-    const job = req.body.job;
-
     const newcareer = await careerService.addCareer({
       user_id,
-      yearly,
-      job,
+      ...req.body,
     });
 
     res.status(201).json(newcareer);
@@ -64,12 +59,15 @@ careerRouter.get("/:id", async function (req, res, next) {
 // 해당 career 수정
 careerRouter.patch("/", async function (req, res, next) {
   try {
-    const _id = req.body["_id"];
+    const { _id } = req.body;
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const yearly = req.body.yearly ?? null;
     const job = req.body.job ?? null;
+    const isWeb = req.body.isWeb ?? null;
+    const position = req.body.position ?? null;
+    const tech_stack = req.body.tech_stack ?? null;
 
-    const toUpdate = { yearly, job };
+    const toUpdate = { yearly, job, isWeb, position, tech_stack };
 
     // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
     const career = await careerService.updateCareer({

@@ -1,12 +1,8 @@
-import { useState } from "react";
 // 정주현
 
-import { Link } from "react-router-dom";
-import styles from "./Header.module.css";
-import logoImgDark from "/logo/logo-dark.png";
-import UserNav from "./UserNav";
-import GuestNav from "./GuestNav";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LeftNav from "./LeftNav";
+import RightNav from "./RightNav";
 
 /** 테스트용 프로필 이미지 */
 
@@ -24,25 +20,9 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <header>
-      <nav>
-        <h1>
-          <Link to="/">
-            <img src={logoImgDark} alt="logo" className={styles.logo} />
-          </Link>
-        </h1>
-        <ul className={styles.navLeft}>
-          {isLogin && (
-            <li>
-              <Link to={`/my-page`}>마이페이지</Link>
-            </li>
-          )}
-          <li>
-            <Link to="/network">네트워크</Link>
-          </li>
-        </ul>
-        {isLogin ? <UserNav /> : <GuestNav />}
-      </nav>
+    <header className="w-full h-[70px] backdrop-blur fixed top-0 z-10 bg-[rgba(161,161,161,0.7)] dark:bg-[rgba(26,26,26,0.7)]">
+      <LeftNav isLogin={isLogin} />
+      <RightNav isLogin={isLogin} />
     </header>
   );
 };

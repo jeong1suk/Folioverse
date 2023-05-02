@@ -6,16 +6,20 @@ import checkToken from "../../middlewares/checkToken.js";
 
 const router = Router();
 
-router.post(
-  "/login-process",
-  (req, res, next) => {
-    loginAuthenticate(req, res, next);
-  },
-  async (req, res) => {
-    const { token } = req.user;
+router.post("/login-process", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const { user, token } = await loginAuthenticate(email, password);
+    req.user = user;
     res.json({ token });
+  } catch (err) {
+    if (err.status) {
+      res.status(err.status).json({ message: err.message });
+    } else {
+      next(err);
+    }
   }
-);
+});
 
 router.get("/is-login", checkToken, (req, res) => {
   res.send(true);

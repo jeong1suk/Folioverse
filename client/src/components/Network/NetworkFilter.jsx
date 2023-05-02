@@ -1,86 +1,82 @@
 // 정주현
 
-import { useEffect, useState } from "react";
 import styles from "./Network.module.css";
 
 function NetworkFilter({ sortBy, setSortBy }) {
-  const [notMajor, setNotMajor] = useState(false);
-  const [major, setMajor] = useState(false);
-  const [juniorDev, setJuniorDev] = useState(false);
-  const [seniorDev, setSeniorDev] = useState(false);
-  const [experiencedDev, setExperiencedDev] = useState(false);
+  function handleFilter(e) {
+    if (sortBy.includes(e.target.value)) {
+      console.log(e.target.value);
+      let newArr = [...sortBy];
+      newArr.splice(newArr.indexOf(e.target.value), 1);
+      return setSortBy(newArr);
+    } else {
+      console.log(e.target.value);
+      let newArr = [...sortBy];
+      newArr.push(e.target.value);
+      return setSortBy(newArr);
+    }
+  }
 
-  useEffect(() => {
-    let sort = "";
-    if (notMajor) sort = "notMajor ";
-    if (major) sort = "major ";
-    if (juniorDev) sort = "juniorDev ";
-    if (seniorDev) sort = "seniorDev ";
-    if (experiencedDev) sort = "experiencedDev ";
-    setSortBy(sort);
-  }, [notMajor, major, juniorDev, seniorDev, experiencedDev]);
-
+  const filterItemStyle =
+    "text-xs font-light text-[white] bg-[#bababa] px-[10px] py-[5px] mx-[5px] rounded-[10px] dark:bg-[#666666]";
+  const btnDisabled = `bg-transparent font-light text-sm text-black m-[3px] px-3.5 py-[3px] rounded-[20px] ${styles.disabledFilterBorder} dark:text-[#b5b5b5]`;
+  const btnEnabled = `bg-transparent font-light text-sm text-black m-[3px] px-3.5 py-[3px] rounded-[20px] ${styles.enabledFilterBorder} dark:text-[#b5b5b5] dark:bg-[rgba(26,26,26,1)]`;
   return (
-    <div className={styles.filterContainer}>
-      <h2>필터</h2>
-      <div className={styles.filterList}>
+    <div
+      className={`w-[1150px] h-auto mt-2.5 m-auto p-2.5 rounded-[5px] bg-transparent text-black dark:text-white`}
+    >
+      <h2 className="ml-[10px]">필터</h2>
+      <div className={`mt-[5px]`}>
         <button
-          className={notMajor ? styles.btnEnable : styles.btnDisable}
-          onClick={() => {
-            setNotMajor(!notMajor);
-            setMajor(false);
-          }}
+          className={sortBy.includes("비전공자") ? btnEnabled : btnDisabled}
+          value="비전공자"
+          onClick={handleFilter}
         >
           비전공자
         </button>
         <button
-          className={major ? styles.btnEnable : styles.btnDisable}
-          onClick={() => {
-            setNotMajor(false);
-            setMajor(!major);
-          }}
+          className={sortBy.includes("전공자") ? btnEnabled : btnDisabled}
+          value="전공자"
+          onClick={handleFilter}
         >
           전공자
         </button>
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         <button
-          className={juniorDev ? styles.btnEnable : styles.btnDisable}
-          onClick={() => {
-            setJuniorDev(!juniorDev);
-            setSeniorDev(false);
-            setExperiencedDev(false);
-          }}
+          className={sortBy.includes("신입개발자") ? btnEnabled : btnDisabled}
+          value="신입개발자"
+          onClick={handleFilter}
         >
           신입개발자
         </button>
         <button
-          className={seniorDev ? styles.btnEnable : styles.btnDisable}
-          onClick={() => {
-            setSeniorDev(!seniorDev);
-            setJuniorDev(false);
-            setExperiencedDev(false);
-          }}
+          className={sortBy.includes("경력개발자") ? btnEnabled : btnDisabled}
+          value="경력개발자"
+          onClick={handleFilter}
         >
           경력개발자
         </button>
         <button
-          className={experiencedDev ? styles.btnEnable : styles.btnDisable}
-          onClick={() => {
-            setExperiencedDev(!experiencedDev);
-            setJuniorDev(false);
-            setSeniorDev(false);
-          }}
+          className={sortBy.includes("숙련개발자") ? btnEnabled : btnDisabled}
+          value="숙련개발자"
+          onClick={handleFilter}
         >
           숙련개발자(8년 이상)
         </button>
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>기술스택 : </span>
-        <button className={styles.btnDisable}>드롭다운메뉴 여기추가</button>
-        <br></br>
-        {/* 예시코드(삭제예정) */}
-        <button className={styles.selectedStack}>
-          Javascript&nbsp;&nbsp;x
-        </button>
-        {/* 예시코드(삭제예정) */}
+      </div>
+      <div className="mt-[10px]">
+        {sortBy.length > 0 &&
+          sortBy.map((item, index) => {
+            return (
+              <button
+                key={index}
+                className={filterItemStyle}
+                onClick={handleFilter}
+                value={item}
+              >
+                {item}
+              </button>
+            );
+          })}
       </div>
     </div>
   );

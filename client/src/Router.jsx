@@ -1,6 +1,7 @@
 //담당 : 이승현
 
 import { Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage/HomePage";
 import UserSetting from "./components/UserSetting/UserSetting";
 import Network from "./components/Network/Network";
 import SignUp from "./components/SignUp/SignUp";
@@ -17,14 +18,10 @@ const Router = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/my-page" element={<UserPage />} />
-      <Route path="/error/*" element={<ErrPage />} />
-      <Route path="/user-page" element={<UserPage />} />
+      <Route path="/error/:type" element={<ErrPage />} />
+      <Route path="/user-page/:id" element={<UserPage />} />
     </Routes>
   );
-};
-
-const HomePage = () => {
-  return <div className="text-black dark:text-white">홈페이지</div>;
 };
 
 export default Router;

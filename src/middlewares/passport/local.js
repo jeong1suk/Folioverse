@@ -2,7 +2,7 @@
 
 import { Strategy } from "passport-local";
 import bcrypt from "bcrypt";
-import { UserModel } from "../db/schemas/user.js";
+import { UserModel } from "../../db/schemas/user.js";
 
 const verifyCallback = async (email, password, done) => {
   try {

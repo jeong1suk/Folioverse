@@ -1,8 +1,9 @@
 //담당 : 이승현
 
 import express from "express";
+import router from "./routes/index.js";
 import cors from "cors";
-import { initializePassport } from "./passport/index.js";
+import { initializePassport } from "./middlewares/passport/index.js";
 
 const app = express();
 
@@ -13,30 +14,16 @@ const passport = initializePassport();
 app.use(passport.initialize());
 
 app.get("/", (req, res) => res.send("Hello, Express"));
-
-import authRouter from "./routes/auth/index.js";
-import dummyRouter from "./routes/dummy/index.js";
-import imageRouter from "./routes/imageRouter.js";
-
-app.use("/api/auth", authRouter);
-app.use("/api/dummy", dummyRouter);
-app.use("/api/image", imageRouter);
-
-import userRouter from "./routes/userRouter.js";
-import projectRouter from "./routes/projectRouter.js";
-import certificateRouter from "./routes/certificateRouter.js";
-import awardRouter from "./routes/awardRouter.js";
-import educationRouter from "./routes/educationRouter.js";
-import checkToken from "./middlewares/checkToken.js";
-
-app.use("/api/user", userRouter);
-app.use("/api/project", checkToken, projectRouter);
-app.use("/api/education", checkToken, educationRouter);
-app.use("/api/certificate", checkToken, certificateRouter);
-app.use("/api/award", checkToken, awardRouter);
+app.use("/api", router);
 
 app.use((err, req, res, next) => {
   console.error(err);
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message || "내부 서버 오류",
+    },
+  });
 });
 
 app.listen(3000, () => {

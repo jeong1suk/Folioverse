@@ -5,9 +5,10 @@ import AddAward from "./AddAward";
 import AddCertificate from "./AddCertificate";
 import AddEducation from "./AddEducation";
 import AddProject from "./AddProject";
-import { useQueryDelete, useQueryFetch } from "../../../utils/useQuery";
+import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../../store/toastStore";
+import AddCareer from "./AddCareer";
 
 const AddData = ({
   editState,
@@ -16,11 +17,11 @@ const AddData = ({
   setAddState,
   title,
   link,
-  deleteLink,
-  method,
   setLink,
   education,
   setEducation,
+  career,
+  setCareer,
   project,
   setProject,
   award,
@@ -32,6 +33,9 @@ const AddData = ({
     switch (title) {
       case "학력":
         setLink("/education");
+        break;
+      case "직업 및 경력":
+        setLink("/career");
         break;
       case "프로젝트":
         setLink("/project");
@@ -45,129 +49,158 @@ const AddData = ({
     }
   }, [editState, addState]);
 
-  const { mutate } = useQueryFetch(link, method);
-  const { deleteMutate } = useQueryDelete(link + deleteLink);
+  const { mutate } = useQueryPatch(link, "put");
+  const { mutate: editMutate } = useQueryPatch(link, "patch");
+  const { deleteMutate } = useQueryDelete(link);
   const queryClient = useQueryClient();
 
   const setToast = useToastStore((state) => state.setToast);
 
+  const [isValid, setIsValid] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    switch (title) {
-      case "학력":
-        mutate(
-          { body: education },
-          { onSuccess: () => queryClient.invalidateQueries("getEducation") }
-        );
-        break;
-      case "프로젝트":
-        mutate(
-          { body: project },
-          { onSuccess: () => queryClient.invalidateQueries("getProject") }
-        );
-        break;
-      case "수상 이력":
-        mutate(
-          { body: award },
-          { onSuccess: () => queryClient.invalidateQueries("getAward") }
-        );
-        break;
-      case "자격증":
-        mutate(
-          { body: certificate },
-          { onSuccess: () => queryClient.invalidateQueries("getCertificate") }
-        );
-        break;
+
+    const handdleMutate = (func, msg, stateFunc) => {
+      switch (title) {
+        case "학력":
+          func(
+            { body: education },
+            { onSuccess: () => queryClient.invalidateQueries("getEducation") }
+          );
+          break;
+        case "직업 및 경력":
+          func(
+            { body: career },
+            { onSuccess: () => queryClient.invalidateQueries("getCareer") }
+          );
+          break;
+        case "프로젝트":
+          func(
+            { body: project },
+            { onSuccess: () => queryClient.invalidateQueries("getProject") }
+          );
+          break;
+        case "수상 이력":
+          func(
+            { body: award },
+            { onSuccess: () => queryClient.invalidateQueries("getAward") }
+          );
+          break;
+        case "자격증":
+          func(
+            { body: certificate },
+            { onSuccess: () => queryClient.invalidateQueries("getCertificate") }
+          );
+          break;
+      }
+      setToast(msg, "success");
+
+      stateFunc(false);
+    };
+
+    if (addState) {
+      handdleMutate(mutate, "데이터가 추가되었습니다", setAddState);
+    } else {
+      handdleMutate(editMutate, "데이터가 수정되었습니다", setEditState);
     }
-    setToast(
-      addState ? "데이터가 추가되었습니다" : "데이터가 수정되었습니다",
-      true
-    );
-    setEditState(false);
-    setAddState(false);
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
     switch (title) {
       case "학력":
-        deleteMutate(
-          { body: education },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getEducation"),
-          }
-        );
+        deleteMutate(education._id, {
+          onSuccess: () => queryClient.invalidateQueries("getEducation"),
+        });
+        break;
+      case "직업 및 경력":
+        deleteMutate(career._id, {
+          onSuccess: () => queryClient.invalidateQueries("getCareer"),
+        });
         break;
       case "프로젝트":
-        deleteMutate(
-          { body: project },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getProject"),
-          }
-        );
+        deleteMutate(project._id, {
+          onSuccess: () => queryClient.invalidateQueries("getProject"),
+        });
         break;
       case "수상 이력":
-        deleteMutate(
-          { body: award },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getAward"),
-          }
-        );
+        deleteMutate(award._id, {
+          onSuccess: () => queryClient.invalidateQueries("getAward"),
+        });
         break;
       case "자격증":
-        deleteMutate(
-          { body: certificate },
-          {
-            onSuccess: () => queryClient.invalidateQueries("getCertificate"),
-          }
-        );
+        deleteMutate(certificate._id, {
+          onSuccess: () => queryClient.invalidateQueries("getCertificate"),
+        });
         break;
     }
-    setToast("데이터가 삭제되었습니다", true);
+    setToast("데이터가 삭제되었습니다", "success");
     setEditState(false);
   };
 
   return (
     <form className={`${!addState && !editState && "hidden"} mt-3`}>
       {(title === "학력" && (
-        <AddEducation education={education} setEducation={setEducation} />
+        <AddEducation
+          setIsValid={setIsValid}
+          education={education}
+          setEducation={setEducation}
+        />
       )) ||
+        (title === "직업 및 경력" && (
+          <AddCareer
+            setIsValid={setIsValid}
+            career={career}
+            setCareer={setCareer}
+          />
+        )) ||
         (title === "프로젝트" && (
-          <AddProject project={project} setProject={setProject} />
+          <AddProject
+            setIsValid={setIsValid}
+            project={project}
+            setProject={setProject}
+          />
         )) ||
         (title === "수상 이력" && (
-          <AddAward award={award} setAward={setAward} />
+          <AddAward setIsValid={setIsValid} award={award} setAward={setAward} />
         )) ||
         (title === "자격증" && (
           <AddCertificate
+            setIsValid={setIsValid}
             certificate={certificate}
             setCertificate={setCertificate}
           />
         ))}
-      <button
-        className="border rounded py-1 px-2 mr-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-        onClick={onSubmit}
-      >
-        확인
-      </button>
-      <button
-        className="border rounded py-1 px-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-        onClick={(e) => {
-          e.preventDefault();
-          setAddState(false);
-          setEditState(false);
-        }}
-      >
-        취소
-      </button>
-      <button
-        className={`${
-          !editState && "hidden"
-        } border rounded py-1 px-2 ml-2 mt-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700`}
-        onClick={handleDelete}
-      >
-        삭제
-      </button>
+      <div className="mt-2">
+        <button
+          className={`text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ${
+            !isValid && "bg-slate-100 dark:bg-slate-700 cursor-not-allowed"
+          }`}
+          onClick={onSubmit}
+          disabled={!isValid}
+        >
+          확인
+        </button>
+        <button
+          className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+          onClick={(e) => {
+            e.preventDefault();
+            setAddState(false);
+            setEditState(false);
+          }}
+        >
+          취소
+        </button>
+        <button
+          className={`${
+            !editState && "hidden"
+          } text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900`}
+          onClick={handleDelete}
+        >
+          삭제
+        </button>
+      </div>
     </form>
   );
 };

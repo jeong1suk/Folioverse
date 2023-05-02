@@ -4,12 +4,13 @@ import { create } from "zustand";
 
 const toastStore = (set) => ({
   content: "",
-  type: true,
+  type: "success",
   isOpen: false,
-  setToast: (content, type) => {
-    set((state) => ({ content, type, isOpen: true }));
+  profileImage: "",
+  setToast: (content, type, profileImage) => {
+    set(() => ({ content, type, profileImage, isOpen: true }));
   },
-  closeToast: () => set((state) => ({ isOpen: false })),
+  closeToast: () => set(() => ({ isOpen: false })),
 });
 
 const useToastStore = create(toastStore);

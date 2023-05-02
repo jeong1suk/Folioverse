@@ -3,9 +3,9 @@
 import { create } from "zustand";
 
 const userStore = (set) => ({
-  id: "644be62dac170f1848d5eeb2",
+  id: "",
   setId: (userId) => {
-    set((state) => ({ userId }));
+    set((state) => ({ id: userId }));
   },
   closeToast: () => set((state) => ({ isOpen: false })),
 });

@@ -5,26 +5,21 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const loginAuthenticate = (req, res, next) => {
-  return passport.authenticate(
-    "local",
-    { session: false },
-    (err, user, info) => {
-      if (!user) {
-        return res.status(400).json({ message: info.message });
-      }
-
-      req.logIn(user, { session: false }, (err) => {
-        if (err) {
-          return next(err);
-        }
-        const { _id, email } = req.user;
+export const loginAuthenticate = (email, password) => {
+  return new Promise((resolve, reject) => {
+    passport.authenticate("local", { session: false }, (err, user, info) => {
+      if (err) {
+        reject(err);
+      } else if (!user) {
+        reject({ status: 400, message: info.message });
+      } else {
+        const { _id, email } = user;
         const payload = { _id, email };
-        req.user.token = signJWT(payload);
-        next();
-      });
-    }
-  )(req, res, next);
+        const token = signJWT(payload);
+        resolve({ user, token });
+      }
+    })({ body: { email, password } });
+  });
 };
 
 export const signJWT = (payload) => {

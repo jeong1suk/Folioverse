@@ -7,18 +7,23 @@ import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
-import SpeedDial from "./SpeedDial";
+import mvpSelectStore from "../../store/mvpSelectStore";
+import Career from "./ViewMvp/Career";
 
-const Mvp = ({ title }) => {
+const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
+
+  const educationState = mvpSelectStore((state) => state.education);
+  const projectState = mvpSelectStore((state) => state.project);
+  const careerState = mvpSelectStore((state) => state.career);
+  const awardState = mvpSelectStore((state) => state.award);
+  const certificateState = mvpSelectStore((state) => state.certificate);
 
   const location = useLocation();
   const { pathname } = location;
 
   const [link, setLink] = useState("");
-  const [deleteLink, setDeleteLink] = useState("");
-  const [method, setMethod] = useState("");
   const [education, setEducation] = useState({
     school_name: "",
     major: "",
@@ -31,6 +36,13 @@ const Mvp = ({ title }) => {
     date: "",
     tech_stack: "",
     link: "",
+  });
+  const [career, setCareer] = useState({
+    job: "",
+    yearly: 0,
+    isWeb: true,
+    position: "",
+    tech_stack: [],
   });
   const [award, setAward] = useState({
     name: "",
@@ -61,11 +73,26 @@ const Mvp = ({ title }) => {
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });
-    setMethod("put");
+    setCareer({
+      ...career,
+      job: "",
+      yearly: 0,
+      isWeb: true,
+      position: "",
+      tech_stack: [],
+    });
   };
 
   return (
-    <section className="border rounded p-5 mb-5">
+    <section
+      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
+        (title === "학력" && !educationState && "hidden") ||
+        (title === "직업 및 경력" && !careerState && "hidden") ||
+        (title === "프로젝트" && !projectState && "hidden") ||
+        (title === "수상 이력" && !awardState && "hidden") ||
+        (title === "자격증" && !certificateState && "hidden")
+      }`}
+    >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
         {(title === "학력" && (
@@ -73,8 +100,7 @@ const Mvp = ({ title }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
-            setMethod={setMethod}
-            setDeleteLink={setDeleteLink}
+            othersData={othersData}
           />
         )) ||
           (title === "프로젝트" && (
@@ -82,8 +108,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
             />
           )) ||
           (title === "수상 이력" && (
@@ -91,8 +116,7 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
             />
           )) ||
           (title === "자격증" && (
@@ -100,8 +124,15 @@ const Mvp = ({ title }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
-              setMethod={setMethod}
-              setDeleteLink={setDeleteLink}
+              othersData={othersData}
+            />
+          )) ||
+          (title === "직업 및 경력" && (
+            <Career
+              setEditState={setEditState}
+              career={career}
+              setCareer={setCareer}
+              othersData={othersData}
             />
           ))}
       </article>
@@ -109,7 +140,7 @@ const Mvp = ({ title }) => {
         onClick={onAdd}
         className={`${
           (addState || editState || pathname !== "/my-page") && "hidden"
-        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700`}
+        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:border-cyan-950`}
       >
         +
       </button>
@@ -120,11 +151,11 @@ const Mvp = ({ title }) => {
         addState={addState}
         setAddState={setAddState}
         link={link}
-        deleteLink={deleteLink}
-        method={method}
         setLink={setLink}
         education={education}
         setEducation={setEducation}
+        career={career}
+        setCareer={setCareer}
         project={project}
         setProject={setProject}
         award={award}
@@ -132,7 +163,6 @@ const Mvp = ({ title }) => {
         certificate={certificate}
         setCertificate={setCertificate}
       />
-      {pathname === "/my-page" && <SpeedDial />}
     </section>
   );
 };

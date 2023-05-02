@@ -1,34 +1,31 @@
 //담당 : 이승현
 
-import { Link, useLocation } from "react-router-dom";
-import { useQueryGet } from "../../utils/useQuery";
-import { useEffect, useState } from "react";
-import useUserStore from "../../store/userStore";
+import { Link } from "react-router-dom";
 import useModalStore from "../../store/modalStore";
 
-const Profile = () => {
-  const location = useLocation();
-  const { pathname } = location;
-  const [data, setData] = useState(null);
-  const userId = useUserStore((state) => state.id);
-  const { data: myData } = useQueryGet("/user/current", "getMyInfo");
-  const { data: others } = useQueryGet(`/user/${userId}`, "getOther");
-
-  useEffect(() => {
-    setData(pathname === "/my-page" ? myData : others);
-  }, [pathname, myData, others]);
+const Profile = ({ myInfo, othersInfo }) => {
+  const isToken = localStorage.getItem("token");
+  const profileSrc = othersInfo
+    ? othersInfo?.profile_image
+    : myInfo?.profile_image;
+  const name = othersInfo ? othersInfo?.name : myInfo?.name;
+  const email = othersInfo ? othersInfo?.email : myInfo?.email;
+  const description = othersInfo
+    ? othersInfo?.description
+    : myInfo?.description;
 
   return (
-    <aside className="basis-1/5 border rounded p-5 h-fit relative">
-      <MessageIcon pathname={pathname} id={data?._id} name={data?.name} />
-      <img className="w-20 rounded-full mx-auto mb-5" src="/cat.png" />
-      <p className="text-center text-xl font-bold dark:text-white">
-        {data?.name}
-      </p>
-      <p className="text-center text-neutral-500">{data?.email}</p>
-      <p className="text-center dark:text-neutral-200 my-3">
-        {data?.description}
-      </p>
+    <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
+      <div className={othersInfo && isToken ? "block" : "hidden"}>
+        <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
+      </div>
+      <img
+        className="w-20 rounded-full mx-auto mb-5"
+        src={profileSrc ?? "/profile/profile-dark.png"}
+      />
+      <p className="text-center text-xl font-bold dark:text-white">{name}</p>
+      <p className="text-center text-neutral-500">{email}</p>
+      <p className="text-center dark:text-neutral-200 my-3">{description}</p>
       <div className="flex flex-row text-neutral-500 my-5">
         <div className="basis-1/2 text-center">
           <div>10</div>
@@ -39,26 +36,28 @@ const Profile = () => {
           <div>좋아요</div>
         </div>
       </div>
-      <div
-        className={`${pathname === "/my-page" && "hidden"} flex justify-center`}
-      >
-        <ButtonGroup />
-      </div>
       <p className="text-center text-sm mt-3 text-blue-400">
         <Link
           className={`hover:bg-neutral-100 dark:hover:bg-neutral-700 p-5 rounded ${
-            pathname !== "/my-page" && "hidden"
+            othersInfo && "hidden"
           }`}
           to="/user-setting"
         >
           Edit
         </Link>
       </p>
+      <div
+        className={`${
+          othersInfo && isToken ? "block" : "hidden"
+        } flex justify-center`}
+      >
+        <ButtonGroup />
+      </div>
     </aside>
   );
 };
 
-const MessageIcon = ({ pathname, id, name }) => {
+const MessageIcon = ({ id, name }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <svg
@@ -67,9 +66,7 @@ const MessageIcon = ({ pathname, id, name }) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={`${
-        pathname === "/my-page" && "hidden"
-      } absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600`}
+      className="absolute right-5 rounded w-8 h-8 text-black dark:text-white cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
       onClick={() => setModal(id, "message", name)}
     >
       <path
@@ -84,8 +81,8 @@ const MessageIcon = ({ pathname, id, name }) => {
 const ButtonGroup = () => {
   return (
     <>
-      <button class="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-        <span class="relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      <button className="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+        <span className="relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -102,8 +99,8 @@ const ButtonGroup = () => {
           </svg>
         </span>
       </button>
-      <button class="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-        <span class="relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      <button className="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+        <span className="relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
