@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useAxiosGet } from "../../CustomHooks";
 import styles from "./SignUp.module.css";
 import { useNavigate } from "react-router-dom";
 const host = import.meta.env.VITE_SERVER_HOST;
@@ -13,7 +12,6 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
-  const navigate = useNavigate();
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -38,15 +36,12 @@ function SignUp() {
   };
 
   const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+    return email.toLowerCase().match(/^[^\s@]+@[^\s@]+.[^\s@]+$/);
   };
 
   const validatePassword = (password) => {
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/; // 최소 8자, 숫자와 문자 모두 포함
+    const regex =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d@$!%*#?&].{6,18}$/;
     return regex.test(password);
   };
 
@@ -68,28 +63,25 @@ function SignUp() {
 
     location.href = "/";
 
-    if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
-    }
+    // 회원가입 시 name, 이메일 형식, 비밀번호 형식이 다를 시 경고문구 처리
   };
 
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.fvhead}>회원가입</h1>
+        <h1 className={styles.fvhead}>폴리오버스로 여행 시작하기</h1>
       </div>
 
       <div className={styles.container}>
         <form className={styles.form}>
-          <label className={styles.label}>Username</label>
+          <label className={styles.label}>이름:</label>
           <input
             className={styles.inputTxt}
             type="text"
             placeholder="User"
             onChange={handleNameChange}
           />
-          <label className={styles.label}>Username or email address</label>
+          <label className={styles.label}>이메일:</label>
           <input
             className={styles.inputTxt}
             type="email"
@@ -108,7 +100,7 @@ function SignUp() {
           />
           {!isPasswordValid && isEmailValid && (
             <div className={styles.text}>
-              숫자, 문자, 특수문자 포함 8글자 이상 입력해주세요.
+              숫자, 문자, 특수문자 포함 6글자 이상 입력해주세요.
             </div>
           )}
           <br />
@@ -120,9 +112,9 @@ function SignUp() {
           />
           {isFormValid &&
             (passwordMatch ? (
-              <p className={styles.text}>Passwords match</p>
+              <p className={styles.text}>비밀번호 확인.</p>
             ) : (
-              <p className={styles.text}>Passwords do not match</p>
+              <p className={styles.text}>비밀번호가 맞지 않습니다.</p>
             ))}
           <br />
           <button className={styles.btn} type="submit" onClick={handleSubmit}>
