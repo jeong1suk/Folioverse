@@ -19,8 +19,8 @@ const UserSetting = () => {
   }, []);
 
   return (
-    <div className="py-2 px-12 sm:px-24 2xl:px-80 dark:bg-neutral-800 min-h-screen">
-      <div className="flex flex-row justify-between mb-4">
+    <div className="py-2 px-2 sm:px-24 md:px-32 lg:px-40 xl:px-60 2xl:px-80 dark:bg-neutral-800 min-h-screen">
+      <div className="flex flex-col sm:flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
           <img
             className="w-24 rounded-full"
@@ -36,13 +36,13 @@ const UserSetting = () => {
         </div>
         <Link
           to="/my-page"
-          className="my-auto p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
+          className="my-auto w-full sm:w-fit mx-auto sm:mx-0 p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
         >
           프로필로 돌아가기
         </Link>
       </div>
-      <div className="flex flex-row">
-        <nav className="basis-1/6 mr-5">
+      <div className="flex flex-col sm:flex-row">
+        <nav className="basis-1/6 mb-5 sm:mr-5">
           <ContentTab />
         </nav>
         <main className="wrapper basis-4/6">
@@ -165,7 +165,7 @@ const ContentTab = () => {
   ];
 
   return (
-    <ul>
+    <ul className="grid grid-cols-2 sm:grid-cols-1">
       {tabList.map((item) => (
         <li key={item.id} className="text-black dark:text-white">
           <Link

@@ -9,7 +9,7 @@ import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 
-const Mvp = ({ title, othersData }) => {
+const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -68,7 +68,7 @@ const Mvp = ({ title, othersData }) => {
 
   return (
     <section
-      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${
+      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
@@ -82,7 +82,7 @@ const Mvp = ({ title, othersData }) => {
             setEditState={setEditState}
             education={education}
             setEducation={setEducation}
-            othersData={othersData?.education}
+            othersData={othersData}
           />
         )) ||
           (title === "프로젝트" && (
@@ -90,7 +90,7 @@ const Mvp = ({ title, othersData }) => {
               setEditState={setEditState}
               project={project}
               setProject={setProject}
-              othersData={othersData?.project}
+              othersData={othersData}
             />
           )) ||
           (title === "수상 이력" && (
@@ -98,7 +98,7 @@ const Mvp = ({ title, othersData }) => {
               setEditState={setEditState}
               award={award}
               setAward={setAward}
-              othersData={othersData?.award}
+              othersData={othersData}
             />
           )) ||
           (title === "자격증" && (
@@ -106,7 +106,7 @@ const Mvp = ({ title, othersData }) => {
               setEditState={setEditState}
               certificate={certificate}
               setCertificate={setCertificate}
-              othersData={othersData?.certificate}
+              othersData={othersData}
             />
           ))}
       </article>
