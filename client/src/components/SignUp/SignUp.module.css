@@ -33,6 +33,14 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+.inputErr {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: rgba(255, 166, 0, 0.749);
+  color: red;
+}
 
 .btn[type="submit"] {
   padding: 10px;

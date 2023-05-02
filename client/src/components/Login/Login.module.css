@@ -3,7 +3,25 @@
 .root {
   padding-top: 100px;
 }
-
+.logo {
+  width: 100px;
+  height: auto;
+}
+.logo1 {
+  width: 50px;
+  height: auto;
+}
+.containerHead {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -15,6 +33,7 @@
 
 .fvhead {
   margin-top: 0;
+  padding-left: 20px;
   text-align: center;
 }
 
@@ -33,6 +52,14 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+.inputErr {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: rgba(255, 166, 0, 0.749);
+  color: red;
+}
 
 .btn[type="submit"] {
   padding: 10px;
@@ -44,22 +71,41 @@
   margin-top: 20px;
 }
 
-.btn {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #000;
+.btnGoogle {
+  background-color: #4285f4;
   color: #fff;
+  font-size: 14pt;
+  padding: 10px 20px;
+  border: none;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
   cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnKakao {
+  background-color: #fee500;
+  color: #3c1e1e;
+  font-size: 14pt;
+  padding: 10px 20px;
+  border: none;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn[type="submit"]:hover {
-  background-color: #333;
+.btnActive:hover {
+  background-color: blue;
+}
+.btnDisabled:hover {
+  cursor: wait;
 }
 
-.btn:hover {
+.btnSocial:hover {
   background-color: #333;
 }
 
