@@ -126,6 +126,16 @@ function Login() {
             카카오 로그인
           </button>
         </div>
+        <button
+          className={`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2 justify-items-start items`}
+        >
+          비밀번호 찾기
+        </button>
+        <button
+          className={`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2 justify-items-end items`}
+        >
+          회원가입
+        </button>
       </div>
     </>
   );
