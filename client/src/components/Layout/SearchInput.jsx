@@ -10,6 +10,8 @@ function SearchInput() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
+
   function handleInput(e) {
     setInputValue(e.target.value);
   }
@@ -22,8 +24,8 @@ function SearchInput() {
     >
       <input
         placeholder="검색어를 입력해주세요."
-        className="h-[40px] w-[300px] mx-[5px] float-right relative top-[50%] -translate-y-1/2 rounded-[10px]
-        bg-[rgba(161,161,161,0.7)] dark:bg-[rgba(26,26,26,0.9)] outline-none text-center text-[#212121] dark:text-[#b5b5b5]"
+        className={`h-[40px] w-[300px] mx-[5px] float-right relative top-[50%] -translate-y-1/2 rounded-[10px]
+        bg-[rgba(161,161,161,0.7)] dark:bg-[rgba(26,26,26,0.9)] outline-none text-center ${fontColorA}`}
         onChange={handleInput}
       />
       {isInputFocused && inputValue && (

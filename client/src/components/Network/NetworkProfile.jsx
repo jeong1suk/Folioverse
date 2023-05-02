@@ -11,7 +11,13 @@ import useUserStore from "../../store/userStore";
 import useThemeStore from "../../store/themeStore";
 
 function NetworkProfile({ name, email, description, profileId, profileImg }) {
-  const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+  const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
+  const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
+  const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
+  const fontColorC = "text-[#808080] dark:text-[#868686]";
+
+  const darkMode = `${boxColor} ${borderColor}`;
   const isDarkMode = useThemeStore((state) => state.theme);
   const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
 
@@ -20,15 +26,9 @@ function NetworkProfile({ name, email, description, profileId, profileImg }) {
   const setId = useUserStore((state) => state.setId);
   const id = useUserStore((state) => state.id);
 
-  const handleNav = () => {
-    setId(profileId);
-    console.log(id);
-    navigate(`/user-page`);
-  };
-
   return (
     <div
-      className={`${darkMode} relative w-[330px] h-[400px] mt-[30px] m-auto rounded-[5px] ${styles.networkProfileBox} dark:border-[#393939]`}
+      className={`${darkMode} relative w-[330px] h-[400px] mt-[30px] m-auto rounded-[5px] ${styles.networkProfileBox}`}
     >
       <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
       <img
@@ -50,17 +50,17 @@ function NetworkProfile({ name, email, description, profileId, profileImg }) {
         className={`w-[250px] absolute bottom-[80px] left-[40px] ${darkMode}`}
       >
         <h4
-          className={`overflow-hidden text-ellipsis  w-full whitespace-nowrap text-lg font-bold ${darkMode}`}
+          className={`overflow-hidden text-ellipsis  w-full whitespace-nowrap text-lg font-bold ${darkMode} ${fontColorA}`}
         >
           {name}
         </h4>
         <h5
-          className={`overflow-hidden text-ellipsis w-full text-[13px] font-normal ${darkMode}`}
+          className={`overflow-hidden text-ellipsis w-full text-[15px] font-normal ${darkMode} ${fontColorC}`}
         >
           {email}
         </h5>
         <p
-          className={`overflow-hidden text-ellipsis inline-block w-full h-[35px] text-[15px] mt-2.5 ${darkMode}`}
+          className={`overflow-hidden text-ellipsis inline-block w-full h-[35px] text-[15px] mt-2.5 ${darkMode} ${fontColorB}`}
         >
           {description ? description : "자기소개가 없습니다"}
         </p>

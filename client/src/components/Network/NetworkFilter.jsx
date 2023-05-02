@@ -1,7 +1,5 @@
 // 정주현
 
-import styles from "./Network.module.css";
-
 function NetworkFilter({ sortBy, setSortBy }) {
   function handleFilter(e) {
     if (sortBy.includes(e.target.value)) {
@@ -14,13 +12,17 @@ function NetworkFilter({ sortBy, setSortBy }) {
       return setSortBy(newArr);
     }
   }
-  const filterItemStyle =
-    "text-xs font-light text-[white] bg-[#bababa] px-[10px] py-[5px] mx-[5px] rounded-[10px] dark:bg-[#666666]";
-  const btnDisabled = `bg-transparent font-light text-sm text-black m-[3px] px-3.5 py-[3px] rounded-[20px] ${styles.disabledFilterBorder} dark:text-[#b5b5b5]`;
-  const btnEnabled = `bg-transparent font-light text-sm text-black m-[3px] px-3.5 py-[3px] rounded-[20px] ${styles.enabledFilterBorder} dark:text-[#b5b5b5] dark:bg-[rgba(26,26,26,1)]`;
+  const bgColor = "bg-white dark:bg-[#1a1a1a]";
+  const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
+  const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
+
+  const filterItemStyle = `text-xs font-light ${fontColorA} ${boxColor} px-[10px] py-[5px] mx-[5px] rounded-[10px]`;
+  const btnDisabled = `box-border border bg-transparent font-light text-sm m-[3px] px-3.5 py-[3px] rounded-[20px]  `;
+  const btnEnabled = `bg-transparent font-light text-sm m-[3px] px-3.5 py-[3px] rounded-[20px] box-border border ${borderColor} ${bgColor} ${fontColorA}`;
   return (
     <div
-      className={`w-[1150px] h-auto mt-2.5 m-auto p-2.5 rounded-[5px] bg-transparent text-black dark:text-white`}
+      className={`w-[1150px] h-auto mt-2.5 m-auto p-2.5 rounded-[5px] bg-transparent ${fontColorA}`}
     >
       <h2 className="ml-[10px]">필터</h2>
       <div className={`mt-[5px]`}>

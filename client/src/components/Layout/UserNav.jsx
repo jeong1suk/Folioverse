@@ -29,7 +29,7 @@ function UserNav() {
     >
       <img
         src={profileImg ? profileImg : profileDefault}
-        className={`w-[40px] h-[40px] rounded-[10px] invert-[20%] dark:invert-[0%]`}
+        className={`w-[40px] h-[40px] rounded-[10px]`}
         onClick={profileViewHandler}
       />
       {profileView && (

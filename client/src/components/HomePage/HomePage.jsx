@@ -1,3 +1,5 @@
+// 정주현
+
 import { useEffect, useRef } from "react";
 import FirstGreet from "./FirstGreet";
 import SecondSlide from "./SecondProfile";

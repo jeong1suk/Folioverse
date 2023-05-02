@@ -7,7 +7,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="bg-white dark:bg-[#000] h-[70px]"></div>
+      <div className="bg-white dark:bg-[#1a1a1a] h-[70px]"></div>
       <Router />
     </>
   );
