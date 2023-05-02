@@ -12,9 +12,4 @@ const CommentsModel = model("Comments", CommentsSchema);
 
 export { CommentsModel };
 
-// Table comments {
-//   id objectId [primary key]
-//   target_user ref[users]
-//   write_user ref[users]
-//   content varchar [not null]
-// }
+
