@@ -10,6 +10,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
+  const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -45,7 +47,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className={`bg-white dark:bg-[#212121]`}>
       <div
         className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-solid border-slate rounded-5 shadow-sm flex justify-center iteims-center`}
       >
@@ -55,14 +57,14 @@ function Login() {
           src="/logo/logo-light.png"
           alt="로고 이미지"
         />
-        <p className={`mx-auto`}>폴리오버스로 출발하기</p>
+        <p className={`${darkMode} mx-auto`}>폴리오버스로 출발하기</p>
       </div>
 
       <div
         className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-solid border-slate rounded-5 shadow-sm`}
       >
         <form className={`flex flex-col`}>
-          <label className={`font-bold mr-5`}>이메일</label>
+          <label className={`${darkMode} font-bold mr-5`}>이메일</label>
           <input
             className={`p-2 border border-solid border-slate rounded`}
             type="email"
@@ -70,7 +72,7 @@ function Login() {
             onChange={handleEmailChange}
           />
           <div>
-            <label htmlFor="password" className={`font-bold mr-5`}>
+            <label htmlFor="password" className={`${darkMode} font-bold mr-5`}>
               비밀번호:
             </label>
           </div>
@@ -104,7 +106,7 @@ function Login() {
         </form>
 
         <div className={`mt-4 flex flex-col items-center mb-2`}>
-          <p className={`mb-2`}>또는</p>
+          <p className={`${darkMode} mb-2`}>또는</p>
           <button
             className={`bg-blue-500 text-white text-lg px-10 py-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
           >
@@ -137,7 +139,7 @@ function Login() {
           회원가입
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
