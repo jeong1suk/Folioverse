@@ -46,7 +46,12 @@ function Login() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.containerHead}>
+        <img
+          className={styles.logo}
+          src="/logo/logo-light.png"
+          alt="로고 이미지"
+        />
         <p className={styles.fvhead}>폴리오버스로 출발하기</p>
       </div>
 
@@ -89,7 +94,22 @@ function Login() {
 
         <div className={styles.alternativeLogin}>
           <p className={styles.alternativeLoginP}>또는</p>
-          <button className={styles.btnSocial}>구글 로그인</button>
+          <button className={styles.btnGoogle}>
+            <img
+              className={styles.logo1}
+              src="/logo/logo-light.png"
+              alt="로고 이미지"
+            />
+            구글로 로그인
+          </button>
+          <button className={styles.btnKakao}>
+            <img
+              className={styles.logo1}
+              src="/logo/logo-light.png"
+              alt="로고 이미지"
+            />
+            카카오 로그인
+          </button>
         </div>
       </div>
     </>
