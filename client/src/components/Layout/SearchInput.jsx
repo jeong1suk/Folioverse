@@ -1,10 +1,12 @@
 // 정주현
-
+import useOnClickOutside from "./useOnClickOutside";
 import SearchResultView from "./SearchResultView";
 import styles from "./Header.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function SearchInput() {
+  const ref = useRef();
+  useOnClickOutside(ref, () => setIsInputFocused(false));
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -14,9 +16,9 @@ function SearchInput() {
 
   return (
     <div
+      ref={ref}
       className="h-[40px] w-[fit-content] mx-[5px] float-right relative top-[50%] -translate-y-1/2"
       onFocus={() => setIsInputFocused(true)}
-      onBlur={() => setIsInputFocused(false)}
     >
       <input
         placeholder="검색어를 입력해주세요."

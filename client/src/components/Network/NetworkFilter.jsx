@@ -5,18 +5,15 @@ import styles from "./Network.module.css";
 function NetworkFilter({ sortBy, setSortBy }) {
   function handleFilter(e) {
     if (sortBy.includes(e.target.value)) {
-      console.log(e.target.value);
       let newArr = [...sortBy];
       newArr.splice(newArr.indexOf(e.target.value), 1);
       return setSortBy(newArr);
     } else {
-      console.log(e.target.value);
       let newArr = [...sortBy];
       newArr.push(e.target.value);
       return setSortBy(newArr);
     }
   }
-
   const filterItemStyle =
     "text-xs font-light text-[white] bg-[#bababa] px-[10px] py-[5px] mx-[5px] rounded-[10px] dark:bg-[#666666]";
   const btnDisabled = `bg-transparent font-light text-sm text-black m-[3px] px-3.5 py-[3px] rounded-[20px] ${styles.disabledFilterBorder} dark:text-[#b5b5b5]`;
