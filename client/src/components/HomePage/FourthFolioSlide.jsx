@@ -40,7 +40,7 @@ function FourthFolioSlide() {
   return (
     <div
       ref={firstRef}
-      className="w-[1200px] h-[600px] relative left-[50%] translate-x-[-50%] opacity-0 transition-opacity duration-500 ease-in-out "
+      className="w-[1200px] h-[600px] relative left-[50%] translate-x-[-50%] opacity-0 transition-opacity duration-500 ease-in-out font-bold text-[50px] text-white"
     >
       <img
         src={fourthImg}
@@ -51,7 +51,7 @@ function FourthFolioSlide() {
         현재 <span className="text-[#9dcaf5]">Folioverse</span>에 등록된
       </h3>
       <h3 className="absolute top-16 left-[50%] w-[800px] translate-x-[-50%] ">
-        프로필을 확인해보세요.
+      <span className="text-[#9dcaf5]">프로필</span>을 확인해보세요.
       </h3>
       <div
         className={`${styles.userList}  overflow-y-hidden absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] w-[900px] h-[320px] px-[25px] mt-[20px] z-10 rounded-[10px]`}
