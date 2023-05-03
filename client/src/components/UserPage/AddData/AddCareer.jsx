@@ -110,7 +110,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
       paddingRight: 0,
       minWidth: "100%",
       borderRadius: "4px",
-      width: "250px", // Add this line to set a fixed width
+      width: "250px",
     }),
     menu: (provided) => ({
       ...provided,
