@@ -16,25 +16,25 @@ class Follow {
     return follows;
   }
 
-  static async findByOne({user_id, target_user}) {
-    const findFollow = await FollowModel.findOne( {user_id, target_user} );
+  static async findByOne({ user_id, target_user }) {
+    const findFollow = await FollowModel.findOne({ user_id, target_user });
     return findFollow;
   }
 
-  static async saveAndpush({user_id, target_user}) {
+  static async saveAndPush({ user_id, target_user }) {
     const createFollow = new FollowModel({
       user_id: user_id,
       target_user: target_user._id,
     });
     await createFollow.save();
 
-    target_user.follower_user.push(createFollow);
+    target_user.follower_user.push(user_id);
     await target_user.save();
     return target_user.follower_user.length;
   }
 
-  static async deleteAndpull(id, target_user) {
-    const deleteFollow = await FollowModel.deleteOne({ _id: id });
+  static async deleteAndPull(id, target_user) {
+    await FollowModel.deleteOne({ _id: id });
     target_user.follower_user.pull(target_user._id);
     await target_user.save();
     return target_user.follower_user.length;

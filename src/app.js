@@ -4,7 +4,7 @@ import express from "express";
 import router from "./routes/index.js";
 import cors from "cors";
 import { initializePassport } from "./middlewares/passport/index.js";
-import dailyMetrics from "./metrics/dailyMetrics.js";
+import dailyMetrics from "./dailyEvent/dailyMetrics.js";
 import cron from "node-cron";
 
 const app = express();
@@ -39,4 +39,3 @@ job.start();
 app.listen(3000, () => {
   console.log("3000번 포트에서 Express 서버 실행중");
 });
-
