@@ -192,7 +192,7 @@ const PostModal = ({ id }) => {
             </div>
           ))
         ) : (
-          <div className="p-5 dark:text-neutral-400">
+          <div className="p-5 dark:text-neutral-400 text-center">
             아직 작성하신 글이 없습니다
           </div>
         )}

@@ -55,7 +55,7 @@ const MessageBoxModal = () => {
         <span className="mr-8">보낸사람</span>
       </div>
       <div className="pt-3 pb-1">
-        {Array.isArray(message) ? (
+        {message?.length > 1 ? (
           message?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div key={item._id}>
               <h2>
@@ -116,7 +116,9 @@ const MessageBoxModal = () => {
             </div>
           ))
         ) : (
-          <div>받은 쪽지가 없습니다</div>
+          <div className="text-center mb-3 dark:text-neutral-400">
+            받은 쪽지가 없습니다
+          </div>
         )}
         <div
           className={`${

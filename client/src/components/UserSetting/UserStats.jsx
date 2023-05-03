@@ -5,12 +5,26 @@ import { CategoryScale, Chart } from "chart.js/auto";
 
 Chart.register(CategoryScale);
 
-const UserStats = () => {
+const UserStats = ({ data }) => {
   return (
     <div className="dark:text-white">
       <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-cyan-950">
         통계
       </h1>
+      <ul className="flex flex-row justify-evenly">
+        <li className="flex flex-col">
+          <span>총 방문자 수</span>
+          <span className="my-2 text-center">{data?.visit_count}</span>
+        </li>
+        <li className="flex flex-col">
+          <span>총 팔로워 수</span>
+          <span className="my-2 text-center">{data?.follower_user.length}</span>
+        </li>
+        <li className="flex flex-col">
+          <span>총 좋아요 수</span>
+          <span className="my-2 text-center">{data?.like_user.length}</span>
+        </li>
+      </ul>
       <div>
         <UserChart />
       </div>
