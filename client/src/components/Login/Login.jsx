@@ -62,7 +62,7 @@ function Login() {
         <form className={`flex flex-col`}>
           {/* <label className={`${darkMode} font-bold mr-5`}>이메일</label> */}
           <input
-            className={`p-2 border border-solid border-slate rounded-5`}
+            className={`p-2 border border-solid border-slate rounded`}
             type="email"
             placeholder="이메일"
             onChange={handleEmailChange}
@@ -71,7 +71,7 @@ function Login() {
             {/* <label className={`${darkMode} font-bold mr-5`}>비밀번호:</label> */}
           </div>
           <input
-            className={`p-2 mt-5 border border-solid border-slate rounded-5`}
+            className={`p-2 mt-5 border border-solid border-slate rounded`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
@@ -86,13 +86,10 @@ function Login() {
           )}
 
           <button
-            className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2`} ${
-              isEmailValid && isPasswordValid
-                ? `hover: bg-blue-500 cursor-pointer`
-                : `cursor-wait`
+            className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`} ${
+              isEmailValid && isPasswordValid && `bg-blue-500 cursor-pointer`
             }`}
             type="submit"
-            disabled={!isEmailValid || !isPasswordValid}
             onClick={handleSubmit}
           >
             로그인
@@ -102,7 +99,7 @@ function Login() {
         <div className={`mt-4 flex flex-col items-center mb-2`}>
           <p className={`${darkMode} mb-2`}>또는</p>
           <button
-            className={`bg-blue-500 text-white text-lg px-10 py-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+            className={`bg-blue-500 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
           >
             <img
               className={styles.logo1}
@@ -112,7 +109,7 @@ function Login() {
             구글로 로그인
           </button>
           <button
-            className={`bg-yellow-300 text-white text-lg px-10 py-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+            className={`bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
           >
             <img
               className={styles.logo1}
@@ -122,12 +119,18 @@ function Login() {
             카카오 로그인
           </button>
         </div>
-        <button
-          className={`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2 justify-items-start items`}
+        <a
+          href="/"
+          className={`inline-block mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
         >
           비밀번호 찾기
-        </button>
-        <a href="/sign-up">회원가입</a>
+        </a>
+        <a
+          href="/sign-up"
+          className={`inline-block mx-2 float-right text-cyan-500`}
+        >
+          회원가입
+        </a>
       </div>
     </div>
   );
