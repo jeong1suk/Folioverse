@@ -8,16 +8,17 @@ class DailyMetrics {
     return metrics;
   }
 
-  static async countUp(user_id, condition) {
+  static async upDateCount(user_id, condition, sign) {
     const metrics = await DailyMetricsModel.findOne({
       user_id,
       date: `${new Date().toISOString().substr(0, 10)}`,
     });
-    if (condition === "follow") {
-      metrics.follow_count += 1;
-    }
-    if (condition === "like") {
-      metrics.like_count += 1;
+
+    // condition === follow, visit, like
+    if (sign === "+") {
+      metrics[`${condition}_count`] += 1;
+    } else if (sign === "-") {
+      metrics[`${condition}_count`] -= i;
     }
     metrics.save();
   }

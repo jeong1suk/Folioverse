@@ -30,7 +30,7 @@ const FollowService = {
         target_user: targetUser,
       });
       // metrics 추가
-      await DailyMetrics.countUp(targetUserId, "follow");
+      await DailyMetrics.upDateCount(targetUserId, "follow", "+");
       return countfollow;
     }
   },
@@ -51,6 +51,8 @@ const FollowService = {
         target_user: targetUser,
         user_id: userId,
       });
+      // metrics 제거
+      await DailyMetrics.upDateCount(targetUserId, "follow", "-");
       return deletefollow;
     }
   },
