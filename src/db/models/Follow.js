@@ -1,4 +1,5 @@
 import { FollowModel } from "../schemas/follow.js";
+import { UserModel } from "../schemas/user.js";
 
 class Follow {
   static async create({ newFollow }) {
@@ -33,11 +34,15 @@ class Follow {
     return target_user.follower_user.length;
   }
 
-  static async deleteAndPull(id, target_user) {
+  static async deleteAndPull({ id, target_user, user_id }) {
     await FollowModel.deleteOne({ _id: id });
-    target_user.follower_user.pull(target_user._id);
-    await target_user.save();
-    return target_user.follower_user.length;
+    await UserModel.updateOne(
+      { _id: target_user._id },
+      { $pull: { follower_user: user_id } }
+    );
+
+    const updatedTargetUser = await UserModel.findById(target_user._id);
+    return updatedTargetUser.follower_user.length;
   }
 }
 
