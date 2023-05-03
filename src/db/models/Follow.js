@@ -28,15 +28,15 @@ class Follow {
     });
     await createFollow.save();
 
-    target_user.follower_user.push(user_id);
+    target_user.follower_user.push(user_id); //
     await target_user.save();
     return target_user.follower_user.length;
   }
 
-  static async deleteAndPull(id, target_user) {
+  static async deleteAndPull({id, target_user}) {
     await FollowModel.deleteOne({ _id: id });
-    target_user.follower_user.pull(target_user._id);
-    await target_user.save();
+    target_user.follower_user.pull(user_id._id); //
+    await target_user.save(); 
     return target_user.follower_user.length;
   }
 }
