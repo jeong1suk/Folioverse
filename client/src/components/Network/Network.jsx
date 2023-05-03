@@ -1,6 +1,6 @@
 // 정주현
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
@@ -11,18 +11,20 @@ function Network() {
   const [listCur, setListCur] = useState(30);
   const [sortBy, setSortBy] = useState([]);
 
+  const bgColor = "bg-white dark:bg-[#1a1a1a]";
+  const fontColorC = "text-[#808080] dark:text-[#868686]";
+
   // data가 불러와지지 않았을 때
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   // visibleData변수에 data에서 listCur만큼 slice한 값을 추가s
   const visibleData = data.slice(0, listCur);
-  console.log(data);
 
   return (
     <>
       <div
-        className={`bg-white dark:bg-[#212121] grid grid-rows-[repeat(3)] gap-5 w-full h-full relative m-0 p-0`}
+        className={`${bgColor} grid grid-rows-[repeat(3)] gap-5 w-full h-full relative m-0 p-0`}
       >
         <NetworkFilter sortBy={sortBy} setSortBy={setSortBy} />{" "}
         {/* filter 구현 필요 */}
@@ -40,7 +42,7 @@ function Network() {
         </div>
         {visibleData.length < data.length && (
           <button
-            className={`bg-white dark:bg-[#212121] text-center text-black dark:text-[#7d7c7c] font-light text-xl p-[5px]`}
+            className={`${bgColor} ${fontColorC} text-center font-light text-xl p-[5px]`}
             onClick={() => {
               setListCur(listCur + 30);
             }}

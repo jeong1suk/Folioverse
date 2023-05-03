@@ -17,12 +17,4 @@ const ProjectModel = model("Project", ProjectSchema);
 
 export { ProjectModel };
 
-// Table project {
-//   id objecrId [primary key]
-//   name varchar [not null]
-//   division varchar [not null]
-//   description varchar
-//   date varchar [not null]
-//   tech_stack varchar
-//   link varchar
-// }
+
