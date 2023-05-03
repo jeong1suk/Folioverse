@@ -1,5 +1,5 @@
 import { Like } from "../db/index.js";
-import { User } from "../db/index.js";
+import { User, DailyMetrics } from "../db/index.js";
 
 const LikeService = {
   //로그인한 유저인지, 아닌지 판별
@@ -30,6 +30,8 @@ const LikeService = {
         user_id: user._id,
         target_user: targetUser,
       });
+      // metrics 추가
+      await DailyMetrics.countUp(targetUserId, "like");
       return countlike;
     }
   },

@@ -26,7 +26,6 @@ class Like {
       target_user: target_user._id,
     });
     await createLike.save();
-
     target_user.like_user.push(user_id);
     await target_user.save();
     return target_user.like_user.length;
