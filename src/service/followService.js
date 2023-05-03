@@ -42,14 +42,15 @@ const FollowService = {
       target_user: targetUserId,
     });
 
-    console.log(follows)
-
-    const targetUser = await User.findById({ user_id: userId });
-
-    console.log(targetUser)
+    const targetUser = await User.findById({ user_id: targetUserId });
 
     if (follows) {
-      const deletefollow = await Follow.deleteAndPull(follows._id, targetUser);
+      const id = follows._id;
+      const deletefollow = await Follow.deleteAndPull({
+        id,
+        target_user: targetUser,
+        user_id: userId,
+      });
       return deletefollow;
     }
   },
