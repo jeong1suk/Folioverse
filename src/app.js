@@ -4,6 +4,8 @@ import express from "express";
 import router from "./routes/index.js";
 import cors from "cors";
 import { initializePassport } from "./middlewares/passport/index.js";
+import dailyMetrics from "./metrics/dailyMetrics.js";
+import cron from "node-cron";
 
 const app = express();
 
@@ -25,6 +27,14 @@ app.use((err, req, res, next) => {
     },
   });
 });
+app.get("/test/daily", async (req, res) => {
+  await dailyMetrics();
+  res.send("good test");
+});
+
+// 정각마다 dailyMetrics 모듈 실행
+const job = cron.schedule("0 0 * * *", dailyMetrics);
+job.start();
 
 app.listen(3000, () => {
   console.log("3000번 포트에서 Express 서버 실행중");

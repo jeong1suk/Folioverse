@@ -11,6 +11,7 @@ const UserSchema = new Schema(
     follower_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     profile_image: { type: String },
+    metrics: [{ type: Schema.Types.ObjectId, ref: "DailyMetrics" }],
   },
   { timestamps: true }
 );
@@ -18,5 +19,3 @@ const UserSchema = new Schema(
 const UserModel = model("User", UserSchema);
 
 export { UserModel };
-
-
