@@ -60,18 +60,17 @@ function Login() {
 
       <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto`}>
         <form className={`flex flex-col`}>
-          {/* <label className={`${darkMode} font-bold mr-5`}>이메일</label> */}
+          <label className={`${darkMode} font-bold p-2`}>이메일:</label>
           <input
             className={`p-2 border border-solid border-slate rounded`}
             type="email"
             placeholder="이메일"
             onChange={handleEmailChange}
           />
-          <div>
-            {/* <label className={`${darkMode} font-bold mr-5`}>비밀번호:</label> */}
-          </div>
+
+          <label className={`${darkMode} font-bold mt-2 p-2`}>비밀번호:</label>
           <input
-            className={`p-2 mt-5 border border-solid border-slate rounded`}
+            className={`p-2 border border-solid border-slate rounded`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
