@@ -65,10 +65,10 @@ awardRouter.patch("/", async function (req, res, next) {
   try {
     const _id = req.body["_id"];
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const yearly = req.body.yearly ?? null;
-    const job = req.body.job ?? null;
+    const name = req.body.name ?? null;
+    const date = req.body.date ?? null;
 
-    const toUpdate = { yearly, job };
+    const toUpdate = { name, date };
 
     // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
     const award = await awardService.updateAward({
