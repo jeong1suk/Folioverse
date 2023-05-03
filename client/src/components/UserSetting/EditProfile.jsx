@@ -129,7 +129,7 @@ const EditProfile = ({ data }) => {
           <h3 className="text-lg mb-3">프로필 사진</h3>
           <div className="grid justify-items-center relative">
             <img
-              className="rounded-full"
+              className="rounded-full object-cover w-24 h-24 lg:w-40 lg:h-40"
               src={
                 previewUrl
                   ? previewUrl
@@ -146,7 +146,7 @@ const EditProfile = ({ data }) => {
             />
             <label
               htmlFor="imageUpload"
-              className="border mt-3 sm:absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100 cursor-pointer dark:border-cyan-950 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+              className="border mt-3 lg:absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100 cursor-pointer dark:border-cyan-950 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
             >
               사진 변경
             </label>

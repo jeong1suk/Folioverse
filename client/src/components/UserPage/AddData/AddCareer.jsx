@@ -285,6 +285,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
             onChange={handleSelectChange}
             placeholder="기술 스택 선택"
             isMulti
+            closeMenuOnSelect={false}
             name="tech_stack"
             isSearchable={true}
             value={career.tech_stack.map((skill) =>
