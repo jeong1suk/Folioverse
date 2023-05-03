@@ -12,8 +12,13 @@ class Follow {
     return deletedFollow;
   }
 
-  static async findAll() {
-    const follows = await FollowModel.find({});
+  static async findAllByMe(id) {
+    const follows = await FollowModel.find({ user_id: id });
+    return follows;
+  }
+
+  static async findAllByThem(id) {
+    const follows = await FollowModel.find({ target_user: id });
     return follows;
   }
 

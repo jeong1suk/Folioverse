@@ -38,4 +38,10 @@ followRouter.delete("/:target_user_id", async (req, res) => {
   }
 });
 
+followRouter.get("/followers/:id", async (req, res) => {
+  const { id } = req.params;
+  const result = await FollowService.getAllFolowers(id);
+  res.json({ result });
+});
+
 export default followRouter;

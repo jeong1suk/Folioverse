@@ -2,12 +2,13 @@
 
 import { Link, useParams } from "react-router-dom";
 import useModalStore from "../../store/modalStore";
-import { useEffect } from "react";
 import { useQueryDelete, useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
+import { useEffect, useState } from "react";
 
-const Profile = ({ myInfo, othersInfo, followInfo }) => {
+const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
+  const params = useParams();
   const isToken = localStorage.getItem("token");
   const profileSrc = othersInfo
     ? othersInfo?.profile_image
@@ -18,13 +19,26 @@ const Profile = ({ myInfo, othersInfo, followInfo }) => {
     ? othersInfo?.description
     : myInfo?.description;
 
+  const [followCount, setFollowCount] = useState();
+  const [likeCount, setLikeCount] = useState();
+
+  useEffect(() => {
+    if (params?.id) {
+      setFollowCount(othersInfo?.follower_user.length);
+      setLikeCount(othersInfo?.like_user.length);
+    } else {
+      setFollowCount(myInfo?.follower_user.length);
+      setLikeCount(myInfo?.like_user.length);
+    }
+  }, [othersInfo, myInfo, params]);
+
   return (
     <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
       <div className={othersInfo && isToken ? "block" : "hidden"}>
         <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
       </div>
       <img
-        className="w-20 rounded-full mx-auto mb-5"
+        className="w-20 h-20 rounded-full mx-auto mb-5 object-cover"
         src={profileSrc ?? "/profile/profile-dark.png"}
       />
       <p className="text-center text-xl font-bold dark:text-white">{name}</p>
@@ -32,11 +46,11 @@ const Profile = ({ myInfo, othersInfo, followInfo }) => {
       <p className="text-center dark:text-neutral-200 my-3">{description}</p>
       <div className="flex flex-row text-neutral-500 my-5">
         <div className="basis-1/2 text-center">
-          <div>10</div>
+          <div>{followCount}</div>
           <div>팔로워</div>
         </div>
         <div className="basis-1/2 text-center">
-          <div>20</div>
+          <div>{likeCount}</div>
           <div>좋아요</div>
         </div>
       </div>
@@ -55,7 +69,7 @@ const Profile = ({ myInfo, othersInfo, followInfo }) => {
           othersInfo && isToken ? "block" : "hidden"
         } flex justify-center`}
       >
-        <ButtonGroup followInfo={followInfo} />
+        <ButtonGroup followInfo={followInfo} likeInfo={likeInfo} />
       </div>
     </aside>
   );
@@ -82,10 +96,13 @@ const MessageIcon = ({ id, name }) => {
   );
 };
 
-const ButtonGroup = ({ followInfo }) => {
+const ButtonGroup = ({ followInfo, likeInfo }) => {
   const params = useParams();
   const { mutate: doFollow } = useQueryPatch(`/follow/${params.id}`, "post");
   const { deleteMutate: unFollow } = useQueryDelete("/follow");
+
+  const { mutate: doLike } = useQueryPatch(`/like/${params.id}`, "post");
+  const { deleteMutate: unLike } = useQueryDelete("/like");
 
   const setToast = useToastStore((state) => state.setToast);
 
@@ -96,6 +113,8 @@ const ButtonGroup = ({ followInfo }) => {
       unFollow(params.id, {
         onSuccess: () => {
           queryClient.invalidateQueries("getFollowInfo");
+          queryClient.invalidateQueries("getMyInfo");
+          queryClient.invalidateQueries("getOthersInfo");
           setToast("팔로우를 취소하였습니다", "success");
         },
       });
@@ -105,7 +124,34 @@ const ButtonGroup = ({ followInfo }) => {
         {
           onSuccess: () => {
             queryClient.invalidateQueries("getFollowInfo");
+            queryClient.invalidateQueries("getMyInfo");
+            queryClient.invalidateQueries("getOthersInfo");
             setToast("유저를 팔로우하였습니다", "success");
+          },
+        }
+      );
+    }
+  };
+
+  const handleLike = () => {
+    if (likeInfo) {
+      unLike(params.id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries("getLikeInfo");
+          queryClient.invalidateQueries("getMyInfo");
+          queryClient.invalidateQueries("getOthersInfo");
+          setToast("좋아요를 취소하였습니다", "success");
+        },
+      });
+    } else {
+      doLike(
+        {},
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries("getLikeInfo");
+            queryClient.invalidateQueries("getMyInfo");
+            queryClient.invalidateQueries("getOthersInfo");
+            setToast("유저를 좋아합니다", "success");
           },
         }
       );
@@ -116,7 +162,7 @@ const ButtonGroup = ({ followInfo }) => {
     <>
       <button
         onClick={handleFollow}
-        className={`relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800`}
+        className="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
       >
         <span
           className={`relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 ${
@@ -139,8 +185,15 @@ const ButtonGroup = ({ followInfo }) => {
           </svg>
         </span>
       </button>
-      <button className="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-        <span className="relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      <button
+        onClick={handleLike}
+        className="relative mx-5 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+      >
+        <span
+          className={`relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 ${
+            likeInfo && "dark:bg-gradient-to-br"
+          }`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
