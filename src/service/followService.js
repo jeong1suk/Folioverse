@@ -1,4 +1,4 @@
-import { Follow } from "../db/index.js";
+import { DailyMetrics, Follow } from "../db/index.js";
 import { User } from "../db/index.js";
 
 const FollowService = {
@@ -24,10 +24,12 @@ const FollowService = {
     });
 
     if (!follows) {
-      const countfollow = await Follow.saveAndpush({
+      const countfollow = await Follow.saveAndPush({
         user_id: user._id,
         target_user: targetUser,
       });
+      // metrics 추가
+      await DailyMetrics.countUp(targetUserId, "follow");
       return countfollow;
     }
   },
@@ -41,7 +43,7 @@ const FollowService = {
     const targetUser = await User.findById({ user_id: targetUserId });
 
     if (follows) {
-      const deletefollow = await Follow.deleteAndpull(follows._id, targetUser);
+      const deletefollow = await Follow.deleteAndPull(follows._id, targetUser);
       return deletefollow;
     }
   },

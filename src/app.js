@@ -27,10 +27,10 @@ app.use((err, req, res, next) => {
     },
   });
 });
-app.get("/test/daily", async (req, res) => {
-  await dailyMetrics();
-  res.send("good test");
-});
+// app.get("/test/daily", async (req, res) => {
+//   await dailyMetrics();
+//   res.send("good test");
+// });
 
 // 정각마다 dailyMetrics 모듈 실행
 const job = cron.schedule("0 0 * * *", dailyMetrics);
