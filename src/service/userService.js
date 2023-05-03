@@ -1,13 +1,23 @@
 import { UserModel } from "../db/schemas/user.js";
 import bcrypt from "bcrypt";
 import { User } from "../db/models/User.js";
+import { CareerModel } from "../db/schemas/career.js";
 
 const userService = {
   /** 네트워크 창 클릭 요청 시 응답.
       전체 유저 정보를 DB에서 가져온다 */
   getUsers: async () => {
     const users = await UserModel.find({});
-    return users;
+    const usersWithCareers = await Promise.all(
+      users.map(async (user) => {
+        const career = await CareerModel.findOne({ user_id: user._id });
+        return {
+          ...user._doc,
+          career,
+        };
+      })
+    );
+    return usersWithCareers;
   },
 
   /** 회원정보수정 요청 시 응답.

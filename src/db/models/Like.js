@@ -15,31 +15,30 @@ class Like {
     const likes = await LikeModel.find({});
     return likes;
   }
-  static async findByOne( {user_id, target_user} ) {
-    const findlike = await LikeModel.findOne( {user_id, target_user} );
+  static async findByOne({ user_id, target_user }) {
+    const findlike = await LikeModel.findOne({ user_id, target_user });
     return findlike;
   }
 
-  static async saveAndpush({user_id, target_user}) {
+  static async saveAndPush({ user_id, target_user }) {
     const createLike = new LikeModel({
       user_id: user_id,
       target_user: target_user._id,
     });
     await createLike.save();
 
-    target_user.like_user.push(createLike);
+    target_user.like_user.push(user_id);
     await target_user.save();
     return target_user.like_user.length;
   }
 
-  static async deleteAndpull (id, target_user) {
+  static async deleteAndPull(id, target_user) {
     // 이미 좋아요한 기록이 있는 경우
-    const deleteLike = await Like.delete({ _id : id});
+    const deleteLike = await Like.delete({ _id: id });
     target_user.like_user.pull(target_user._id);
     await target_user.save();
     return target_user.like_user.length;
   }
 }
 
-export {Like} ;
-
+export { Like };

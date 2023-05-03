@@ -13,6 +13,7 @@ import Career from "./ViewMvp/Career";
 const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
   const [editState, setEditState] = useState(false);
+  const [resetCount, setResetCount] = useState(0);
 
   const educationState = mvpSelectStore((state) => state.education);
   const projectState = mvpSelectStore((state) => state.project);
@@ -73,14 +74,7 @@ const Mvp = ({ title, othersData, customClass }) => {
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });
-    setCareer({
-      ...career,
-      job: "",
-      yearly: 0,
-      isWeb: true,
-      position: "",
-      tech_stack: [],
-    });
+    setResetCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -162,6 +156,7 @@ const Mvp = ({ title, othersData, customClass }) => {
         setAward={setAward}
         certificate={certificate}
         setCertificate={setCertificate}
+        resetCount={resetCount}
       />
     </section>
   );
