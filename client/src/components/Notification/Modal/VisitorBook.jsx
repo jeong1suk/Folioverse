@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import Pagination from "./Pagination";
 
-const VisitorBook = ({ id, myId }) => {
+const VisitorBook = ({ id }) => {
   const { mutate } = useQueryPatch("/visitor_book", "post");
   const isToken = localStorage.getItem("token");
 
