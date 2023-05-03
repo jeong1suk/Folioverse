@@ -117,7 +117,7 @@ const VisitorBook = ({ id, myId }) => {
         </button>
       </div>
       <div>
-        {Array.isArray(bookData) ? (
+        {bookData?.length > 1 ? (
           bookData?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div
               key={item._id}
@@ -125,13 +125,23 @@ const VisitorBook = ({ id, myId }) => {
             >
               <div className="flex flex-row justify-between w-full">
                 <span>{item.description}</span>
+              </div>
+              <div className="flex flex-row items-center">
+                <img
+                  src={
+                    item.write_userProfileImage ?? "/profile/profile-dark.png"
+                  }
+                  alt="프로필 이미지"
+                  className="w-10 rounded-full mr-1"
+                />
+                <span>{item.write_userName}</span>
                 <span
                   className={`${
                     myInfo?._id === item.write_user ||
                     location.pathname === "/my-page"
                       ? ""
                       : "hidden"
-                  } cursor-pointer`}
+                  } cursor-pointer ml-3 mr-10`}
                   onClick={() => onDelete(item._id)}
                 >
                   <span className="sr-only">Close</span>
@@ -150,20 +160,12 @@ const VisitorBook = ({ id, myId }) => {
                   </svg>
                 </span>
               </div>
-              <div className="flex flex-row items-center">
-                <img
-                  src={
-                    item.write_userProfileImage ?? "/profile/profile-dark.png"
-                  }
-                  alt="프로필 이미지"
-                  className="w-10 rounded-full mr-1"
-                />
-                <span>{item.write_userName}</span>
-              </div>
             </div>
           ))
         ) : (
-          <div>작성된 방명록이 없습니다</div>
+          <div className="text-center p-5 dark:text-neutral-400">
+            작성된 방명록이 없습니다
+          </div>
         )}
         <div
           className={`${

@@ -54,6 +54,30 @@ const FollowService = {
       return deletefollow;
     }
   },
+
+  getAllFolowers: async (id) => {
+    const followByMe = await Follow.findAllByMe(id);
+    const followByThem = await Follow.findAllByThem(id);
+
+    const followByMeUsers = await Promise.all(
+      followByMe.map(async (follow) => {
+        let target_user = follow.target_user;
+        const targetUser = await User.findById({ user_id: target_user });
+        return targetUser;
+      })
+    );
+
+    // Fetch user_id information for each element in followByThem
+    const followByThemUsers = await Promise.all(
+      followByThem.map(async (follow) => {
+        let user_id = follow.user_id;
+        const user = await User.findById({ user_id });
+        return user;
+      })
+    );
+
+    return { followByMeUsers, followByThemUsers };
+  },
 };
 
 export { FollowService };
