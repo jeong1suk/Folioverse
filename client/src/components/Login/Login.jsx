@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import styles from "./Login.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 function Login() {
@@ -11,6 +10,9 @@ function Login() {
   const [errMessage, setErrMessage] = useState("");
 
   const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
+  const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
+  const fontColorC = "text-[#808080] dark:text-[#868686]";
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
@@ -47,20 +49,23 @@ function Login() {
   };
 
   return (
-    <div className={`bg-white dark:bg-[#212121]`}>
+    <div className={`bg-white dark:bg-[#212121] min-h-screen`}>
       <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto shadow-sm`}>
-        {/* max-w-800px mx-auto p-20 border border-gray-300 rounded-lg shadow-sm flex justify-center items-center */}
         <img
           className={`w-20 h-auto mx-auto`}
           src="/logo/logo-light.png"
           alt="로고 이미지"
         />
-        <p className={`${darkMode} mt-2 text-center`}>폴리오버스로 출발하기</p>
+        <p className={`${darkMode} mt-2 text-2xl text-center`}>
+          폴리오버스로 출발하기
+        </p>
       </div>
 
-      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto`}>
+      <div className={`max-w-xl h-auto mx-auto mb-auto`}>
         <form className={`flex flex-col`}>
-          <label className={`${darkMode} font-bold p-2`}>이메일:</label>
+          <label className={`${darkMode} ${fontColorA} font-bold p-2`}>
+            이메일:
+          </label>
           <input
             className={`p-2 border border-solid border-slate rounded`}
             type="email"
@@ -68,9 +73,11 @@ function Login() {
             onChange={handleEmailChange}
           />
 
-          <label className={`${darkMode} font-bold mt-2 p-2`}>비밀번호:</label>
+          <label className={`${darkMode} ${fontColorA} font-bold mt-2 p-2`}>
+            비밀번호:
+          </label>
           <input
-            className={`p-2 border border-solid border-slate rounded`}
+            className={`p-2 border border-solid border-slate rounde`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
@@ -95,7 +102,7 @@ function Login() {
           </button>
         </form>
 
-        <div className={`mt-4 flex flex-col items-center mb-2`}>
+        {/* <div className={`mt-4 flex flex-col items-center mb-2`}>
           <p className={`${darkMode} mb-2`}>또는</p>
           <button
             className={`bg-blue-500 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
@@ -103,7 +110,7 @@ function Login() {
             <img
               className={styles.logo1}
               src="/logo/logo-light.png"
-              alt="로고 이미지"
+              alt="Google"
             />
             구글로 로그인
           </button>
@@ -117,16 +124,16 @@ function Login() {
             />
             카카오 로그인
           </button>
-        </div>
+        </div> */}
         <a
           href="/"
-          className={`inline-block mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
+          className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
         >
           비밀번호 찾기
         </a>
         <a
           href="/sign-up"
-          className={`inline-block mx-2 float-right text-cyan-500`}
+          className={`inline-block mt-2 mx-2 float-right text-cyan-500`}
         >
           회원가입
         </a>
