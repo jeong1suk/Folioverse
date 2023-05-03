@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
@@ -14,11 +16,11 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
     setEditState(true);
     setCareer({
       ...career,
-      job: item.name,
-      yearly: item.division,
-      isWeb: item.description,
-      position: item.date,
-      tech_stack: item.tech_stack,
+      job: "",
+      yearly: "",
+      isWeb: false,
+      position: "",
+      tech_stack: [],
       _id: item._id,
     });
   };
@@ -35,7 +37,7 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
               <span
                 className={`text-lg dark:text-${!isPdf && "white"} leading-10`}
               >
-                직업 : {item.job}({item.yearly})
+                직업 : {item.job}
               </span>
               <button
                 className={`text-blue-400 p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
@@ -51,6 +53,13 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
                 !isPdf && "neutral-600"
               } leading-10`}
             >
+              {item.yearly}
+            </p>
+            <p
+              className={`text-sm text-neutral-400 dark:text-${
+                !isPdf && "neutral-600"
+              } ${!item.position && "hidden"} leading-10`}
+            >
               개발 분야
             </p>
             <p
@@ -58,12 +67,13 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
                 !isPdf && "neutral-300"
               } leading-10 whitespace-pre-wrap`}
             >
-              {item.isWeb}({item.position})
+              {item.isWeb && "웹 개발자"}
+              {item.isWeb ? `(${item.position})` : `${item.position}`}
             </p>
             <p
               className={`text-sm text-neutral-400 dark:text-${
                 !isPdf && "neutral-600"
-              } leading-10`}
+              } ${item.tech_stack.length === 0 && "hidden"} leading-10`}
             >
               기술 스택
             </p>
@@ -72,7 +82,11 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              {item.tech_stack}
+              {item.tech_stack.map((stack) => (
+                <span key={stack} className="mx-1">
+                  {stack}
+                </span>
+              ))}
             </p>
           </div>
         </li>

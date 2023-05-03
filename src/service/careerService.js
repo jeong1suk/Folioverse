@@ -1,7 +1,7 @@
 import { Career } from "../db/index.js";
 
 const careerService = {
-  addCareer: async ({ user_id, data }) => {
+  addCareer: async ({ user_id, ...data }) => {
     // 따로 확인할 조건이 없어보여 컬렉션 추가 코드만 작성
     const newCareer = { user_id, ...data };
     const creatednewCareer = await Career.create({ newCareer });
@@ -42,6 +42,21 @@ const careerService = {
     if (toUpdate.job) {
       const fieldToUpdate = "job";
       const newValue = toUpdate.job;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.isWeb || !toUpdate.isWeb) {
+      const fieldToUpdate = "isWeb";
+      const newValue = toUpdate.isWeb;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.position || !toUpdate.position) {
+      const fieldToUpdate = "position";
+      const newValue = toUpdate.position;
+      career = await Career.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.tech_stack || !toUpdate.tech_stack) {
+      const fieldToUpdate = "tech_stack";
+      const newValue = toUpdate.tech_stack;
       career = await Career.update({ _id, fieldToUpdate, newValue });
     }
     return career;

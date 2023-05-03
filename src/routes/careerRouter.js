@@ -8,10 +8,15 @@ careerRouter.put("/", async function (req, res, next) {
   try {
     // 토큰에서 받아올 수 있게 수정
     const user_id = req.user._id;
+    const { job, yearly, isWeb, position, tech_stack } = req.body;
 
     const newcareer = await careerService.addCareer({
       user_id,
-      ...req.body,
+      job,
+      yearly,
+      isWeb,
+      position,
+      tech_stack,
     });
 
     res.status(201).json(newcareer);

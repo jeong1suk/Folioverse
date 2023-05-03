@@ -11,9 +11,10 @@ import projectRouter from "./projectRouter.js";
 import certificateRouter from "./certificateRouter.js";
 import awardRouter from "./awardRouter.js";
 import educationRouter from "./educationRouter.js";
-import likeRouter  from "./likeRouter.js";
+import likeRouter from "./likeRouter.js";
 import followRouter from "./followRouter.js";
 import careerRouter from "./careerRouter.js";
+import visitorBookRouter from "./visitorBookRouter.js";
 
 import othersRouter from "../extra/others.js";
 import checkToken from "../middlewares/checkToken.js";
@@ -30,8 +31,9 @@ router.use("/project", checkToken, projectRouter);
 router.use("/education", checkToken, educationRouter);
 router.use("/certificate", checkToken, certificateRouter);
 router.use("/award", checkToken, awardRouter);
+router.use("/visitor_book", visitorBookRouter);
 router.use("/like", checkToken, likeRouter);
 router.use("/follow", checkToken, followRouter);
-router.use("/career", checkToken, careerRouter); 
+router.use("/career", checkToken, careerRouter);
 
 export default router;
