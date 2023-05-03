@@ -33,7 +33,7 @@ const UserPage = () => {
   const { data: othersInfo } = othersInfoQuery;
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") && !id) {
       navigate("/error/auth");
     }
   }, []);
@@ -57,7 +57,7 @@ const UserPage = () => {
             <MessageBoxButton id={myInfo?._id} />
           </div>
           <div>
-            <VisitorBookButton othersId={id} myId={myInfo?._id} />
+            <VisitorBookButton othersId={id} />
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = ({ id, myId }) => {
+const MessageBoxButton = ({ id }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
@@ -106,13 +106,13 @@ const MessageBoxButton = ({ id, myId }) => {
   );
 };
 
-const VisitorBookButton = ({ othersId, myId }) => {
+const VisitorBookButton = ({ othersId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
       onClick={() => {
-        setModal(othersId, "visitorBook", "", myId);
+        setModal(othersId, "visitorBook");
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}

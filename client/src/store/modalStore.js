@@ -7,10 +7,9 @@ const modalStore = (set) => ({
   id: "",
   type: "",
   name: "",
-  id2: "",
   toggleOpen: () => set((state) => ({ isOpen: !state.isOpen })),
-  setModal: (id, type, name, id2) =>
-    set((state) => ({ id, type, name, id2, isOpen: true })),
+  setModal: (id, type, name) =>
+    set((state) => ({ id, type, name, isOpen: true })),
 });
 
 const useModalStore = create(modalStore);

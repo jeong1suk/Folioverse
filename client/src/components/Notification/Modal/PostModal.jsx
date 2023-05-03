@@ -6,6 +6,7 @@ import {
 } from "./../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import { useLocation } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const PostModal = ({ id }) => {
   const [expandedPostId, setExpandedPostId] = useState(null);
@@ -14,6 +15,12 @@ const PostModal = ({ id }) => {
   const { deleteMutate } = useQueryDelete("/post");
   const { mutate: editMutate } = useQueryPatch("/post", "patch");
   const queryClient = useQueryClient();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const location = useLocation();
   const { pathname } = location;
@@ -74,17 +81,25 @@ const PostModal = ({ id }) => {
     );
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <>
       <h1 className="pt-5 pl-5 dark:text-neutral-200 text-xl">글 목록</h1>
+      <div className="flex flex-row justify-between mt-7 dark:text-neutral-400 pb-3">
+        <span className="ml-6">제목</span>
+        <span className="mr-8">작성일</span>
+      </div>
       <div data-accordion="collapse" className="pt-3 pb-1">
         {Array.isArray(posts) ? (
-          posts?.map((item) => (
+          posts?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div key={item._id}>
               <h2>
                 <button
                   type="button"
-                  className="flex items-center justify-between w-full p-5 font-medium text-left text-neutral-500 border border-b-0 border-neutral-200 focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800 dark:border-neutral-700 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  className="flex items-center justify-between w-full p-5 font-medium text-left text-neutral-500 border border-b-0 border-neutral-200 focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800 dark:border-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                   data-accordion-target="#accordion-collapse-body-2"
                   aria-expanded="false"
                   aria-controls="accordion-collapse-body-2"
@@ -212,6 +227,12 @@ const PostModal = ({ id }) => {
           </button>
         </div>
       </div>
+      <Pagination
+        content={posts}
+        handlePageChange={handlePageChange}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+      />
     </>
   );
 };
