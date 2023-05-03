@@ -14,6 +14,8 @@ function SignUp() {
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
+  const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   // 비밀번호 유효성검사, 숫자 문자 8글자 이상
@@ -49,10 +51,34 @@ function SignUp() {
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
 
-  const isFormValid = isEmailValid && isPasswordValid;
+  // const isFormValid = isEmailValid && isPasswordValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setErrMessage("");
+
+    if (name.trim() === "") {
+      setErrMessage("이름을 입력해 주세요.");
+      return;
+    }
+
+    if (!isEmailValid) {
+      setErrMessage("유효한 이메일 주소를 입력해주세요.");
+      return;
+    }
+
+    if (!isPasswordValid) {
+      setErrMessage(
+        "비밀번호는 숫자, 문자, 특수문자를 포함한 6자 이상이여야 합니다."
+      );
+      return;
+    }
+
+    if (!passwordMatch) {
+      setErrMessage("비밀번호가 일치하지 않습니다.");
+      return;
+    }
 
     try {
       const result = await axios.post(host + "/auth/signup", {
@@ -68,80 +94,92 @@ function SignUp() {
       // console.log(err.response.data.message);
       setErrMessage(err.response.data.message);
     }
-
-    // 회원가입 시 name, 이메일 형식, 비밀번호 형식이 다를 시 경고문구 처리
   };
 
-  const isSumbitDisabled = !(isEmailValid && isPasswordValid && passwordMatch);
   return (
-    <>
-      <div className={styles.container}>
-        <h1 className={styles.fvhead}>폴리오버스로 여행 시작하기</h1>
+    <div className={`bg-white dark:bg-[#212121]`}>
+      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto shadow-sm`}>
+        <h1 className={`${darkMode} mt-2 text-center`}>
+          폴리오버스로 여행 시작하기
+        </h1>
       </div>
 
-      <div className={styles.container}>
-        <form className={styles.form}>
-          <label className={styles.label}>이름:</label>
+      <div
+        className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-slate rounded`}
+      >
+        <form className={`flex flex-col`}>
+          <label className={`${darkMode} font-bold p-2`}>이름:</label>
           <input
-            className={styles.inputTxt}
+            className={`p-2 border border-solid border-slate rounded`}
             type="text"
-            placeholder="User"
+            placeholder="이름"
             onChange={handleNameChange}
           />
-          <label className={styles.label}>이메일:</label>
+          <label className={`${darkMode} font-bold p-2`}>이메일:</label>
           <input
-            className={styles.inputTxt}
+            className={`p-2 border border-solid border-slate rounded`}
             type="email"
+            placeholder="이메일"
             onChange={handleEmailChange}
           />
-          {errMessage && (
-            <div className={styles.text}>이메일 형식이 올바르지 않습니다.</div>
-          )}
-          <br />
-          {isEmailValid && <label className={styles.label}>Password</label>}
+          {/* {!isEmailValid && (
+            <div className={`mt-2 text-red-500`}>
+              이메일 형식이 올바르지 않습니다.
+            </div>
+          )} */}
+
+          <label className={`${darkMode} font-bold p-2`}>비밀번호:</label>
           <input
-            className={styles.inputPwd}
+            className={`p-2 border border-solid border-slate rounded`}
             type="password"
-            placeholder="Password"
+            placeholder="비밀번호"
             onChange={handlePasswordChange}
           />
-          {!isPasswordValid && isEmailValid && errMessage && (
-            <div className={styles.text}>
+          {/* {!isPasswordValid && (
+            <div className={`mt-2 text-red-500`}>
               숫자, 문자, 특수문자 포함 6글자 이상 입력해주세요.
             </div>
-          )}
-          <br />
+          )} */}
+
+          <label className={`${darkMode} font-bold p-2`}>비밀번호 확인:</label>
           <input
-            className={styles.inputPwd}
+            className={`p-2 border border-solid border-slate rounded`}
             type="password"
-            placeholder="Password check"
+            placeholder="비밀번호 확인"
             onChange={handleConfirmPasswordChange}
           />
-          {isFormValid &&
-            errMessage &&
-            (passwordMatch ? (
-              <p className={styles.text}>비밀번호 일치.</p>
-            ) : (
-              <p className={styles.text}>비밀번호가 맞지 않습니다.</p>
-            ))}
-          <br />
-          {errMessage && <div className={styles.inputErr}>{errMessage}</div>}
+          {/* {passwordMatch ? (
+            <p></p>
+          ) : (
+            <p className={`mt-2 text-red-500`}>비밀번호가 맞지 않습니다.</p>
+          )} */}
+
+          {errMessage && (
+            <div
+              className={`p-2 border border-solid border-slate rounded text-center bg-yellow-300 text-red-500`}
+            >
+              {errMessage}
+            </div>
+          )}
           <button
-            className={styles.btn}
+            className={`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`}
             type="submit"
             onClick={handleSubmit}
-            disabled={isSumbitDisabled}
           >
             회원가입
           </button>
         </form>
       </div>
 
-      <div className={styles.container}>
-        <p className={styles.fvhead}>Welcome to Folioverse</p>
-        <p className={styles.fvhead}>Let's begin the adventure</p>
+      <div
+        className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-slate rounded`}
+      >
+        <p className={`${darkMode} mt-2 text-center`}>Welcome to Folioverse</p>
+        <p className={`${darkMode} mt-2 text-center`}>
+          Let's begin the adventure
+        </p>
       </div>
-    </>
+    </div>
   );
 }
 
