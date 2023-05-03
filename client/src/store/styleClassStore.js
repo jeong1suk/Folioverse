@@ -11,6 +11,7 @@ const styleClassStore = (set) => ({
   fontColorC: "text-[#808080] dark:text-[#868686]",
   pointColor:
     "bg-[#69b1ff] dark:bg-[#407bb3] dark:text-[#d4d4d4] text-white hover:bg-[#5581ab] hover:text-[#ebebeb] dark:hover:bg-[#2c4e6e] dark:hover:text-white",
+  transitionStyle: "transition ease-in-out duration-[0.3s]",
 });
 
 const useStyleClassStore = create(styleClassStore);

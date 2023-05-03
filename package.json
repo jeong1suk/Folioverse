@@ -23,6 +23,8 @@
     "multer-s3": "^2.10.0",
     "node-cron": "^3.0.2",
     "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-kakao": "^1.0.1",
     "passport-local": "^1.0.0",
     "stream": "^0.0.2",
     "uuid": "^9.0.0"
