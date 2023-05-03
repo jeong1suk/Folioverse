@@ -5,7 +5,7 @@ import { educationService } from "../service/educationService.js";
 import { projectService } from "../service/projectService.js";
 import { awardService } from "../service/awardService.js";
 import { certificateService } from "../service/certificateService.js";
-import { UserModel } from "../db/schemas/user.js";
+import { upVisit } from "../service/othersService.js";
 
 const router = Router();
 
@@ -15,9 +15,7 @@ const getUserInfo = async (service, method, user_id) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-
-  const { visit_count } = await UserModel.findById({ _id: id });
-  await UserModel.updateOne({ _id: id }, { visit_count: visit_count + 1 });
+  await upVisit(id);
 
   const services = [
     { service: educationService, method: "getUserEducationInfo" },

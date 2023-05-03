@@ -16,7 +16,7 @@ import followRouter from "./followRouter.js";
 import careerRouter from "./careerRouter.js";
 import visitorBookRouter from "./visitorBookRouter.js";
 
-import othersRouter from "../extra/others.js";
+import othersRouter from "./othersRouter.js";
 import checkToken from "../middlewares/checkToken.js";
 
 const router = Router();
