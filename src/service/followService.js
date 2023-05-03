@@ -24,7 +24,7 @@ const FollowService = {
     });
 
     if (!follows) {
-      const countfollow = await Follow.saveAndPush({
+      const countfollow = await Follow.saveAndpush({
         user_id: user._id,
         target_user: targetUser,
       });
@@ -41,7 +41,7 @@ const FollowService = {
     const targetUser = await User.findById({ user_id: targetUserId });
 
     if (follows) {
-      const deletefollow = await Follow.deleteAndPull(follows._id, targetUser);
+      const deletefollow = await Follow.deleteAndpull(follows._id, targetUser);
       return deletefollow;
     }
   },

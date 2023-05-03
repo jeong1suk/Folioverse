@@ -23,8 +23,8 @@ class Follow {
 
   static async saveAndPush({ user_id, target_user }) {
     const createFollow = new FollowModel({
-      user_id: user_id,
-      target_user: target_user._id,
+      user_id,
+      target_user,
     });
     await createFollow.save();
 

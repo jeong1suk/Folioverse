@@ -28,9 +28,14 @@ const UserPage = () => {
     enabled: !!id,
   });
 
+  const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
+    enabled: !!id,
+  });
+
   const { data: myInfo } = myInfoQuery;
   const { data: othersData } = othersDataQuery;
   const { data: othersInfo } = othersInfoQuery;
+  const { data: followInfo } = followInfoQuery;
 
   useEffect(() => {
     if (!localStorage.getItem("token") && !id) {
@@ -43,6 +48,10 @@ const UserPage = () => {
       myInfo?._id === id && navigate("/my-page");
     }
   }, [params]);
+
+  useEffect(() => {
+    console.log(followInfo);
+  }, [followInfo]);
 
   return (
     <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">

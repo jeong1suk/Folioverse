@@ -6,10 +6,17 @@ import {
 } from "../../../utils/useQuery";
 import { useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
+import Pagination from "./Pagination";
 
 const VisitorBook = ({ id, myId }) => {
   const { mutate } = useQueryPatch("/visitor_book", "post");
   const isToken = localStorage.getItem("token");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const myInfoQuery = useQueryGet("/user/current", "getMyInfo", {
     enabled: !!isToken,
@@ -78,9 +85,17 @@ const VisitorBook = ({ id, myId }) => {
     });
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
-    <div className="p-5 dark:text-neutral-200 text-xl">
+    <div className="p-5 dark:text-neutral-200">
       <h1 className="text-2xl">방명록</h1>
+      <div className="flex flex-row justify-between mt-7 dark:text-neutral-400 pb-3 border-b dark:border-neutral-600">
+        <span className="ml-6">내용</span>
+        <span className="mr-8">작성자</span>
+      </div>
       <div
         className={`flex items-stretchr justify-evenly my-3 ${
           location.pathname === "/my-page" && "hidden"
@@ -94,16 +109,19 @@ const VisitorBook = ({ id, myId }) => {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
-        <button className="px-2 py-1 border rounded" onClick={onSubmit}>
+        <button
+          className="px-2 py-1 border rounded hover:bg-neutral-200 dark:hover:bg-neutral-800"
+          onClick={onSubmit}
+        >
           작성
         </button>
       </div>
       <div>
         {Array.isArray(bookData) ? (
-          bookData?.map((item) => (
+          bookData?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div
               key={item._id}
-              className="flex flex-row justify-between text-sm mt-5 items-center"
+              className="flex flex-row justify-between text-sm mt-5 items-center dark:border-neutral-600"
             >
               <div className="flex flex-row justify-between w-full">
                 <span>{item.description}</span>
@@ -178,6 +196,12 @@ const VisitorBook = ({ id, myId }) => {
           </button>
         </div>
       </div>
+      <Pagination
+        content={bookData}
+        handlePageChange={handlePageChange}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };

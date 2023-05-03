@@ -49,8 +49,8 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
               </button>
             </p>
             <p
-              className={`text-sm text-neutral-400 dark:text-${
-                !isPdf && "neutral-600"
+              className={`ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
               } leading-10`}
             >
               {item.yearly}
