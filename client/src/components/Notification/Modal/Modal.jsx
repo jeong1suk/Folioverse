@@ -11,7 +11,6 @@ import VisitorBook from "./VisitorBook";
 const Modal = () => {
   const isOpen = useModalStore((state) => state.isOpen);
   const id = useModalStore((state) => state.id);
-  const id2 = useModalStore((state) => state.id2);
   const name = useModalStore((state) => state.name);
   const type = useModalStore((state) => state.type);
   const toggleOpen = useModalStore((state) => state.toggleOpen);
@@ -56,7 +55,7 @@ const Modal = () => {
             (type === "write" && <WritePostModal toggleOpen={toggleOpen} />) ||
             (type === "post" && <PostModal id={id} />) ||
             (type === "messageBox" && <MessageBoxModal />) ||
-            (type === "visitorBook" && <VisitorBook id={id} myId={id2} />)}
+            (type === "visitorBook" && <VisitorBook id={id} />)}
         </div>
       </div>
     </div>

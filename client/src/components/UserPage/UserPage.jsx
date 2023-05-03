@@ -28,12 +28,17 @@ const UserPage = () => {
     enabled: !!id,
   });
 
+  const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
+    enabled: !!id,
+  });
+
   const { data: myInfo } = myInfoQuery;
   const { data: othersData } = othersDataQuery;
   const { data: othersInfo } = othersInfoQuery;
+  const { data: followInfo } = followInfoQuery;
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") && !id) {
       navigate("/error/auth");
     }
   }, []);
@@ -43,6 +48,10 @@ const UserPage = () => {
       myInfo?._id === id && navigate("/my-page");
     }
   }, [params]);
+
+  useEffect(() => {
+    console.log(followInfo);
+  }, [followInfo]);
 
   return (
     <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">
@@ -57,7 +66,7 @@ const UserPage = () => {
             <MessageBoxButton id={myInfo?._id} />
           </div>
           <div>
-            <VisitorBookButton othersId={id} myId={myInfo?._id} />
+            <VisitorBookButton othersId={id} />
           </div>
         </div>
       </div>
@@ -92,7 +101,7 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = ({ id, myId }) => {
+const MessageBoxButton = ({ id }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
@@ -106,13 +115,13 @@ const MessageBoxButton = ({ id, myId }) => {
   );
 };
 
-const VisitorBookButton = ({ othersId, myId }) => {
+const VisitorBookButton = ({ othersId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
       onClick={() => {
-        setModal(othersId, "visitorBook", "", myId);
+        setModal(othersId, "visitorBook");
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}

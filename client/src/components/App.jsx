@@ -5,7 +5,7 @@ import Layout from "./Layout/Layout";
 import useThemeStore from "../store/themeStore";
 import Toast from "./Notification/Toast";
 import Modal from "./Notification/Modal/Modal";
-import { useQueryGetRefetch } from "../utils/useQuery";
+import { useQueryGet, useQueryGetRefetch } from "../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../store/toastStore";
 
@@ -14,13 +14,14 @@ const App = () => {
   const queryClient = useQueryClient();
   const setToast = useToastStore((state) => state.setToast);
 
-  const { data: refetchMessageData, dataChanged } = useQueryGetRefetch(
-    "/message",
-    "getRefetchMessage"
-  );
+  const { data: refetchMessageData, dataChanged: messageChanged } =
+    useQueryGetRefetch("/message", "getRefetchMessage");
+
+  const { data: refetchVisitorBookData, dataChanged: bookChanged } =
+    useQueryGetRefetch(`/visitor_book`, "getRefetchVisitorBook");
 
   useEffect(() => {
-    if (dataChanged) {
+    if (messageChanged) {
       queryClient.invalidateQueries("getMessage");
       setToast(
         `${
@@ -32,7 +33,23 @@ const App = () => {
           .sendUserProfileImage
       );
     }
-  }, [dataChanged]);
+  }, [messageChanged]);
+
+  useEffect(() => {
+    if (bookChanged) {
+      queryClient.invalidateQueries("getMyVisitor");
+      setToast(
+        `${
+          refetchVisitorBookData.result[
+            refetchVisitorBookData.result.length - 1
+          ].write_userName
+        } 님이 방명록을 작성하였습니다`,
+        "message",
+        refetchVisitorBookData.result[refetchVisitorBookData.result.length - 1]
+          .write_userProfileImage
+      );
+    }
+  }, [bookChanged]);
 
   useEffect(() => {
     document.body.classList[theme ? "remove" : "add"]("dark");
