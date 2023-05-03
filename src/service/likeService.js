@@ -23,8 +23,6 @@ const LikeService = {
       target_user: targetUser._id,
     });
 
-    console.log(targetUser);
-
     if (!likes) {
       const countlike = await Like.saveAndPush({
         user_id: user._id,
