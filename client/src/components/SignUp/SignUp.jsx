@@ -72,7 +72,7 @@ function SignUp() {
 
   const isSumbitDisabled = !(isEmailValid && isPasswordValid && passwordMatch);
   return (
-    <>
+    <div className={`bg-white dark:bg-[#212121]`}>
       <div className={styles.container}>
         <h1 className={styles.fvhead}>폴리오버스로 여행 시작하기</h1>
       </div>
@@ -139,7 +139,7 @@ function SignUp() {
         <p className={styles.fvhead}>Welcome to Folioverse</p>
         <p className={styles.fvhead}>Let's begin the adventure</p>
       </div>
-    </>
+    </div>
   );
 }
 

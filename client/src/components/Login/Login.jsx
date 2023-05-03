@@ -48,36 +48,30 @@ function Login() {
 
   return (
     <div className={`bg-white dark:bg-[#212121]`}>
-      <div
-        className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-solid border-slate rounded-5 shadow-sm flex justify-center iteims-center`}
-      >
+      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto shadow-sm`}>
         {/* max-w-800px mx-auto p-20 border border-gray-300 rounded-lg shadow-sm flex justify-center items-center */}
         <img
           className={`w-20 h-auto mx-auto`}
           src="/logo/logo-light.png"
           alt="로고 이미지"
         />
-        <p className={`${darkMode} mx-auto`}>폴리오버스로 출발하기</p>
+        <p className={`${darkMode} mt-2 text-center`}>폴리오버스로 출발하기</p>
       </div>
 
-      <div
-        className={`max-w-2xl h-auto mx-auto p-10 mb-auto border border-solid border-slate rounded-5 shadow-sm`}
-      >
+      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto`}>
         <form className={`flex flex-col`}>
-          <label className={`${darkMode} font-bold mr-5`}>이메일</label>
+          {/* <label className={`${darkMode} font-bold mr-5`}>이메일</label> */}
           <input
-            className={`p-2 border border-solid border-slate rounded`}
+            className={`p-2 border border-solid border-slate rounded-5`}
             type="email"
             placeholder="이메일"
             onChange={handleEmailChange}
           />
           <div>
-            <label htmlFor="password" className={`${darkMode} font-bold mr-5`}>
-              비밀번호:
-            </label>
+            {/* <label className={`${darkMode} font-bold mr-5`}>비밀번호:</label> */}
           </div>
           <input
-            className={`p-2 border border-solid border-slate rounded`}
+            className={`p-2 mt-5 border border-solid border-slate rounded-5`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
@@ -133,11 +127,7 @@ function Login() {
         >
           비밀번호 찾기
         </button>
-        <button
-          className={`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2 justify-items-end items`}
-        >
-          회원가입
-        </button>
+        <a href="/sign-up">회원가입</a>
       </div>
     </div>
   );
