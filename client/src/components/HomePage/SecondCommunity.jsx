@@ -31,7 +31,7 @@ function SecondCommunity() {
     <div className="text-white w-[fit-content] text-black grid grid-cols-[500px_300px]  gap-[20px] relative left-[50%] translate-x-[-50%] rounded-[10px] ">
       <div
         ref={div1Ref}
-        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] h-[200px] rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[600ms]"
+        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] h-[200px] rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[500ms]"
       >
         <img
           src={messageImg}
@@ -50,7 +50,7 @@ function SecondCommunity() {
       </div>
       <div
         ref={div2Ref}
-        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] h-[200px] rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[700ms]"
+        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] h-[200px] rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[600ms]"
       >
         <img
           src={followLikeImg}
@@ -71,7 +71,8 @@ function SecondCommunity() {
       </div>
       <div
         ref={div3Ref}
-        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] col-start-1 col-end-3 h-[250px] rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[800ms]"
+        className="w-full bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] col-start-1 col-end-3 h-[250px] 
+        rounded-[10px] overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-[650ms]"
       >
         <img
           src={pdfExportImg}
@@ -93,7 +94,7 @@ function SecondCommunity() {
       </div>
       <h4
         ref={linkRef}
-        className="relative left-[10px] text-[20px]  opacity-0 transition-opacity duration-1000 ease-in-out delay-[900ms]"
+        className="relative left-[10px] text-[20px]  opacity-0 transition-opacity duration-1000 ease-in-out delay-[400ms]"
       >
         <Link
           to="/sign-up"

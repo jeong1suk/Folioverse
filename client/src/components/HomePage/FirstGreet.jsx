@@ -27,14 +27,14 @@ function FirstGreet() {
   }, []);
 
   return (
-    <div className="mt-[80px] relative text-white">
+    <div className="mt-[80px] relative text-white w-full">
       <img
         src={logo}
         alt="Homepage"
         ref={logoRef}
         className="mx-auto h-[300px] opacity-0 rotate-[5deg] transition-all duration-1000 ease-in-out"
       />
-      <div className="absolute left-[50%] translate-x-[-50%]">
+      <div className="relative left-[50%] translate-x-[-50%] inline-block">
         <h2 ref={h21Ref} className={`${h2style} mt-[100px] delay-[500ms]`}>
           <span className="text-[#9dcaf5]">Folioverse</span>에 오신 것을
           환영합니다!

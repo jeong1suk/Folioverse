@@ -1,7 +1,6 @@
 // 정주현
 
 import { useEffect, useRef } from "react";
-import profileIntroImg from "/homepage/profileExample.png";
 import secondImg from "/homepage/2.png";
 import SecondCommunity from "./SecondCommunity";
 

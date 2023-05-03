@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import FirstGreet from "./FirstGreet";
 import SecondSlide from "./SecondProfile";
 import firstimg from "/homepage/1.png";
-import FourthFolioSlide from "./FourthFolioSlide";
+import ThirdFolioSlide from "./ThirdFolioSlide";
+import FourthFooter from "./FourthFooter";
 function HomePage() {
   const bgRef = useRef(null);
 
@@ -29,11 +30,11 @@ function HomePage() {
         src={firstimg}
         alt="성운"
       />
-      <div className="grid grid-cols-1 w-full mx-auto gap-[1500px] bg-[#000]">
+      <div className="grid grid-cols-1 w-full mx-auto gap-[1000px] bg-[#000]">
         <FirstGreet />
         <SecondSlide />
-        <FourthFolioSlide />
-        <div className="font-bold text-[50px] text-white m-auto">Footer</div>
+        <ThirdFolioSlide />
+        <FourthFooter />
       </div>
     </div>
   );

@@ -27,41 +27,69 @@ function NetworkFilter({ sortBy, setSortBy }) {
       <h2 className="ml-[10px]">필터</h2>
       <div className={`mt-[5px]`}>
         <button
-          className={sortBy.includes("비전공자") ? btnEnabled : btnDisabled}
-          value="비전공자"
+          className={sortBy.includes("비개발자") ? btnEnabled : btnDisabled}
+          value="비개발자"
           onClick={handleFilter}
         >
-          비전공자
+          비개발자
         </button>
         <button
-          className={sortBy.includes("전공자") ? btnEnabled : btnDisabled}
-          value="전공자"
+          className={sortBy.includes("개발자") ? btnEnabled : btnDisabled}
+          value="개발자"
           onClick={handleFilter}
         >
-          전공자
+          개발자
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={
+            sortBy.includes("신입 - 1년 미만") ? btnEnabled : btnDisabled
+          }
+          value="신입 - 1년 미만"
+          onClick={handleFilter}
+        >
+          신입 - 1년 미만
         </button>
         <button
-          className={sortBy.includes("신입개발자") ? btnEnabled : btnDisabled}
-          value="신입개발자"
+          className={
+            sortBy.includes("경력 - 5년 미만") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 5년 미만"
           onClick={handleFilter}
         >
-          신입개발자
+          경력 - 5년 미만
         </button>
         <button
-          className={sortBy.includes("경력개발자") ? btnEnabled : btnDisabled}
-          value="경력개발자"
+          className={
+            sortBy.includes("경력 - 5년 이상") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 5년 이상"
           onClick={handleFilter}
         >
-          경력개발자(1년 이상)
+          경력 - 5년 이상
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={sortBy.includes("프론트엔드") ? btnEnabled : btnDisabled}
+          value="프론트엔드"
+          onClick={handleFilter}
+        >
+          프론트엔드
         </button>
         <button
-          className={sortBy.includes("숙련개발자") ? btnEnabled : btnDisabled}
-          value="숙련개발자"
+          className={sortBy.includes("백엔드") ? btnEnabled : btnDisabled}
+          value="백엔드"
           onClick={handleFilter}
         >
-          숙련개발자(5년 이상)
+          백엔드
         </button>
-        {/* 프론트, 백엔드, 풀스택 추가 */}
+        <button
+          className={sortBy.includes("풀스택") ? btnEnabled : btnDisabled}
+          value="풀스택"
+          onClick={handleFilter}
+        >
+          풀스택
+        </button>
       </div>
       <div className="mt-[10px]">
         {sortBy.length > 0 &&
