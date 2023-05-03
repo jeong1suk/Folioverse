@@ -2,6 +2,8 @@
 
 import passport from "passport";
 import localPassport from "./local.js";
+import googleStrategy from "./google.js";
+import kakaoStrategy from "./kakao.js";
 import { UserModel } from "../../db/schemas/user.js";
 
 export const initializePassport = () => {
@@ -19,6 +21,8 @@ export const initializePassport = () => {
   });
 
   passport.use(localPassport);
+  passport.use(googleStrategy);
+  passport.use(kakaoStrategy);
 
   return passport;
 };
