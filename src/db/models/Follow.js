@@ -29,7 +29,7 @@ class Follow {
     });
     await createFollow.save();
 
-    target_user.follower_user.push(user_id); 
+    target_user.follower_user.push(user_id);
     await target_user.save();
     return target_user.follower_user.length;
   }
