@@ -81,7 +81,7 @@ const userService = {
     const userMetrics = await UserModel.findById({ _id })
       .select("metrics")
       .populate("metrics");
-    console.log(userMetrics);
+    // console.log(userMetrics);
     if (!userMetrics) {
       const errorMessage =
         "통계 정보를 불러오는데 실패했습니다. 다시 한 번 확인해 주세요.";
