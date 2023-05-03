@@ -5,12 +5,13 @@ const FollowService = {
   //로그인한 유저인지, 아닌지 판별
   getFollow: async ({ userId, targetUserId }) => {
     // follow_user와 target_user가 모두 존재하는지 확인
-    const user = await User.findById(userId);
+    const user = await User.findById({ user_id: userId });
 
-    if (!user) {
-      const errorMessage = "로그인이 필요한 서비스입니다.";
-      return errorMessage;
-    }
+    const isFollowing = user.follower_user.some((followerId) =>
+      followerId.equals(targetUserId)
+    );
+
+    return isFollowing;
   },
 
   // 팔로우한 기록이 없는경우

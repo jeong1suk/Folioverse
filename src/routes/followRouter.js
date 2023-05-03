@@ -7,13 +7,8 @@ const followRouter = Router();
 followRouter.get("/:target_user_id", async (req, res) => {
   const userId = req.user._id;
   const targetUserId = req.params.target_user_id;
-
-  try {
-    const result = await FollowService.getFollow({ userId, targetUserId });
-    res.status(200).json({ success: true, result });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
+  const result = await FollowService.getFollow({ userId, targetUserId });
+  res.status(200).json({ result });
 });
 
 // 특정 사용자를 팔로우
