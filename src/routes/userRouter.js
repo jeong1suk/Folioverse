@@ -8,10 +8,9 @@ const userRouter = Router();
 userRouter.get("/list", async function (req, res, next) {
   try {
     // 전체 유저 목록을 얻음
-    // 전체 유저 리스트를 받는데 토큰을 굳이 받아야 하나....
     const users = await userService.getUsers();
     const sortedUsers = users.sort((a, b) => {
-      return a.follower_user.length, -b.follower_user.length;
+      return a.follower_user.length - b.follower_user.length;
     });
     res.status(200).send(sortedUsers);
   } catch (error) {
@@ -62,6 +61,7 @@ userRouter.patch("/:id", checkToken, async function (req, res, next) {
 
 /** 유저 정보 조회, 현재 로그인한 유저가 있는 경우 응답은 따로 있기 때문에
  *  다른 유저 정보를 조회하는 경우가 사용할 것 같음
+ *  visit을 올려야하기 때문에 여기서 count 추가
  */
 userRouter.get("/:id", async function (req, res, next) {
   try {

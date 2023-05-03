@@ -7,9 +7,9 @@ const host = import.meta.env.VITE_SERVER_HOST;
 
 function SearchResultView({ inputValue }) {
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
+  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
 
-  const liStyle =
-    "text-[#000] dark:text-[#fff] bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]";
+  const liStyle = `${fontColorA} bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]`;
 
   if (loading) {
     return <li className={`${liStyle} text-center`}>Loading...</li>;
@@ -39,7 +39,7 @@ function SearchResultView({ inputValue }) {
             <img
               src={el.profile_image || profileDefaultDark}
               alt="profile"
-              className="w-[40px] h-[40px] ml-1 rounded-[5px] inline-block relative top-[50%] translate-y-[-50%] "
+              className="w-[40px] h-[40px] ml-1 object-cover rounded-[5px] inline-block relative top-[50%] translate-y-[-50%] "
             />
             <div className="w-[190px] overflow-hidden inline-block ml-5 relative top-[50%]">
               <h4>{el.name}</h4>
