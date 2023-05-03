@@ -5,10 +5,10 @@ const FollowService = {
   //로그인한 유저인지, 아닌지 판별
   getFollow: async ({ userId, targetUserId }) => {
     // follow_user와 target_user가 모두 존재하는지 확인
-    const user = await User.findById({ user_id: userId });
+    const user = await User.findById({ user_id: targetUserId });
 
     const isFollowing = user.follower_user.some((followerId) =>
-      followerId.equals(targetUserId)
+      followerId.equals(userId)
     );
 
     return isFollowing;

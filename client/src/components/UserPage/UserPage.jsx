@@ -49,15 +49,15 @@ const UserPage = () => {
     }
   }, [params]);
 
-  useEffect(() => {
-    console.log(followInfo);
-  }, [followInfo]);
-
   return (
     <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">
       <div className="basis-1/4 px-5 mb-2">
         <div className="sticky top-20">
-          <Profile myInfo={myInfo} othersInfo={othersInfo} />
+          <Profile
+            myInfo={myInfo}
+            othersInfo={othersInfo}
+            followInfo={followInfo?.result}
+          />
           <div className={id ? "hidden" : ""}>
             <MvpSelector />
           </div>
