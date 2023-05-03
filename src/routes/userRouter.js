@@ -78,4 +78,18 @@ userRouter.get("/:id", async function (req, res, next) {
   }
 });
 
+userRouter.get("/metrics", async function (req, res, next) {
+  try {
+    const _id = req.user._id;
+    const metricsInfo = await userService.getUserMetricsInfo({ _id });
+
+    if (metricsInfo) {
+      throw new Error(metricsInfo.errorMessage);
+    }
+    res.status(200).send(metricsInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default userRouter;

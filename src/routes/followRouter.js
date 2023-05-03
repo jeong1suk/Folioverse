@@ -32,6 +32,8 @@ followRouter.delete("/:target_user_id", async (req, res) => {
   try {
     const unfollows = await FollowService.countDown({ userId, targetUserId });
 
+    console.log(unfollows);
+
     res.status(200).json({ success: true, unfollows });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
