@@ -92,7 +92,7 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = ({ id }) => {
+const MessageBoxButton = ({ id, myId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
@@ -112,7 +112,7 @@ const VisitorBookButton = ({ othersId, myId }) => {
     <button
       className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
       onClick={() => {
-        setModal(myId, "visitorBook");
+        setModal(othersId, "visitorBook", "", myId);
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}

@@ -12,6 +12,7 @@ import certificateRouter from "./certificateRouter.js";
 import awardRouter from "./awardRouter.js";
 import educationRouter from "./educationRouter.js";
 import careerRouter from "./careerRouter.js";
+import visitorBookRouter from "./visitorBookRouter.js";
 
 import othersRouter from "../extra/others.js";
 import checkToken from "../middlewares/checkToken.js";
@@ -29,5 +30,6 @@ router.use("/education", checkToken, educationRouter);
 router.use("/certificate", checkToken, certificateRouter);
 router.use("/award", checkToken, awardRouter);
 router.use("/career", checkToken, careerRouter);
+router.use("/visitor_book", visitorBookRouter);
 
 export default router;
