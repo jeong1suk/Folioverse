@@ -11,9 +11,18 @@ class User {
     return user;
   }
 
-  static async findById( {user_id} ) {
+  static async findById({ user_id }) {
     const user = await UserModel.findOne({ _id: user_id });
     return user;
+  }
+
+  // 함수 오버로딩
+  static async findAll(condition) {
+    if (condition === "metrics") {
+      const users = await UserModel.find({}, { _id: 1, metrics: 1 });
+      return users;
+    }
+    return null;
   }
 
   static async findAll() {
@@ -36,4 +45,3 @@ class User {
 }
 
 export { User };
-

@@ -5,12 +5,17 @@ import { EducationModel } from "../../db/schemas/education.js";
 import { ProjectModel } from "../../db/schemas/project.js";
 import { AwardModel } from "../../db/schemas/award.js";
 import { CertificateModel } from "../../db/schemas/certificate.js";
+import { DailyMetrics } from "../../db/models/DailyMetrics.js";
 import { signJWT } from "./login.js";
 
 const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  await UserModel.create({ email, password: hashedPassword, name });
-
+  const user = await UserModel.create({
+    email,
+    password: hashedPassword,
+    name,
+  });
+  await DailyMetrics.createUserMetrics(user);
   return new Promise((resolve, reject) => {
     passport.authenticate("local", { session: false }, (err, user, info) => {
       if (err || !user) {

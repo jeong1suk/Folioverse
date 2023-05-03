@@ -10,6 +10,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
+  const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -45,56 +47,59 @@ function Login() {
   };
 
   return (
-    <>
-      <div className={styles.containerHead}>
+    <div className={`bg-white dark:bg-[#212121]`}>
+      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto shadow-sm`}>
+        {/* max-w-800px mx-auto p-20 border border-gray-300 rounded-lg shadow-sm flex justify-center items-center */}
         <img
-          className={styles.logo}
+          className={`w-20 h-auto mx-auto`}
           src="/logo/logo-light.png"
           alt="로고 이미지"
         />
-        <p className={styles.fvhead}>폴리오버스로 출발하기</p>
+        <p className={`${darkMode} mt-2 text-center`}>폴리오버스로 출발하기</p>
       </div>
 
-      <div className={styles.container}>
-        <form className={styles.form}>
-          <label className={styles.label}>이메일</label>
+      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto`}>
+        <form className={`flex flex-col`}>
+          <label className={`${darkMode} font-bold p-2`}>이메일:</label>
           <input
-            className={styles.inputTxt}
+            className={`p-2 border border-solid border-slate rounded`}
             type="email"
             placeholder="이메일"
             onChange={handleEmailChange}
           />
-          <div>
-            <label htmlFor="password" className={styles.label}>
-              비밀번호:
-            </label>
-          </div>
+
+          <label className={`${darkMode} font-bold mt-2 p-2`}>비밀번호:</label>
           <input
-            className={styles.inputPwd}
+            className={`p-2 border border-solid border-slate rounded`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
           />
-          <br />
-          {errMessage && <div className={styles.inputErr}>{errMessage}</div>}
+
+          {errMessage && (
+            <div
+              className={`p-2 border border-solid border-slate rounded text-center bg-yellow-300 text-red-500`}
+            >
+              {errMessage}
+            </div>
+          )}
 
           <button
-            className={`${styles.btn} ${
-              isEmailValid && isPasswordValid
-                ? styles.btnActive
-                : styles.btnDisabled
+            className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`} ${
+              isEmailValid && isPasswordValid && `bg-blue-500 cursor-pointer`
             }`}
             type="submit"
-            disabled={!isEmailValid || !isPasswordValid}
             onClick={handleSubmit}
           >
             로그인
           </button>
         </form>
 
-        <div className={styles.alternativeLogin}>
-          <p className={styles.alternativeLoginP}>또는</p>
-          <button className={styles.btnGoogle}>
+        <div className={`mt-4 flex flex-col items-center mb-2`}>
+          <p className={`${darkMode} mb-2`}>또는</p>
+          <button
+            className={`bg-blue-500 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+          >
             <img
               className={styles.logo1}
               src="/logo/logo-light.png"
@@ -102,7 +107,9 @@ function Login() {
             />
             구글로 로그인
           </button>
-          <button className={styles.btnKakao}>
+          <button
+            className={`bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+          >
             <img
               className={styles.logo1}
               src="/logo/logo-light.png"
@@ -111,8 +118,20 @@ function Login() {
             카카오 로그인
           </button>
         </div>
+        <a
+          href="/"
+          className={`inline-block mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
+        >
+          비밀번호 찾기
+        </a>
+        <a
+          href="/sign-up"
+          className={`inline-block mx-2 float-right text-cyan-500`}
+        >
+          회원가입
+        </a>
       </div>
-    </>
+    </div>
   );
 }
 

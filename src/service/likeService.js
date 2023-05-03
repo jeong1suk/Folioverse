@@ -6,39 +6,47 @@ const LikeService = {
   getLike: async ({ userId, targetUserId }) => {
     // like_user와 target_user가 모두 존재하는지 확인
     const user = await User.findById(userId);
-    
+
     if (!user) {
-      const errorMessage = '로그인이 필요한 서비스입니다.'
-      return errorMessage
+      const errorMessage = "로그인이 필요한 서비스입니다.";
+      return errorMessage;
     }
   },
 
   // 좋아요한 기록이 없는경우
-  countUp: async ({userId, targetUserId}) => {
-    const user = await User.findById({user_id:userId});
-    const targetUser = await User.findById({user_id:targetUserId});
+  countUp: async ({ userId, targetUserId }) => {
+    const user = await User.findById({ user_id: userId });
+    const targetUser = await User.findById({ user_id: targetUserId });
 
-    const likes = await Like.findByOne({user_id :user._id, target_user: targetUser._id});
+    const likes = await Like.findByOne({
+      user_id: user._id,
+      target_user: targetUser._id,
+    });
 
-    console.log(targetUser)
+    console.log(targetUser);
 
     if (!likes) {
-      const countlike = await Like.saveAndpush({user_id :user._id, target_user: targetUser});
+      const countlike = await Like.saveAndPush({
+        user_id: user._id,
+        target_user: targetUser,
+      });
       return countlike;
     }
   },
 
   // 이미 좋아요한 기록이 있는 경우
-  countDown: async({userId, targetUserId}) => {
-
-    const likes = await Like.findByOne({user_id:userId, target_user: targetUserId});
-    const targetUser = await User.findById({user_id: targetUserId});
+  countDown: async ({ userId, targetUserId }) => {
+    const likes = await Like.findByOne({
+      user_id: userId,
+      target_user: targetUserId,
+    });
+    const targetUser = await User.findById({ user_id: targetUserId });
 
     if (likes) {
-      const deletelike = await Like.deleteAndpull(likes._id, targetUser);
+      const deletelike = await Like.deleteAndPull(likes._id, targetUser);
       return deletelike;
     }
-  }
+  },
 };
 
 export { LikeService };
