@@ -9,9 +9,9 @@ const UserSchema = new Schema(
     description: { type: String },
     like_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
     follower_user: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     profile_image: { type: String },
     metrics: [{ type: Schema.Types.ObjectId, ref: "DailyMetrics" }],
+    career: { type: Schema.Types.ObjectId, ref: "Career" },
   },
   { timestamps: true }
 );
