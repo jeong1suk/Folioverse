@@ -7,18 +7,18 @@ const likeRouter = Router();
 likeRouter.get("/:target_user_id", async (req, res) => {
   const userId = req.user._id;
   const targetUserId = req.params.target_user_id;
-  const result = await FollowService.getFollow({ userId, targetUserId });
+  const result = await LikeService.getLike({ userId, targetUserId });
   res.status(200).json({ result });
 });
 
 // 특정 사용자를 좋아요
-likeRouter.post('/:target_user_id', async (req, res) => {
+likeRouter.post("/:target_user_id", async (req, res) => {
   const userId = req.user._id;
   const targetUserId = req.params.target_user_id;
 
   try {
     const likes = await LikeService.countUp({ userId, targetUserId });
-    
+
     res.status(200).json({ success: true, likes });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -26,7 +26,7 @@ likeRouter.post('/:target_user_id', async (req, res) => {
 });
 
 // 특정 사용자를 좋아요 취소
-likeRouter.delete('/:target_user_id', async (req, res) => {
+likeRouter.delete("/:target_user_id", async (req, res) => {
   const userId = req.user._id;
   const targetUserId = req.params.target_user_id;
 
@@ -38,4 +38,4 @@ likeRouter.delete('/:target_user_id', async (req, res) => {
   }
 });
 
-export default likeRouter; 
+export default likeRouter;
