@@ -1,13 +1,7 @@
 import AWS from "aws-sdk";
-import { awsConfig } from "../lib/config.js";
+import { sesConfig } from "../lib/config.js";
 
-const SES_CONFIG = {
-  accessKeyId: awsConfig.accessKeyId,
-  secretAccessKey: awsConfig.secretAccessKey,
-  region: awsConfig.region,
-};
-
-const AWS_SES = new AWS.SES(SES_CONFIG);
+const AWS_SES = new AWS.SES(sesConfig);
 
 const sendMailer = async (email, password) => {
   const params = {
