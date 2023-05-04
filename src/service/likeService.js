@@ -28,7 +28,7 @@ const LikeService = {
         target_user: targetUser,
       });
       // metrics 추가
-      await DailyMetrics.countUp(targetUserId, "like");
+      await DailyMetrics.upDateCount(targetUserId, "like", "+");
       return countlike;
     }
   },
@@ -49,6 +49,8 @@ const LikeService = {
         target_user: targetUser,
         user_id: userId,
       });
+      // metrics 제거
+      await DailyMetrics.upDateCount(targetUserId, "follow", "-");
       return deletelike;
     }
   },

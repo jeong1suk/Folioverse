@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { userService } from "../service/userService.js";
 import checkToken from "../middlewares/checkToken.js";
+import mongoose from "mongoose";
 
 const userRouter = Router();
 
@@ -77,5 +78,25 @@ userRouter.get("/:id", async function (req, res, next) {
     next(error);
   }
 });
+
+// 이거 코치님에게 물어봐야한다.
+userRouter.get(
+  "/weekly-metrics/:id",
+  checkToken,
+  async function (req, res, next) {
+    try {
+      // const _id = req.user._id;
+      const _id = req.params.id;
+      const metricsInfo = await userService.getUserMetricsInfo({ _id });
+
+      if (metricsInfo.errorMessage) {
+        throw new Error(metricsInfo.errorMessage);
+      }
+      res.status(200).send(metricsInfo);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export default userRouter;
