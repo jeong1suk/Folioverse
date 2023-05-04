@@ -9,11 +9,12 @@
 1. [시작하기](#시작하기)
    - [필수요건](#필수요건)
    - [설치](#설치)
-2. [사용법](#사용법)
-3. [프로젝트 참여](#프로젝트-참여)
-4. [저작권](#저작권)
-5. [연락 정보](#연락-정보)
-6. [폴더 트리](#폴더-트리)
+2. [사이트 이용법](#사이트-이용법)
+3. [상세 기술 설명](#상세-기술-설명)
+4. [프로젝트 참여](#프로젝트-참여)
+5. [저작권](#저작권)
+6. [연락 정보](#연락-정보)
+7. [폴더 트리](#폴더-트리)
 
 ## 시작하기
 
@@ -45,14 +46,19 @@ client 폴더 내에도 .env 파일을 생성하고 다음과 같이 작성합�
 
 5. npm run dev 시, localhost:3000에 백엔드 서버, localhost:5173에 클라이언트 서버가 동시에 실행됩니다.
 
-<<<<<<< HEAD
-본 프로젝트에서 제공하는 모든 코드 등의는 저작권법에 의해 보호받는 ㈜엘리스의 자산이며, 무단 사용 및 도용, 복제 및 배포를 금합니다.
-
-Copyright 2023 엘리스 Inc. All rights reserved.
-=======
-## 사용법
+## 사이트 이용법
 
 이 사이트에 대한 클라이언트 입장에서의 사용법 이곳에 적을것
+
+## 상세 기술 설명
+
+<details>
+<summary>접기/펼치기</summary>
+
+- 상세 기술 설명1
+- 상세 기술 설명2
+</details>
+<br/>
 
 ## 프로젝트 참여
 
@@ -71,9 +77,10 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 '라이센스'�
 ## 연락 정보
 
 이승현 - kubrickcode@gmail.com
-기타 팀원 이메일 등 이곳에.
-
-Project Link: https://kdt-gitlab.elice.io/ai_track/class_07/web_project/team02/portfolio-share-service-racer
+정재훈 - wjdwogns120523@gmail.com
+양재영 - yayww@naver.com
+정원석 - ssukgoon@gmail.com
+김기용 - kodinger17@gmail.com
 
 ## 폴더 트리
 
@@ -87,6 +94,16 @@ Folioverse
 │  ├─ public
 │  │  ├─ cat.png
 │  │  ├─ dark-mode.png
+│  │  ├─ google.png
+│  │  ├─ homepage
+│  │  │  ├─ 1.png
+│  │  │  ├─ 2.png
+│  │  │  ├─ 3.png
+│  │  │  ├─ followLike.png
+│  │  │  ├─ message.png
+│  │  │  ├─ pdfExport.png
+│  │  │  └─ profileExample.png
+│  │  ├─ kakao.png
 │  │  ├─ logo
 │  │  │  ├─ logo-dark.png
 │  │  │  └─ logo-light.png
@@ -104,10 +121,23 @@ Folioverse
 │  │  ├─ components
 │  │  │  ├─ App.jsx
 │  │  │  ├─ ErrPage.jsx
+│  │  │  ├─ HomePage
+│  │  │  │  ├─ FirstGreet.jsx
+│  │  │  │  ├─ FourthFolioSlide.jsx
+│  │  │  │  ├─ FourthFooter.jsx
+│  │  │  │  ├─ HomePage.jsx
+│  │  │  │  ├─ HomePage.module.css
+│  │  │  │  ├─ SecondCommunity.jsx
+│  │  │  │  ├─ SecondProfile.jsx
+│  │  │  │  └─ ThirdFolioSlide.jsx
+│  │  │  ├─ HomePage.zip
+│  │  │  ├─ LoadingOverLay.jsx
 │  │  │  ├─ Login
+│  │  │  │  ├─ Authorized.jsx
 │  │  │  │  ├─ Login.jsx
-│  │  │  │  └─ Login.module.css
+│  │  │  │  └─ SocialButton.jsx
 │  │  │  ├─ Network
+│  │  │  │  ├─ FilterDownMenu.jsx
 │  │  │  │  ├─ Network.jsx
 │  │  │  │  ├─ Network.module.css
 │  │  │  │  ├─ NetworkFilter.jsx
@@ -115,20 +145,28 @@ Folioverse
 │  │  │  ├─ Notification
 │  │  │  │  ├─ Modal
 │  │  │  │  │  ├─ DeleteModal.jsx
+│  │  │  │  │  ├─ MailerModal.jsx
+│  │  │  │  │  ├─ MessageBoxModal.jsx
 │  │  │  │  │  ├─ MessageModal.jsx
-│  │  │  │  │  └─ Modal.jsx
+│  │  │  │  │  ├─ Modal.jsx
+│  │  │  │  │  ├─ Pagination.jsx
+│  │  │  │  │  ├─ PostModal.jsx
+│  │  │  │  │  ├─ VisitorBook.jsx
+│  │  │  │  │  └─ WritePostModal.jsx
 │  │  │  │  └─ Toast.jsx
 │  │  │  ├─ SignUp
-│  │  │  │  ├─ SignUp.jsx
-│  │  │  │  └─ SignUp.module.css
+│  │  │  │  └─ SignUp.jsx
 │  │  │  ├─ UserPage
 │  │  │  │  ├─ AddData
 │  │  │  │  │  ├─ AddAward.jsx
+│  │  │  │  │  ├─ AddCareer.jsx
 │  │  │  │  │  ├─ AddCertificate.jsx
 │  │  │  │  │  ├─ AddData.jsx
 │  │  │  │  │  ├─ AddEducation.jsx
 │  │  │  │  │  └─ AddProject.jsx
 │  │  │  │  ├─ Mvp.jsx
+│  │  │  │  ├─ MvpSelector.jsx
+│  │  │  │  ├─ PostList.jsx
 │  │  │  │  ├─ Profile.jsx
 │  │  │  │  ├─ SpeedDial
 │  │  │  │  │  ├─ PdfReader.jsx
@@ -136,21 +174,24 @@ Folioverse
 │  │  │  │  ├─ UserPage.jsx
 │  │  │  │  └─ ViewMvp
 │  │  │  │     ├─ Award.jsx
+│  │  │  │     ├─ Career.jsx
 │  │  │  │     ├─ Certificate.jsx
 │  │  │  │     ├─ Education.jsx
 │  │  │  │     └─ Project.jsx
 │  │  │  └─ UserSetting
-│  │  │     ├─ Chart.jsx
 │  │  │     ├─ EditProfile.jsx
 │  │  │     ├─ EditUserInfo.jsx
 │  │  │     ├─ ManageFollow.jsx
-│  │  │     └─ UserSetting.jsx
+│  │  │     ├─ UserSetting.jsx
+│  │  │     └─ UserStats.jsx
 │  │  ├─ CustomHooks.jsx
 │  │  ├─ index.css
 │  │  ├─ index.jsx
 │  │  ├─ QueryProvider.jsx
 │  │  ├─ store
 │  │  │  ├─ modalStore.js
+│  │  │  ├─ mvpSelectStore.js
+│  │  │  ├─ styleClassStore.js
 │  │  │  ├─ themeStore.js
 │  │  │  ├─ toastStore.js
 │  │  │  └─ userStore.js
@@ -163,30 +204,46 @@ Folioverse
 ├─ README.md
 ├─ src
 │  ├─ app.js
+│  ├─ dailyEvent
+│  │  └─ dailyMetrics.js
 │  ├─ db
 │  │  ├─ index.js
 │  │  ├─ models
 │  │  │  ├─ Award.js
 │  │  │  ├─ Career.js
 │  │  │  ├─ Certificate.js
+│  │  │  ├─ DailyMetrics.js
 │  │  │  ├─ Education.js
+│  │  │  ├─ Follow.js
+│  │  │  ├─ Like.js
+│  │  │  ├─ Message.js
+│  │  │  ├─ Post.js
 │  │  │  ├─ Project.js
-│  │  │  └─ User.js
+│  │  │  ├─ User.js
+│  │  │  └─ VisitorBook.js
 │  │  └─ schemas
 │  │     ├─ award.js
 │  │     ├─ career.js
 │  │     ├─ certificate.js
-│  │     ├─ comments.js
+│  │     ├─ dailyMetrics.js
 │  │     ├─ education.js
 │  │     ├─ follow.js
 │  │     ├─ like.js
+│  │     ├─ message.js
+│  │     ├─ post.js
 │  │     ├─ project.js
-│  │     └─ user.js
+│  │     ├─ user.js
+│  │     └─ visitorBook.js
+│  ├─ lib
+│  │  └─ config.js
 │  ├─ middlewares
+│  │  ├─ checkDuplicate.js
 │  │  ├─ checkToken.js
 │  │  ├─ errorMiddleware.js
 │  │  └─ passport
+│  │     ├─ google.js
 │  │     ├─ index.js
+│  │     ├─ kakao.js
 │  │     └─ local.js
 │  ├─ service
 │  │  ├─ auth
@@ -197,12 +254,19 @@ Folioverse
 │  │  ├─ careerService.js
 │  │  ├─ certificateService.js
 │  │  ├─ educationService.js
+│  │  ├─ followService.js
 │  │  ├─ imageService.js
+│  │  ├─ likeService.js
+│  │  ├─ messageService.js
+│  │  ├─ othersService.js
+│  │  ├─ postService.js
 │  │  ├─ projectService.js
-│  │  └─ userService.js
+│  │  ├─ userService.js
+│  │  └─ visitorBookService.js
 │  └─ utils
+│     ├─ changeRandomPassword.js
+│     ├─ sendMailer.js
 │     └─ verifyPassword.js
 └─ uploads
 
 ```
->>>>>>> develop

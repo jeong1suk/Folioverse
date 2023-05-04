@@ -1,4 +1,4 @@
-// Responsible: Seunghyun Lee
+//담당 : 이승현
 
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { UserModel } from "../../db/schemas/user.js";

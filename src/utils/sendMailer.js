@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import AWS from "aws-sdk";
 import { sesConfig } from "../lib/config.js";
 

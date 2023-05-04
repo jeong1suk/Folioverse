@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Career } from "../db/index.js";
 
 const careerService = {

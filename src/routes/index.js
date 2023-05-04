@@ -15,18 +15,18 @@ import likeRouter from "./likeRouter.js";
 import followRouter from "./followRouter.js";
 import careerRouter from "./careerRouter.js";
 import visitorBookRouter from "./visitorBookRouter.js";
-
 import othersRouter from "./othersRouter.js";
 import checkToken from "../middlewares/checkToken.js";
 
 const router = Router();
 
+//퍼블릭
 router.use("/auth", authRouter);
-router.use("/image", checkToken, imageRouter);
 router.use("/post", postRouter);
 router.use("/others", othersRouter);
-router.use("/message", checkToken, messageRouter);
 router.use("/user", userRouter);
+
+//프라이빗
 router.use("/project", checkToken, projectRouter);
 router.use("/education", checkToken, educationRouter);
 router.use("/certificate", checkToken, certificateRouter);
@@ -35,5 +35,7 @@ router.use("/visitor_book", visitorBookRouter);
 router.use("/like", checkToken, likeRouter);
 router.use("/follow", checkToken, followRouter);
 router.use("/career", checkToken, careerRouter);
+router.use("/image", checkToken, imageRouter);
+router.use("/message", checkToken, messageRouter);
 
 export default router;
