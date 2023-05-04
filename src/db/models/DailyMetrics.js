@@ -30,7 +30,7 @@ class DailyMetrics {
     } else if (sign === "-") {
       checkCondition(condition, -1);
     }
-    metrics.save();
+    // metrics.save();
   }
 
   static async createWholeUsersMetrics(users) {
