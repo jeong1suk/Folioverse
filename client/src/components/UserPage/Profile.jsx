@@ -53,7 +53,9 @@ const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
       />
       <p className="text-center text-xl font-bold dark:text-white">{name}</p>
       <p className="text-center text-neutral-500">{email}</p>
-      <p className="text-center dark:text-neutral-200 my-3">{description}</p>
+      <p className="text-center dark:text-neutral-200 my-3">
+        {description ?? "소개가 없습니다"}
+      </p>
       <div className="flex flex-row text-neutral-500 my-5">
         <div className="basis-1/2 text-center">
           <div>{followCount}</div>
