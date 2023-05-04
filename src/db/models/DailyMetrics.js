@@ -13,7 +13,6 @@ class DailyMetrics {
       user_id,
       date: `${new Date().toISOString().substr(0, 10)}`,
     });
-
     function checkCondition(condition, i) {
       if (condition === "follow") {
         metrics.follow_count += i;
@@ -30,7 +29,7 @@ class DailyMetrics {
     } else if (sign === "-") {
       checkCondition(condition, -1);
     }
-    // metrics.save();
+    metrics.save();
   }
 
   static async createWholeUsersMetrics(users) {

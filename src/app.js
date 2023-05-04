@@ -28,6 +28,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get("/api/test", (req, res) => {
+  dailyMetrics();
+  res.send("goot test");
+});
+
 // 정각마다 dailyMetrics 모듈 실행
 const job = cron.schedule("0 0 * * *", dailyMetrics);
 job.start();
