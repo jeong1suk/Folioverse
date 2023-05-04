@@ -14,11 +14,21 @@ class DailyMetrics {
       date: `${new Date().toISOString().substr(0, 10)}`,
     });
 
+    function checkCondition(condition, i) {
+      if (condition === "follow") {
+        metrics.follow_count += i;
+      } else if (condition === "like") {
+        metrics.like_count += i;
+      } else if (condition === "visit") {
+        metrics.visit_count += i;
+      }
+    }
+
     // condition === follow, visit, like
     if (sign === "+") {
-      metrics[`${condition}_count`] += 1;
+      checkCondition(condition, 1);
     } else if (sign === "-") {
-      metrics[`${condition}_count`] -= i;
+      checkCondition(condition, -1);
     }
     metrics.save();
   }
