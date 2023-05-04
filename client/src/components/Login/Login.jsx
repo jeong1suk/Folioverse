@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import useModalStore from "../../store/modalStore";
 import { Link } from "react-router-dom";
+import { GoogleButton, KakaoButton } from "./SocialButton";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 const Login = () => {
@@ -123,8 +124,12 @@ const Login = () => {
               로그인
             </button>
           </form>
+          <div className="flex justify-center flex-col sm:flex-row">
+            <GoogleButton />
+            <KakaoButton />
+          </div>
 
-          <div className={`mt-4 flex flex-col items-center  mb-2`}>
+          {/* <div className={`mt-4 flex flex-col items-center  mb-2`}>
             <p className={`mb-2 ${fontColorA}`}>or</p>
             <button
               className={`bg-blue-500 hover:bg-blue-400 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
@@ -138,7 +143,7 @@ const Login = () => {
             >
               카카오 로그인
             </button>
-          </div>
+          </div> */}
           <Link
             className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500 cursor-pointer`}
             onClick={() => {

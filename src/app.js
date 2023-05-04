@@ -14,7 +14,7 @@ const app = express();
 const clientHost = process.env.CLIENT_HOST;
 const corsOptions = {
   origin: clientHost,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
