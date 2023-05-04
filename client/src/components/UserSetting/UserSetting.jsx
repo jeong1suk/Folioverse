@@ -11,11 +11,14 @@ import useStyleClassStore from "./../../store/styleClassStore";
 import useThemeStore from "../../store/themeStore";
 
 const UserSetting = () => {
-  const { data } = useQueryGet("/user/current", "getMyInfo");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/user/current", "getMyInfo", {
+    enabled: !!isToken,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!isToken) {
       navigate("/error/auth");
     }
   }, []);
