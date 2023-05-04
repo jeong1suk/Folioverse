@@ -30,7 +30,7 @@ function SearchInput() {
       />
       {isInputFocused && inputValue && (
         <ul
-          className={`w-[300px] h-[fit-content] max-h-[400px] relative left-[50%] top-[55px] rounded-bl-[10px] rounded-br-[10px] opacity-90 dark:bg-[rgba(26,26,26,1)] overflow-y-scroll scrollbar-hide ${styles.hideScroll}`}
+          className={`w-[300px] h-[fit-content] max-h-[330px] relative left-[50%] top-[55px] rounded-bl-[10px] rounded-br-[10px] opacity-90 dark:bg-[rgba(26,26,26,1)] overflow-y-scroll ${styles.hideScroll}`}
         >
           <SearchResultView inputValue={inputValue} />
         </ul>

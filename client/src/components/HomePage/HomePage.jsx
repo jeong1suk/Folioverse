@@ -24,13 +24,15 @@ function HomePage() {
   }, []);
   return (
     <div className="overflow-hidden w-full">
+      <div className="absolute top-0 w-full h-[70px] bg-[#000] z-0"></div>
+      {/* Header부분 공백가리기 */}
       <img
         ref={bgRef}
         className="w-[1700px] absolute top-[-300px] left-[50%] translate-x-[-50%] z-0 opacity-0 transition-all duration-500 ease-in-out"
         src={firstimg}
         alt="성운"
       />
-      <div className="grid grid-cols-1 w-full mx-auto gap-[1000px] bg-[#000]">
+      <div className="grid grid-cols-1 w-full mx-auto gap-[700px] bg-[#000]">
         <FirstGreet />
         <SecondSlide />
         <ThirdFolioSlide />

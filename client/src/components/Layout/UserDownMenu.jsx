@@ -10,8 +10,7 @@ function UserDownMenu() {
     location.href = "/";
   }
 
-  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
-  const liStyle = `px-[15px] py-[10px] ${fontColorA} bg-[#d6d6d6] dark:bg-[rgba(26,26,26,9)]`;
+  const liStyle = `px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6]`;
   return (
     <>
       <li className={liStyle}>

@@ -7,9 +7,8 @@ const host = import.meta.env.VITE_SERVER_HOST;
 
 function SearchResultView({ inputValue }) {
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
-  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
 
-  const liStyle = `${fontColorA} bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]`;
+  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6]`;
 
   if (loading) {
     return <li className={`${liStyle} text-center`}>Loading...</li>;

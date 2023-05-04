@@ -33,7 +33,7 @@ function UserNav() {
         onClick={profileViewHandler}
       />
       {profileView && (
-        <ul className="relative w-[120px] top-[15px] right-50% translate-x-[-50%] bg-[#d6d6d6]  dark:bg-[rgba(26,26,26,1)] p-2 rounded-[10px]">
+        <ul className="relative w-[120px] top-[15px] right-50% translate-x-[-50%] bg-[#d6d6d6] p-2 rounded-[10px]">
           <UserDownMenu />
         </ul>
       )}
