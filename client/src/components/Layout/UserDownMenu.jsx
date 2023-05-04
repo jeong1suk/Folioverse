@@ -10,20 +10,22 @@ const UserDownMenu = () => {
     location.href = "/";
   };
 
-  const liStyle = `px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6]`;
+  const liStyle = `w-full text-left px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6] hover:bg-[#bababa]`;
   return (
     <>
       <li className={liStyle}>
         <Link to="/user-setting">회원설정</Link>
       </li>
-      <li className={liStyle}>
+      <li className={`${liStyle} cursor-point`}>
         <Link to="/my-page">마이페이지</Link>
       </li>
       <li className={liStyle}>
         <button onClick={() => setModal("", "messageBox")}>쪽지함</button>
       </li>
-      <li onClick={logout} className={liStyle}>
-        로그아웃
+      <li>
+        <button onClick={logout} className={liStyle}>
+          로그아웃
+        </button>
       </li>
     </>
   );

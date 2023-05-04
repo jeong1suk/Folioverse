@@ -25,7 +25,7 @@ const UserNav = () => {
   return (
     <div
       ref={ref}
-      className="h-[40px] w-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2"
+      className="h-[40px] w-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2 cursor-pointer"
     >
       <img
         src={profileImg ? profileImg : profileDefault}
