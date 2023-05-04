@@ -1,12 +1,12 @@
 // 정주현
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function Network() {
+const Network = () => {
   const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const [listCur, setListCur] = useState(30);
   const [sortBy, setSortBy] = useState([]);
@@ -17,10 +17,10 @@ function Network() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // visibleData변수에 data에서 listCur만큼 slice한 값을 추가s
+  // visibleData변수에 data에서 listCur만큼 slice한 값을 추가
   const visibleData = data.slice(0, listCur);
 
-  function sortByFilter(userData) {
+  const sortByFilter = (userData) => {
     let filterdData = [];
     userData.forEach((d) => {
       if (
@@ -36,7 +36,7 @@ function Network() {
       }
     });
     return filterdData;
-  }
+  };
 
   const filteredUserData = sortByFilter(data);
 
@@ -86,6 +86,6 @@ function Network() {
       </div>
     </div>
   );
-}
+};
 
 export default Network;

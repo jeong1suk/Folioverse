@@ -9,7 +9,13 @@ import lightModeProfile from "/profile/profile-light.png";
 import { Link } from "react-router-dom";
 import useThemeStore from "../../store/themeStore";
 
-function NetworkProfile({ name, email, description, profileId, profileImg }) {
+const NetworkProfile = ({
+  name,
+  email,
+  description,
+  profileId,
+  profileImg,
+}) => {
   const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
   const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
   const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
@@ -68,6 +74,6 @@ function NetworkProfile({ name, email, description, profileId, profileImg }) {
       </Link>
     </div>
   );
-}
+};
 
 export default NetworkProfile;

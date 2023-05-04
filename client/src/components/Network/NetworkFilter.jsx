@@ -1,17 +1,17 @@
 // 정주현
 
-function NetworkFilter({ sortBy, setSortBy }) {
-  function handleFilter(e) {
+const NetworkFilter = ({ sortBy, setSortBy }) => {
+  const handleFilter = (e) => {
     if (sortBy.includes(e.target.value)) {
-      let newArr = [...sortBy];
-      newArr.splice(newArr.indexOf(e.target.value), 1);
-      return setSortBy(newArr);
+      let filterArr = [...sortBy];
+      filterArr.splice(filterArr.indexOf(e.target.value), 1);
+      return setSortBy(filterArr);
     } else {
-      let newArr = [...sortBy];
-      newArr.push(e.target.value);
-      return setSortBy(newArr);
+      let filterArr = [...sortBy];
+      filterArr.push(e.target.value);
+      return setSortBy(filterArr);
     }
-  }
+  };
   const bgColor = "bg-white dark:bg-[#1a1a1a]";
   const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
   const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
@@ -108,5 +108,5 @@ function NetworkFilter({ sortBy, setSortBy }) {
       </div>
     </div>
   );
-}
+};
 export default NetworkFilter;

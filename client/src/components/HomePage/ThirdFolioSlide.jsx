@@ -6,10 +6,9 @@ import { useAxiosGet } from "../../CustomHooks";
 import fourthImg from "/homepage/3.png";
 import profileImgDefault from "/profile/profile-dark.png";
 import styles from "./HomePage.module.css";
-import FourthFooter from "./FourthFooter";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function ThirdFolioSlide() {
+const ThirdFolioSlide = () => {
   const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const firstRef = useRef(null);
 
@@ -91,6 +90,6 @@ function ThirdFolioSlide() {
       </div>
     </div>
   );
-}
+};
 
 export default ThirdFolioSlide;

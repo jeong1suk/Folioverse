@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import FirstGreet from "./FirstGreet";
-import SecondSlide from "./SecondProfile";
+import SecondProfile from "./SecondProfile";
 import firstimg from "/homepage/1.png";
 import ThirdFolioSlide from "./ThirdFolioSlide";
 import FourthFooter from "./FourthFooter";
-function HomePage() {
+
+const HomePage = () => {
   const bgRef = useRef(null);
 
   const observer = new IntersectionObserver((entry) => {
@@ -34,12 +35,12 @@ function HomePage() {
       />
       <div className="grid grid-cols-1 w-full mx-auto gap-[700px] bg-[#000]">
         <FirstGreet />
-        <SecondSlide />
+        <SecondProfile />
         <ThirdFolioSlide />
         <FourthFooter />
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;

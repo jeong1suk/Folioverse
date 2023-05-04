@@ -2,13 +2,13 @@
 import useModalStore from "../../store/modalStore";
 import { Link } from "react-router-dom";
 
-function UserDownMenu() {
+const UserDownMenu = () => {
   const setModal = useModalStore((state) => state.setModal);
 
-  function logout() {
+  const logout = () => {
     localStorage.removeItem("token");
     location.href = "/";
-  }
+  };
 
   const liStyle = `px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6]`;
   return (
@@ -27,6 +27,6 @@ function UserDownMenu() {
       </li>
     </>
   );
-}
+};
 
 export default UserDownMenu;

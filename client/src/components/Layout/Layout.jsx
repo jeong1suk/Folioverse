@@ -3,7 +3,7 @@
 import Header from "./Header";
 import Router from "../../Router";
 
-function Layout() {
+const Layout = () => {
   return (
     <>
       <Header />
@@ -11,6 +11,6 @@ function Layout() {
       <Router />
     </>
   );
-}
+};
 
 export default Layout;

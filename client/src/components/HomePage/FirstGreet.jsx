@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import logo from "/logo/logo-dark.png";
-function FirstGreet() {
+const FirstGreet = () => {
   const logoRef = useRef(null);
   const h21Ref = useRef(null);
   const h22Ref = useRef(null);
@@ -48,6 +48,6 @@ function FirstGreet() {
       </div>
     </div>
   );
-}
+};
 
 export default FirstGreet;

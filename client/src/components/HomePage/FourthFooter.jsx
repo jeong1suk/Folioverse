@@ -2,7 +2,7 @@
 import logoImg from "/logo/logo-dark.png";
 import { Link } from "react-router-dom";
 
-export default function FourthFooter() {
+const FourthFooter = () => {
   return (
     <footer className="bg-black">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -108,4 +108,6 @@ export default function FourthFooter() {
       </div>
     </footer>
   );
-}
+};
+
+export default FourthFooter;

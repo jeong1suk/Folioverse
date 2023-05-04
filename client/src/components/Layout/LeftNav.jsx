@@ -3,7 +3,7 @@
 import { Link } from "react-router-dom";
 import logoDark from "/logo/logo-dark.png";
 
-function LeftNav({ isLogin }) {
+const LeftNav = ({ isLogin }) => {
   const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
 
   return (
@@ -31,6 +31,6 @@ function LeftNav({ isLogin }) {
       </Link>
     </div>
   );
-}
+};
 
 export default LeftNav;
