@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
-  const { data } = useQueryGet("/career", "getCareer");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/career", "getCareer", { enabled: !!isToken });
 
   const [careerData, setCareerData] = useState(null);
 

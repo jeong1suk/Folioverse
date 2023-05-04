@@ -30,11 +30,11 @@ const UserPage = () => {
   });
 
   const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const likeInfoQuery = useQueryGet(`/like/${id}`, "getLikeInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const { data: myInfo } = myInfoQuery;

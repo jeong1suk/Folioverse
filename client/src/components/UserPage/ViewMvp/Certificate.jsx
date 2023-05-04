@@ -10,7 +10,10 @@ const Certificate = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/certificate", "getCertificate");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/certificate", "getCertificate", {
+    enabled: !!isToken,
+  });
 
   const [ceriticateData, setCertificateData] = useState(null);
 
