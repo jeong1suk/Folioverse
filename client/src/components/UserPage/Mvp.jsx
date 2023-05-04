@@ -9,6 +9,7 @@ import Project from "./ViewMvp/Project";
 import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 import Career from "./ViewMvp/Career";
+import useStyleClassStore from "../../store/styleClassStore";
 
 const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
@@ -77,15 +78,17 @@ const Mvp = ({ title, othersData, customClass }) => {
     setResetCount((prevCount) => prevCount + 1);
   };
 
+  const borderColor = useStyleClassStore((state) => state.borderColor);
+
   return (
     <section
-      className={`border rounded p-5 mb-5 dark:border-cyan-950 ${customClass} ${
+      className={`border rounded p-5 mb-5 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "직업 및 경력" && !careerState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
         (title === "자격증" && !certificateState && "hidden")
-      }`}
+      } ${borderColor}`}
     >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
@@ -134,7 +137,7 @@ const Mvp = ({ title, othersData, customClass }) => {
         onClick={onAdd}
         className={`${
           (addState || editState || pathname !== "/my-page") && "hidden"
-        } block w-full border-dotted border border-dotted border-neutral-400 p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:border-cyan-950`}
+        } block w-full border-dotted border border-dotted p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 ${borderColor}`}
       >
         +
       </button>
