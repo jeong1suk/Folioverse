@@ -7,7 +7,7 @@ import SearchInput from "./SearchInput";
 import UserNav from "./UserNav";
 import GuestNav from "./GuestNav";
 
-function RightNav({ isLogin }) {
+const RightNav = ({ isLogin }) => {
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   return (
@@ -23,6 +23,6 @@ function RightNav({ isLogin }) {
       <SearchInput></SearchInput>
     </div>
   );
-}
+};
 
 export default RightNav;

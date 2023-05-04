@@ -5,11 +5,10 @@ import { useAxiosGet } from "../../CustomHooks";
 import profileDefaultDark from "/profile/profile-dark.png";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function SearchResultView({ inputValue }) {
+const SearchResultView = ({ inputValue }) => {
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
-  const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
 
-  const liStyle = `${fontColorA} bg-[#d6d6d6] dark:bg-[rgba(26,26,26,1)]`;
+  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6]`;
 
   if (loading) {
     return <li className={`${liStyle} text-center`}>Loading...</li>;
@@ -23,7 +22,7 @@ function SearchResultView({ inputValue }) {
     return <li className={`${liStyle} text-center`}>데이터 응답실패!</li>;
   }
 
-  function listHandler(data) {
+  const listHandler = (data) => {
     const filteredData = data.filter(
       (el) =>
         (el.name || "").toUpperCase().includes(inputValue.toUpperCase()) ||
@@ -51,9 +50,9 @@ function SearchResultView({ inputValue }) {
     ) : (
       <li className={`${liStyle} text-center`}>결과가 없습니다.</li>
     );
-  }
+  };
 
   return <>{data && listHandler(data)}</>;
-}
+};
 
 export default SearchResultView;

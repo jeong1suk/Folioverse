@@ -8,9 +8,11 @@ import profileImgDefault from "/profile/profile-dark.png";
 import styles from "./HomePage.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-const FourthFolioSlide = () => {
+const ThirdFolioSlide = () => {
   const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const firstRef = useRef(null);
+
+  console.log(data);
 
   // 유저목록을 랜덤하게 배열
   const randomUserProfile = useMemo(() => {
@@ -90,4 +92,4 @@ const FourthFolioSlide = () => {
   );
 };
 
-export default FourthFolioSlide;
+export default ThirdFolioSlide;
