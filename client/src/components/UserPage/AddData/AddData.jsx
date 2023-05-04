@@ -1,15 +1,14 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
 import AddAward from "./AddAward";
 import AddCertificate from "./AddCertificate";
 import AddEducation from "./AddEducation";
 import AddProject from "./AddProject";
-import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
-import { useQueryClient } from "react-query";
 import useToastStore from "../../../store/toastStore";
 import AddCareer from "./AddCareer";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const AddData = ({
   editState,
@@ -51,9 +50,12 @@ const AddData = ({
     }
   }, [editState, addState]);
 
-  const { mutate } = useQueryPatch(link, "put");
-  const { mutate: editMutate } = useQueryPatch(link, "patch");
-  const { deleteMutate } = useQueryDelete(link);
+  const { mutate, isLoading: loadingPut } = useQueryPatch(link, "put");
+  const { mutate: editMutate, isLoading: loadingPatch } = useQueryPatch(
+    link,
+    "patch"
+  );
+  const { deleteMutate, isLoading: loadingDelete } = useQueryDelete(link);
   const queryClient = useQueryClient();
 
   const setToast = useToastStore((state) => state.setToast);
@@ -182,7 +184,7 @@ const AddData = ({
             "bg-blue-300 hover:bg-blue-300 dark:bg-sky-800 dark:hover:bg-sky-800 cursor-not-allowed"
           }`}
           onClick={onSubmit}
-          disabled={!isValid}
+          disabled={!isValid || loadingPut || loadingPatch}
         >
           확인
         </button>
@@ -203,6 +205,7 @@ const AddData = ({
             !editState && "hidden"
           } text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2 dark:border-red-400 dark:text-red-400 dark:hover:text-white dark:hover:bg-red-400 dark:focus:ring-red-900`}
           onClick={handleDelete}
+          disabled={loadingDelete}
         >
           삭제
         </button>

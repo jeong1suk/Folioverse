@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const Certificate = ({
   setEditState,

@@ -1,19 +1,24 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useLocation } from "react-router-dom";
+import Pagination from "./Pagination";
 import {
   useQueryDelete,
   useQueryGet,
   useQueryPatch,
 } from "./../../../utils/useQuery";
-import { useQueryClient } from "react-query";
-import { useLocation } from "react-router-dom";
-import Pagination from "./Pagination";
 
 const PostModal = ({ id }) => {
   const [expandedPostId, setExpandedPostId] = useState(null);
   const { data } = useQueryGet(`/post/${id}`, "getPost");
   const [posts, setPosts] = useState(null);
-  const { deleteMutate } = useQueryDelete("/post");
-  const { mutate: editMutate } = useQueryPatch("/post", "patch");
+  const { deleteMutate, isLoading: loadingDelete } = useQueryDelete("/post");
+  const { mutate: editMutate, isLoading: loadingPatch } = useQueryPatch(
+    "/post",
+    "patch"
+  );
   const queryClient = useQueryClient();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -156,6 +161,7 @@ const PostModal = ({ id }) => {
                     <button
                       className="border px-2 py-1 rounded mx-1 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-600"
                       onClick={() => onPatch(item._id)}
+                      disabled={loadingPatch}
                     >
                       저장
                     </button>
@@ -178,12 +184,14 @@ const PostModal = ({ id }) => {
                   <button
                     className="border px-2 py-1 rounded mx-2 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-600"
                     onClick={() => setEdit(true)}
+                    disabled={loadingPatch}
                   >
                     수정
                   </button>
                   <button
                     className="border px-2 py-1 rounded mx-2 text-red-500 border-red-500 hover:bg-red-100"
                     onClick={() => onDelete(item._id)}
+                    disabled={loadingDelete}
                   >
                     삭제
                   </button>

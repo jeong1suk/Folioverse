@@ -1,9 +1,11 @@
+//담당 : 이승현
+
 import { useRef, useState } from "react";
 import { useQueryPatch } from "../../../utils/useQuery";
 import useToastStore from "../../../store/toastStore";
 
 const MessageModal = ({ id, name, toggleOpen }) => {
-  const { mutate } = useQueryPatch("/message", "post");
+  const { mutate, isLoading } = useQueryPatch("/message", "post");
   const setToast = useToastStore((state) => state.setToast);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -54,6 +56,7 @@ const MessageModal = ({ id, name, toggleOpen }) => {
         <button
           className="border py-1 px-2 mx-2 rounded hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
           onClick={(e) => sendMessage(e)}
+          disabled={isLoading}
         >
           보내기
         </button>

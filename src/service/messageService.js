@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Message } from "../db/models/Message.js";
 import { UserModel } from "../db/schemas/user.js";
 

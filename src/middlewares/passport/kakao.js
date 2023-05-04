@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { Strategy as KakaoStrategy } from "passport-kakao";
 import { UserModel } from "../../db/schemas/user.js";
 import { kakaoConfig } from "../../lib/config.js";

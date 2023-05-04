@@ -1,10 +1,10 @@
 //담당 : 이승현
 
+import { useEffect } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
-import { useEffect } from "react";
 import { useQueryGet } from "./../../utils/useQuery";
 import UserStats from "./UserStats";
 import useStyleClassStore from "./../../store/styleClassStore";
