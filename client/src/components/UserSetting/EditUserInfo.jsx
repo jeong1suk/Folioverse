@@ -35,10 +35,10 @@ const EditUserInfo = ({ data }) => {
         <div className="pr-20">
           <article className={`${content && "hidden"}`}>
             <label className="text-lg block">현재 비밀번호를 입력하세요</label>
-            <form>
+            <form className="flex flex-row items-center mt-3 w-screen sm:w-full">
               <input type="text" className="hidden" autoComplete="username" />
               <input
-                className="border mx-1 mt-3 rounded p-1 text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+                className="border mx-1 rounded p-1 text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="new-password"

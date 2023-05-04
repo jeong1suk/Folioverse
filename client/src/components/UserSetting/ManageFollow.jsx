@@ -4,10 +4,25 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../utils/useQuery";
 import { Link } from "react-router-dom";
 
-const ManageFollow = () => {
+const ManageFollow = ({ data }) => {
   const [tab, setTab] = useState(0);
-  const [getUrl, setGetUrl] = useState("/user/list");
-  const { data } = useQueryGet(getUrl, "getFollow");
+  const { data: followers } = useQueryGet(
+    `/follow/followers/${data?._id}`,
+    "getAllFollowers",
+    {
+      enabled: !!data,
+    }
+  );
+
+  const [usersData, setUsersData] = useState(null);
+
+  useEffect(() => {
+    setUsersData(
+      tab === 0
+        ? followers?.result.followByMeUsers
+        : followers?.result.followByThemUsers
+    );
+  }, [followers, tab]);
 
   return (
     <div className="dark:text-white">
@@ -43,8 +58,8 @@ const ManageFollow = () => {
         </ul>
       </nav>
       <section>
-        <ul className="grid grid-cols-4 gap-4 mt-4">
-          {data?.map((user) => (
+        <ul className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-4">
+          {usersData?.map((user) => (
             <UserCard user={user} key={user._id} />
           ))}
         </ul>
@@ -55,16 +70,23 @@ const ManageFollow = () => {
 
 const UserCard = ({ user }) => {
   return (
-    <li className="border p-4 rounded dark:border-cyan-950">
-      <img
-        className="rounded-full w-16 mx-auto my-2"
-        src={user.profile_image ?? "/profile/profile-dark.png"}
-      />
-      <p className="text-center text-black dark:text-white">{user.name}</p>
-      <p className="text-center text-sm text-neutral-400">{user.email}</p>
-      <p className="text-center mt-2">
+    <li className="border p-4 rounded dark:border-cyan-950 flex flex-col">
+      <div className="w-full h-3/5 flex items-center justify-center">
+        <img
+          className="rounded-full w-16 h-16 object-cover"
+          src={user.profile_image ?? "/profile/profile-dark.png"}
+          alt={user.name}
+        />
+      </div>
+      <p className="text-center text-black dark:text-white flex-1">
+        {user.name}
+      </p>
+      <p className="text-center text-sm text-neutral-400 flex-1">
+        {user.email}
+      </p>
+      <p className="text-center mt-2 flex-1">
         <Link to={`/user-page/${user._id}`} className="text-blue-400 text-xs">
-          프로필 보기
+          View profile
         </Link>
       </p>
     </li>

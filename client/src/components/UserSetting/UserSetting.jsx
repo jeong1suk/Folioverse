@@ -6,7 +6,7 @@ import EditUserInfo from "./EditUserInfo";
 import ManageFollow from "./ManageFollow";
 import { useEffect } from "react";
 import { useQueryGet } from "./../../utils/useQuery";
-import UserStats from "./Chart";
+import UserStats from "./UserStats";
 
 const UserSetting = () => {
   const { data } = useQueryGet("/user/current", "getMyInfo");
@@ -23,8 +23,8 @@ const UserSetting = () => {
       <div className="flex flex-col sm:flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
           <img
-            className="w-24 rounded-full"
-            src={`${data?.profile_image ?? "profile/profile-dark.png"}`}
+            className="w-16 h-16 rounded-full object-cover"
+            src={`${data?.profile_image ?? "/profile/profile-dark.png"}`}
             alt="프로필 사진"
           />
           <div className="my-auto ml-3">
@@ -52,8 +52,11 @@ const UserSetting = () => {
               path="edit-user-info"
               element={<EditUserInfo data={data} />}
             />
-            <Route path="manage-follow" element={<ManageFollow />} />
-            <Route path="user-stats" element={<UserStats />} />
+            <Route
+              path="manage-follow"
+              element={<ManageFollow data={data} />}
+            />
+            <Route path="user-stats" element={<UserStats data={data} />} />
           </Routes>
         </main>
       </div>
@@ -160,7 +163,7 @@ const ContentTab = () => {
         </svg>
       ),
       backgroundColor:
-        params["*"] === "chart" && "bg-gray-100 dark:bg-neutral-700",
+        params["*"] === "user-stats" && "bg-gray-100 dark:bg-neutral-700",
     },
   ];
 

@@ -49,8 +49,8 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
               </button>
             </p>
             <p
-              className={`text-sm text-neutral-400 dark:text-${
-                !isPdf && "neutral-600"
+              className={`ml-2 text-neutral-500 dark:text-${
+                !isPdf && "neutral-300"
               } leading-10`}
             >
               {item.yearly}
@@ -80,7 +80,7 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
             <p
               className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
-              } leading-10`}
+              } leading-10 flex flex-wrap`}
             >
               {item.tech_stack.map((stack) => (
                 <span key={stack} className="mx-1">

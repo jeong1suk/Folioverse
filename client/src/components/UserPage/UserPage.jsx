@@ -28,12 +28,22 @@ const UserPage = () => {
     enabled: !!id,
   });
 
+  const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
+    enabled: !!id,
+  });
+
+  const likeInfoQuery = useQueryGet(`/like/${id}`, "getLikeInfo", {
+    enabled: !!id,
+  });
+
   const { data: myInfo } = myInfoQuery;
   const { data: othersData } = othersDataQuery;
   const { data: othersInfo } = othersInfoQuery;
+  const { data: followInfo } = followInfoQuery;
+  const { data: likeInfo } = likeInfoQuery;
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") && !id) {
       navigate("/error/auth");
     }
   }, []);
@@ -48,21 +58,26 @@ const UserPage = () => {
     <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">
       <div className="basis-1/4 px-5 mb-2">
         <div className="sticky top-20">
-          <Profile myInfo={myInfo} othersInfo={othersInfo} />
+          <Profile
+            myInfo={myInfo}
+            othersInfo={othersInfo}
+            followInfo={followInfo?.result}
+            likeInfo={likeInfo?.result}
+          />
           <div className={id ? "hidden" : ""}>
             <MvpSelector />
           </div>
           <PostList id={id ?? myInfo?._id} />
           <div className={id ? "hidden" : ""}>
-            <MessageBoxButton id={myInfo?._id} />
+            <MessageBoxButton />
           </div>
           <div>
-            <VisitorBookButton othersId={id} myId={myInfo?._id} />
+            <VisitorBookButton othersId={id} />
           </div>
         </div>
       </div>
       <main className="basis-3/4 ml-5">
-        <div className="md:flex flew-row mb-2">
+        <div className="lg:flex flew-row mb-2">
           <div className="basis-1/2 mr-1">
             <Mvp
               title={"학력"}
@@ -79,8 +94,22 @@ const UserPage = () => {
           </div>
         </div>
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
-        <Mvp title={"수상 이력"} othersData={othersData?.award} />
-        <Mvp title={"자격증"} othersData={othersData?.certificate} />
+        <div className="lg:flex flew-row mb-2">
+          <div className="basis-1/2 mr-1">
+            <Mvp
+              title={"수상 이력"}
+              othersData={othersData?.award}
+              customClass="h-full"
+            />
+          </div>
+          <div className="basis-1/2 ml-1">
+            <Mvp
+              title={"자격증"}
+              othersData={othersData?.certificate}
+              customClass="h-full"
+            />
+          </div>
+        </div>
       </main>
       <div className={id ? "hidden" : ""}>
         <SpeedDial id={myInfo?._id} />
@@ -92,13 +121,13 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = ({ id, myId }) => {
+const MessageBoxButton = () => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
       onClick={() => {
-        setModal(id, "messageBox");
+        setModal("", "messageBox");
       }}
     >
       쪽지함 열기
@@ -106,13 +135,13 @@ const MessageBoxButton = ({ id, myId }) => {
   );
 };
 
-const VisitorBookButton = ({ othersId, myId }) => {
+const VisitorBookButton = ({ othersId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
       onClick={() => {
-        setModal(othersId, "visitorBook", "", myId);
+        setModal(othersId, "visitorBook");
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}
