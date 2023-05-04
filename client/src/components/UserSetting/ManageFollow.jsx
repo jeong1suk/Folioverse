@@ -84,9 +84,8 @@ const UserCard = ({ user }) => {
         <img
           className="rounded-full w-16 h-16 object-cover"
           src={
-            user.profile_image ?? theme
-              ? "/profile/profile-light.png"
-              : "/profile/profile-dark.png"
+            user.profile_image ??
+            (theme ? "/profile/profile-dark.png" : "/profile/profile-light.png")
           }
           alt={user.name}
         />

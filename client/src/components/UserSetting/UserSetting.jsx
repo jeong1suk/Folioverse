@@ -35,9 +35,10 @@ const UserSetting = () => {
           <img
             className="w-16 h-16 rounded-full object-cover"
             src={`${
-              data?.profile_image ?? theme
-                ? "/profile/profile-light.png"
-                : "/profile/profile-dark.png"
+              data?.profile_image ??
+              (theme
+                ? "/profile/profile-dark.png"
+                : "/profile/profile-light.png")
             }`}
             alt="프로필 사진"
           />

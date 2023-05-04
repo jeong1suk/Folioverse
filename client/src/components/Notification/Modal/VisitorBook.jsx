@@ -136,9 +136,10 @@ const VisitorBook = ({ id }) => {
               <div className="flex flex-row items-center">
                 <img
                   src={
-                    item.write_userProfileImage ?? theme
-                      ? "/profile/profile-light.png"
-                      : "/profile/profile-dark.png"
+                    item.write_userProfileImage ??
+                    (theme
+                      ? "/profile/profile-dark.png"
+                      : "/profile/profile-light.png")
                   }
                   alt="프로필 이미지"
                   className="w-10 rounded-full mr-1"
