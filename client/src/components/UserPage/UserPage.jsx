@@ -74,6 +74,9 @@ const UserPage = () => {
           <div>
             <VisitorBookButton othersId={id} />
           </div>
+          <div>
+            <Mailer />
+          </div>
         </div>
       </div>
       <main className="basis-3/4 ml-5">
@@ -145,6 +148,18 @@ const VisitorBookButton = ({ othersId }) => {
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}
+    </button>
+  );
+};
+
+const Mailer = () => {
+  const setModal = useModalStore((state) => state.setModal);
+  return (
+    <button
+      className="border p-3 w-full mt-2"
+      onClick={() => setModal("", "mail")}
+    >
+      임시 메일 버튼
     </button>
   );
 };
