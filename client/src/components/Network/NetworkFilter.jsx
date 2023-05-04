@@ -1,17 +1,25 @@
+import { useRef, useState } from "react";
+import FilterDropMenu from "./FilterDownMenu";
+import useOnClickOutside from "../Layout/useOnClickOutside";
 // 정주현
 
-function NetworkFilter({ sortBy, setSortBy }) {
-  function handleFilter(e) {
+const NetworkFilter = ({ sortBy, setSortBy }) => {
+  const [isTechStackFocused, setIsTechStackFocused] = useState(false);
+  const [techStackList, setTechStackList] = useState([]);
+  const ref = useRef();
+  useOnClickOutside(ref, () => setIsTechStackFocused(false));
+
+  const handleFilter = (e) => {
     if (sortBy.includes(e.target.value)) {
-      let newArr = [...sortBy];
-      newArr.splice(newArr.indexOf(e.target.value), 1);
-      return setSortBy(newArr);
+      let filterArr = [...sortBy];
+      filterArr.splice(filterArr.indexOf(e.target.value), 1);
+      return setSortBy(filterArr);
     } else {
-      let newArr = [...sortBy];
-      newArr.push(e.target.value);
-      return setSortBy(newArr);
+      let filterArr = [...sortBy];
+      filterArr.push(e.target.value);
+      return setSortBy(filterArr);
     }
-  }
+  };
   const bgColor = "bg-white dark:bg-[#1a1a1a]";
   const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
   const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
@@ -27,41 +35,84 @@ function NetworkFilter({ sortBy, setSortBy }) {
       <h2 className="ml-[10px]">필터</h2>
       <div className={`mt-[5px]`}>
         <button
-          className={sortBy.includes("비전공자") ? btnEnabled : btnDisabled}
-          value="비전공자"
+          className={sortBy.includes("비개발자") ? btnEnabled : btnDisabled}
+          value="비개발자"
           onClick={handleFilter}
         >
-          비전공자
+          비개발자
         </button>
         <button
-          className={sortBy.includes("전공자") ? btnEnabled : btnDisabled}
-          value="전공자"
+          className={sortBy.includes("개발자") ? btnEnabled : btnDisabled}
+          value="개발자"
           onClick={handleFilter}
         >
-          전공자
+          개발자
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={
+            sortBy.includes("신입 - 1년 미만") ? btnEnabled : btnDisabled
+          }
+          value="신입 - 1년 미만"
+          onClick={handleFilter}
+        >
+          신입 - 1년 미만
         </button>
         <button
-          className={sortBy.includes("신입개발자") ? btnEnabled : btnDisabled}
-          value="신입개발자"
+          className={
+            sortBy.includes("경력 - 5년 미만") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 5년 미만"
           onClick={handleFilter}
         >
-          신입개발자
+          경력 - 5년 미만
         </button>
         <button
-          className={sortBy.includes("경력개발자") ? btnEnabled : btnDisabled}
-          value="경력개발자"
+          className={
+            sortBy.includes("경력 - 5년 이상") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 5년 이상"
           onClick={handleFilter}
         >
-          경력개발자(1년 이상)
+          경력 - 5년 이상
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={sortBy.includes("프론트엔드") ? btnEnabled : btnDisabled}
+          value="프론트엔드"
+          onClick={handleFilter}
+        >
+          프론트엔드
         </button>
         <button
-          className={sortBy.includes("숙련개발자") ? btnEnabled : btnDisabled}
-          value="숙련개발자"
+          className={sortBy.includes("백엔드") ? btnEnabled : btnDisabled}
+          value="백엔드"
           onClick={handleFilter}
         >
-          숙련개발자(5년 이상)
+          백엔드
         </button>
-        {/* 프론트, 백엔드, 풀스택 추가 */}
+        <button
+          className={sortBy.includes("풀스택") ? btnEnabled : btnDisabled}
+          value="풀스택"
+          onClick={handleFilter}
+        >
+          풀스택
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <div ref={ref} className="inline-block relative">
+          <button
+            className={btnDisabled}
+            onClick={() => setIsTechStackFocused(!isTechStackFocused)}
+          >
+            {isTechStackFocused ? "기술스택 △" : "기술스택 ▽"}
+          </button>
+          {isTechStackFocused && (
+            <FilterDropMenu
+              techStackList={techStackList}
+              setTechStackList={setTechStackList}
+            />
+          )}
+        </div>
       </div>
       <div className="mt-[10px]">
         {sortBy.length > 0 &&
@@ -80,5 +131,5 @@ function NetworkFilter({ sortBy, setSortBy }) {
       </div>
     </div>
   );
-}
+};
 export default NetworkFilter;
