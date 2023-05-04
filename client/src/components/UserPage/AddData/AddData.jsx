@@ -9,6 +9,7 @@ import { useQueryDelete, useQueryPatch } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../../store/toastStore";
 import AddCareer from "./AddCareer";
+import useStyleClassStore from "../../../store/styleClassStore";
 
 const AddData = ({
   editState,
@@ -140,6 +141,8 @@ const AddData = ({
     setEditState(false);
   };
 
+  const pointColor = useStyleClassStore((state) => state.pointColor);
+
   return (
     <form className={`${!addState && !editState && "hidden"} mt-3`}>
       {(title === "학력" && (
@@ -176,8 +179,9 @@ const AddData = ({
         ))}
       <div className="mt-2">
         <button
-          className={`text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ${
-            !isValid && "bg-slate-100 dark:bg-slate-700 cursor-not-allowed"
+          className={`text-gray-900 border focus:outline-none focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:focus:ring-gray-700 ${pointColor} ${
+            !isValid &&
+            "bg-blue-100 dark:bg-sky-800 dark:hover:bg-sky-800 cursor-not-allowed"
           }`}
           onClick={onSubmit}
           disabled={!isValid}
@@ -185,7 +189,10 @@ const AddData = ({
           확인
         </button>
         <button
-          className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+          className={
+            "text-gray-900 bg-white border focus:outline-none focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:focus:ring-gray-700 " +
+            pointColor
+          }
           onClick={(e) => {
             e.preventDefault();
             setAddState(false);
