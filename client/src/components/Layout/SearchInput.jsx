@@ -4,7 +4,7 @@ import SearchResultView from "./SearchResultView";
 import styles from "./Header.module.css";
 import { useRef, useState } from "react";
 
-function SearchInput() {
+const SearchInput = () => {
   const ref = useRef();
   useOnClickOutside(ref, () => setIsInputFocused(false));
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -12,9 +12,9 @@ function SearchInput() {
 
   const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
 
-  function handleInput(e) {
+  const handleInput = (e) => {
     setInputValue(e.target.value);
-  }
+  };
 
   return (
     <div
@@ -30,12 +30,13 @@ function SearchInput() {
       />
       {isInputFocused && inputValue && (
         <ul
-          className={`w-[300px] h-[fit-content] max-h-[400px] relative left-[50%] top-[55px] rounded-bl-[10px] rounded-br-[10px] opacity-90 dark:bg-[rgba(26,26,26,1)] overflow-y-scroll scrollbar-hide ${styles.hideScroll}`}
+          className={`w-[300px] h-[fit-content] max-h-[330px] relative left-[50%] top-[55px] rounded-bl-[10px] 
+          rounded-br-[10px] opacity-90 dark:bg-[rgba(26,26,26,1)] overflow-y-scroll ${styles.hideScroll}`}
         >
           <SearchResultView inputValue={inputValue} />
         </ul>
       )}
     </div>
   );
-}
+};
 export default SearchInput;

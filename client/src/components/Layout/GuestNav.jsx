@@ -1,7 +1,7 @@
 // 정주현
 import { Link } from "react-router-dom";
 
-function GuestNav() {
+const GuestNav = () => {
   const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
 
   return (
@@ -20,6 +20,6 @@ function GuestNav() {
       </Link>
     </div>
   );
-}
+};
 
 export default GuestNav;

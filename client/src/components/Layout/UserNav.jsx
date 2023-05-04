@@ -8,7 +8,7 @@ import { useQueryGet } from "../../utils/useQuery";
 import useThemeStore from "../../store/themeStore";
 import useOnClickOutside from "./useOnClickOutside";
 
-function UserNav() {
+const UserNav = () => {
   const ref = useRef();
   useOnClickOutside(ref, () => setProfileView(false));
   const [profileView, setProfileView] = useState(false);
@@ -18,9 +18,9 @@ function UserNav() {
   const data = useQueryGet("/user/current", "getMyInfo");
   const profileImg = data.data?.profile_image;
 
-  function profileViewHandler() {
+  const profileViewHandler = () => {
     return setProfileView(!profileView);
-  }
+  };
 
   return (
     <div
@@ -33,12 +33,12 @@ function UserNav() {
         onClick={profileViewHandler}
       />
       {profileView && (
-        <ul className="relative w-[120px] top-[15px] right-50% translate-x-[-50%] bg-[#d6d6d6]  dark:bg-[rgba(26,26,26,1)] p-2 rounded-[10px]">
+        <ul className="relative w-[120px] top-[15px] right-50% translate-x-[-50%] bg-[#d6d6d6] p-2 rounded-[10px]">
           <UserDownMenu />
         </ul>
       )}
     </div>
   );
-}
+};
 
 export default UserNav;
