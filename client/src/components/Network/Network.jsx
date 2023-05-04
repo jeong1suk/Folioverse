@@ -16,7 +16,7 @@ const Network = () => {
   // data가 불러와지지 않았을 때
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
+  console.log(data);
   // visibleData변수에 data에서 listCur만큼 slice한 값을 추가
   const visibleData = data.slice(0, listCur);
 

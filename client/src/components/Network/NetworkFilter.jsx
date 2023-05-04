@@ -1,6 +1,14 @@
+import { useRef, useState } from "react";
+import FilterDropMenu from "./FilterDownMenu";
+import useOnClickOutside from "../Layout/useOnClickOutside";
 // 정주현
 
 const NetworkFilter = ({ sortBy, setSortBy }) => {
+  const [isTechStackFocused, setIsTechStackFocused] = useState(false);
+  const [techStackList, setTechStackList] = useState([]);
+  const ref = useRef();
+  useOnClickOutside(ref, () => setIsTechStackFocused(false));
+
   const handleFilter = (e) => {
     if (sortBy.includes(e.target.value)) {
       let filterArr = [...sortBy];
@@ -90,6 +98,21 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
         >
           풀스택
         </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <div ref={ref} className="inline-block relative">
+          <button
+            className={btnDisabled}
+            onClick={() => setIsTechStackFocused(!isTechStackFocused)}
+          >
+            {isTechStackFocused ? "기술스택 △" : "기술스택 ▽"}
+          </button>
+          {isTechStackFocused && (
+            <FilterDropMenu
+              techStackList={techStackList}
+              setTechStackList={setTechStackList}
+            />
+          )}
+        </div>
       </div>
       <div className="mt-[10px]">
         {sortBy.length > 0 &&
