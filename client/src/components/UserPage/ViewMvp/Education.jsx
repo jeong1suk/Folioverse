@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
+import useStyleClassStore from "../../../store/styleClassStore";
 
 const Education = ({
   setEditState,
@@ -29,12 +30,14 @@ const Education = ({
     });
   };
 
+  const borderColor = useStyleClassStore((state) => state.borderColor);
+
   return (
     <ul>
       {educationData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={"text-black border p-3 rounded mt-2 " + borderColor}
         >
           <div>
             <p className="flex justify-between mb-2">

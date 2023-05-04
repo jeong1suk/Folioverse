@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "./../../../utils/useQuery";
+import useStyleClassStore from "../../../store/styleClassStore";
 
 const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
   const { data } = useQueryGet("/award", "getAward");
@@ -21,12 +22,15 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
       _id: item._id,
     });
   };
+
+  const borderColor = useStyleClassStore((state) => state.borderColor);
+
   return (
     <ul>
       {awardData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={"text-black border p-3 rounded mt-2 " + borderColor}
         >
           <div>
             <p className="flex justify-between mb-2">

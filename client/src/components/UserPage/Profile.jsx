@@ -6,6 +6,7 @@ import { useQueryDelete, useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
 import { useEffect, useState } from "react";
+import useStyleClassStore from "../../store/styleClassStore";
 
 const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
   const params = useParams();
@@ -32,8 +33,10 @@ const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
     }
   }, [othersInfo, myInfo, params]);
 
+  const borderColor = useStyleClassStore((state) => state.borderColor);
+
   return (
-    <aside className="border rounded p-5 h-fit relative dark:border-cyan-950">
+    <aside className={"border rounded p-5 h-fit relative " + borderColor}>
       <div className={othersInfo && isToken ? "block" : "hidden"}>
         <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
       </div>
