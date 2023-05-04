@@ -13,7 +13,8 @@ class DailyMetrics {
       user_id,
       date: `${new Date().toISOString().substr(0, 10)}`,
     });
-    function checkCondition(condition, i) {
+
+    const checkCondition = (condition, i) => {
       if (condition === "follow") {
         metrics.follow_count += i;
       } else if (condition === "like") {
@@ -21,7 +22,7 @@ class DailyMetrics {
       } else if (condition === "visit") {
         metrics.visit_count += i;
       }
-    }
+    };
 
     // condition === follow, visit, like
     if (sign === "+") {
