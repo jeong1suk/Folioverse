@@ -13,6 +13,7 @@ const Header = () => {
     location.pathname === "/" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/login";
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -27,7 +28,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full h-[70px] backdrop-blur fixed top-0 z-10 ${
+      className={`w-full h-[60px] sm:h-[70px] backdrop-blur fixed top-0 z-10 ${
         !isHome && "bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(26,26,26,0.7)]"
       } ${isHome && "bg-[rgba(0,0,0,0.7)] dark:bg-[rgba(0,0,0,0.7)]"}`}
     >

@@ -3,13 +3,16 @@ import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import Pagination from "./Pagination";
 import useThemeStore from "../../../store/themeStore";
+import useModalStore from "../../../store/modalStore";
 
-const MessageBoxModal = () => {
+const MessageBoxModal = ({ toggleOpen }) => {
   const { data } = useQueryGet("/message", "getMessage");
   const { deleteMutate } = useQueryDelete("/message");
   const [message, setMessage] = useState(null);
   const queryClient = useQueryClient();
   const [alert, setAlert] = useState(false);
+
+  const setModal = useModalStore((state) => state.setModal);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -48,6 +51,10 @@ const MessageBoxModal = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+  };
+
+  const onReply = (id, name) => {
+    setModal(id, "message", name);
   };
 
   return (
@@ -111,12 +118,20 @@ const MessageBoxModal = () => {
                   </p>
                   <p className="whitespace-pre-wrap px-5">{item.description}</p>
                 </div>
-                <button
-                  className="ml-7 mb-3 border px-2 py-1 rounded text-red-500 border-red-500 hover:bg-red-100"
-                  onClick={() => onDelete(item._id)}
-                >
-                  삭제
-                </button>
+                <div>
+                  <button
+                    className="ml-7 mb-3 border px-2 py-1 rounded text-neutral-200 border-neutral-500 hover:bg-neutral-500"
+                    onClick={() => onReply(item.sendUser, item.sendUserName)}
+                  >
+                    답장
+                  </button>
+                  <button
+                    className="ml-2 mb-3 border px-2 py-1 rounded text-red-500 border-red-500 hover:bg-red-100"
+                    onClick={() => onDelete(item._id)}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             </div>
           ))

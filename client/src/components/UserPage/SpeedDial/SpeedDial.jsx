@@ -23,7 +23,7 @@ const SpeedDial = ({ id }) => {
       >
         <button
           type="button"
-          className="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
+          className="relative w-[52px] h-[52px] text-neutral-500 bg-white rounded-full border border-neutral-200 dark:border-neutral-600 hover:text-neutral-900 shadow-sm dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-50 dark:bg-neutral-700 dark:hover:bg-neutral-600 focus:ring-4 focus:ring-neutral-300 focus:outline-none dark:focus:ring-neutral-400"
           onClick={downloadPortfolioAsPDF}
         >
           <svg
@@ -39,13 +39,13 @@ const SpeedDial = ({ id }) => {
               fillRule="evenodd"
             ></path>
           </svg>
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-32 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-neutral-700 dark:border-neutral-600">
             PDF로 다운로드
           </span>
         </button>
         <button
           type="button"
-          className="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
+          className="relative w-[52px] h-[52px] text-neutral-500 bg-white rounded-full border border-neutral-200 dark:border-neutral-600 hover:text-neutral-900 shadow-sm dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-50 dark:bg-neutral-700 dark:hover:bg-neutral-600 focus:ring-4 focus:ring-neutral-300 focus:outline-none dark:focus:ring-neutral-400"
           onClick={() => setModal(id, "write")}
         >
           <svg
@@ -63,7 +63,7 @@ const SpeedDial = ({ id }) => {
             />
           </svg>
 
-          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-gray-700 dark:border-gray-600">
+          <span className="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-28 top-1/2 bg-white border px-2 py-1 rounded-full dark:bg-neutral-700 dark:border-neutral-600">
             게시글 작성
           </span>
         </button>
@@ -73,7 +73,7 @@ const SpeedDial = ({ id }) => {
         data-dial-toggle="speed-dial-menu-text-outside-button-square"
         aria-controls="speed-dial-menu-text-outside-button-square"
         aria-expanded="false"
-        className="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+        className="flex items-center justify-center text-white bg-blue-500 rounded-full w-14 h-14 hover:bg-blue-800 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
       >
         <svg
           aria-hidden="true"

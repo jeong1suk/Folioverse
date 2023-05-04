@@ -8,13 +8,9 @@ import { useQueryGet } from "../../utils/useQuery";
 Chart.register(CategoryScale);
 
 const UserStats = ({ data }) => {
-  const { data: chartData } = useQueryGet(
-    `/user/weekly-metrics/${data?._id}`,
-    "getChart",
-    {
-      enabled: !!data,
-    }
-  );
+  const { data: chartData } = useQueryGet(`/user/weekly-metrics`, "getChart", {
+    enabled: !!data,
+  });
 
   return (
     <div className="dark:text-white">
