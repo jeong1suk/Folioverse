@@ -45,3 +45,7 @@
 .networkProfileBox .medalBronze {
   display: none;
 }
+
+.filterDropMenu::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
