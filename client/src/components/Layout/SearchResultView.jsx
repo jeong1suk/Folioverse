@@ -8,7 +8,7 @@ const host = import.meta.env.VITE_SERVER_HOST;
 const SearchResultView = ({ inputValue }) => {
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
 
-  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6]`;
+  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6] dark:text-[#fff] dark:bg-[#3e3e3e] hover:bg-[#bababa] dark:hover:bg-[#575757] cursor-pointer`;
 
   if (loading) {
     return <li className={`${liStyle} text-center`}>Loading...</li>;
@@ -32,7 +32,7 @@ const SearchResultView = ({ inputValue }) => {
       filteredData.map((el, idx) => (
         <li
           key={idx}
-          className={`w-[300px] overflow-hidden px-5 py-[15px] opacity-80 m-auto ${liStyle}`}
+          className={`w-[300px] overflow-hidden px-5 py-[15px] m-auto ${liStyle}`}
         >
           <Link to={`/user-page/${el._id}`} className="top-[50%] block">
             <img
