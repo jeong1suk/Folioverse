@@ -14,6 +14,17 @@
   background-color: transparent;
 }
 
+.networkProfileBox:first-child {
+  border: #ffd700 5px solid;
+}
+.networkProfileBox:nth-child(2) {
+  border: #c0c0c0 5px solid;
+}
+
+.networkProfileBox:nth-child(3) {
+  border: #b87333 5px solid;
+}
+
 .networkProfileBox .medalGold {
   display: none;
 }

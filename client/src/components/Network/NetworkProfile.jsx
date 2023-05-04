@@ -21,7 +21,7 @@ const NetworkProfile = ({
   const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
   const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
   const fontColorC = "text-[#808080] dark:text-[#868686]";
-  const darkMode = `${boxColor} ${borderColor}`;
+  const darkMode = `${boxColor}`;
 
   const isDarkMode = useThemeStore((state) => state.theme);
   const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
