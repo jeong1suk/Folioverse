@@ -47,9 +47,9 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
       {projectData?.map((item) => (
         <li
           key={item._id}
-          className={
-            "text-black border p-3 rounded-xl mt-2 dark:bg-neutral-900"
-          }
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            !isPdf && "white"
+          }neutral-900`}
         >
           <div>
             <p className="flex justify-between mb-2">

@@ -1,6 +1,6 @@
 // 정원석
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 const host = import.meta.env.VITE_SERVER_HOST;
@@ -10,73 +10,56 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(false);
   const [errMessage, setErrMessage] = useState("");
+
+  //아래는 각 필드의 유효성에 대한 상태값
+  const [nameValid, setNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
+  //유효성 검사 로직
+  const emailValidator = (email) =>
+    RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email);
+  const passwordValidator = (password) =>
+    RegExp(
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,18}$/
+    ).test(password);
+  const nameValidator = (name) => RegExp(/^[a-zA-Z가-힣\s]{2,20}$/).test(name);
+
+  //각 필드에 값이 입력될 때마다 검사를 진행해서 set된 valid값을 기준으로 각 필드의 스타일을 변경함
+  useEffect(() => {
+    setNameValid(nameValidator(name));
+    setEmailValid(emailValidator(email));
+    setPasswordValid(passwordValidator(password));
+    setConfirmPasswordValid(password === confirmPassword);
+  }, [name, email, password, confirmPassword]);
+
+  //각 필드의 유효성 값이 변했을 때 최종적으로 isValid에 대한 값을 세팅하며 버튼의 상태를 제어함
+  useEffect(() => {
+    if (nameValid && emailValid && passwordValid && confirmPasswordValid) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [nameValid, emailValid, passwordValid, confirmPasswordValid]);
 
   const darkMode = "text-[#212121] dark:text-white";
   const fontColorA = "text-white";
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    const isValid = validatePassword(e.target.value);
-    if (isValid && e.target.value === confirmPassword) {
-      setPasswordMatch(true);
-    } else {
-      setPasswordMatch(false);
-    }
   };
-
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-    if (e.target.value === password) {
-      setPasswordMatch(true);
-    } else {
-      setPasswordMatch(false);
-    }
   };
-
-  const validateEmail = (email) => {
-    return email.toLowerCase().match(/^[^\s@]+@[^\s@]+.[^\s@]+$/);
-  };
-
-  const validatePassword = (password) => {
-    const regex =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d@$!%*#?&].{6,18}$/;
-    return regex.test(password);
-  };
-
-  const isEmailValid = validateEmail(email);
-  const isPasswordValid = validatePassword(password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setErrMessage("");
-
-    if (name.trim() === "") {
-      setErrMessage("이름을 입력해 주세요.");
-      return;
-    }
-
-    if (!isEmailValid) {
-      setErrMessage("유효한 이메일 주소를 입력해주세요.");
-      return;
-    }
-
-    if (!isPasswordValid) {
-      setErrMessage(
-        "비밀번호는 숫자, 문자, 특수문자를 포함한 6자 이상이여야 합니다."
-      );
-      return;
-    }
-
-    if (!passwordMatch) {
-      setErrMessage("비밀번호가 일치하지 않습니다.");
-      return;
-    }
 
     try {
       const result = await axios.post(host + "/auth/signup", {
@@ -128,7 +111,9 @@ const SignUp = () => {
               이름:
             </label>
             <input
-              className={`p-2 border border-solid border-slate rounded outline-black my-1`}
+              className={`p-2 border border-solid border-slate rounded outline-black my-1 ${
+                name && !nameValid && "border-red-500 outline-red-500"
+              }`}
               type="text"
               placeholder="이름"
               onChange={handleNameChange}
@@ -137,7 +122,9 @@ const SignUp = () => {
               이메일:
             </label>
             <input
-              className={`p-2 border border-solid border-slate rounded outline-black my-1`}
+              className={`p-2 border border-solid border-slate rounded outline-black my-1 ${
+                email && !emailValid && "border-red-500 outline-red-500"
+              }`}
               type="email"
               placeholder="이메일"
               onChange={handleEmailChange}
@@ -147,7 +134,9 @@ const SignUp = () => {
               비밀번호:
             </label>
             <input
-              className={`p-2 border border-solid border-slate rounded outline-black my-1`}
+              className={`p-2 border border-solid border-slate rounded outline-black my-1 ${
+                password && !passwordValid && "border-red-500 outline-red-500"
+              }`}
               type="password"
               placeholder="비밀번호(숫자, 문자 특수문자 포함 6자 이상)"
               onChange={handlePasswordChange}
@@ -157,7 +146,11 @@ const SignUp = () => {
               비밀번호 확인:
             </label>
             <input
-              className={`p-2 border border-solid border-slate rounded outline-black my-1`}
+              className={`p-2 border border-solid border-slate rounded outline-black my-1 ${
+                confirmPassword &&
+                !confirmPasswordValid &&
+                "border-red-500 outline-red-500"
+              }`}
               type="password"
               placeholder="비밀번호 확인"
               onChange={handleConfirmPasswordChange}
@@ -172,13 +165,11 @@ const SignUp = () => {
             )}
 
             <button
-              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2 my-1`} ${
-                name.length > 0 &&
-                isEmailValid &&
-                passwordMatch &&
-                `bg-blue-500 cursor-pointer`
+              className={`${`p-2 rounded-2xl border-none bg-black text-white mt-2 my-1`} ${`bg-blue-500`} ${
+                !isValid && "bg-neutral-300 cursor-not-allowed"
               }`}
               type="submit"
+              disabled={!isValid}
               onClick={handleSubmit}
             >
               회원가입

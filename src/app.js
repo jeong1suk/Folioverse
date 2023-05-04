@@ -8,7 +8,15 @@ import dailyMetrics from "./dailyEvent/dailyMetrics.js";
 import cron from "node-cron";
 const app = express();
 
-app.use(cors());
+const clientHost = process.env.CLIENT_HOST;
+const corsOptions = {
+  origin: clientHost,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const passport = initializePassport();
