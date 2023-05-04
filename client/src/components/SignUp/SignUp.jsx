@@ -86,12 +86,6 @@ const SignUp = () => {
         className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[1200px]`}
       >
         <div className={`h-auto pt-10 mx-auto p-5 mb-auto min-w-screen`}>
-          {/* <img
-          className={`w-20 h-auto mx-auto`}
-          src="/logo/logo-dark.png"
-          alt="로고 이미지"
-        /> */}
-
           <p
             className={`${darkMode} ${fontColorA} mt-2 text-3xl font-bold text-center bg-[transparent] relative`}
           >

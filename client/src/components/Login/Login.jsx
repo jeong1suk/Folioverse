@@ -13,8 +13,6 @@ const Login = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const fontColorA = "text-white";
-  const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
-  const fontColorC = "text-[#808080] dark:text-[#868686]";
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
@@ -50,15 +48,6 @@ const Login = () => {
     } catch (err) {
       setErrMessage(err.response.data.message);
     }
-  };
-
-  const googleLogin = async () => {
-    const result = await axios.get(host + "/auth/google/callback");
-    console.log(result);
-  };
-
-  const kakaoLogin = async () => {
-    const result = await axios.get(host + "/auth/kakao/callback");
   };
 
   return (
@@ -106,14 +95,14 @@ const Login = () => {
 
             {errMessage && (
               <div
-                className={`p-2 border border-solid border-slate rounded text-center bg-yellow-300 text-red-500`}
+                className={`p-2 mt-2 rounded text-center bg-red-500 text-white my-1`}
               >
                 {errMessage}
               </div>
             )}
 
             <button
-              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`} ${
+              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2`} ${
                 isEmailValid &&
                 isPasswordValid &&
                 `bg-blue-500 hover:bg-blue-400 cursor-pointer`
@@ -129,21 +118,6 @@ const Login = () => {
             <KakaoButton />
           </div>
 
-          {/* <div className={`mt-4 flex flex-col items-center  mb-2`}>
-            <p className={`mb-2 ${fontColorA}`}>or</p>
-            <button
-              className={`bg-blue-500 hover:bg-blue-400 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-              onClick={googleLogin}
-            >
-              구글로 로그인
-            </button>
-            <button
-              className={`bg-yellow-400 hover:bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-              onClick={kakaoLogin}
-            >
-              카카오 로그인
-            </button>
-          </div> */}
           <Link
             className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500 cursor-pointer`}
             onClick={() => {
