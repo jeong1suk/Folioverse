@@ -5,6 +5,7 @@ import {
   googleAuthenticate,
   kakaoAuthenticate,
   loginAuthenticate,
+  passportAuthenticate,
 } from "../../service/auth/login.js";
 import checkToken from "../../middlewares/checkToken.js";
 
@@ -35,15 +36,13 @@ router.get("/logout", (req, res, next) => {
   req.logout(() => res.send(true));
 });
 
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+router.get("/google", passportAuthenticate("google", ["profile", "email"]));
 
 router.get("/google/callback", async (req, res, next) => {
   try {
     const { user, token } = await googleAuthenticate(req, res, next);
-    res.json({ token });
+    const appURL = "http://localhost:5173/authorized";
+    res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {
       res.status(err.status).json({ message: err.message });
@@ -53,12 +52,13 @@ router.get("/google/callback", async (req, res, next) => {
   }
 });
 
-router.get("/kakao", passport.authenticate("kakao"));
+router.get("/kakao", passportAuthenticate("kakao"));
 
 router.get("/kakao/callback", async (req, res, next) => {
   try {
     const { user, token } = await kakaoAuthenticate(req, res, next);
-    res.json({ token });
+    const appURL = "http://localhost:5173/authorized";
+    res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {
       res.status(err.status).json({ message: err.message });
