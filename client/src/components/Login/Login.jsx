@@ -2,9 +2,10 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import useModalStore from "../../store/modalStore";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
@@ -32,6 +33,8 @@ function Login() {
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
 
+  const setModal = useModalStore((state) => state.setModal);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,6 +49,15 @@ function Login() {
     } catch (err) {
       setErrMessage(err.response.data.message);
     }
+  };
+
+  const googleLogin = async () => {
+    const result = await axios.get(host + "/auth/google/callback");
+    console.log(result);
+  };
+
+  const kakaoLogin = async () => {
+    const result = await axios.get(host + "/auth/kakao/callback");
   };
 
   return (
@@ -77,7 +89,7 @@ function Login() {
             비밀번호:
           </label>
           <input
-            className={`p-2 border border-solid border-slate rounde`}
+            className={`p-2 border border-solid border-slate rounded`}
             type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
@@ -102,13 +114,14 @@ function Login() {
           </button>
         </form>
 
-        {/* <div className={`mt-4 flex flex-col items-center mb-2`}>
+        <div className={`mt-4 flex flex-col items-center mb-2`}>
           <p className={`${darkMode} mb-2`}>또는</p>
           <button
             className={`bg-blue-500 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+            onClick={googleLogin}
           >
             <img
-              className={styles.logo1}
+              className={`w-[50px] h-auto`}
               src="/logo/logo-light.png"
               alt="Google"
             />
@@ -116,18 +129,21 @@ function Login() {
           </button>
           <button
             className={`bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
+            onClick={kakaoLogin}
           >
             <img
-              className={styles.logo1}
+              className={`w-[50px] h-auto`}
               src="/logo/logo-light.png"
               alt="로고 이미지"
             />
             카카오 로그인
           </button>
-        </div> */}
+        </div>
         <a
-          href="/"
           className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
+          onClick={() => {
+            setModal("", "mail");
+          }}
         >
           비밀번호 찾기
         </a>
@@ -140,6 +156,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

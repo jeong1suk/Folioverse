@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function SignUp() {
+const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -114,7 +114,7 @@ function SignUp() {
             placeholder="이름"
             onChange={handleNameChange}
           />
-          <label className={`${darkMode} ${fontColorA} font-bold`}>
+          <label className={`${darkMode} ${fontColorA} font-bold mt-2`}>
             이메일:
           </label>
           <input
@@ -124,7 +124,7 @@ function SignUp() {
             onChange={handleEmailChange}
           />
 
-          <label className={`${darkMode} ${fontColorA} font-bold`}>
+          <label className={`${darkMode} ${fontColorA} font-bold mt-2`}>
             비밀번호:
           </label>
           <input
@@ -134,7 +134,7 @@ function SignUp() {
             onChange={handlePasswordChange}
           />
 
-          <label className={`${darkMode} ${fontColorA} font-bold`}>
+          <label className={`${darkMode} ${fontColorA} font-bold mt-2`}>
             비밀번호 확인:
           </label>
           <input
@@ -183,6 +183,6 @@ function SignUp() {
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;
