@@ -25,11 +25,11 @@ const UserNav = () => {
   return (
     <div
       ref={ref}
-      className="h-[40px] w-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2 cursor-pointer"
+      className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px]  mx-[5px] float-right relative top-[50%] -translate-y-1/2 cursor-pointer"
     >
       <img
         src={profileImg ? profileImg : profileDefault}
-        className={`w-[40px] h-[40px] rounded-[10px]`}
+        className={`w-[32px] h-[32px] sm:w-[40px] sm:h-[40px]  rounded-[10px]`}
         onClick={profileViewHandler}
       />
       {profileView && (
