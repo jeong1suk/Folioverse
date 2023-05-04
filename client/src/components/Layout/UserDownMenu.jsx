@@ -17,6 +17,8 @@ const UserDownMenu = () => {
         <Link to="/user-setting">회원설정</Link>
       </li>
       <li className={`${liStyle} cursor-point`}>
+        {" "}
+        {/** nav로 수정 */}
         <Link to="/my-page">마이페이지</Link>
       </li>
       <li className={liStyle}>
