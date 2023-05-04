@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import dotenv from "dotenv";
 dotenv.config();
 

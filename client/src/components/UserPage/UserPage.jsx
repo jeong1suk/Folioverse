@@ -1,10 +1,10 @@
 //담당 : 이승현
 
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQueryGet } from "../../utils/useQuery";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
-import { useEffect } from "react";
-import { useQueryGet } from "../../utils/useQuery";
 import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
@@ -30,11 +30,11 @@ const UserPage = () => {
   });
 
   const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const likeInfoQuery = useQueryGet(`/like/${id}`, "getLikeInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const { data: myInfo } = myInfoQuery;
@@ -56,10 +56,6 @@ const UserPage = () => {
   }, [params]);
 
   const bgColor = useStyleClassStore((state) => state.bgColor);
-
-  useEffect(() => {
-    console.log(othersData);
-  }, [othersData]);
 
   return (
     <div

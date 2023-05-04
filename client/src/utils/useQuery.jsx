@@ -1,8 +1,8 @@
 //담당 : 이승현
 
+import { useRef, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
 
 const host = import.meta.env.VITE_SERVER_HOST;
 const token = localStorage.getItem("token") ?? null;

@@ -9,7 +9,7 @@ const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
   const [vaild, IsValid] = useState(false);
-  const { mutate } = useQueryPatch(`/auth/check-password`, "post");
+  const { mutate, isLoading } = useQueryPatch(`/auth/check-password`, "post");
   const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
@@ -56,7 +56,7 @@ const EditUserInfo = ({ data }) => {
                   !vaild && "cursor-not-allowed"
                 }`}
                 onClick={onSubmit}
-                disabled={!vaild}
+                disabled={!vaild || isLoading}
               >
                 확인
               </button>
@@ -70,7 +70,7 @@ const EditUserInfo = ({ data }) => {
 };
 
 const EditContent = ({ content, data }) => {
-  const { mutate } = useQueryPatch(`/user/${data?._id}`, "patch");
+  const { mutate, isLoading } = useQueryPatch(`/user/${data?._id}`, "patch");
   const formRef = useRef();
 
   const [password, setPassword] = useState("");
@@ -162,7 +162,7 @@ const EditContent = ({ content, data }) => {
             !isValid && "bg-gray-100 dark:bg-neutral-600 cursor-not-allowed"
           } border py-1 px-2 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800`}
           onClick={onSubmit}
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
           변경
         </button>

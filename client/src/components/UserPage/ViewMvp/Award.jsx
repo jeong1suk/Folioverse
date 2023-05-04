@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "./../../../utils/useQuery";
 
 const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
-  const { data } = useQueryGet("/award", "getAward");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/award", "getAward", { enabled: !!isToken });
 
   const [awardData, setAwardData] = useState(null);
 
@@ -28,8 +29,8 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
         <li
           key={item._id}
           className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
-            !isPdf && "white"
-          }neutral-900`}
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          } `}
         >
           <div>
             <p className="flex justify-between mb-2">

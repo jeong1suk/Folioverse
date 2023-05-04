@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { UserModel } from "../db/schemas/user.js";
 import { DailyMetrics } from "../db/models/DailyMetrics.js";
 

@@ -1,10 +1,12 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
 import { useQueryDelete } from "../../../utils/useQuery";
 
 const DeleteModal = ({ id, toggleOpen }) => {
   const [isValid, setIsVaid] = useState(false);
   const [input, setInput] = useState("");
-  const { deleteMutate } = useQueryDelete(`/auth`);
+  const { deleteMutate, isLoading } = useQueryDelete(`/auth`);
 
   const deleteUser = () => {
     deleteMutate(id, {
@@ -58,7 +60,7 @@ const DeleteModal = ({ id, toggleOpen }) => {
         className={`text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 ${
           !isValid && "bg-red-900 hover:bg-red-900"
         }`}
-        disabled={!isValid}
+        disabled={!isValid || isLoading}
         onClick={deleteUser}
       >
         네 삭제하겠습니다

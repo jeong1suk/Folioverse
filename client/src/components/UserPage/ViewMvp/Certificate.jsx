@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const Certificate = ({
   setEditState,
@@ -11,7 +10,10 @@ const Certificate = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/certificate", "getCertificate");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/certificate", "getCertificate", {
+    enabled: !!isToken,
+  });
 
   const [ceriticateData, setCertificateData] = useState(null);
 
@@ -36,8 +38,8 @@ const Certificate = ({
         <li
           key={item._id}
           className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
-            !isPdf && "white"
-          }neutral-900`}
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          }`}
         >
           <div>
             <p className="flex justify-between mb-2">

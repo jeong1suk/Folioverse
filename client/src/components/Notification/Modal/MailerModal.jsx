@@ -1,8 +1,10 @@
+//담당 : 이승현
+
 import { useState } from "react";
 import { useQueryPatch } from "../../../utils/useQuery";
 
 const MailerModal = ({ toggleOpen }) => {
-  const { mutate } = useQueryPatch("/auth/find", "post");
+  const { mutate, isLoading } = useQueryPatch("/auth/find", "post");
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState(false);
   const [message, setMessage] = useState("");
@@ -66,6 +68,7 @@ const MailerModal = ({ toggleOpen }) => {
         type="button"
         className={`text-white bg-neutral-600 hover:bg-neutral-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:focus:ring-neutral-800 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center mr-2`}
         onClick={onSubmit}
+        disabled={isLoading}
       >
         확인
       </button>

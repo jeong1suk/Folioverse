@@ -1,15 +1,14 @@
 //담당 : 이승현
 
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import AddData from "./AddData/AddData";
 import Award from "./ViewMvp/Award";
 import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
-import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 import Career from "./ViewMvp/Career";
-import useStyleClassStore from "../../store/styleClassStore";
 
 const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);
@@ -80,7 +79,7 @@ const Mvp = ({ title, othersData, customClass }) => {
 
   return (
     <section
-      className={`border rounded-2xl dark:bg-[#22212163] p-5 mb-5 ${customClass} ${
+      className={`border rounded-2xl dark:bg-[#4e4e4e61] dark:border-neutral-600 p-5 mb-5 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "직업 및 경력" && !careerState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
@@ -135,7 +134,7 @@ const Mvp = ({ title, othersData, customClass }) => {
         onClick={onAdd}
         className={`${
           (addState || editState || pathname !== "/my-page") && "hidden"
-        } block w-full border-dotted border border-dotted p-2 mt-2 rounded-xl hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900`}
+        } block w-full border border-dotted dark:border-neutral-600 p-2 mt-2 rounded-xl hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800`}
       >
         +
       </button>

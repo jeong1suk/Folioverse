@@ -7,14 +7,18 @@ const Authorized = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const { token } = location.search
-      .substring(1)
-      .split("&")
-      .map((param) => param.split("="))
-      .reduce((params, [key, value]) => ({ ...params, [key]: value }), {});
+    if (location.search) {
+      const { token } = location.search
+        .substring(1)
+        .split("&")
+        .map((param) => param.split("="))
+        .reduce((params, [key, value]) => ({ ...params, [key]: value }), {});
 
-    localStorage.setItem("token", token);
-    window.location.href = "/";
+      localStorage.setItem("token", token);
+      window.location.href = "/";
+    } else {
+      window.location.href = "/error/auth";
+    }
   }, [location.search]);
 
   return <div>Redirecting...</div>;
