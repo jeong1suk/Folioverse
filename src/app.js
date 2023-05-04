@@ -6,11 +6,14 @@ import cors from "cors";
 import { initializePassport } from "./middlewares/passport/index.js";
 import dailyMetrics from "./dailyEvent/dailyMetrics.js";
 import cron from "node-cron";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
+const clientHost = process.env.CLIENT_HOST;
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: clientHost,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,

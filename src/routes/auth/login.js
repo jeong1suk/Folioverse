@@ -8,16 +8,17 @@ import {
   passportAuthenticate,
 } from "../../service/auth/login.js";
 import checkToken from "../../middlewares/checkToken.js";
-
-import passport from "passport";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = Router();
+
+const clientHost = process.env.CLIENT_HOST;
 
 router.post("/login-process", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const { user, token } = await loginAuthenticate(email, password);
-    req.user = user;
+    const { token } = await loginAuthenticate(email, password);
     res.json({ token });
   } catch (err) {
     if (err.status) {
@@ -40,8 +41,8 @@ router.get("/google", passportAuthenticate("google", ["profile", "email"]));
 
 router.get("/google/callback", async (req, res, next) => {
   try {
-    const { user, token } = await googleAuthenticate(req, res, next);
-    const appURL = "http://localhost:5173/authorized";
+    const { token } = await googleAuthenticate(req, res, next);
+    const appURL = clientHost + "/authorized";
     res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {
@@ -56,8 +57,8 @@ router.get("/kakao", passportAuthenticate("kakao"));
 
 router.get("/kakao/callback", async (req, res, next) => {
   try {
-    const { user, token } = await kakaoAuthenticate(req, res, next);
-    const appURL = "http://localhost:5173/authorized";
+    const { token } = await kakaoAuthenticate(req, res, next);
+    const appURL = clientHost + "/authorized";
     res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {

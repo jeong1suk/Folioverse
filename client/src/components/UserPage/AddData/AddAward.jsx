@@ -14,7 +14,7 @@ const AddAward = ({ award, setAward, setIsValid }) => {
   return (
     <>
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+        className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
         type="text"
         placeholder="수상 내역(필수)"
         onChange={(e) => setAward({ ...award, name: e.target.value })}
@@ -23,7 +23,7 @@ const AddAward = ({ award, setAward, setIsValid }) => {
         required
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+        className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
         type="text"
         placeholder="수상 날짜(필수)"
         onChange={(e) => setAward({ ...award, date: e.target.value })}

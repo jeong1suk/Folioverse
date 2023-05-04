@@ -9,7 +9,7 @@ import Project from "../ViewMvp/Project";
 const PdfReader = ({ myInfo }) => {
   return (
     <div className="pdf-area" style={{ width: "540pt" }}>
-      <div className="border rounded p-3 border-black">
+      <div className="border rounded-xl p-3">
         <h1 className="text-xl my-2">{myInfo?.name} 님의 포트폴리오</h1>
         <p className="leading-10 ml-2 text-sm text-neutral-400">
           {myInfo?.email}

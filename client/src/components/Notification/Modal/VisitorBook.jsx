@@ -7,6 +7,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import Pagination from "./Pagination";
+import useThemeStore from "../../../store/themeStore";
 
 const VisitorBook = ({ id }) => {
   const { mutate } = useQueryPatch("/visitor_book", "post");
@@ -40,6 +41,8 @@ const VisitorBook = ({ id }) => {
   const location = useLocation();
   const [alert, setAlert] = useState(false);
   const [msg, setMsg] = useState("");
+
+  const theme = useThemeStore((state) => state.theme);
 
   useEffect(() => {
     if (location.pathname === "/my-page") {
@@ -103,21 +106,25 @@ const VisitorBook = ({ id }) => {
       >
         <div>
           <textarea
-            className="p-1 border rounded dark:bg-neutral-200 focus:outline-neutral-500 dark:text-neutral-300 dark:bg-neutral-800"
+            className={`p-1 border rounded dark:bg-neutral-200 focus:outline-neutral-500 dark:text-neutral-300 dark:bg-neutral-800 ${
+              !isToken && "hidden"
+            }`}
             cols="30"
             rows="1"
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
         <button
-          className="px-2 py-1 border rounded hover:bg-neutral-200 dark:hover:bg-neutral-800"
+          className={`px-2 py-1 border rounded hover:bg-neutral-200 dark:hover:bg-neutral-800 ${
+            !isToken && "hidden"
+          }`}
           onClick={onSubmit}
         >
           작성
         </button>
       </div>
       <div>
-        {bookData?.length > 1 ? (
+        {bookData?.length > 0 ? (
           bookData?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div
               key={item._id}
@@ -129,7 +136,9 @@ const VisitorBook = ({ id }) => {
               <div className="flex flex-row items-center">
                 <img
                   src={
-                    item.write_userProfileImage ?? "/profile/profile-dark.png"
+                    item.write_userProfileImage ?? theme
+                      ? "/profile/profile-light.png"
+                      : "/profile/profile-dark.png"
                   }
                   alt="프로필 이미지"
                   className="w-10 rounded-full mr-1"

@@ -77,14 +77,8 @@ const UserPage = () => {
             <MvpSelector />
           </div>
           <PostList id={id ?? myInfo?._id} />
-          <div className={id ? "hidden" : ""}>
-            <MessageBoxButton />
-          </div>
           <div>
-            <VisitorBookButton othersId={id} />
-          </div>
-          <div>
-            <Mailer />
+            <VisitorBookButton othersId={id} isToken={isToken} />
           </div>
         </div>
       </div>
@@ -133,48 +127,19 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = () => {
+const VisitorBookButton = ({ othersId, isToken }) => {
   const pointColor = useStyleClassStore((state) => state.pointColor);
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className={
-        "text-sm w-full p-3 rounded border mt-3 dark:border-0 " + pointColor
-      }
-      onClick={() => {
-        setModal("", "messageBox");
-      }}
-    >
-      쪽지함 열기
-    </button>
-  );
-};
-
-const VisitorBookButton = ({ othersId }) => {
-  const pointColor = useStyleClassStore((state) => state.pointColor);
-  const setModal = useModalStore((state) => state.setModal);
-  return (
-    <button
-      className={
-        "text-sm w-full p-3 rounded border mt-3 dark:border-0 " + pointColor
+        "text-sm w-full p-3 rounded rounded-xl mt-3 dark:border-0 " + pointColor
       }
       onClick={() => {
         setModal(othersId, "visitorBook");
       }}
     >
-      {othersId ? "방명록 작성" : "방명록 열기"}
-    </button>
-  );
-};
-
-const Mailer = () => {
-  const setModal = useModalStore((state) => state.setModal);
-  return (
-    <button
-      className="border p-3 w-full mt-2"
-      onClick={() => setModal("", "mail")}
-    >
-      임시 메일 버튼
+      {othersId && isToken ? "방명록 작성" : "방명록 열기"}
     </button>
   );
 };
