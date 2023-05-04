@@ -332,7 +332,6 @@ const positionOptions = [
 ];
 
 const skillStackOptions = [
-  { value: "", label: "기술 스택" },
   { value: "HTML/CSS", label: "HTML/CSS" },
   { value: "JavaScript", label: "JavaScript" },
   { value: "TypeScript", label: "TypeScript" },

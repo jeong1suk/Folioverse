@@ -1,13 +1,11 @@
 import { Strategy as KakaoStrategy } from "passport-kakao";
 import { UserModel } from "../../db/schemas/user.js";
+import { kakaoConfig } from "../../lib/config.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 const kakaoStrategy = new KakaoStrategy(
-  {
-    clientID: process.env.KAKAO_CLIENT_ID,
-    callbackURL: "/api/auth/kakao/callback",
-  },
+  kakaoConfig,
   async (accessToken, refreshToken, profile, done) => {
     try {
       const email = profile.id + "@kakao.email";
