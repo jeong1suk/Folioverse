@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
+import useStyleClassStore from "../../../store/styleClassStore";
 
 const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
   const { data } = useQueryGet("/project", "getProject");
@@ -41,12 +42,14 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
     );
   };
 
+  const borderColor = useStyleClassStore((state) => state.borderColor);
+
   return (
     <ul>
       {projectData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={"text-black border p-3 rounded mt-2 " + borderColor}
         >
           <div>
             <p className="flex justify-between mb-2">

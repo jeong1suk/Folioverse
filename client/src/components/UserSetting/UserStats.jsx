@@ -56,7 +56,7 @@ const UserChart = ({ chartData }) => {
       const dateString = d.toISOString().slice(0, 10);
       labels.push(dateString);
 
-      const dayData = chartData.find((item) => item.date === dateString);
+      const dayData = chartData?.find((item) => item.date === dateString);
 
       if (dayData) {
         visitorData.push(dayData.visit_count);

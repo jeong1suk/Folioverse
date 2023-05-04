@@ -6,6 +6,7 @@ import {
   createUser,
   deleteUser,
   checkDuplicate,
+  findPassword,
 } from "./../../service/auth/sign.js";
 
 const router = Router();
@@ -26,6 +27,12 @@ router.delete("/:id", checkToken, async (req, res) => {
   const { id } = req.params;
   const result = await deleteUser(id);
   res.status(200).json({ result });
+});
+
+router.post("/find", async (req, res) => {
+  const { email } = req.body;
+  const result = await findPassword(email);
+  res.json(result);
 });
 
 export default router;
