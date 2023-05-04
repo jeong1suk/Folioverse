@@ -33,9 +33,10 @@ const Toast = () => {
             <img
               className="rounded-full"
               src={
-                profileImage ?? theme
-                  ? "/profile/profile-light.png"
-                  : "/profile/profile-dark.png"
+                profileImage ??
+                (theme
+                  ? "/profile/profile-dark.png"
+                  : "/profile/profile-light.png")
               }
               alt="profileImage"
             />

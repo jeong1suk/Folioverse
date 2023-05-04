@@ -75,9 +75,10 @@ const MessageBoxModal = () => {
                     <span className="flex flex-row items-center">
                       <img
                         src={
-                          item.sendUserProfileImage ?? theme
-                            ? "/profile/profile-light.png"
-                            : "/profile/profile-dark.png"
+                          item.sendUserProfileImage ??
+                          (theme
+                            ? "/profile/profile-dark.png"
+                            : "/profile/profile-light.png")
                         }
                         className="w-10 rounded-full mr-1"
                         alt="프로필이미지"
