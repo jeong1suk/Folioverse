@@ -13,7 +13,6 @@ const Header = () => {
     location.pathname === "/" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/login";
-  console.log(location.pathname);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
