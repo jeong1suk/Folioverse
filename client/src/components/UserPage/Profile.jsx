@@ -36,7 +36,11 @@ const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
   const theme = useThemeStore((state) => state.theme);
 
   return (
-    <aside className={"border rounded-2xl p-5 h-fit relative"}>
+    <aside
+      className={
+        "border rounded-2xl p-5 h-fit relative dark:bg-[#4e4e4e61] dark:border-neutral-600"
+      }
+    >
       <div className={othersInfo && isToken ? "block" : "hidden"}>
         <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
       </div>
