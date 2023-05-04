@@ -11,7 +11,7 @@ userRouter.get("/list", async function (req, res, next) {
     // 전체 유저 목록을 얻음
     const users = await userService.getUsers();
     const sortedUsers = users.sort((a, b) => {
-      return a.follower_user.length - b.follower_user.length;
+      return b.follower_user.length - a.follower_user.length;
     });
     res.status(200).send(sortedUsers);
   } catch (error) {
