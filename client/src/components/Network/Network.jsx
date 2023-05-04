@@ -1,6 +1,6 @@
 // 정주현
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
@@ -46,7 +46,7 @@ const Network = () => {
       >
         <NetworkFilter sortBy={sortBy} setSortBy={setSortBy} />
         <div className={`grid grid-cols-[400px_400px_400px] mb-10 m-auto`}>
-          {!filteredUserData === []
+          {filteredUserData.length > 0
             ? filteredUserData.map((user, idx) => {
                 return (
                   <NetworkProfile
