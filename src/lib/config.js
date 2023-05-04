@@ -18,10 +18,10 @@ export const s3Config = {
 export const googleConfig = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/api/auth/google/callback",
+  callbackURL: process.env.REDIRECT_CALLBACK + "/google/callback",
 };
 
 export const kakaoConfig = {
   clientID: process.env.KAKAO_CLIENT_ID,
-  callbackURL: "/api/auth/kakao/callback",
+  callbackURL: process.env.REDIRECT_CALLBACK + "/kakao/callback",
 };
