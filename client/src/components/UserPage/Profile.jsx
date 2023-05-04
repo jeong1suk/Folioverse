@@ -6,7 +6,7 @@ import { useQueryDelete, useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
 import { useEffect, useState } from "react";
-import useStyleClassStore from "../../store/styleClassStore";
+import useThemeStore from "../../store/themeStore";
 
 const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
   const params = useParams();
@@ -33,16 +33,20 @@ const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
     }
   }, [othersInfo, myInfo, params]);
 
-  const borderColor = useStyleClassStore((state) => state.borderColor);
+  const theme = useThemeStore((state) => state.theme);
 
   return (
-    <aside className={"border rounded p-5 h-fit relative " + borderColor}>
+    <aside className={"border rounded-2xl p-5 h-fit relative"}>
       <div className={othersInfo && isToken ? "block" : "hidden"}>
         <MessageIcon id={othersInfo?._id} name={othersInfo?.name} />
       </div>
       <img
         className="w-20 h-20 rounded-full mx-auto mb-5 object-cover"
-        src={profileSrc ?? "/profile/profile-dark.png"}
+        src={
+          profileSrc ?? theme
+            ? "/profile/profile-light.png"
+            : "/profile/profile-dark.png"
+        }
       />
       <p className="text-center text-xl font-bold dark:text-white">{name}</p>
       <p className="text-center text-neutral-500">{email}</p>

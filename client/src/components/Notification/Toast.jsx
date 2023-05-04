@@ -1,5 +1,6 @@
 //담당 : 이승현
 
+import useThemeStore from "../../store/themeStore";
 import useToastStore from "../../store/toastStore";
 
 const Toast = () => {
@@ -8,6 +9,7 @@ const Toast = () => {
   const content = useToastStore((state) => state.content);
   const profileImage = useToastStore((state) => state.profileImage);
   const closeToast = useToastStore((state) => state.closeToast);
+  const theme = useThemeStore((state) => state.theme);
 
   return (
     <div
@@ -30,7 +32,11 @@ const Toast = () => {
           (type === "message" && (
             <img
               className="rounded-full"
-              src={profileImage ?? "/profile/profile-dark.png"}
+              src={
+                profileImage ?? theme
+                  ? "/profile/profile-light.png"
+                  : "/profile/profile-dark.png"
+              }
               alt="profileImage"
             />
           ))}

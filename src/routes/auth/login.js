@@ -5,18 +5,20 @@ import {
   googleAuthenticate,
   kakaoAuthenticate,
   loginAuthenticate,
+  passportAuthenticate,
 } from "../../service/auth/login.js";
 import checkToken from "../../middlewares/checkToken.js";
-
-import passport from "passport";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = Router();
+
+const clientHost = process.env.CLIENT_HOST;
 
 router.post("/login-process", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const { user, token } = await loginAuthenticate(email, password);
-    req.user = user;
+    const { token } = await loginAuthenticate(email, password);
     res.json({ token });
   } catch (err) {
     if (err.status) {
@@ -35,15 +37,13 @@ router.get("/logout", (req, res, next) => {
   req.logout(() => res.send(true));
 });
 
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+router.get("/google", passportAuthenticate("google", ["profile", "email"]));
 
 router.get("/google/callback", async (req, res, next) => {
   try {
-    const { user, token } = await googleAuthenticate(req, res, next);
-    res.json({ token });
+    const { token } = await googleAuthenticate(req, res, next);
+    const appURL = clientHost + "/authorized";
+    res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {
       res.status(err.status).json({ message: err.message });
@@ -53,12 +53,13 @@ router.get("/google/callback", async (req, res, next) => {
   }
 });
 
-router.get("/kakao", passport.authenticate("kakao"));
+router.get("/kakao", passportAuthenticate("kakao"));
 
 router.get("/kakao/callback", async (req, res, next) => {
   try {
-    const { user, token } = await kakaoAuthenticate(req, res, next);
-    res.json({ token });
+    const { token } = await kakaoAuthenticate(req, res, next);
+    const appURL = clientHost + "/authorized";
+    res.redirect(`${appURL}?token=${token}`);
   } catch (err) {
     if (err.status) {
       res.status(err.status).json({ message: err.message });

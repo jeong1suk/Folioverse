@@ -12,7 +12,7 @@ const PostList = ({ id }) => {
         data-dropdown-toggle="dropdownSearch"
         data-dropdown-placement="bottom"
         className={
-          "w-full text-black border dark:border-0 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-black " +
+          "w-full text-black border dark:border-0 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-4 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-black " +
           pointColor
         }
         type="button"

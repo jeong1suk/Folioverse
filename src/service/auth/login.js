@@ -63,3 +63,7 @@ export const kakaoAuthenticate = (req, res, next) => {
     })(req, res, next);
   });
 };
+
+export const passportAuthenticate = (strategy, scope = null) => {
+  return passport.authenticate(strategy, scope ? { scope } : {});
+};

@@ -78,17 +78,15 @@ const Mvp = ({ title, othersData, customClass }) => {
     setResetCount((prevCount) => prevCount + 1);
   };
 
-  const borderColor = useStyleClassStore((state) => state.borderColor);
-
   return (
     <section
-      className={`border rounded p-5 mb-5 ${customClass} ${
+      className={`border rounded-2xl dark:bg-[#22212163] p-5 mb-5 ${customClass} ${
         (title === "학력" && !educationState && "hidden") ||
         (title === "직업 및 경력" && !careerState && "hidden") ||
         (title === "프로젝트" && !projectState && "hidden") ||
         (title === "수상 이력" && !awardState && "hidden") ||
         (title === "자격증" && !certificateState && "hidden")
-      } ${borderColor}`}
+      }`}
     >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
@@ -137,7 +135,7 @@ const Mvp = ({ title, othersData, customClass }) => {
         onClick={onAdd}
         className={`${
           (addState || editState || pathname !== "/my-page") && "hidden"
-        } block w-full border-dotted border border-dotted p-2 mt-2 rounded hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 ${borderColor}`}
+        } block w-full border-dotted border border-dotted p-2 mt-2 rounded-xl hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900`}
       >
         +
       </button>

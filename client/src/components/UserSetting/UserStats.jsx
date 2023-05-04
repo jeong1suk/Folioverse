@@ -18,7 +18,7 @@ const UserStats = ({ data }) => {
 
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-cyan-950">
+      <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-neutral-800">
         통계
       </h1>
       <ul className="flex flex-row justify-evenly">

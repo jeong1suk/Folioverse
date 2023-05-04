@@ -37,7 +37,7 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
   return (
     <>
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+        className="block border w-full p-2 mb-4 rounded-lg focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
         type="text"
         placeholder="학교 이름(필수)"
         onChange={(e) => {
@@ -47,7 +47,7 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
         maxLength={20}
       />
       <input
-        className="block border w-full p-2 mb-4 rounded focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+        className="block border w-full p-2 mb-4 rounded-lg focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
         type="text"
         placeholder="전공(필수)"
         onChange={(e) => {
@@ -56,14 +56,11 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
         value={education.major}
         maxLength={20}
       />
-      <ul className="flex flex-col sm:flex-row lg:flex-col items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-neutral-800 dark:border-cyan-950 dark:text-white">
+      <ul className="flex flex-col sm:flex-row lg:flex-col items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg sm:flex border dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
         {radioOptions.map((option) => (
           <li
             key={option.value}
-            className={`w-full dark:border-cyan-950 ${
-              option.value !== "중퇴" &&
-              "border-b border-gray-200 sm:border-b-0 sm:border-r"
-            }`}
+            className={`w-full ${option.value !== "중퇴" && ""}`}
             onClick={handleLiClick}
           >
             <div className="flex items-center pl-3">

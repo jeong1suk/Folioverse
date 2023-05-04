@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import Pagination from "./Pagination";
+import useThemeStore from "../../../store/themeStore";
 
 const MessageBoxModal = () => {
   const { data } = useQueryGet("/message", "getMessage");
@@ -15,6 +16,8 @@ const MessageBoxModal = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const theme = useThemeStore((state) => state.theme);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -55,7 +58,7 @@ const MessageBoxModal = () => {
         <span className="mr-8">보낸사람</span>
       </div>
       <div className="pt-3 pb-1">
-        {message?.length > 1 ? (
+        {message?.length > 0 ? (
           message?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div key={item._id}>
               <h2>
@@ -72,8 +75,9 @@ const MessageBoxModal = () => {
                     <span className="flex flex-row items-center">
                       <img
                         src={
-                          item.sendUserProfileImage ??
-                          "/profile/profile-dark.png"
+                          item.sendUserProfileImage ?? theme
+                            ? "/profile/profile-light.png"
+                            : "/profile/profile-dark.png"
                         }
                         className="w-10 rounded-full mr-1"
                         alt="프로필이미지"

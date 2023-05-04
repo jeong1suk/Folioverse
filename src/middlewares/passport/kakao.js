@@ -10,7 +10,6 @@ const kakaoStrategy = new KakaoStrategy(
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
-      console.log(profile);
       const email = profile.id + "@kakao.email";
 
       const existingUser = await UserModel.findOne({ email });

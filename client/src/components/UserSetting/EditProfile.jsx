@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
 import useToastStore from "../../store/toastStore";
+import useThemeStore from "../../store/themeStore";
 
 const EditProfile = ({ data }) => {
   const [name, setName] = useState("");
@@ -75,9 +76,11 @@ const EditProfile = ({ data }) => {
     setIsValid(name ? true : false);
   }, [name]);
 
+  const theme = useThemeStore((state) => state.theme);
+
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 dark:border-cyan-950">
+      <h1 className="text-2xl border-b-2 pb-2 dark:border-neutral-800">
         프로필 설정
       </h1>
       <form className="flex flex-row pt-5">
@@ -85,7 +88,7 @@ const EditProfile = ({ data }) => {
           <article>
             <label className="text-lg">이름</label>
             <input
-              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black focus:outline-neutral-300 dark:focus:outline-neutral-800 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-300"
               name="name"
               type="text"
               value={name}
@@ -97,7 +100,7 @@ const EditProfile = ({ data }) => {
             <label className="text-lg">이메일</label>
             <input
               type="text"
-              className="block w-full mx-1 mb-5 mt-1 p-1 text-slate-500 font-thin border rounded dark:bg-neutral-700 dark:border-cyan-950"
+              className="block w-full mx-1 mb-5 mt-1 p-1 text-slate-500 font-thin border rounded dark:bg-neutral-700 dark:border-neutral-800"
               defaultValue={data?.email}
               disabled
             />
@@ -105,7 +108,7 @@ const EditProfile = ({ data }) => {
           <article>
             <label className="text-lg">한줄 소개</label>
             <textarea
-              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+              className="block border w-full mx-1 mb-5 mt-1 rounded p-1 dark:text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-300"
               name="description"
               cols="30"
               rows="3"
@@ -118,7 +121,7 @@ const EditProfile = ({ data }) => {
           <button
             className={`${
               !isValid && "bg-gray-100 dark:bg-neutral-700 cursor-not-allowed"
-            } border px-2 py-1 w-full rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950`}
+            } border px-2 py-1 w-full rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800`}
             onClick={onSubmit}
             disabled={!isValid}
           >
@@ -133,7 +136,11 @@ const EditProfile = ({ data }) => {
               src={
                 previewUrl
                   ? previewUrl
-                  : `${data?.profile_image ?? "/profile/profile-dark.png"}`
+                  : `${
+                      data?.profile_image ?? theme
+                        ? "/profile/profile-light.png"
+                        : "/profile/profile-dark.png"
+                    }`
               }
               alt="프로필 사진"
             />
@@ -146,7 +153,7 @@ const EditProfile = ({ data }) => {
             />
             <label
               htmlFor="imageUpload"
-              className="border mt-3 lg:absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100 cursor-pointer dark:border-cyan-950 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+              className="border mt-3 lg:absolute bottom-0 left-3 px-2 py-1 bg-white text-black rounded hover:bg-gray-100 cursor-pointer dark:border-neutral-800 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
             >
               사진 변경
             </label>

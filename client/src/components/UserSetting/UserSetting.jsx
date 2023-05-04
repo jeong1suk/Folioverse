@@ -7,6 +7,8 @@ import ManageFollow from "./ManageFollow";
 import { useEffect } from "react";
 import { useQueryGet } from "./../../utils/useQuery";
 import UserStats from "./UserStats";
+import useStyleClassStore from "./../../store/styleClassStore";
+import useThemeStore from "../../store/themeStore";
 
 const UserSetting = () => {
   const { data } = useQueryGet("/user/current", "getMyInfo");
@@ -18,13 +20,25 @@ const UserSetting = () => {
     }
   }, []);
 
+  const bgColor = useStyleClassStore((state) => state.bgColor);
+  const theme = useThemeStore((state) => state.theme);
+
   return (
-    <div className="py-2 px-2 sm:px-24 md:px-32 lg:px-40 xl:px-60 2xl:px-80 dark:bg-neutral-800 min-h-screen">
+    <div
+      className={
+        "py-2 px-2 sm:px-24 md:px-32 lg:px-40 xl:px-60 2xl:px-80 min-h-screen " +
+        bgColor
+      }
+    >
       <div className="flex flex-col sm:flex-row justify-between mb-4">
         <div className="p-3 flex flew-row">
           <img
             className="w-16 h-16 rounded-full object-cover"
-            src={`${data?.profile_image ?? "/profile/profile-dark.png"}`}
+            src={`${
+              data?.profile_image ?? theme
+                ? "/profile/profile-light.png"
+                : "/profile/profile-dark.png"
+            }`}
             alt="프로필 사진"
           />
           <div className="my-auto ml-3">
@@ -36,7 +50,7 @@ const UserSetting = () => {
         </div>
         <Link
           to="/my-page"
-          className="my-auto w-full sm:w-fit mx-auto sm:mx-0 p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
+          className="my-auto w-full sm:w-fit mx-auto sm:mx-0 p-2 border h-fit rounded whitespace-nowrap hover:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800"
         >
           프로필로 돌아가기
         </Link>

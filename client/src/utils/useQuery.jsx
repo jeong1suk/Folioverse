@@ -69,7 +69,6 @@ export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
 
   const { data, isLoading, error } = useQuery([key, host + link], queryFunc, {
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 3,
     refetchInterval: 1000,
     ...queryOptions,
     onSuccess: (newData) => {

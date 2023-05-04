@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../utils/useQuery";
 import { Link } from "react-router-dom";
+import useStyleClassStore from "../../store/styleClassStore";
+import useThemeStore from "../../store/themeStore";
 
 const ManageFollow = ({ data }) => {
   const [tab, setTab] = useState(0);
@@ -24,16 +26,20 @@ const ManageFollow = ({ data }) => {
     );
   }, [followers, tab]);
 
+  const bgColor = useStyleClassStore((state) => state.bgColor);
+
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 dark:border-cyan-950">
+      <h1 className="text-2xl border-b-2 pb-2 dark:border-neutral-800">
         팔로우 관리
       </h1>
       <nav className="mt-3">
         <ul className="flex flex-row">
           <li
-            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:border-cyan-950 ${
-              tab === 0 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
+            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 dark:border-neutral-800 ${
+              tab === 0
+                ? `${bgColor} border-b-0`
+                : "bg-neutral-100 dark:bg-neutral-800 hover:bg-white"
             }`}
           >
             <button
@@ -44,8 +50,10 @@ const ManageFollow = ({ data }) => {
             </button>
           </li>
           <li
-            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:border-cyan-950 ${
-              tab === 1 && "bg-gray-100 dark:bg-neutral-700 border-b-0"
+            className={`basis-1/2 text-center p-2 border rounded-t-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 dark:border-neutral-800 ${
+              tab === 1
+                ? `${bgColor} border-b-0`
+                : "bg-neutral-100 dark:bg-neutral-800 hover:bg-white"
             }`}
           >
             <button
@@ -69,12 +77,17 @@ const ManageFollow = ({ data }) => {
 };
 
 const UserCard = ({ user }) => {
+  const theme = useThemeStore((state) => state.theme);
   return (
-    <li className="border p-4 rounded dark:border-cyan-950 flex flex-col">
+    <li className="border p-4 rounded-2xl dark:border-neutral-800 flex flex-col">
       <div className="w-full h-3/5 flex items-center justify-center">
         <img
           className="rounded-full w-16 h-16 object-cover"
-          src={user.profile_image ?? "/profile/profile-dark.png"}
+          src={
+            user.profile_image ?? theme
+              ? "/profile/profile-light.png"
+              : "/profile/profile-dark.png"
+          }
           alt={user.name}
         />
       </div>

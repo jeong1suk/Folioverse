@@ -42,14 +42,14 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
     );
   };
 
-  const borderColor = useStyleClassStore((state) => state.borderColor);
-
   return (
     <ul>
       {projectData?.map((item) => (
         <li
           key={item._id}
-          className={"text-black border p-3 rounded mt-2 " + borderColor}
+          className={
+            "text-black border p-3 rounded-xl mt-2 dark:bg-neutral-900"
+          }
         >
           <div>
             <p className="flex justify-between mb-2">

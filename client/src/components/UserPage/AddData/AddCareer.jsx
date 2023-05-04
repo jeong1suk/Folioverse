@@ -173,7 +173,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
       {career.job !== "개발자" && career.job !== "" && (
         <div className="items-center mb-4 px-2">
           <input
-            className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
+            className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300"
             type="text"
             placeholder="직업명을 작성하세요"
             defaultValue={""}

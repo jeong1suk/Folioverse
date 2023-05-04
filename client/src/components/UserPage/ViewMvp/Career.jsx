@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
   const { data } = useQueryGet("/career", "getCareer");
@@ -26,14 +25,14 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
     });
   };
 
-  const borderColor = useStyleClassStore((state) => state.borderColor);
-
   return (
     <ul>
       {careerData?.map((item) => (
         <li
           key={item._id}
-          className={"text-black border p-3 rounded mt-2 " + borderColor}
+          className={
+            "text-black border p-3 rounded-xl mt-2 dark:bg-neutral-900"
+          }
         >
           <div>
             <p className="flex justify-between mb-2">
