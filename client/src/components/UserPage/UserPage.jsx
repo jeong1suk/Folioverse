@@ -10,6 +10,7 @@ import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
+import useStyleClassStore from "../../store/styleClassStore";
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -54,8 +55,16 @@ const UserPage = () => {
     }
   }, [params]);
 
+  const bgColor = useStyleClassStore((state) => state.bgColor);
+
+  useEffect(() => {
+    console.log(othersData);
+  }, [othersData]);
+
   return (
-    <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">
+    <div
+      className={`flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row min-h-screen ${bgColor}`}
+    >
       <div className="basis-1/4 px-5 mb-2">
         <div className="sticky top-20">
           <Profile
@@ -73,6 +82,9 @@ const UserPage = () => {
           </div>
           <div>
             <VisitorBookButton othersId={id} />
+          </div>
+          <div>
+            <Mailer />
           </div>
         </div>
       </div>
@@ -122,10 +134,13 @@ const UserPage = () => {
 };
 
 const MessageBoxButton = () => {
+  const pointColor = useStyleClassStore((state) => state.pointColor);
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
-      className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
+      className={
+        "text-sm w-full p-3 rounded border mt-3 dark:border-0 " + pointColor
+      }
       onClick={() => {
         setModal("", "messageBox");
       }}
@@ -136,15 +151,30 @@ const MessageBoxButton = () => {
 };
 
 const VisitorBookButton = ({ othersId }) => {
+  const pointColor = useStyleClassStore((state) => state.pointColor);
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
-      className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
+      className={
+        "text-sm w-full p-3 rounded border mt-3 dark:border-0 " + pointColor
+      }
       onClick={() => {
         setModal(othersId, "visitorBook");
       }}
     >
       {othersId ? "방명록 작성" : "방명록 열기"}
+    </button>
+  );
+};
+
+const Mailer = () => {
+  const setModal = useModalStore((state) => state.setModal);
+  return (
+    <button
+      className="border p-3 w-full mt-2"
+      onClick={() => setModal("", "mail")}
+    >
+      임시 메일 버튼
     </button>
   );
 };

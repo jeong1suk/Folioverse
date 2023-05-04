@@ -56,7 +56,7 @@ const AddEducation = ({ education, setEducation, setIsValid }) => {
         value={education.major}
         maxLength={20}
       />
-      <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-neutral-800 dark:border-cyan-950 dark:text-white">
+      <ul className="flex flex-col sm:flex-row lg:flex-col items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-neutral-800 dark:border-cyan-950 dark:text-white">
         {radioOptions.map((option) => (
           <li
             key={option.value}

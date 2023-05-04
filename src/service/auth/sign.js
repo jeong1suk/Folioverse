@@ -7,6 +7,8 @@ import { AwardModel } from "../../db/schemas/award.js";
 import { CertificateModel } from "../../db/schemas/certificate.js";
 import { DailyMetrics } from "../../db/models/DailyMetrics.js";
 import { signJWT } from "./login.js";
+import changeRandomPassword from "../../utils/changeRandomPassword.js";
+import sendMailer from "../../utils/sendMailer.js";
 
 const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -43,4 +45,16 @@ const checkDuplicate = async (email) => {
   return result.length > 0;
 };
 
-export { createUser, deleteUser, checkDuplicate };
+const findPassword = async (email) => {
+  const isExistEmail = await UserModel.findOne({ email });
+  if (isExistEmail) {
+    const { newPassword, hashedPassword } = await changeRandomPassword();
+    await UserModel.updateOne({ email }, { password: hashedPassword });
+    const result = await sendMailer(email, newPassword);
+    return result;
+  } else {
+    return { message: "존재하지 않는 계정입니다" };
+  }
+};
+
+export { createUser, deleteUser, checkDuplicate, findPassword };
