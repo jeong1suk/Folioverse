@@ -1,5 +1,6 @@
 //담당 : 이승현
 
+import { useEffect } from "react";
 import useThemeStore from "../../store/themeStore";
 import useToastStore from "../../store/toastStore";
 
@@ -10,6 +11,12 @@ const Toast = () => {
   const profileImage = useToastStore((state) => state.profileImage);
   const closeToast = useToastStore((state) => state.closeToast);
   const theme = useThemeStore((state) => state.theme);
+
+  useEffect(() => {
+    setTimeout(() => {
+      closeToast();
+    }, 3000);
+  }, [isOpen]);
 
   return (
     <div

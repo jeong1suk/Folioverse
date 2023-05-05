@@ -79,8 +79,8 @@ const ManageFollow = ({ data }) => {
 const UserCard = ({ user }) => {
   const theme = useThemeStore((state) => state.theme);
   return (
-    <li className="border p-4 rounded-2xl dark:border-neutral-800 flex flex-col">
-      <div className="w-full h-3/5 flex items-center justify-center">
+    <li className="border p-4 rounded-2xl dark:border-neutral-800 flex flex-col min-h-[200px]">
+      <div className="w-full h-1/2 flex items-center justify-center">
         <img
           className="rounded-full w-16 h-16 object-cover"
           src={
@@ -93,7 +93,7 @@ const UserCard = ({ user }) => {
       <p className="text-center text-black dark:text-white flex-1">
         {user.name}
       </p>
-      <p className="text-center text-sm text-neutral-400 flex-1">
+      <p className="text-center text-sm text-neutral-400 flex-1 truncate max-w-full">
         {user.email}
       </p>
       <p className="text-center mt-2 flex-1">

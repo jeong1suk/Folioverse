@@ -177,6 +177,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
             type="text"
             placeholder="직업명을 작성하세요"
             defaultValue={""}
+            maxLength={20}
             onChange={(e) =>
               setCareer((prevCareer) => ({
                 ...prevCareer,
@@ -237,6 +238,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
             className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
             type="text"
             placeholder="개발 직군을 입력하세요"
+            maxLength={20}
             value={
               career.job === "개발자" && !career.isWeb ? career.position : ""
             }
