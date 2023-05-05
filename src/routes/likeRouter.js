@@ -29,7 +29,6 @@ likeRouter.post("/:target_user_id", async (req, res) => {
 likeRouter.delete("/:target_user_id", async (req, res) => {
   const userId = req.user._id;
   const targetUserId = req.params.target_user_id;
-
   try {
     const unlikes = await LikeService.countDown({ userId, targetUserId });
     res.status(200).json({ success: true, unlikes });
