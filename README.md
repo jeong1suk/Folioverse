@@ -115,6 +115,7 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 '라이센스'�
 양재영 - yayww@naver.com
 정원석 - ssukgoon@gmail.com
 김기용 - kodinger17@gmail.com
+정주현 - nb3065@gmail.com
 
 ## 폴더 트리
 
