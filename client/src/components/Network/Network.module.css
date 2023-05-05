@@ -25,7 +25,9 @@
   border: #b87333 5px solid;
 }
 
-.networkProfileBox .medalGold {
+.networkProfileBox .medalGold,
+.medalSilver,
+.medalBronze {
   display: none;
 }
 
@@ -39,10 +41,6 @@
   background-color: transparent;
 }
 
-.networkProfileBox .medalSilver {
-  display: none;
-}
-
 .networkProfileBox:nth-child(3) > .medalBronze {
   display: block;
   width: 30px;
@@ -51,10 +49,6 @@
   left: -15px;
   z-index: 1;
   background-color: transparent;
-}
-
-.networkProfileBox .medalBronze {
-  display: none;
 }
 
 .filterDropMenu::-webkit-scrollbar {

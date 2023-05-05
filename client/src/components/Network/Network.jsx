@@ -111,6 +111,8 @@ const Network = () => {
                 description={user.description}
                 profileId={`${user._id}`}
                 profileImg={user.profile_image}
+                follower={user.follower_user.length}
+                like={user.like_user.length}
                 key={idx}
               />
             );
@@ -129,7 +131,7 @@ const Network = () => {
         )}
       </div>
       <div onClick={handleScrollToTop} className="fixed bottom-6 right-6">
-        <div className="w-[45px] h-[45px] rounded-full bg-[#69b1ff]">
+        <div className="w-[45px] h-[45px] rounded-full text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 ">
           <span className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-white text-[15px] font-bold cursor-pointer">
             TOP
           </span>
