@@ -1,4 +1,4 @@
-//담당 : 이승현
+// 담당 : 이승현
 
 import AWS from "aws-sdk";
 import multer from "multer";
