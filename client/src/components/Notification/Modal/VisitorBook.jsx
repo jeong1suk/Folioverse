@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import Pagination from "./Pagination";
@@ -17,6 +17,7 @@ const VisitorBook = ({ id }) => {
     "post"
   );
   const isToken = localStorage.getItem("token");
+  const inputRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -75,6 +76,7 @@ const VisitorBook = ({ id }) => {
           }
           setAlert(true);
           setMsg("방명록을 작성하였습니다");
+          inputRef.current.value = "";
         },
       }
     );
@@ -117,7 +119,9 @@ const VisitorBook = ({ id }) => {
             }`}
             cols="30"
             rows="1"
+            maxLength={50}
             onChange={(e) => setDescription(e.target.value)}
+            ref={inputRef}
           ></textarea>
         </div>
         <button
@@ -135,12 +139,12 @@ const VisitorBook = ({ id }) => {
           bookData?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div
               key={item._id}
-              className="flex flex-row justify-between text-sm mt-5 items-center dark:border-neutral-600"
+              className="flex flex-row text-sm mt-5 items-center dark:border-neutral-600 mb-3"
             >
-              <div className="flex flex-row justify-between w-full">
-                <span>{item.description}</span>
-              </div>
-              <div className="flex flex-row items-center">
+              <span className="break-words w-7/12 pe-3">
+                {item.description}
+              </span>
+              <div className="inline-flex flex-row items-center w-5/12">
                 <img
                   src={
                     item.write_userProfileImage ??
@@ -149,16 +153,18 @@ const VisitorBook = ({ id }) => {
                       : "/profile/profile-light.png")
                   }
                   alt="프로필 이미지"
-                  className="w-10 rounded-full mr-1"
+                  className="w-10 rounded-full mr-1 whitespace-nowrap"
                 />
-                <span>{item.write_userName}</span>
+                <span className="break-words whitespace-normal">
+                  {item.write_userName}
+                </span>
                 <span
                   className={`${
                     myInfo?._id === item.write_user ||
                     location.pathname === "/my-page"
                       ? ""
                       : "hidden"
-                  } cursor-pointer ml-3 mr-10`}
+                  } cursor-pointer ml-3 mr-10 whitespace-normal`}
                   onClick={() => onDelete(item._id)}
                   disabled={loadingDelete}
                 >

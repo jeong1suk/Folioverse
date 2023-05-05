@@ -12,8 +12,8 @@ const messageService = {
           "name profile_image"
         );
         const messageObj = message.toObject();
-        messageObj["sendUserName"] = sendUser.name;
-        messageObj["sendUserProfileImage"] = sendUser.profile_image;
+        messageObj["sendUserName"] = sendUser?.name;
+        messageObj["sendUserProfileImage"] = sendUser?.profile_image;
         return messageObj;
       })
     );

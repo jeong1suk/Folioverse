@@ -119,6 +119,7 @@ const SignUp = () => {
               type="text"
               placeholder="이름"
               onChange={handleNameChange}
+              maxLength={12}
             />
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
               이메일:
@@ -130,6 +131,7 @@ const SignUp = () => {
               type="email"
               placeholder="이메일"
               onChange={handleEmailChange}
+              maxLength={250}
             />
 
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
@@ -142,6 +144,7 @@ const SignUp = () => {
               type="password"
               placeholder="비밀번호(숫자, 문자 특수문자 포함 6자 이상)"
               onChange={handlePasswordChange}
+              maxLength={18}
             />
 
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
@@ -156,6 +159,7 @@ const SignUp = () => {
               type="password"
               placeholder="비밀번호 확인"
               onChange={handleConfirmPasswordChange}
+              maxLength={18}
             />
 
             {errMessage && (

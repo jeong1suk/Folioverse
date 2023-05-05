@@ -88,6 +88,7 @@ const Login = () => {
               type="email"
               placeholder="이메일"
               onChange={handleEmailChange}
+              maxLength={250}
             />
 
             <label className={`${fontColorA} font-bold mt-2 p-2`}>
@@ -98,6 +99,7 @@ const Login = () => {
               type="password"
               placeholder="비밀번호"
               onChange={handlePasswordChange}
+              maxLength={18}
             />
 
             {errMessage && (
