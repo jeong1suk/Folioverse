@@ -55,7 +55,7 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
   ];
   const stackHandleFilter = (e) => {
     if (skillStackOptions.includes(e.target.value)) {
-      if (sortBy.techStack.includes(e.target.value)) {
+      if (sortBy?.techStack.includes(e.target.value)) {
         let arr = [...sortBy.techStack];
         arr.splice(arr.indexOf(e.target.value), 1);
         return setSortBy({ ...sortBy, techStack: arr });
@@ -68,32 +68,47 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
   };
 
   const handleFilter = (e) => {
-    if (e.target.value === "비개발자" || e.target.value === "개발자") {
-      if (sortBy.job === e.target.value) {
-        return setSortBy({ ...sortBy, job: "" });
+    if (
+      e.target.value.includes("비개발자") ||
+      e.target.value.includes("개발자")
+    ) {
+      if (sortBy?.job.includes(e.target.value)) {
+        let arr = [...sortBy.job];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, job: arr });
       }
-      return setSortBy({ ...sortBy, job: e.target.value });
+      return setSortBy({ ...sortBy, job: [...sortBy.job, e.target.value] });
     }
     if (
-      e.target.value === "신입 - 1년 미만" ||
-      e.target.value === "경력 - 5년 미만" ||
-      e.target.value === "경력 - 5년 이상"
+      e.target.value.includes("신입 - 1년 미만") ||
+      e.target.value.includes("경력 - 1년 이상") ||
+      e.target.value.includes("경력 - 5년 이상")
     ) {
-      if (sortBy.yearly === e.target.value) {
-        return setSortBy({ ...sortBy, yearly: "" });
+      if (sortBy?.yearly.includes(e.target.value)) {
+        let arr = [...sortBy.yearly];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, yearly: arr });
       }
-      return setSortBy({ ...sortBy, yearly: e.target.value });
+      return setSortBy({
+        ...sortBy,
+        yearly: [...sortBy.yearly, e.target.value],
+      });
     }
 
     if (
-      e.target.value === "프론트엔드" ||
-      e.target.value === "백엔드" ||
-      e.target.value === "풀스택"
+      e.target.value.includes("프론트엔드") ||
+      e.target.value.includes("백엔드") ||
+      e.target.value.includes("풀스택")
     ) {
-      if (sortBy.position === e.target.value) {
-        return setSortBy({ ...sortBy, position: "" });
+      if (sortBy?.position.includes(e.target.value)) {
+        let arr = [...sortBy?.position];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, position: arr });
       }
-      return setSortBy({ ...sortBy, position: e.target.value });
+      return setSortBy({
+        ...sortBy,
+        position: [...sortBy.position, e.target.value],
+      });
     }
   };
   return (
@@ -103,14 +118,14 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
       <h2 className="ml-[10px]">필터</h2>
       <div className={`mt-[5px]`}>
         <button
-          className={sortBy.job === "비개발자" ? btnEnabled : btnDisabled}
+          className={sortBy.job.includes("비개발자") ? btnEnabled : btnDisabled}
           value="비개발자"
           onClick={handleFilter}
         >
           비개발자
         </button>
         <button
-          className={sortBy.job === "개발자" ? btnEnabled : btnDisabled}
+          className={sortBy.job.includes("개발자") ? btnEnabled : btnDisabled}
           value="개발자"
           onClick={handleFilter}
         >
@@ -119,7 +134,7 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <button
           className={
-            sortBy.yearly === "신입 - 1년 미만" ? btnEnabled : btnDisabled
+            sortBy.yearly.includes("신입 - 1년 미만") ? btnEnabled : btnDisabled
           }
           value="신입 - 1년 미만"
           onClick={handleFilter}
@@ -128,16 +143,16 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
         </button>
         <button
           className={
-            sortBy.yearly === "경력 - 5년 미만" ? btnEnabled : btnDisabled
+            sortBy.yearly.includes("경력 - 1년 이상") ? btnEnabled : btnDisabled
           }
-          value="경력 - 5년 미만"
+          value="경력 - 1년 이상"
           onClick={handleFilter}
         >
           경력 - 5년 미만
         </button>
         <button
           className={
-            sortBy.yearly === "경력 - 5년 이상" ? btnEnabled : btnDisabled
+            sortBy.yearly.includes("경력 - 5년 이상") ? btnEnabled : btnDisabled
           }
           value="경력 - 5년 이상"
           onClick={handleFilter}
@@ -147,7 +162,7 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <button
           className={
-            sortBy.position === "프론트엔드" ? btnEnabled : btnDisabled
+            sortBy.position.includes("프론트엔드") ? btnEnabled : btnDisabled
           }
           value="프론트엔드"
           onClick={handleFilter}
@@ -155,14 +170,18 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
           프론트엔드
         </button>
         <button
-          className={sortBy.position === "백엔드" ? btnEnabled : btnDisabled}
+          className={
+            sortBy.position.includes("백엔드") ? btnEnabled : btnDisabled
+          }
           value="백엔드"
           onClick={handleFilter}
         >
           백엔드
         </button>
         <button
-          className={sortBy.position === "풀스택" ? btnEnabled : btnDisabled}
+          className={
+            sortBy.position.includes("풀스택") ? btnEnabled : btnDisabled
+          }
           value="풀스택"
           onClick={handleFilter}
         >
