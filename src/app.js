@@ -7,6 +7,8 @@ import { initializePassport } from "./middlewares/passport/index.js";
 import dailyMetrics from "./dailyEvent/dailyMetrics.js";
 import cron from "node-cron";
 const app = express();
+import dotenv from "dotenv";
+dotenv.config();
 
 const clientHost = process.env.CLIENT_HOST;
 const corsOptions = {
