@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { userService } from "../service/userService.js";
 import checkToken from "../middlewares/checkToken.js";
-import mongoose from "mongoose";
 
 const userRouter = Router();
 

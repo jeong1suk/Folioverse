@@ -7,3 +7,37 @@
 * {
   font-family: "Noto Sans KR", sans-serif;
 }
+
+.react-calendar {
+  @apply rounded-xl dark:bg-neutral-800 border dark:border-neutral-700;
+}
+.react-calendar__month-view__days__day {
+  @apply text-neutral-800 dark:text-neutral-300;
+}
+.react-calendar__month-view__days__day:hover {
+  @apply dark:bg-neutral-900;
+}
+.react-calendar__month-view__days__day--selected {
+  @apply bg-blue-500 text-blue-500;
+}
+
+.react-calendar__navigation__label,
+.react-calendar__navigation button {
+  @apply text-neutral-400 dark:hover:bg-neutral-700;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  @apply text-neutral-500;
+}
+
+.react-calendar__century-view__decades__decade {
+  @apply dark:text-neutral-400 dark:hover:bg-neutral-700;
+}
+
+.react-calendar__year-view__months__month {
+  @apply dark:text-neutral-400 dark:hover:bg-neutral-700;
+}
+
+.react-calendar__decade-view__years__year {
+  @apply dark:text-neutral-400 dark:hover:bg-neutral-700;
+}

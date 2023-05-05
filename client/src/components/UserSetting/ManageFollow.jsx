@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useQueryGet } from "../../utils/useQuery";
+import { useQueryDelete, useQueryGet } from "../../utils/useQuery";
 import useStyleClassStore from "../../store/styleClassStore";
 import useThemeStore from "../../store/themeStore";
+import { useQueryClient } from "react-query";
+import useToastStore from "../../store/toastStore";
 
 const ManageFollow = ({ data }) => {
   const [tab, setTab] = useState(0);
@@ -68,7 +70,7 @@ const ManageFollow = ({ data }) => {
       <section>
         <ul className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-4">
           {usersData?.map((user) => (
-            <UserCard user={user} key={user._id} />
+            <UserCard user={user} key={user?._id} tab={tab} />
           ))}
         </ul>
       </section>
@@ -76,34 +78,55 @@ const ManageFollow = ({ data }) => {
   );
 };
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, tab }) => {
   const theme = useThemeStore((state) => state.theme);
+  const { deleteMutate: unFollow, isLoading: loadingUnFollow } =
+    useQueryDelete("/follow");
+  const queryClient = useQueryClient();
+  const setToast = useToastStore((state) => state.setToast);
+
+  const handdleClick = (e) => {
+    e.stopPropagation();
+    unFollow(user?._id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getAllFollowers");
+        setToast("팔로우를 취소하였습니다", "success");
+      },
+    });
+  };
   return (
-    <li className="border p-4 rounded-2xl dark:border-neutral-800 flex flex-col min-h-[200px]">
-      <div className="w-full h-1/2 flex items-center justify-center">
-        <img
-          className="rounded-full w-16 h-16 object-cover"
-          src={
-            user.profile_image ??
-            (!theme
-              ? "/profile/profile-dark.png"
-              : "/profile/profile-light.png")
-          }
-          alt={user.name}
-        />
-      </div>
-      <p className="text-center text-black dark:text-white flex-1">
-        {user.name}
-      </p>
-      <p className="text-center text-sm text-neutral-400 flex-1 truncate max-w-full">
-        {user.email}
-      </p>
-      <p className="text-center mt-2 flex-1">
-        <Link to={`/user-page/${user._id}`} className="text-blue-400 text-xs">
-          View profile
-        </Link>
-      </p>
-    </li>
+    <div className="relative">
+      <Link to={`/user-page/${user?._id}`}>
+        <li className="border p-4 rounded-2xl dark:border-neutral-800 flex flex-col min-h-[200px] dark:bg-neutral-800 dark:hover:bg-neutral-900">
+          <div className="w-full h-4/5 mt-2 flex items-center justify-center">
+            <img
+              className="rounded-full w-16 h-16 object-cover"
+              src={
+                user?.profile_image ??
+                (!theme
+                  ? "/profile/profile-dark.png"
+                  : "/profile/profile-light.png")
+              }
+              alt={user?.name}
+            />
+          </div>
+          <p className="text-center text-black dark:text-white flex-1">
+            {user?.name}
+          </p>
+          <p className="text-center text-sm text-neutral-400 flex-1 truncate max-w-full">
+            {user?.email}
+          </p>
+        </li>
+      </Link>
+      <button
+        className={`${
+          tab === 1 && "hidden"
+        } absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center border hover:bg-neutral-100 text-neutral-500 dark:border-neutral-700 rounded-lg w-fit mx-auto px-3 dark:bg-neutral-900 dark:hover:bg-neutral-700`}
+        onClick={handdleClick}
+      >
+        Unfollow
+      </button>
+    </div>
   );
 };
 

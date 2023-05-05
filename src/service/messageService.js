@@ -22,11 +22,23 @@ const messageService = {
   sendMessage: async (sendUser, targetUser, title, description) => {
     const newMessage = { sendUser, targetUser, title, description };
     const creatednewMessage = await Message.send({ newMessage });
+    await UserModel.findByIdAndUpdate(targetUser, { $set: { isRead: false } });
     return creatednewMessage;
   },
   deleteMessage: async (_id) => {
     const deleteOneMessage = await Message.delete(_id);
     return deleteOneMessage;
+  },
+  readMessage: async (_id) => {
+    const readMessage = await UserModel.findByIdAndUpdate(_id, {
+      $set: { isRead: true },
+    });
+    return readMessage;
+  },
+  isRead: async (_id) => {
+    const isReadMessage = await UserModel.findById({ _id });
+    const result = isReadMessage.isRead;
+    return result;
   },
 };
 

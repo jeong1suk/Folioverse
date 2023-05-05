@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     if (messageChanged) {
       queryClient.invalidateQueries("getMessage");
+      queryClient.invalidateQueries("getIsRead");
       setToast(
         `${
           refetchMessageData.result[refetchMessageData.result.length - 1]

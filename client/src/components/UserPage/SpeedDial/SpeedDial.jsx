@@ -73,7 +73,7 @@ const SpeedDial = ({ id }) => {
         data-dial-toggle="speed-dial-menu-text-outside-button-square"
         aria-controls="speed-dial-menu-text-outside-button-square"
         aria-expanded="false"
-        className="flex items-center justify-center text-white bg-blue-500 rounded-full w-14 h-14 hover:bg-blue-800 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+        className="flex items-center justify-center rounded-full w-14 h-14 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800"
       >
         <svg
           aria-hidden="true"

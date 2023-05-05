@@ -13,6 +13,7 @@ const UserSchema = new Schema(
     metrics: [{ type: Schema.Types.ObjectId, ref: "DailyMetrics" }],
     career: { type: Schema.Types.ObjectId, ref: "Career" },
     visit_count: { type: Number, default: 0 },
+    isRead: { type: Number, default: true },
   },
   { timestamps: true }
 );

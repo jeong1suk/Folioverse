@@ -78,7 +78,7 @@ const UserPage = () => {
           </div>
           <PostList id={id ?? myInfo?._id} />
           <div>
-            <VisitorBookButton othersId={id} isToken={isToken} />
+            <VisitorBookButton othersId={id} />
           </div>
         </div>
       </div>
@@ -139,19 +139,18 @@ const UserPage = () => {
   );
 };
 
-const VisitorBookButton = ({ othersId, isToken }) => {
-  const pointColor = useStyleClassStore((state) => state.pointColor);
+const VisitorBookButton = ({ othersId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
       className={
-        "text-sm w-full p-3 rounded rounded-xl mt-3 dark:border-0 " + pointColor
+        "w-full mt-2 rounded-xl text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
       }
       onClick={() => {
         setModal(othersId, "visitorBook");
       }}
     >
-      {othersId && isToken ? "방명록 작성" : "방명록 열기"}
+      방명록
     </button>
   );
 };

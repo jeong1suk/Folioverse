@@ -11,6 +11,12 @@ router.get("/", async (req, res) => {
   res.status(200).json({ result });
 });
 
+router.get("/is-read", async (req, res) => {
+  const user_id = req.user._id;
+  const result = await messageService.isRead(user_id);
+  res.status(200).json({ result });
+});
+
 router.post("/", async (req, res) => {
   const user_id = req.user._id;
   const { target_id, title, description } = req.body;
@@ -20,6 +26,12 @@ router.post("/", async (req, res) => {
     title,
     description
   );
+  res.status(200).json({ result });
+});
+
+router.patch("/read", async (req, res) => {
+  const user_id = req.user._id;
+  const result = await messageService.readMessage(user_id);
   res.status(200).json({ result });
 });
 

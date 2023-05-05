@@ -32,6 +32,11 @@ const Certificate = ({
     });
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   return (
     <ul>
       {ceriticateData?.map((item) => (
@@ -69,7 +74,7 @@ const Certificate = ({
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              {item.date}
+              {formatDate(item.date)}
             </p>
             <p
               className={`text-sm text-neutral-400 dark:text-${

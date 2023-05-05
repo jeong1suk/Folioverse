@@ -23,6 +23,11 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
     });
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   return (
     <ul>
       {awardData?.map((item) => (
@@ -60,7 +65,7 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              {item.date}
+              {formatDate(item.date)}
             </p>
           </div>
         </li>

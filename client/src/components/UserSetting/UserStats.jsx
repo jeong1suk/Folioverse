@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart } from "chart.js/auto";
 import { useQueryGet } from "../../utils/useQuery";
@@ -41,8 +41,7 @@ const UserStats = ({ data }) => {
 const UserChart = ({ chartData }) => {
   const chartConfig = useMemo(() => {
     const endDate = new Date();
-    const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-
+    const startDate = new Date(endDate.getTime() - 6 * 24 * 60 * 60 * 1000);
     const labels = [];
     const visitorData = [];
     const followerData = [];
