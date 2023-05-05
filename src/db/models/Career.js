@@ -1,3 +1,5 @@
+//담당 : 이승현
+
 import { CareerModel } from "../schemas/career.js";
 
 class Career {

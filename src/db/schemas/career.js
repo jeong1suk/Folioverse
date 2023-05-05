@@ -1,6 +1,7 @@
+//담당 : 이승현
+
 import { Schema, model } from "mongoose";
 
-//CareerSchema 정의하기
 const CareerSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
   yearly: { type: String, required: true },
@@ -13,5 +14,3 @@ const CareerSchema = new Schema({
 const CareerModel = model("Career", CareerSchema);
 
 export { CareerModel };
-
-

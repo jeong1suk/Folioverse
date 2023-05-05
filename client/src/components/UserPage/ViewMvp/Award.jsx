@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "./../../../utils/useQuery";
 
 const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
-  const { data } = useQueryGet("/award", "getAward");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/award", "getAward", { enabled: !!isToken });
 
   const [awardData, setAwardData] = useState(null);
 

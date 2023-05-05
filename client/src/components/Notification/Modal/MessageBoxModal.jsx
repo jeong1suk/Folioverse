@@ -1,13 +1,15 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
-import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
 import { useQueryClient } from "react-query";
+import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
 import Pagination from "./Pagination";
 import useThemeStore from "../../../store/themeStore";
 import useModalStore from "../../../store/modalStore";
 
-const MessageBoxModal = ({ toggleOpen }) => {
+const MessageBoxModal = () => {
   const { data } = useQueryGet("/message", "getMessage");
-  const { deleteMutate } = useQueryDelete("/message");
+  const { deleteMutate, isLoading } = useQueryDelete("/message");
   const [message, setMessage] = useState(null);
   const queryClient = useQueryClient();
   const [alert, setAlert] = useState(false);
@@ -128,6 +130,7 @@ const MessageBoxModal = ({ toggleOpen }) => {
                   <button
                     className="ml-2 mb-3 border px-2 py-1 rounded text-red-500 border-red-500 hover:bg-red-100"
                     onClick={() => onDelete(item._id)}
+                    disabled={isLoading}
                   >
                     삭제
                   </button>

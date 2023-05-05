@@ -1,5 +1,9 @@
-import bcrypt from "bcrypt";
+//담당 : 이승현
+
 import passport from "passport";
+import bcrypt from "bcrypt";
+import changeRandomPassword from "../../utils/changeRandomPassword.js";
+import sendMailer from "../../utils/sendMailer.js";
 import { UserModel } from "../../db/schemas/user.js";
 import { EducationModel } from "../../db/schemas/education.js";
 import { ProjectModel } from "../../db/schemas/project.js";
@@ -7,8 +11,6 @@ import { AwardModel } from "../../db/schemas/award.js";
 import { CertificateModel } from "../../db/schemas/certificate.js";
 import { DailyMetrics } from "../../db/models/DailyMetrics.js";
 import { signJWT } from "./login.js";
-import changeRandomPassword from "../../utils/changeRandomPassword.js";
-import sendMailer from "../../utils/sendMailer.js";
 
 const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);

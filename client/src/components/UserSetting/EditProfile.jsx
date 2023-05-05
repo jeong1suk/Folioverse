@@ -1,8 +1,8 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useQueryPatch } from "../../utils/useQuery";
 import { useQueryClient } from "react-query";
+import { useQueryPatch } from "../../utils/useQuery";
 import useToastStore from "../../store/toastStore";
 import useThemeStore from "../../store/themeStore";
 
@@ -15,11 +15,14 @@ const EditProfile = ({ data }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const queryClient = useQueryClient();
-  const { mutate: updateProfile } = useQueryPatch(
+  const { mutate: updateProfile, isLoading: isLoadingProfile } = useQueryPatch(
     `/user/${data?._id}`,
     "patch"
   );
-  const { mutate: uploadImage } = useQueryPatch(`/image`, "patch");
+  const { mutate: uploadImage, isLoading: isLoadingImage } = useQueryPatch(
+    `/image`,
+    "patch"
+  );
 
   const setToast = useToastStore((state) => state.setToast);
 
@@ -123,7 +126,7 @@ const EditProfile = ({ data }) => {
               !isValid && "bg-gray-100 dark:bg-neutral-700 cursor-not-allowed"
             } border px-2 py-1 w-full rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800`}
             onClick={onSubmit}
-            disabled={!isValid}
+            disabled={!isValid || isLoadingProfile || isLoadingImage}
           >
             변경
           </button>

@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
-  const { data } = useQueryGet("/project", "getProject");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/project", "getProject", {
+    enabled: !!isToken,
+  });
 
   const [projectData, setProjectData] = useState(null);
 

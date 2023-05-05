@@ -1,8 +1,8 @@
 //담당 : 이승현
 
 import { useEffect, useState } from "react";
-import { useQueryGet } from "../../utils/useQuery";
 import { Link } from "react-router-dom";
+import { useQueryGet } from "../../utils/useQuery";
 import useStyleClassStore from "../../store/styleClassStore";
 import useThemeStore from "../../store/themeStore";
 
