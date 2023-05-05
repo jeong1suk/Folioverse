@@ -1,7 +1,7 @@
 // 정원석
 
 import axios from "axios";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import useModalStore from "../../store/modalStore";
 import { Link } from "react-router-dom";
 import { GoogleButton, KakaoButton } from "./SocialButton";
@@ -33,6 +33,13 @@ const Login = () => {
   const isPasswordValid = validatePassword(password);
 
   const setModal = useModalStore((state) => state.setModal);
+  const isToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isToken) {
+      location.href = "/error/auth";
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +64,7 @@ const Login = () => {
         className={`absolute rotate-180 w-[1440px] top-[-20%] left-[50%] translate-x-[-50%]`}
       />
       <div
-        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[1200px]`}
+        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%]`}
       >
         <div className={`h-auto pt-10 mx-auto p-5 mb-auto min-w-screen`}>
           <p
@@ -102,7 +109,7 @@ const Login = () => {
             )}
 
             <button
-              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-2`} ${
+              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-3`} ${
                 isEmailValid &&
                 isPasswordValid &&
                 `bg-blue-500 hover:bg-blue-400 cursor-pointer`
@@ -113,7 +120,7 @@ const Login = () => {
               로그인
             </button>
           </form>
-          <div className="flex justify-center flex-col sm:flex-row">
+          <div className="flex justify-center flex-col sm:flex-row mt-2">
             <GoogleButton />
             <KakaoButton />
           </div>
