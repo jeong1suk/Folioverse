@@ -2,6 +2,7 @@
 
 import { Strategy as KakaoStrategy } from "passport-kakao";
 import { UserModel } from "../../db/schemas/user.js";
+import { DailyMetrics } from "../../db/models/DailyMetrics.js";
 import { kakaoConfig } from "../../lib/config.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,6 +25,9 @@ const kakaoStrategy = new KakaoStrategy(
       });
 
       const savedUser = await newUser.save();
+      console.log(savedUser);
+      await DailyMetrics.createUserMetrics(savedUser);
+
       done(null, savedUser);
     } catch (err) {
       done(err);

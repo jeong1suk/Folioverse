@@ -43,8 +43,8 @@ app.get("/api/test", (req, res) => {
   res.send("goot test");
 });
 
-// 정각마다 dailyMetrics 모듈 실행
-const job = cron.schedule("0 0 * * *", dailyMetrics);
+// 정각(인데 오류가 조금 있어서 0시 5분)에 dailyMetrics 모듈 실행
+const job = cron.schedule("5 0 * * *", dailyMetrics);
 job.start();
 
 app.listen(3000, () => {
