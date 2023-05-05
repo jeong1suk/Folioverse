@@ -14,7 +14,7 @@ const UserDownMenu = () => {
     location.href = "/";
   };
 
-  const liStyle = `w-full text-left px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6] hover:bg-[#bababa]`;
+  const liStyle = `w-full text-left px-[15px] py-[10px] text-[#3e3e3e] bg-[#d6d6d6] hover:bg-[#bababa] transition-all ease-in duration-75`;
   return (
     <>
       <li className={liStyle}>

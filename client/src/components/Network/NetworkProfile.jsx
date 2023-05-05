@@ -26,52 +26,55 @@ const NetworkProfile = ({
   const profileDefault = isDarkMode ? lightModeProfile : darkModeProfile;
 
   return (
-    <div
+    <Link
+      to={`/user-page/${profileId}`}
       className={`${darkMode} relative sm:grid-cols-[400px] w-[300px] md:w-[330px] h-[400px] mt-[30px] m-auto rounded-3xl ${styles.networkProfileBox}`}
     >
-      <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
-      <img
-        src={silvermedal}
-        alt="silver medal"
-        className={styles.medalSilver}
-      />
-      <img
-        src={bronzemedal}
-        alt="bronze medal"
-        className={styles.medalBronze}
-      />
-      <img
-        src={profileImg ? profileImg : profileDefault}
-        alt="profileImg"
-        className={`${darkMode} w-[180px] h-[180px] absolute -translate-x-2/4 object-cover rounded-full left-2/4 top-5`}
-      />
-      <div
-        className={`w-[250px] absolute bottom-[80px] left-[40px] ${darkMode}`}
-      >
-        <h4
-          className={`overflow-hidden text-ellipsis  w-full whitespace-nowrap text-lg font-bold ${darkMode} ${fontColorA}`}
+      <div>
+        <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
+        <img
+          src={silvermedal}
+          alt="silver medal"
+          className={styles.medalSilver}
+        />
+        <img
+          src={bronzemedal}
+          alt="bronze medal"
+          className={styles.medalBronze}
+        />
+        <img
+          src={profileImg ? profileImg : profileDefault}
+          alt="profileImg"
+          className={`${darkMode} w-[180px] h-[180px] absolute -translate-x-2/4 object-cover rounded-full left-2/4 top-5`}
+        />
+        <div
+          className={`w-[250px] absolute bottom-[50px] left-[40px] ${darkMode}`}
         >
-          {name}
-        </h4>
-        <h5
-          className={`overflow-hidden text-ellipsis w-full text-[15px] font-normal ${darkMode} ${fontColorC}`}
-        >
-          {email}
-        </h5>
-        <p
-          className={`inline-block truncate max-w-full h-[45px] text-[15px] mt-2.5 ${darkMode} ${fontColorB}`}
-        >
-          {description ? description : "자기소개가 없습니다"}
-        </p>
-      </div>
-      <Link
+          <h4
+            className={`overflow-hidden text-ellipsis  w-full whitespace-nowrap text-lg font-bold ${darkMode} ${fontColorA}`}
+          >
+            {name}
+          </h4>
+          <h5
+            className={`overflow-hidden text-ellipsis w-full text-[15px] font-normal ${darkMode} ${fontColorC}`}
+          >
+            {email}
+          </h5>
+          <p
+            className={`inline-block truncate max-w-full h-[45px] text-[15px] mt-2.5 ${darkMode} ${fontColorB}`}
+          >
+            {description ? description : "자기소개가 없습니다"}
+          </p>
+        </div>
+        {/* <Link
         className={`absolute -translate-x-2/4 bg-[#69b1ff] text-white dark:bg-[#407bb3] dark:text-[#d4d4d4] px-[15px] py-2 rounded-xl border-[none]
         left-2/4 top-[340px] hover:bg-[#5581ab] hover:text-[#ebebeb] dark:hover:bg-[#2c4e6e] dark:hover:text-white transition ease-in-out duration-[0.3s]`}
         to={`/user-page/${profileId}`}
       >
         프로필
-      </Link>
-    </div>
+      </Link> */}
+      </div>
+    </Link>
   );
 };
 

@@ -13,7 +13,7 @@ const SearchResultView = ({ inputValue }) => {
 
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
 
-  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6] dark:text-[#fff] dark:bg-[#3e3e3e] hover:bg-[#bababa] dark:hover:bg-[#575757] cursor-pointer`;
+  const liStyle = `text-[#3e3e3e] bg-[#d6d6d6] dark:text-[#fff] dark:bg-[#3e3e3e] hover:bg-[#bababa] dark:hover:bg-[#575757] cursor-pointer transition-all ease-in duration-75`;
 
   if (loading) {
     return <li className={`${liStyle} text-center`}>Loading...</li>;
