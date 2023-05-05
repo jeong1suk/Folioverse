@@ -60,6 +60,10 @@ const deleteUser = async (_id) => {
   await VisitorBookModel.deleteMany({ target_user: _id });
   await FollowModel.deleteMany({ target_user: _id });
   await LikeModel.deleteMany({ target_user: _id });
+  await UserModel.updateMany(
+    {},
+    { $pull: { follower_user: _id, like_user: _id } }
+  );
 
   const user = await UserModel.deleteOne({ _id });
   return user.deletedCount ? true : false;

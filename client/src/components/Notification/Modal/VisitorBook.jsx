@@ -144,7 +144,7 @@ const VisitorBook = ({ id }) => {
               <span className="break-words w-7/12 pe-3">
                 {item.description}
               </span>
-              <div className="inline-flex flex-row items-center w-5/12">
+              <div className="inline-flex flex-row items-center w-5/12 justify-end">
                 <img
                   src={
                     item.write_userProfileImage ??
@@ -164,11 +164,10 @@ const VisitorBook = ({ id }) => {
                     location.pathname === "/my-page"
                       ? ""
                       : "hidden"
-                  } cursor-pointer ml-3 mr-10 whitespace-normal`}
+                  } cursor-pointer ml-3 mr-1 whitespace-normal`}
                   onClick={() => onDelete(item._id)}
                   disabled={loadingDelete}
                 >
-                  <span className="sr-only">Close</span>
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5"
