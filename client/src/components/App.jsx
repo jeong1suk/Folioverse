@@ -52,7 +52,7 @@ const App = () => {
   }, [bookChanged]);
 
   useEffect(() => {
-    document.body.classList[theme ? "remove" : "add"]("dark");
+    document.body.classList[theme ? "add" : "remove"]("dark");
   }, [theme]);
 
   return (
