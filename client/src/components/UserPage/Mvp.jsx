@@ -77,14 +77,16 @@ const Mvp = ({ title, othersData, customClass }) => {
     setResetCount((prevCount) => prevCount + 1);
   };
 
+  const isMyPage = pathname === "/my-page";
+
   return (
     <section
       className={`border rounded-2xl dark:bg-[#4e4e4e61] dark:border-neutral-600 p-5 mb-5 ${customClass} ${
-        (title === "학력" && !educationState && "hidden") ||
-        (title === "직업 및 경력" && !careerState && "hidden") ||
-        (title === "프로젝트" && !projectState && "hidden") ||
-        (title === "수상 이력" && !awardState && "hidden") ||
-        (title === "자격증" && !certificateState && "hidden")
+        (title === "학력" && !educationState && isMyPage && "hidden") ||
+        (title === "직업 및 경력" && !careerState && isMyPage && "hidden") ||
+        (title === "프로젝트" && !projectState && isMyPage && "hidden") ||
+        (title === "수상 이력" && !awardState && isMyPage && "hidden") ||
+        (title === "자격증" && !certificateState && isMyPage && "hidden")
       }`}
     >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
@@ -133,7 +135,7 @@ const Mvp = ({ title, othersData, customClass }) => {
       <button
         onClick={onAdd}
         className={`${
-          (addState || editState || pathname !== "/my-page") && "hidden"
+          (addState || editState || !isMyPage) && "hidden"
         } block w-full border border-dotted dark:border-neutral-600 p-2 mt-2 rounded-xl hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800`}
       >
         +
