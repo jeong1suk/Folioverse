@@ -37,13 +37,15 @@ const RightNav = ({ isLogin }) => {
   return (
     <div className="absolute right-[20px] top-0 w-[fit-content] h-full">
       {isLogin ? <UserNav /> : <GuestNav isHome={isHome} />}
-      <button
-        className={`w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2
+      {!isHome && (
+        <button
+          className={`w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2
          px-[10px] py-[10px] rounded-[5px] w-10 ${btnStyle}`}
-        onClick={darkmodeHandler}
-      >
-        <img src={darkModeImg} className="invert-[70%]" alt="dark mode btn" />
-      </button>
+          onClick={darkmodeHandler}
+        >
+          <img src={darkModeImg} className="invert-[70%]" alt="dark mode btn" />
+        </button>
+      )}
       <div
         ref={ref}
         onClick={handleSearchClick}
