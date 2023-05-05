@@ -148,7 +148,7 @@ const NetworkFilter = ({ sortBy, setSortBy }) => {
           value="경력 - 1년 이상"
           onClick={handleFilter}
         >
-          경력 - 5년 미만
+          경력 - 1년 이상
         </button>
         <button
           className={

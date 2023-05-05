@@ -15,7 +15,9 @@ const Layout = () => {
       <Header />
       <div
         className={`${
-          isHome ? "bg-black h-[70px]" : "bg-white dark:bg-[#1a1a1a] h-[70px]"
+          isHome
+            ? "bg-black h-[70px] min-w-screen"
+            : "min-w-screen bg-white dark:bg-[#1a1a1a] h-[70px]"
         }`}
       ></div>
       <Router />
