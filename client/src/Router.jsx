@@ -21,7 +21,7 @@ const Router = () => {
       <Route path="/my-page" element={<UserPage />} />
       <Route path="/error/:type" element={<ErrPage />} />
       <Route path="/user-page/:id" element={<UserPage />} />
-      <Route path="/authorized" element={<Authorized />} />
+      <Route path="/authorized/*" element={<Authorized />} />
       <Route path="*" element={<ErrPage />} />
     </Routes>
   );

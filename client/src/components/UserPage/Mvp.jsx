@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AddData from "./AddData/AddData";
 import Award from "./ViewMvp/Award";
@@ -87,7 +87,7 @@ const Mvp = ({ title, othersData, customClass }) => {
         (title === "프로젝트" && !projectState && isMyPage && "hidden") ||
         (title === "수상 이력" && !awardState && isMyPage && "hidden") ||
         (title === "자격증" && !certificateState && isMyPage && "hidden")
-      }`}
+      } ${!isMyPage && othersData?.length < 1 && "hidden"}`}
     >
       <h1 className="text-xl font-bold dark:text-white">{title}</h1>
       <article>
