@@ -5,19 +5,15 @@ const GuestNav = ({ isHome }) => {
   const fontColorB = isHome
     ? "text-[#a4a4a4]"
     : "text-[#4f4f4f] dark:text-[#a4a4a4]";
+  const linkStyle =
+    "float-right sm:text-[16px] text-[13px] mx-[5px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal";
 
   return (
     <div className="h-[40px] w-[fit-content] mx-[5px] float-right relative top-[50%] -translate-y-1/2">
-      <Link
-        to="/login"
-        className={`float-right sm:text-[16px] text-[13px] mx-[5px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal ${fontColorB}`}
-      >
+      <Link to="/login" className={`${linkStyle} ${fontColorB}`}>
         로그인
       </Link>
-      <Link
-        to="/sign-up"
-        className={`float-right sm:text-[16px] text-[13px] mx-[5px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal ${fontColorB}`}
-      >
+      <Link to="/sign-up" className={`${linkStyle} ${fontColorB}`}>
         회원가입
       </Link>
     </div>
