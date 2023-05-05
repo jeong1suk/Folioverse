@@ -12,7 +12,7 @@ const LeftNav = ({ isLogin }) => {
     location.pathname === "/" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/login";
-  const logo = isDarkMode || isHome ? logoDark : logoLight;
+  const logo = !isDarkMode || isHome ? logoDark : logoLight;
   const fontColorB = isHome
     ? "text-[#a4a4a4]"
     : "text-[#4f4f4f] dark:text-[#a4a4a4]";
