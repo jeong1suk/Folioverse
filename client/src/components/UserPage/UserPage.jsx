@@ -78,16 +78,16 @@ const UserPage = () => {
           </div>
         </div>
       </div>
-      <main className="basis-3/4 ml-5">
-        <div className="lg:flex flew-row mb-2">
-          <div className="basis-1/2 mr-1">
+      <main className="basis-3/4">
+        <div className="lg:flex flew-row mb-4">
+          <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"학력"}
               othersData={othersData?.education}
               customClass="h-full"
             />
           </div>
-          <div className="basis-1/2 ml-1">
+          <div className="basis-1/2 lg:ml-1">
             <Mvp
               title={"직업 및 경력"}
               othersData={othersData?.career}
@@ -97,14 +97,14 @@ const UserPage = () => {
         </div>
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
         <div className="lg:flex flew-row mb-2">
-          <div className="basis-1/2 mr-1">
+          <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"수상 이력"}
               othersData={othersData?.award}
               customClass="h-full"
             />
           </div>
-          <div className="basis-1/2 ml-1">
+          <div className="basis-1/2 lg:ml-1">
             <Mvp
               title={"자격증"}
               othersData={othersData?.certificate}
