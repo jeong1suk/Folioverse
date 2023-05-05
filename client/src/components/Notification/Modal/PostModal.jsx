@@ -1,6 +1,6 @@
 //담당 : 이승현
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useLocation } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -37,6 +37,9 @@ const PostModal = ({ id }) => {
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   useEffect(() => {
     setPosts(data?.result);
@@ -81,6 +84,8 @@ const PostModal = ({ id }) => {
           setEdit(false);
           setMsg("게시글이 수정되었습니다");
           setAlert(true);
+          titleRef.current.value = "";
+          descriptionRef.current.value = "";
         },
       }
     );
@@ -145,6 +150,7 @@ const PostModal = ({ id }) => {
                       className="w-full rounded border p-1 focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-800 dark:border-cyan-950 dark:text-neutral-300"
                       defaultValue={item.title}
                       onChange={(e) => setTitle(e.target.value)}
+                      ref={titleRef}
                     />
                   </div>
                   <div>
@@ -155,6 +161,7 @@ const PostModal = ({ id }) => {
                       cols="30"
                       rows="10"
                       onChange={(e) => setDescription(e.target.value)}
+                      ref={descriptionRef}
                     ></textarea>
                   </div>
                   <div className="text-center mt-2">

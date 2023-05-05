@@ -70,7 +70,11 @@ const AddData = ({
         case "학력":
           func(
             { body: education },
-            { onSuccess: () => queryClient.invalidateQueries("getEducation") }
+            {
+              onSuccess: () => {
+                queryClient.invalidateQueries("getEducation");
+              },
+            }
           );
           break;
         case "직업 및 경력":
