@@ -1,15 +1,14 @@
 //담당 : 이승현
 
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import AddData from "./AddData/AddData";
 import Award from "./ViewMvp/Award";
 import Certificate from "./ViewMvp/Certificate";
 import Education from "./ViewMvp/Education";
 import Project from "./ViewMvp/Project";
-import { useLocation } from "react-router-dom";
 import mvpSelectStore from "../../store/mvpSelectStore";
 import Career from "./ViewMvp/Career";
-import useStyleClassStore from "../../store/styleClassStore";
 
 const Mvp = ({ title, othersData, customClass }) => {
   const [addState, setAddState] = useState(false);

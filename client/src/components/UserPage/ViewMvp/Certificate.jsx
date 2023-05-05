@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
-import useStyleClassStore from "../../../store/styleClassStore";
 
 const Certificate = ({
   setEditState,
@@ -11,7 +10,10 @@ const Certificate = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/certificate", "getCertificate");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/certificate", "getCertificate", {
+    enabled: !!isToken,
+  });
 
   const [ceriticateData, setCertificateData] = useState(null);
 

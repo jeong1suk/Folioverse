@@ -10,7 +10,10 @@ const Education = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/education", "getEducation");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/education", "getEducation", {
+    enabled: !!isToken,
+  });
 
   const [educationData, setEducationData] = useState(null);
 

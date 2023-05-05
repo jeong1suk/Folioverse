@@ -1,16 +1,21 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useQueryClient } from "react-query";
+import Pagination from "./Pagination";
+import useThemeStore from "../../../store/themeStore";
 import {
   useQueryDelete,
   useQueryGet,
   useQueryPatch,
 } from "../../../utils/useQuery";
-import { useLocation } from "react-router-dom";
-import { useQueryClient } from "react-query";
-import Pagination from "./Pagination";
-import useThemeStore from "../../../store/themeStore";
 
 const VisitorBook = ({ id }) => {
-  const { mutate } = useQueryPatch("/visitor_book", "post");
+  const { mutate, isLoading: loadingPatch } = useQueryPatch(
+    "/visitor_book",
+    "post"
+  );
   const isToken = localStorage.getItem("token");
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +39,8 @@ const VisitorBook = ({ id }) => {
   const { data: myData } = useQueryGet(`/visitor_book`, "getMyVisitor", {
     enabled: !!myInfo?._id,
   });
-  const { deleteMutate } = useQueryDelete("/visitor_book");
+  const { deleteMutate, isLoading: loadingDelete } =
+    useQueryDelete("/visitor_book");
 
   const [bookData, setBookData] = useState(null);
   const [description, setDescription] = useState("");
@@ -119,6 +125,7 @@ const VisitorBook = ({ id }) => {
             !isToken && "hidden"
           }`}
           onClick={onSubmit}
+          disabled={loadingPatch}
         >
           작성
         </button>
@@ -153,6 +160,7 @@ const VisitorBook = ({ id }) => {
                       : "hidden"
                   } cursor-pointer ml-3 mr-10`}
                   onClick={() => onDelete(item._id)}
+                  disabled={loadingDelete}
                 >
                   <span className="sr-only">Close</span>
                   <svg
