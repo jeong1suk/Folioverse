@@ -16,7 +16,8 @@ const LeftNav = ({ isLogin }) => {
   const fontColorB = isHome
     ? "text-[#a4a4a4]"
     : "text-[#4f4f4f] dark:text-[#a4a4a4]";
-
+  const linkStyle =
+    " float-left sm:text-[16px] text-[13px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal";
   return (
     <div className="absolute left-[20px] top-0 w-[fit-content] h-full">
       <Link to="/">
@@ -27,17 +28,11 @@ const LeftNav = ({ isLogin }) => {
         ></img>
       </Link>
       {isLogin && (
-        <Link
-          to="/my-page"
-          className={` float-left  sm:text-[16px] text-[13px] mr-[10px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal ${fontColorB}`}
-        >
+        <Link to="/my-page" className={`mr-[10px] ${linkStyle} ${fontColorB}`}>
           마이페이지
         </Link>
       )}
-      <Link
-        to="/network"
-        className={`float-left sm:text-[16px] text-[13px] mx-[5px] relative top-[50%] -translate-y-1/2 w-[fit-content] h-[fit-content] font-normal ${fontColorB}`}
-      >
+      <Link to="/network" className={`mx-[5px] ${linkStyle} ${fontColorB}`}>
         네트워크
       </Link>
     </div>

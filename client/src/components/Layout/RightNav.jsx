@@ -21,7 +21,8 @@ const RightNav = ({ isLogin }) => {
   const [searchBtnView, setSearchBtnView] = useState(false);
   const textStyle = isHome ? "text-[#ccc]" : "text-[#919191] dark:text-[#ccc]";
   const btnStyle = isHome ? "bg-gray-700" : "bg-gray-200 dark:bg-gray-700";
-
+  const btnStyle2 =
+    "rounded-[5px] w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] mx-[5px] float-right";
   const darkmodeHandler = () => {
     if (!isHome) {
       toggleTheme();
@@ -39,8 +40,7 @@ const RightNav = ({ isLogin }) => {
       {isLogin ? <UserNav /> : <GuestNav isHome={isHome} />}
       {!isHome && (
         <button
-          className={`w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] mx-[5px] float-right relative top-[50%] -translate-y-1/2
-         px-[10px] py-[10px] rounded-[5px] w-10 ${btnStyle}`}
+          className={`${btnStyle2} relative top-[50%] -translate-y-1/2 px-[10px] py-[10px]  w-10 ${btnStyle}`}
           onClick={darkmodeHandler}
         >
           <img src={darkModeImg} className="invert-[70%]" alt="dark mode btn" />
@@ -51,9 +51,7 @@ const RightNav = ({ isLogin }) => {
         onClick={handleSearchClick}
         className="float-right relative top-[50%] -translate-y-1/2"
       >
-        <button
-          className={`w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] mx-[5px] float-right  p-4  rounded-[5px] ${btnStyle}`}
-        >
+        <button className={`${btnStyle2}  p-4  ${btnStyle}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
