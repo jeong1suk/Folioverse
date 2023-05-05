@@ -111,6 +111,8 @@ const Network = () => {
                 description={user.description}
                 profileId={`${user._id}`}
                 profileImg={user.profile_image}
+                follower={user.follower_user.length}
+                like={user.like_user.length}
                 key={idx}
               />
             );
