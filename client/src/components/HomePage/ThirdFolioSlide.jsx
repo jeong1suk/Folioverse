@@ -67,9 +67,13 @@ const ThirdFolioSlide = () => {
                       className="w-[100px] h-[100px] rounded-[10px] object-cover m-auto bg-[#9dcaf5] border-[1px] border-[#ccc] mt-[10px]"
                     />
                     <div className="float-left w-[400px] ml-[20px]">
-                      <h4 className="text-[20px]">{user?.name}</h4>
-                      <h5 className="text-[18px]">{user?.email}</h5>
-                      <p className="text-[14px] w-[400px] overflow-hidden whitespace-nowrap text-ellipsis">
+                      <h4 className="text-[20px] overflow-hidden w-[280px] whitespace-nowrap text-ellipsis">
+                        {user?.name}
+                      </h4>
+                      <h5 className="text-[18px] overflow-hidden w-[280px] whitespace-nowrap text-ellipsis">
+                        {user?.email}
+                      </h5>
+                      <p className="text-[14px] w-[280px] overflow-hidden whitespace-nowrap text-ellipsis">
                         {user?.description}
                       </p>
                     </div>
