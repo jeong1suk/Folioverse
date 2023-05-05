@@ -121,6 +121,9 @@ const SignUp = () => {
               onChange={handleNameChange}
               maxLength={12}
             />
+            {name && !nameValid && (
+              <p className={`text-red-500`}>2글자 이상 입력해주세요.</p>
+            )}
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
               이메일:
             </label>
@@ -133,6 +136,9 @@ const SignUp = () => {
               onChange={handleEmailChange}
               maxLength={250}
             />
+            {email && !emailValid && (
+              <p className={`text-red-500`}>이메일 형식을 맞춰주세요.</p>
+            )}
 
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
               비밀번호:
@@ -146,6 +152,11 @@ const SignUp = () => {
               onChange={handlePasswordChange}
               maxLength={18}
             />
+            {password && !passwordValid && (
+              <p className={`text-red-500`}>
+                비밀번호(숫자, 문자, 특수문자 포함 6자 이상)
+              </p>
+            )}
 
             <label className={`${darkMode} ${fontColorA} font-bold mt-3 my-1`}>
               비밀번호 확인:
@@ -161,6 +172,9 @@ const SignUp = () => {
               onChange={handleConfirmPasswordChange}
               maxLength={18}
             />
+            {confirmPassword && !confirmPasswordValid && (
+              <p className={`text-red-500`}>비밀번호가 일치하지 않습니다.</p>
+            )}
 
             {errMessage && (
               <div
