@@ -9,9 +9,11 @@ class DailyMetrics {
   }
 
   static async upDateCount(user_id, condition, sign) {
+    const date = new Date();
+    date.setHours(date.getHours() + 9);
     const metrics = await DailyMetricsModel.findOne({
       user_id,
-      date: `${new Date().toISOString().substr(0, 10)}`,
+      date: `${date.toISOString().substr(0, 10)}`,
     });
 
     const checkCondition = (condition, i) => {
