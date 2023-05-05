@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart } from "chart.js/auto";
 import { useQueryGet } from "../../utils/useQuery";
+import moment from "moment";
 
 Chart.register(CategoryScale);
 
@@ -48,7 +49,7 @@ const UserChart = ({ chartData }) => {
     const likeData = [];
 
     for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-      const dateString = d.toISOString().slice(0, 10);
+      const dateString = moment(d).format("YYYY-MM-DD");
       labels.push(dateString);
 
       const dayData = chartData?.find((item) => item.date === dateString);
