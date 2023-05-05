@@ -1,8 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const date = new Date();
-date.setHours(date.getHours() + 9);
-
+date.setHours(date.getHours() + 15);
 
 const dailySchema = new Schema({
   date: {

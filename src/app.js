@@ -44,8 +44,8 @@ app.get("/api/test", (req, res) => {
 });
 
 // 정각(인데 오류가 조금 있어서 0시 5분)에 dailyMetrics 모듈 실행
-const job = cron.schedule("5 0 * * *", dailyMetrics);
-job.start();
+// const job = cron.schedule("5 0 * * *", dailyMetrics);
+// job.start();
 
 app.listen(3000, () => {
   console.log("3000번 포트에서 Express 서버 실행중");
