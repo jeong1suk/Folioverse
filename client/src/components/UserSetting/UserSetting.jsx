@@ -39,7 +39,7 @@ const UserSetting = () => {
             className="w-16 h-16 rounded-full object-cover"
             src={`${
               data?.profile_image ??
-              (theme
+              (!theme
                 ? "/profile/profile-dark.png"
                 : "/profile/profile-light.png")
             }`}

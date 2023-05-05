@@ -84,7 +84,7 @@ const MessageBoxModal = () => {
                     <img
                       src={
                         item.sendUserProfileImage ??
-                        (theme
+                        (!theme
                           ? "/profile/profile-dark.png"
                           : "/profile/profile-light.png")
                       }
