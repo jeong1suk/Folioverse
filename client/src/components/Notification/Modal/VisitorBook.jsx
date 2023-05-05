@@ -148,7 +148,7 @@ const VisitorBook = ({ id }) => {
                 <img
                   src={
                     item.write_userProfileImage ??
-                    (theme
+                    (!theme
                       ? "/profile/profile-dark.png"
                       : "/profile/profile-light.png")
                   }

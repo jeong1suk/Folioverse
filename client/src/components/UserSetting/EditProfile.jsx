@@ -141,7 +141,7 @@ const EditProfile = ({ data }) => {
                   ? previewUrl
                   : `${
                       data?.profile_image ??
-                      (theme
+                      (!theme
                         ? "/profile/profile-dark.png"
                         : "/profile/profile-light.png")
                     }`

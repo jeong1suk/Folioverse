@@ -110,12 +110,12 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 '라이센스'�
 
 ## 연락 정보
 
-이승현 - kubrickcode@gmail.com
-정재훈 - wjdwogns120523@gmail.com
-양재영 - yayww@naver.com
-정원석 - ssukgoon@gmail.com
-김기용 - kodinger17@gmail.com
-정주현 - nb3065@gmail.com
+이승현 - kubrickcode@gmail.com<br />
+정재훈 - wjdwogns120523@gmail.com<br />
+양재영 - yayww@naver.com<br />
+정원석 - ssukgoon@gmail.com<br />
+김기용 - kodinger17@gmail.com<br />
+정주현 - nb3065@gmail.com<br />
 
 ## 폴더 트리
 

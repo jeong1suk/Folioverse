@@ -13,6 +13,10 @@ const DeleteModal = ({ id, toggleOpen }) => {
       onSuccess: (data) => {
         if (data.result) {
           localStorage.removeItem("token");
+          localStorage.removeItem("mvpStore");
+          localStorage.removeItem("themeStore");
+          localStorage.removeItem("reactQueryDevtoolsSortFn");
+          localStorage.removeItem("reactQueryDevtoolsOpen");
           location.href = "/";
         } else {
           console.log("회원 탈퇴에 실패하였습니다.");
