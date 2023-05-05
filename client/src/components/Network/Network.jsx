@@ -1,51 +1,73 @@
 // 정주현
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LoadingOverLay from "../LoadingOverLay";
 import { useAxiosGet } from "../../CustomHooks";
 import NetworkProfile from "./NetworkProfile";
 import NetworkFilter from "./NetworkFilter";
 const host = import.meta.env.VITE_SERVER_HOST;
+import { useQueryGet } from "./../../utils/useQuery";
 
 const Network = () => {
-  const { data, error, loading } = useAxiosGet(`${host}/user/list`);
+  // const { data, error, loading } = useAxiosGet(`${host}/user/list`);
+  const { data, isLoading } = useQueryGet(`/user/list`, "getAllUsers");
   const [listCur, setListCur] = useState(30);
+  const [filteredUser, setFilteredUser] = useState([]);
   const [sortBy, setSortBy] = useState({
-    job: "",
-    yearly: "",
-    position: "",
-    techStack: "",
+    job: [],
+    yearly: [],
+    position: [],
+    techStack: [],
   });
   const bgColor = "bg-white dark:bg-[#1a1a1a]";
   const fontColorC = "text-[#808080] dark:text-[#868686]";
 
-  // data가 불러와지지 않았을 때
-  if (loading)
-    return (
-      <div
-        className={`min-h-screen min-w-screen ${bgColor} ${fontColorC} text-center`}
-      >
-        Loading...
-      </div>
-    );
-  if (error)
-    return (
-      <div
-        className={`min-h-screen min-w-screen ${bgColor} ${fontColorC} text-center`}
-      >
-        Error: {error.message}
-      </div>
+  const [visibleData, setVisibleData] = useState([]);
+
+  useEffect(() => {
+    const users = data.slice(0, listCur);
+    setVisibleData(users);
+  }, [data, listCur]);
+
+  // // visibleData변수에 data에서 listCur만큼 slice한 값을 추가
+  // const visibleData =
+  //   filteredUser.length > 0
+  //     ? filteredUser.slice(0, listCur)
+  //     : data.slice(0, listCur);
+
+  useEffect(() => {
+    const usersJob = data?.filter((user) =>
+      sortBy.job.includes(user?.career?.job)
     );
 
-  // Filter << 진짜 모르겠음..
-  let filteredUser = data.filter((user) => {
-    return user;
-  });
+    const usersYearly = data?.filter((user) =>
+      sortBy.yearly.includes(user?.career?.yearly)
+    );
 
-  // visibleData변수에 data에서 listCur만큼 slice한 값을 추가
-  const visibleData =
-    filteredUser.length > 0
-      ? filteredUser.slice(0, listCur)
-      : data.slice(0, listCur);
+    const usersPosition = data?.filter((user) =>
+      sortBy.position.includes(user?.career?.position)
+    );
+
+    //user?.career?.techStack
+
+    const usersTechStack = data?.filter((user) => {
+      return sortBy.techStack.every((tech) =>
+        user?.career?.tech_stack.includes(tech)
+      );
+    });
+
+    setFilteredUser([usersJob, usersYearly, usersPosition, usersTechStack]);
+    // setFilteredUser(
+    //   data?.filter((user) => {
+    //     if (sortBy.job.includes(user.career?.job)) {
+    //       return user;
+    //     }
+    //   })
+    // );
+  }, [sortBy, data]);
+
+  useEffect(() => {
+    console.log(filteredUser);
+  }, [filteredUser]);
 
   return (
     <div className={`${bgColor} w-[fit-content] md:w-screen min-h-screen`}>
@@ -56,7 +78,7 @@ const Network = () => {
         <div
           className={`grid grid-cols-[400px] sm:grid-cols-[330px_330px] md:grid-cols-[400px_400px] lg:grid-cols-[350px_350px_350px] xl:grid-cols-[400px_400px_400px] mb-10 m-auto`}
         >
-          {visibleData.map((user, idx) => {
+          {visibleData?.map((user, idx) => {
             return (
               <NetworkProfile
                 name={user.name}
