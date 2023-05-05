@@ -1,6 +1,6 @@
 // 정원석
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 const host = import.meta.env.VITE_SERVER_HOST;
@@ -57,6 +57,14 @@ const SignUp = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const isToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isToken) {
+      location.href = "/error/auth";
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrMessage("");
@@ -83,15 +91,9 @@ const SignUp = () => {
         className={`absolute rotate-180 w-[1200px] top-0 left-[50%] translate-x-[-50%]`}
       />
       <div
-        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[1200px]`}
+        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%]`}
       >
         <div className={`h-auto pt-10 mx-auto p-5 mb-auto min-w-screen`}>
-          {/* <img
-          className={`w-20 h-auto mx-auto`}
-          src="/logo/logo-dark.png"
-          alt="로고 이미지"
-        /> */}
-
           <p
             className={`${darkMode} ${fontColorA} mt-2 text-3xl font-bold text-center bg-[transparent] relative`}
           >

@@ -1,7 +1,7 @@
 // 정원석
 
 import axios from "axios";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import useModalStore from "../../store/modalStore";
 import { Link } from "react-router-dom";
 import { GoogleButton, KakaoButton } from "./SocialButton";
@@ -13,8 +13,6 @@ const Login = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const fontColorA = "text-white";
-  const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
-  const fontColorC = "text-[#808080] dark:text-[#868686]";
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
@@ -35,6 +33,13 @@ const Login = () => {
   const isPasswordValid = validatePassword(password);
 
   const setModal = useModalStore((state) => state.setModal);
+  const isToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isToken) {
+      location.href = "/error/auth";
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,15 +57,6 @@ const Login = () => {
     }
   };
 
-  const googleLogin = async () => {
-    const result = await axios.get(host + "/auth/google/callback");
-    console.log(result);
-  };
-
-  const kakaoLogin = async () => {
-    const result = await axios.get(host + "/auth/kakao/callback");
-  };
-
   return (
     <div className={`min-h-screen bg-black`}>
       <img
@@ -68,7 +64,7 @@ const Login = () => {
         className={`absolute rotate-180 w-[1440px] top-[-20%] left-[50%] translate-x-[-50%]`}
       />
       <div
-        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[1200px]`}
+        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%]`}
       >
         <div className={`h-auto pt-10 mx-auto p-5 mb-auto min-w-screen`}>
           <p
@@ -106,14 +102,14 @@ const Login = () => {
 
             {errMessage && (
               <div
-                className={`p-2 border border-solid border-slate rounded text-center bg-yellow-300 text-red-500`}
+                className={`p-2 mt-2 rounded text-center bg-red-500 text-white my-1`}
               >
                 {errMessage}
               </div>
             )}
 
             <button
-              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`} ${
+              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-3`} ${
                 isEmailValid &&
                 isPasswordValid &&
                 `bg-blue-500 hover:bg-blue-400 cursor-pointer`
@@ -124,26 +120,11 @@ const Login = () => {
               로그인
             </button>
           </form>
-          <div className="flex justify-center flex-col sm:flex-row">
+          <div className="flex justify-center flex-col sm:flex-row mt-2">
             <GoogleButton />
             <KakaoButton />
           </div>
 
-          {/* <div className={`mt-4 flex flex-col items-center  mb-2`}>
-            <p className={`mb-2 ${fontColorA}`}>or</p>
-            <button
-              className={`bg-blue-500 hover:bg-blue-400 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-              onClick={googleLogin}
-            >
-              구글로 로그인
-            </button>
-            <button
-              className={`bg-yellow-400 hover:bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-              onClick={kakaoLogin}
-            >
-              카카오 로그인
-            </button>
-          </div> */}
           <Link
             className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500 cursor-pointer`}
             onClick={() => {
