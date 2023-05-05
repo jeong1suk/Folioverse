@@ -1,8 +1,55 @@
 //담당 : 이승현
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const AddProject = ({ project, setProject, setIsValid }) => {
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showEndCalendar, setShowEndCalendar] = useState(false);
+  const calendarRef = useRef();
+  const calendarEndRef = useRef();
+
+  const handleDateChange = (date) => {
+    setProject({ ...project, startDate: date });
+    setShowCalendar(false);
+  };
+
+  const handleEndDateChange = (date) => {
+    setProject({ ...project, endDate: date });
+    setShowEndCalendar(false);
+  };
+
+  useEffect(() => {
+    if (project.startDate && project.endDate) {
+      const startDateString = formatDate(project.startDate);
+      const endDateString = formatDate(project.endDate);
+      const dateRange = `${startDateString} ~ ${endDateString}`;
+      setProject({ ...project, date: dateRange });
+    }
+  }, [project.startDate, project.endDate]);
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    if (isNaN(date)) return "";
+    return date.toLocaleDateString();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setShowCalendar(false);
+        setShowEndCalendar(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleRadioClick = (e) => {
     const { value } = e.target;
     setProject({
@@ -87,14 +134,48 @@ const AddProject = ({ project, setProject, setIsValid }) => {
         value={project.description}
         maxLength={1000}
       ></textarea>
-      <input
-        className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
-        type="text"
-        placeholder="프로젝트 기간"
-        onChange={(e) => setProject({ ...project, date: e.target.value })}
-        value={project.date}
-        maxLength={50}
-      />
+      <div className="flex flex-row">
+        <div className="relative basis-1/2 mr-1">
+          <input
+            className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
+            type="text"
+            placeholder="시작 날짜"
+            onFocus={() => setShowCalendar(true)}
+            value={formatDate(project?.startDate)}
+            readOnly
+          />
+          {showCalendar && (
+            <div
+              ref={calendarRef}
+              className="absolute top-0 left-0 transform -translate-y-full"
+            >
+              <Calendar onChange={handleDateChange} value={project.startDate} />
+            </div>
+          )}
+        </div>
+        <div className="relative basis-1/2 ml-1">
+          <input
+            className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
+            type="text"
+            placeholder="종료 날짜"
+            onFocus={() => setShowEndCalendar(true)}
+            value={formatDate(project?.endDate)}
+            readOnly
+          />
+          {showEndCalendar && (
+            <div
+              ref={calendarEndRef}
+              className="absolute top-0 left-0 transform -translate-y-full"
+            >
+              <Calendar
+                onChange={handleEndDateChange}
+                value={project.endDate}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
       <textarea
         className="block border w-full p-2 mb-4 rounded-xl focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300"
         cols="30"

@@ -2,14 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useQueryDelete, useQueryGet } from "../../../utils/useQuery";
+import {
+  useQueryDelete,
+  useQueryGet,
+  useQueryPatch,
+} from "../../../utils/useQuery";
 import Pagination from "./Pagination";
 import useThemeStore from "../../../store/themeStore";
 import useModalStore from "../../../store/modalStore";
 
-const MessageBoxModal = () => {
+const MessageBoxModal = ({ isOpen }) => {
   const { data } = useQueryGet("/message", "getMessage");
   const { deleteMutate, isLoading } = useQueryDelete("/message");
+  const { mutate: readMessage } = useQueryPatch("/message/read", "patch");
   const [message, setMessage] = useState(null);
   const queryClient = useQueryClient();
   const [alert, setAlert] = useState(false);
@@ -33,6 +38,13 @@ const MessageBoxModal = () => {
   useEffect(() => {
     setMessage(data?.result);
   }, [data]);
+
+  useEffect(() => {
+    readMessage(
+      {},
+      { onSuccess: () => queryClient.invalidateQueries("getIsRead") }
+    );
+  }, [isOpen]);
 
   const handleToggle = (id) => {
     if (expandedMessageId === id) {

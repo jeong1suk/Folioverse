@@ -37,6 +37,8 @@ const Mvp = ({ title, othersData, customClass }) => {
     date: "",
     tech_stack: "",
     link: "",
+    startDate: "",
+    endDate: "",
   });
   const [career, setCareer] = useState({
     job: "",
@@ -64,13 +66,14 @@ const Mvp = ({ title, othersData, customClass }) => {
       graduate_status: "재학중",
     });
     setProject({
-      ...project,
       name: "",
       division: "개인 프로젝트",
       description: "",
       date: "",
       tech_stack: "",
       link: "",
+      startDate: "",
+      endDate: "",
     });
     setAward({ ...award, name: "", date: "" });
     setCertificate({ ...certificate, name: "", date: "", agency: "" });

@@ -187,7 +187,7 @@ const ButtonGroup = ({ followInfo, likeInfo }) => {
       >
         <span
           className={`relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 ${
-            followInfo && "dark:bg-gradient-to-br"
+            followInfo && "bg-gradient-to-br dark:bg-gradient-to-br"
           }`}
         >
           <svg
@@ -213,7 +213,7 @@ const ButtonGroup = ({ followInfo, likeInfo }) => {
       >
         <span
           className={`relative flex px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 ${
-            likeInfo && "dark:bg-gradient-to-br"
+            likeInfo && "bg-gradient-to-br dark:bg-gradient-to-br"
           }`}
         >
           <svg
@@ -222,7 +222,7 @@ const ButtonGroup = ({ followInfo, likeInfo }) => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${likeInfo && "text-white"}`}
           >
             <path
               strokeLinecap="round"

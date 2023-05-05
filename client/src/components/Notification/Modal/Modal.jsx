@@ -55,7 +55,7 @@ const Modal = () => {
             )) ||
             (type === "write" && <WritePostModal toggleOpen={toggleOpen} />) ||
             (type === "post" && <PostModal id={id} />) ||
-            (type === "messageBox" && <MessageBoxModal />) ||
+            (type === "messageBox" && <MessageBoxModal isOpen={isOpen} />) ||
             (type === "visitorBook" && <VisitorBook id={id} />) ||
             (type === "mail" && <MailerModal toggleOpen={toggleOpen} />)}
         </div>
