@@ -25,7 +25,6 @@ const FourthFolioSlide = () => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = "1";
         observer.unobserve(entry.target);
-        console.log(entry.target);
       }
     });
   });

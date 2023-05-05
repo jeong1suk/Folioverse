@@ -12,8 +12,6 @@ const ThirdFolioSlide = () => {
   const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const firstRef = useRef(null);
 
-  console.log(data);
-
   // 유저목록을 랜덤하게 배열
   const randomUserProfile = useMemo(() => {
     if (data) {
@@ -27,7 +25,6 @@ const ThirdFolioSlide = () => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = "1";
         observer.unobserve(entry.target);
-        console.log(entry.target);
       }
     });
   });
