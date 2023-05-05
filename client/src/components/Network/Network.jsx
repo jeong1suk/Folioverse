@@ -5,7 +5,6 @@ import NetworkFilter from "./NetworkFilter";
 import { useQueryGet } from "./../../utils/useQuery";
 
 const Network = () => {
-  // const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const { data, isLoading } = useQueryGet(`/user/list`, "getAllUsers");
   const [listCur, setListCur] = useState(30);
   const [filteredUser, setFilteredUser] = useState([]);
@@ -38,7 +37,22 @@ const Network = () => {
 
   useEffect(() => {
     const users = data.slice(0, listCur);
-    setVisibleData(users);
+    const intersection = getIntersection(
+      filteredUser[0],
+      filteredUser[1],
+      filteredUser[2],
+      filteredUser[3]
+    );
+    if (
+      filteredUser[0]?.length > 0 ||
+      filteredUser[1]?.length > 0 ||
+      filteredUser[3]?.length > 0 ||
+      filteredUser[4]?.length < data?.length
+    ) {
+      setVisibleData(intersection?.slice(0, listCur));
+    } else {
+      setVisibleData(users);
+    }
   }, [data, listCur]);
 
   useEffect(() => {
@@ -72,9 +86,8 @@ const Network = () => {
       filteredUser[2],
       filteredUser[3]
     );
-    setVisibleData(intersection);
+    setVisibleData(intersection?.slice(0, listCur));
   }, [filteredUser]);
-
   return (
     <div className={`${bgColor} w-[fit-content] md:w-full min-h-screen`}>
       <div
@@ -97,7 +110,7 @@ const Network = () => {
             );
           })}
         </div>
-        {curPage < data?.length / 30 - 1 && (
+        {visibleData?.length >= 30 && curPage < data?.length / 30 - 1 && (
           <button
             className={`${bgColor} ${fontColorC} w-full text-center font-light text-xl p-[5px]`}
             onClick={() => {
