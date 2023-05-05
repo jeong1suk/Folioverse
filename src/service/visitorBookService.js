@@ -12,8 +12,8 @@ const visitorBookService = {
           visitorBook.write_user
         ).select("name profile_image");
         const visitorBookObj = visitorBook.toObject();
-        visitorBookObj["write_userName"] = write_user.name;
-        visitorBookObj["write_userProfileImage"] = write_user.profile_image;
+        visitorBookObj["write_userName"] = write_user?.name;
+        visitorBookObj["write_userProfileImage"] = write_user?.profile_image;
         return visitorBookObj;
       })
     );

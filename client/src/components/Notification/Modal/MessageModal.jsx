@@ -38,7 +38,7 @@ const MessageModal = ({ id, name, toggleOpen }) => {
           <input
             type="text"
             className="p-1 border w-full rounded dark:bg-neutral-200 focus:outline-neutral-500"
-            maxLength={50}
+            maxLength={20}
             onChange={(e) => setTitle(e.target.value)}
           />
         </p>
