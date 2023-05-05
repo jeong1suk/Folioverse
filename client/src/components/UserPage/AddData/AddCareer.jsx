@@ -71,14 +71,14 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
         ...provided,
         padding: 10,
         fontSize: 14,
-        backgroundColor: !theme
+        backgroundColor: theme
           ? state.isFocused
             ? "#3F3F46"
             : "#1F1F23"
           : state.isFocused
           ? "#E5E7EB"
           : "#F3F4F6",
-        color: !theme ? "lightgray" : "gray",
+        color: theme ? "lightgray" : "gray",
         borderTopLeftRadius:
           isFirstOrLast && state.data === state.selectProps.options[0]
             ? "4px"
@@ -103,7 +103,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
     },
     control: (provided) => ({
       ...provided,
-      backgroundColor: !theme ? "#1F1F23" : "#F3F4F6",
+      backgroundColor: theme ? "#1F1F23" : "#F3F4F6",
       border: "none",
       boxShadow: "none",
       paddingLeft: 0,
@@ -130,18 +130,18 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
     }),
     multiValue: (provided, state) => ({
       ...provided,
-      backgroundColor: !theme ? "#1F1F23" : "#F3F4F6",
+      backgroundColor: theme ? "#1F1F23" : "#F3F4F6",
       borderRadius: "4px",
     }),
     multiValueLabel: (provided, state) => ({
       ...provided,
-      color: !theme ? "lightgray" : "gray",
+      color: theme ? "lightgray" : "gray",
     }),
     multiValueRemove: (provided, state) => ({
       ...provided,
-      color: !theme ? "lightgray" : "gray",
+      color: theme ? "lightgray" : "gray",
       ":hover": {
-        backgroundColor: !theme ? "#3F3F46" : "#E5E7EB",
+        backgroundColor: theme ? "#3F3F46" : "#E5E7EB",
         color: "white",
       },
     }),
