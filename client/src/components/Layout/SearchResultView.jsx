@@ -3,9 +3,14 @@
 import { Link } from "react-router-dom";
 import { useAxiosGet } from "../../CustomHooks";
 import profileDefaultDark from "/profile/profile-dark.png";
+import profileDefaultLight from "/profile/profile-light.png";
+import useThemeStore from "../../store/themeStore.js";
 const host = import.meta.env.VITE_SERVER_HOST;
 
 const SearchResultView = ({ inputValue }) => {
+  const isDarkMode = useThemeStore((state) => state.theme);
+  const defaultProfile = isDarkMode ? profileDefaultLight : profileDefaultDark;
+
   let { data, error, loading } = useAxiosGet(`${host}/user/list`);
 
   const liStyle = `text-[#3e3e3e] bg-[#d6d6d6] dark:text-[#fff] dark:bg-[#3e3e3e] hover:bg-[#bababa] dark:hover:bg-[#575757] cursor-pointer`;
@@ -36,7 +41,7 @@ const SearchResultView = ({ inputValue }) => {
         >
           <Link to={`/user-page/${el._id}`} className="top-[50%] block">
             <img
-              src={el.profile_image || profileDefaultDark}
+              src={el.profile_image || defaultProfile}
               alt="profile"
               className="w-[40px] h-[40px] ml-1 object-cover rounded-[5px] inline-block relative top-[50%] translate-y-[-50%] "
             />

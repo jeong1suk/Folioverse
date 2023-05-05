@@ -19,6 +19,11 @@ const Network = () => {
   const fontColorC = "text-[#808080] dark:text-[#868686]";
   const [visibleData, setVisibleData] = useState([]);
   const page = Math.floor(visibleData?.length / 30) + 1;
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   const getIntersection = (arr1, arr2, arr3, arr4) => {
     const nonEmptyArrays = [arr1, arr2, arr3, arr4].filter(
       (arr) => arr && arr.length > 0
@@ -49,6 +54,7 @@ const Network = () => {
       filteredUser[3]?.length > 0 ||
       filteredUser[4]?.length < data?.length
     ) {
+      ``;
       setVisibleData(intersection?.slice(0, listCur));
     } else {
       setVisibleData(users);
@@ -112,7 +118,7 @@ const Network = () => {
         </div>
         {visibleData?.length >= 30 && curPage < data?.length / 30 - 1 && (
           <button
-            className={`${bgColor} ${fontColorC} w-full text-center font-light text-xl p-[5px]`}
+            className={`${bgColor} ${fontColorC} w-full text-center font-light text-xl p-[5px] pb-[20px]`}
             onClick={() => {
               setListCur(listCur + 30);
               setCurPage(curPage + 1);
@@ -121,6 +127,13 @@ const Network = () => {
             More
           </button>
         )}
+      </div>
+      <div onClick={handleScrollToTop} className="fixed bottom-6 right-6">
+        <div className="w-[45px] h-[45px] rounded-full bg-[#69b1ff]">
+          <span className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-white text-[15px] font-bold cursor-pointer">
+            TOP
+          </span>
+        </div>
       </div>
     </div>
   );
