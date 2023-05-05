@@ -28,7 +28,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    김기용
+                    김기용(kodinger17@gmail.com)
                   </a>
                 </li>
                 <li className="mb-4">
@@ -36,7 +36,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    정원석
+                    정원석(ssukgoon@gmail.com)
                   </a>
                 </li>
                 <li>
@@ -44,7 +44,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    정주현
+                    정주현(nb3065@gmail.com)
                   </a>
                 </li>
               </ul>
@@ -59,7 +59,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    양재영
+                    양재영(yayww@naver.com)
                   </a>
                 </li>
                 <li className="mb-4">
@@ -67,7 +67,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    이승현
+                    이승현(kubrickcode@gmail.com)
                   </a>
                 </li>
                 <li>
@@ -75,7 +75,7 @@ const FourthFooter = () => {
                     href="https://www.notion.so/052e7f34263d47e88aed5927b4be6043#c571e7ef64934ef68dc6c8522ad94e04"
                     className="hover:underline"
                   >
-                    정재훈
+                    정재훈(wjdwogns120523@gmail.com)
                   </a>
                 </li>
               </ul>

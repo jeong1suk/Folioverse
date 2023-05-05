@@ -14,7 +14,6 @@ const SecondCommunity = () => {
     entry.forEach((e) => {
       if (e.isIntersecting) {
         e.target.style.opacity = "1";
-        console.log(e.target);
         observer.unobserve(e.target);
       }
     });

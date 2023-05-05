@@ -1,7 +1,7 @@
 /* 정주현 */
 
 .networkProfileBox {
-  border: #9b9b9b 1px solid;
+  border: none;
 }
 
 .networkProfileBox:first-child > .medalGold {
