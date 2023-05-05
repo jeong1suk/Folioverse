@@ -73,26 +73,26 @@ const MessageBoxModal = () => {
               <h2>
                 <button
                   type="button"
-                  className="flex flex-row items-center w-full p-5 font-medium text-left text-neutral-500 border border-b-0 border-neutral-200 focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800 dark:border-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  className="flex flex-row items-center w-full p-5 font-medium text-neutral-500 border border-b-0 border-neutral-200 focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800 dark:border-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                   data-accordion-target="#accordion-collapse-body-2"
                   aria-expanded="false"
                   aria-controls="accordion-collapse-body-2"
                   onClick={() => handleToggle(item._id)}
                 >
-                  <span className="basis-4/5">{item.title}</span>
-                  <div className="flex flex-row items-center basis-1/5">
-                    <span className="flex flex-row items-center">
-                      <img
-                        src={
-                          item.sendUserProfileImage ??
-                          (theme
-                            ? "/profile/profile-dark.png"
-                            : "/profile/profile-light.png")
-                        }
-                        className="w-10 rounded-full mr-1"
-                        alt="프로필이미지"
-                      />
-                      <span className="truncate">{item.sendUserName}</span>
+                  <span className="w-3/5 text-left pr-10">{item.title}</span>
+                  <div className="inline-flex flex-row items-center w-2/5 justify-end">
+                    <img
+                      src={
+                        item.sendUserProfileImage ??
+                        (theme
+                          ? "/profile/profile-dark.png"
+                          : "/profile/profile-light.png")
+                      }
+                      className="w-10 rounded-full mr-1"
+                      alt="프로필이미지"
+                    />
+                    <span className="break-words whitespace-normal">
+                      {item.sendUserName}
                     </span>
                     <svg
                       data-accordion-icon

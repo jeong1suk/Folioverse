@@ -11,6 +11,13 @@ import { AwardModel } from "../../db/schemas/award.js";
 import { CertificateModel } from "../../db/schemas/certificate.js";
 import { DailyMetrics } from "../../db/models/DailyMetrics.js";
 import { signJWT } from "./login.js";
+import { CareerModel } from "../../db/schemas/career.js";
+import { FollowModel } from "../../db/schemas/follow.js";
+import { LikeModel } from "../../db/schemas/like.js";
+import { MessageModel } from "../../db/schemas/message.js";
+import { PostModel } from "../../db/schemas/post.js";
+import { VisitorBookModel } from "../../db/schemas/visitorBook.js";
+import { DailyMetricsModel } from "../../db/schemas/dailyMetrics.js";
 
 const createUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,8 +42,28 @@ const createUser = async (email, password, name) => {
 };
 
 const deleteUser = async (_id) => {
-  const models = [EducationModel, ProjectModel, AwardModel, CertificateModel];
+  const models = [
+    EducationModel,
+    ProjectModel,
+    AwardModel,
+    CertificateModel,
+    CareerModel,
+    FollowModel,
+    LikeModel,
+    PostModel,
+    DailyMetricsModel,
+  ];
   await Promise.all(models.map((model) => model.deleteMany({ user_id: _id })));
+  await MessageModel.deleteMany({ sendUser: _id });
+  await MessageModel.deleteMany({ targetUser: _id });
+  await VisitorBookModel.deleteMany({ write_user: _id });
+  await VisitorBookModel.deleteMany({ target_user: _id });
+  await FollowModel.deleteMany({ target_user: _id });
+  await LikeModel.deleteMany({ target_user: _id });
+  await UserModel.updateMany(
+    {},
+    { $pull: { follower_user: _id, like_user: _id } }
+  );
 
   const user = await UserModel.deleteOne({ _id });
   return user.deletedCount ? true : false;
