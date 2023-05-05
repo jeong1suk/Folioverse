@@ -59,7 +59,7 @@ const NetworkProfile = ({
           {email}
         </h5>
         <p
-          className={`overflow-hidden text-ellipsis inline-block w-full h-[45px] word-break text-[15px] mt-2.5 ${darkMode} ${fontColorB}`}
+          className={`inline-block truncate max-w-full h-[45px] text-[15px] mt-2.5 ${darkMode} ${fontColorB}`}
         >
           {description ? description : "자기소개가 없습니다"}
         </p>
