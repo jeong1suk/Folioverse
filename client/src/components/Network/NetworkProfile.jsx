@@ -17,7 +17,6 @@ const NetworkProfile = ({
   profileImg,
 }) => {
   const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
-  const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
   const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
   const fontColorB = "text-[#4f4f4f] dark:text-[#a4a4a4]";
   const fontColorC = "text-[#808080] dark:text-[#868686]";
@@ -28,7 +27,7 @@ const NetworkProfile = ({
 
   return (
     <div
-      className={`${darkMode} relative w-[330px] h-[400px] mt-[30px] m-auto rounded-3xl ${styles.networkProfileBox}`}
+      className={`${darkMode} relative sm:grid-cols-[400px] w-[300px] md:w-[330px] h-[400px] mt-[30px] m-auto rounded-3xl ${styles.networkProfileBox}`}
     >
       <img src={goldmedal} alt="gold medal" className={styles.medalGold} />
       <img
