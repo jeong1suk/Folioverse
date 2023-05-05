@@ -57,6 +57,10 @@ const UserPage = () => {
 
   const bgColor = useStyleClassStore((state) => state.bgColor);
 
+  useEffect(() => {
+    console.log(othersData?.career);
+  }, [othersData?.career]);
+
   return (
     <div
       className={`flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row min-h-screen ${bgColor}`}
@@ -79,7 +83,13 @@ const UserPage = () => {
         </div>
       </div>
       <main className="basis-3/4">
-        <div className="lg:flex flew-row mb-4">
+        <div
+          className={`lg:flex${
+            othersData?.education.length < 1 || othersData?.career.length < 1
+              ? "-row"
+              : ""
+          } flex-row mb-4`}
+        >
           <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"학력"}
@@ -96,7 +106,13 @@ const UserPage = () => {
           </div>
         </div>
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
-        <div className="lg:flex flew-row mb-2">
+        <div
+          className={`lg:flex${
+            othersData?.award.length < 1 || othersData?.certificate.length < 1
+              ? "-row"
+              : ""
+          } flew-row mb-2`}
+        >
           <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"수상 이력"}

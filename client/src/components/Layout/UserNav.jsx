@@ -13,7 +13,7 @@ const UserNav = () => {
   useOnClickOutside(ref, () => setProfileView(false));
   const [profileView, setProfileView] = useState(false);
   const isDarkMode = useThemeStore((state) => state.theme);
-  const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
+  const profileDefault = isDarkMode ? lightModeProfile : darkModeProfile;
 
   const data = useQueryGet("/user/current", "getMyInfo");
   const profileImg = data.data?.profile_image;

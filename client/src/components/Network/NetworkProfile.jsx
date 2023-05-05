@@ -23,7 +23,7 @@ const NetworkProfile = ({
   const darkMode = `${boxColor}`;
 
   const isDarkMode = useThemeStore((state) => state.theme);
-  const profileDefault = isDarkMode ? darkModeProfile : lightModeProfile;
+  const profileDefault = isDarkMode ? lightModeProfile : darkModeProfile;
 
   return (
     <div

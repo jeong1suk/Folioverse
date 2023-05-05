@@ -7,6 +7,10 @@ const UserDownMenu = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("mvpStore");
+    localStorage.removeItem("themeStore");
+    localStorage.removeItem("reactQueryDevtoolsSortFn");
+    localStorage.removeItem("reactQueryDevtoolsOpen");
     location.href = "/";
   };
 

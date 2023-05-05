@@ -48,7 +48,7 @@ const Profile = ({ myInfo, othersInfo, followInfo, likeInfo }) => {
         className="w-20 h-20 rounded-full mx-auto mb-5 object-cover"
         src={
           profileSrc ??
-          (theme ? "/profile/profile-dark.png" : "/profile/profile-light.png")
+          (!theme ? "/profile/profile-dark.png" : "/profile/profile-light.png")
         }
       />
       <p className="text-center text-xl font-bold dark:text-white">{name}</p>
