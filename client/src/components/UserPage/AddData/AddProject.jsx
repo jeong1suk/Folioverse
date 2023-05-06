@@ -1,5 +1,6 @@
 //담당 : 이승현
 
+import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -33,7 +34,7 @@ const AddProject = ({ project, setProject, setIsValid }) => {
     if (!dateString) return "";
     const date = new Date(dateString);
     if (isNaN(date)) return "";
-    return date.toLocaleDateString();
+    return moment(date).format("YYYY-MM-DD");
   };
 
   useEffect(() => {
@@ -67,11 +68,24 @@ const AddProject = ({ project, setProject, setIsValid }) => {
 
   useEffect(() => {
     if (project.name && project.division) {
-      setIsValid(true);
+      if (project.startDate && project.endDate) {
+        const startDate = new Date(project.startDate);
+        const endDate = new Date(project.endDate);
+
+        if (startDate <= endDate) {
+          setIsValid(true);
+        } else {
+          setIsValid(false);
+        }
+      } else if (!project.startDate && !project.endDate) {
+        setIsValid(true);
+      } else {
+        setIsValid(false);
+      }
     } else {
       setIsValid(false);
     }
-  }, [project.name, project.division]);
+  }, [project.name, project.division, project.startDate, project.endDate]);
 
   return (
     <>

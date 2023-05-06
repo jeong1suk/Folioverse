@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "./../../../utils/useQuery";
+import moment from "moment";
 
 const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
   const isToken = localStorage.getItem("token");
@@ -25,7 +26,7 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString();
+    return moment(date).format("YYYY-MM-DD");
   };
 
   return (

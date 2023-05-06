@@ -11,6 +11,7 @@ import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
 import useStyleClassStore from "../../store/styleClassStore";
+import mvpSelectStore from "../../store/mvpSelectStore";
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -42,6 +43,11 @@ const UserPage = () => {
   const { data: othersInfo } = othersInfoQuery;
   const { data: followInfo } = followInfoQuery;
   const { data: likeInfo } = likeInfoQuery;
+
+  const educationState = mvpSelectStore((state) => state.education);
+  const careerState = mvpSelectStore((state) => state.career);
+  const awardState = mvpSelectStore((state) => state.award);
+  const certificateState = mvpSelectStore((state) => state.certificate);
 
   useEffect(() => {
     if (!localStorage.getItem("token") && !id) {
@@ -85,7 +91,10 @@ const UserPage = () => {
       <main className="basis-3/4">
         <div
           className={`lg:flex${
-            othersData?.education.length < 1 || othersData?.career.length < 1
+            othersData?.education.length < 1 ||
+            othersData?.career.length < 1 ||
+            !educationState ||
+            !careerState
               ? "-row"
               : ""
           } flex-row mb-4`}
@@ -108,7 +117,10 @@ const UserPage = () => {
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
         <div
           className={`lg:flex${
-            othersData?.award.length < 1 || othersData?.certificate.length < 1
+            othersData?.award.length < 1 ||
+            othersData?.certificate.length < 1 ||
+            !awardState ||
+            !certificateState
               ? "-row"
               : ""
           } flew-row mb-2`}

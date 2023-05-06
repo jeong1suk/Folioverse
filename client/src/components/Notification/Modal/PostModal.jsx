@@ -9,6 +9,7 @@ import {
   useQueryGet,
   useQueryPatch,
 } from "./../../../utils/useQuery";
+import moment from "moment";
 
 const PostModal = ({ id }) => {
   const [expandedPostId, setExpandedPostId] = useState(null);
@@ -47,7 +48,7 @@ const PostModal = ({ id }) => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toISOString().split("T")[0];
+    return moment(date).format("YYYY-MM-DD");
   };
 
   const handleToggle = (id) => {
