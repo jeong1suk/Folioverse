@@ -43,7 +43,12 @@ const PostModal = ({ id }) => {
   const descriptionRef = useRef(null);
 
   useEffect(() => {
-    setPosts(data?.result);
+    if (data?.result) {
+      const sortedPosts = data.result.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setPosts(sortedPosts);
+    }
   }, [data]);
 
   const formatDate = (dateString) => {

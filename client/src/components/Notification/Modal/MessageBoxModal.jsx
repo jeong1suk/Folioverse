@@ -37,7 +37,12 @@ const MessageBoxModal = ({ isOpen }) => {
   const [expandedMessageId, setExpandedMessageId] = useState(null);
 
   useEffect(() => {
-    setMessage(data?.result);
+    if (data?.result) {
+      const sortedMessage = data.result.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setMessage(sortedMessage);
+    }
   }, [data]);
 
   useEffect(() => {
