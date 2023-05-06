@@ -53,9 +53,9 @@ const VisitorBook = ({ id }) => {
 
   useEffect(() => {
     if (location.pathname === "/my-page") {
-      setBookData(myData?.result);
+      setBookData(myData?.result?.slice().reverse());
     } else {
-      setBookData(othersData?.result);
+      setBookData(othersData?.result?.slice().reverse());
     }
   }, [myData, othersData]);
 
