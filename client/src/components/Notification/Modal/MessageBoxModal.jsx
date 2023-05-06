@@ -10,6 +10,7 @@ import {
 import Pagination from "./Pagination";
 import useThemeStore from "../../../store/themeStore";
 import useModalStore from "../../../store/modalStore";
+import moment from "moment";
 
 const MessageBoxModal = ({ isOpen }) => {
   const { data } = useQueryGet("/message", "getMessage");
@@ -31,7 +32,7 @@ const MessageBoxModal = ({ isOpen }) => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toISOString().split("T")[0];
+    return moment(date).format("YYYY-MM-DD");
   };
   const [expandedMessageId, setExpandedMessageId] = useState(null);
 
