@@ -27,11 +27,16 @@ const LeftNav = ({ isLogin }) => {
           alt="logo"
         ></img>
       </Link>
-      {isLogin && (
-        <Link to="/my-page" className={`mr-[10px] ${linkStyle} ${fontColorB}`}>
-          마이페이지
-        </Link>
-      )}
+      <span className="hidden sm:inline">
+        {isLogin && (
+          <Link
+            to="/my-page"
+            className={`mr-[10px] ${linkStyle} ${fontColorB}`}
+          >
+            마이페이지
+          </Link>
+        )}
+      </span>
       <Link to="/network" className={`mx-[5px] ${linkStyle} ${fontColorB}`}>
         네트워크
       </Link>
