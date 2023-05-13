@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
-  const { data } = useQueryGet("/career", "getCareer");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/career", "getCareer", { enabled: !!isToken });
 
   const [careerData, setCareerData] = useState(null);
 
@@ -30,7 +31,9 @@ const Career = ({ setEditState, career, setCareer, isPdf, othersData }) => {
       {careerData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          }`}
         >
           <div>
             <p className="flex justify-between mb-2">

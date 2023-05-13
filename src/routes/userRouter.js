@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { userService } from "../service/userService.js";
 import checkToken from "../middlewares/checkToken.js";
-import mongoose from "mongoose";
 
 const userRouter = Router();
 
@@ -11,7 +10,7 @@ userRouter.get("/list", async function (req, res, next) {
     // 전체 유저 목록을 얻음
     const users = await userService.getUsers();
     const sortedUsers = users.sort((a, b) => {
-      return a.follower_user.length - b.follower_user.length;
+      return b.follower_user.length - a.follower_user.length;
     });
     res.status(200).send(sortedUsers);
   } catch (error) {
@@ -60,6 +59,21 @@ userRouter.patch("/:id", checkToken, async function (req, res, next) {
   }
 });
 
+// 이거 코치님에게 물어봐야한다.
+userRouter.get("/weekly-metrics", checkToken, async function (req, res, next) {
+  try {
+    const _id = req.user._id;
+    const metricsInfo = await userService.getUserMetricsInfo({ _id });
+
+    if (metricsInfo.errorMessage) {
+      throw new Error(metricsInfo.errorMessage);
+    }
+    res.status(200).send(metricsInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 /** 유저 정보 조회, 현재 로그인한 유저가 있는 경우 응답은 따로 있기 때문에
  *  다른 유저 정보를 조회하는 경우가 사용할 것 같음
  *  visit을 올려야하기 때문에 여기서 count 추가
@@ -78,25 +92,5 @@ userRouter.get("/:id", async function (req, res, next) {
     next(error);
   }
 });
-
-// 이거 코치님에게 물어봐야한다.
-userRouter.get(
-  "/weekly-metrics/:id",
-  checkToken,
-  async function (req, res, next) {
-    try {
-      // const _id = req.user._id;
-      const _id = req.params.id;
-      const metricsInfo = await userService.getUserMetricsInfo({ _id });
-
-      if (metricsInfo.errorMessage) {
-        throw new Error(metricsInfo.errorMessage);
-      }
-      res.status(200).send(metricsInfo);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
 
 export default userRouter;

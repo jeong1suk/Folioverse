@@ -1,16 +1,18 @@
 // 정원석
 
 import axios from "axios";
-import React, { useState } from "react";
-import styles from "./Login.module.css";
+import { useState, useEffect } from "react";
+import useModalStore from "../../store/modalStore";
+import { Link } from "react-router-dom";
+import { GoogleButton, KakaoButton } from "./SocialButton";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
-  const darkMode = "bg-white text-[#212121] dark:bg-[#212121] dark:text-white";
+  const fontColorA = "text-white";
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => {
@@ -30,6 +32,15 @@ function Login() {
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
 
+  const setModal = useModalStore((state) => state.setModal);
+  const isToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isToken) {
+      location.href = "/error/auth";
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,92 +58,93 @@ function Login() {
   };
 
   return (
-    <div className={`bg-white dark:bg-[#212121]`}>
-      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto shadow-sm`}>
-        {/* max-w-800px mx-auto p-20 border border-gray-300 rounded-lg shadow-sm flex justify-center items-center */}
-        <img
-          className={`w-20 h-auto mx-auto`}
-          src="/logo/logo-light.png"
-          alt="로고 이미지"
-        />
-        <p className={`${darkMode} mt-2 text-center`}>폴리오버스로 출발하기</p>
-      </div>
-
-      <div className={`max-w-2xl h-auto mx-auto p-10 mb-auto`}>
-        <form className={`flex flex-col`}>
-          <label className={`${darkMode} font-bold p-2`}>이메일:</label>
-          <input
-            className={`p-2 border border-solid border-slate rounded`}
-            type="email"
-            placeholder="이메일"
-            onChange={handleEmailChange}
-          />
-
-          <label className={`${darkMode} font-bold mt-2 p-2`}>비밀번호:</label>
-          <input
-            className={`p-2 border border-solid border-slate rounded`}
-            type="password"
-            placeholder="비밀번호"
-            onChange={handlePasswordChange}
-          />
-
-          {errMessage && (
-            <div
-              className={`p-2 border border-solid border-slate rounded text-center bg-yellow-300 text-red-500`}
-            >
-              {errMessage}
-            </div>
-          )}
-
-          <button
-            className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-5`} ${
-              isEmailValid && isPasswordValid && `bg-blue-500 cursor-pointer`
-            }`}
-            type="submit"
-            onClick={handleSubmit}
+    <div className={`min-h-screen bg-black`}>
+      <img
+        src="/homepage/3.png"
+        className={`absolute rotate-180 w-[1440px] top-[-20%] left-[50%] translate-x-[-50%]`}
+      />
+      <div
+        className={`absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%]`}
+      >
+        <div className={`h-auto pt-10 mx-auto p-5 mb-auto min-w-screen`}>
+          <p
+            className={`${fontColorA} mt-2 text-3xl font-bold text-center bg-[transparent] relative`}
           >
-            로그인
-          </button>
-        </form>
-
-        <div className={`mt-4 flex flex-col items-center mb-2`}>
-          <p className={`${darkMode} mb-2`}>또는</p>
-          <button
-            className={`bg-blue-500 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-          >
-            <img
-              className={styles.logo1}
-              src="/logo/logo-light.png"
-              alt="로고 이미지"
-            />
-            구글로 로그인
-          </button>
-          <button
-            className={`bg-yellow-300 text-white text-lg px-10 py-2 mt-2 rounded-md shadow-md flex justify-center items-center hover:cursor-pointer`}
-          >
-            <img
-              className={styles.logo1}
-              src="/logo/logo-light.png"
-              alt="로고 이미지"
-            />
-            카카오 로그인
-          </button>
+            <span className={`text-[#9dcaf5] text-[50px] mr-2`}>Welcome</span>{" "}
+            to
+            <span className={`text-[50px] mt-10`}>
+              <span className={`text-[#9dcaf5] ml-2`}>Folio</span>verse
+            </span>
+          </p>
         </div>
-        <a
-          href="/"
-          className={`inline-block mx-2 lg:mx-0 lg:ml-auto text-cyan-500`}
+
+        <div
+          className={`max-w-2xl h-auto mx-auto p-5 mb-auto bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] border-slate py-18 rounded-3xl`}
         >
-          비밀번호 찾기
-        </a>
-        <a
-          href="/sign-up"
-          className={`inline-block mx-2 float-right text-cyan-500`}
-        >
-          회원가입
-        </a>
+          <form className={`flex flex-col`}>
+            <label className={`${fontColorA} font-bold p-2`}>이메일:</label>
+            <input
+              className={`p-2 border border-solid border-slate rounded outline-black`}
+              type="email"
+              placeholder="이메일"
+              onChange={handleEmailChange}
+              maxLength={250}
+            />
+
+            <label className={`${fontColorA} font-bold mt-2 p-2`}>
+              비밀번호:
+            </label>
+            <input
+              className={`p-2 border border-solid border-slate rounded outline-black`}
+              type="password"
+              placeholder="비밀번호"
+              onChange={handlePasswordChange}
+              maxLength={18}
+            />
+
+            {errMessage && (
+              <div
+                className={`p-2 mt-2 rounded text-center bg-red-500 text-white my-1`}
+              >
+                {errMessage}
+              </div>
+            )}
+
+            <button
+              className={`${`p-2 rounded-2xl border-none bg-black text-white cursor-pointer mt-3`} ${
+                isEmailValid &&
+                isPasswordValid &&
+                `bg-blue-500 hover:bg-blue-400 cursor-pointer`
+              }`}
+              type="submit"
+              onClick={handleSubmit}
+            >
+              로그인
+            </button>
+          </form>
+          <div className="flex justify-center flex-col sm:flex-row mt-2">
+            <GoogleButton />
+            <KakaoButton />
+          </div>
+
+          <Link
+            className={`inline-block mt-2 mx-2 lg:mx-0 lg:ml-auto text-cyan-500 cursor-pointer`}
+            onClick={() => {
+              setModal("", "mail");
+            }}
+          >
+            비밀번호 찾기
+          </Link>
+          <Link
+            to="/sign-up"
+            className={`inline-block mt-2 mx-2 float-right text-cyan-500 cursor-pointer`}
+          >
+            회원가입
+          </Link>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Login;

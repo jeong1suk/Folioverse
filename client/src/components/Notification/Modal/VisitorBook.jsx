@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+//담당 : 이승현
+
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useQueryClient } from "react-query";
+import Pagination from "./Pagination";
+import useThemeStore from "../../../store/themeStore";
 import {
   useQueryDelete,
   useQueryGet,
   useQueryPatch,
 } from "../../../utils/useQuery";
-import { useLocation } from "react-router-dom";
-import { useQueryClient } from "react-query";
-import Pagination from "./Pagination";
 
 const VisitorBook = ({ id }) => {
-  const { mutate } = useQueryPatch("/visitor_book", "post");
+  const { mutate, isLoading: loadingPatch } = useQueryPatch(
+    "/visitor_book",
+    "post"
+  );
   const isToken = localStorage.getItem("token");
+  const inputRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -33,7 +40,8 @@ const VisitorBook = ({ id }) => {
   const { data: myData } = useQueryGet(`/visitor_book`, "getMyVisitor", {
     enabled: !!myInfo?._id,
   });
-  const { deleteMutate } = useQueryDelete("/visitor_book");
+  const { deleteMutate, isLoading: loadingDelete } =
+    useQueryDelete("/visitor_book");
 
   const [bookData, setBookData] = useState(null);
   const [description, setDescription] = useState("");
@@ -41,11 +49,13 @@ const VisitorBook = ({ id }) => {
   const [alert, setAlert] = useState(false);
   const [msg, setMsg] = useState("");
 
+  const theme = useThemeStore((state) => state.theme);
+
   useEffect(() => {
     if (location.pathname === "/my-page") {
-      setBookData(myData?.result);
+      setBookData(myData?.result?.slice().reverse());
     } else {
-      setBookData(othersData?.result);
+      setBookData(othersData?.result?.slice().reverse());
     }
   }, [myData, othersData]);
 
@@ -66,6 +76,7 @@ const VisitorBook = ({ id }) => {
           }
           setAlert(true);
           setMsg("방명록을 작성하였습니다");
+          inputRef.current.value = "";
         },
       }
     );
@@ -103,48 +114,60 @@ const VisitorBook = ({ id }) => {
       >
         <div>
           <textarea
-            className="p-1 border rounded dark:bg-neutral-200 focus:outline-neutral-500 dark:text-neutral-300 dark:bg-neutral-800"
+            className={`p-1 border rounded dark:bg-neutral-200 focus:outline-neutral-500 dark:text-neutral-300 dark:bg-neutral-800 ${
+              !isToken && "hidden"
+            }`}
             cols="30"
             rows="1"
+            maxLength={50}
             onChange={(e) => setDescription(e.target.value)}
+            ref={inputRef}
           ></textarea>
         </div>
         <button
-          className="px-2 py-1 border rounded hover:bg-neutral-200 dark:hover:bg-neutral-800"
+          className={`px-2 py-1 border rounded hover:bg-neutral-200 dark:hover:bg-neutral-800 ${
+            !isToken && "hidden"
+          }`}
           onClick={onSubmit}
+          disabled={loadingPatch}
         >
           작성
         </button>
       </div>
       <div>
-        {bookData?.length > 1 ? (
+        {bookData?.length > 0 ? (
           bookData?.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
             <div
               key={item._id}
-              className="flex flex-row justify-between text-sm mt-5 items-center dark:border-neutral-600"
+              className="flex flex-row text-sm mt-5 items-center dark:border-neutral-600 mb-3"
             >
-              <div className="flex flex-row justify-between w-full">
-                <span>{item.description}</span>
-              </div>
-              <div className="flex flex-row items-center">
+              <span className="break-words w-7/12 pe-3">
+                {item.description}
+              </span>
+              <div className="inline-flex flex-row items-center w-5/12 justify-end">
                 <img
                   src={
-                    item.write_userProfileImage ?? "/profile/profile-dark.png"
+                    item.write_userProfileImage ??
+                    (!theme
+                      ? "/profile/profile-dark.png"
+                      : "/profile/profile-light.png")
                   }
                   alt="프로필 이미지"
-                  className="w-10 rounded-full mr-1"
+                  className="w-10 rounded-full mr-1 whitespace-nowrap"
                 />
-                <span>{item.write_userName}</span>
+                <span className="break-words whitespace-normal">
+                  {item.write_userName}
+                </span>
                 <span
                   className={`${
                     myInfo?._id === item.write_user ||
                     location.pathname === "/my-page"
                       ? ""
                       : "hidden"
-                  } cursor-pointer ml-3 mr-10`}
+                  } cursor-pointer ml-3 mr-1 whitespace-normal`}
                   onClick={() => onDelete(item._id)}
+                  disabled={loadingDelete}
                 >
-                  <span className="sr-only">Close</span>
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5"

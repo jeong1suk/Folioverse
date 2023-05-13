@@ -1,7 +1,7 @@
 /* 정주현 */
 
 .networkProfileBox {
-  border: #9b9b9b 1px solid;
+  border: none;
 }
 
 .networkProfileBox:first-child > .medalGold {
@@ -14,7 +14,20 @@
   background-color: transparent;
 }
 
-.networkProfileBox .medalGold {
+.networkProfileBox:first-child {
+  border: #ffd700 5px solid;
+}
+.networkProfileBox:nth-child(2) {
+  border: #c0c0c0 5px solid;
+}
+
+.networkProfileBox:nth-child(3) {
+  border: #b87333 5px solid;
+}
+
+.networkProfileBox .medalGold,
+.medalSilver,
+.medalBronze {
   display: none;
 }
 
@@ -28,10 +41,6 @@
   background-color: transparent;
 }
 
-.networkProfileBox .medalSilver {
-  display: none;
-}
-
 .networkProfileBox:nth-child(3) > .medalBronze {
   display: block;
   width: 30px;
@@ -42,6 +51,6 @@
   background-color: transparent;
 }
 
-.networkProfileBox .medalBronze {
-  display: none;
+.filterDropMenu::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }

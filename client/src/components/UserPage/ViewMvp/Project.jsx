@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
 
 const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
-  const { data } = useQueryGet("/project", "getProject");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/project", "getProject", {
+    enabled: !!isToken,
+  });
 
   const [projectData, setProjectData] = useState(null);
 
@@ -46,7 +49,9 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
       {projectData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          }`}
         >
           <div>
             <p className="flex justify-between mb-2">
@@ -74,7 +79,7 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
             <p
               className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
-              } leading-10 whitespace-pre-wrap`}
+              } leading-10 whitespace-pre-wrap break-words`}
             >
               {item.description}
             </p>
@@ -88,7 +93,7 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
             <p
               className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
-              } leading-10`}
+              } leading-10 break-words`}
             >
               {item.date}
             </p>
@@ -102,7 +107,7 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
             <p
               className={`mb-2 ml-2 text-neutral-500 dark:text-${
                 !isPdf && "neutral-300"
-              } leading-10 whitespace-pre-wrap`}
+              } leading-10 whitespace-pre-wrap break-words`}
             >
               {item.tech_stack}
             </p>
@@ -119,7 +124,9 @@ const Project = ({ setEditState, project, setProject, isPdf, othersData }) => {
                 참조 링크
               </span>
               {item.link.split("\n").map((link) => (
-                <div key={link}>{renderLink(link)}</div>
+                <div key={link} className="break-words">
+                  {renderLink(link)}
+                </div>
               ))}
             </div>
           </div>

@@ -1,8 +1,8 @@
 //담당 : 이승현
 
+import { useRef, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
 
 const host = import.meta.env.VITE_SERVER_HOST;
 const token = localStorage.getItem("token") ?? null;
@@ -69,7 +69,6 @@ export const useQueryGetRefetch = (link, key, queryOptions = {}) => {
 
   const { data, isLoading, error } = useQuery([key, host + link], queryFunc, {
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 3,
     refetchInterval: 1000,
     ...queryOptions,
     onSuccess: (newData) => {

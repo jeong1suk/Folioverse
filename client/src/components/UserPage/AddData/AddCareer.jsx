@@ -71,14 +71,14 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
         ...provided,
         padding: 10,
         fontSize: 14,
-        backgroundColor: !theme
+        backgroundColor: theme
           ? state.isFocused
             ? "#3F3F46"
             : "#1F1F23"
           : state.isFocused
           ? "#E5E7EB"
           : "#F3F4F6",
-        color: !theme ? "lightgray" : "gray",
+        color: theme ? "lightgray" : "gray",
         borderTopLeftRadius:
           isFirstOrLast && state.data === state.selectProps.options[0]
             ? "4px"
@@ -103,7 +103,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
     },
     control: (provided) => ({
       ...provided,
-      backgroundColor: !theme ? "#1F1F23" : "#F3F4F6",
+      backgroundColor: theme ? "#1F1F23" : "#F3F4F6",
       border: "none",
       boxShadow: "none",
       paddingLeft: 0,
@@ -130,18 +130,18 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
     }),
     multiValue: (provided, state) => ({
       ...provided,
-      backgroundColor: !theme ? "#1F1F23" : "#F3F4F6",
+      backgroundColor: theme ? "#1F1F23" : "#F3F4F6",
       borderRadius: "4px",
     }),
     multiValueLabel: (provided, state) => ({
       ...provided,
-      color: !theme ? "lightgray" : "gray",
+      color: theme ? "lightgray" : "gray",
     }),
     multiValueRemove: (provided, state) => ({
       ...provided,
-      color: !theme ? "lightgray" : "gray",
+      color: theme ? "lightgray" : "gray",
       ":hover": {
-        backgroundColor: !theme ? "#3F3F46" : "#E5E7EB",
+        backgroundColor: theme ? "#3F3F46" : "#E5E7EB",
         color: "white",
       },
     }),
@@ -173,10 +173,11 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
       {career.job !== "개발자" && career.job !== "" && (
         <div className="items-center mb-4 px-2">
           <input
-            className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
+            className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300"
             type="text"
             placeholder="직업명을 작성하세요"
             defaultValue={""}
+            maxLength={20}
             onChange={(e) =>
               setCareer((prevCareer) => ({
                 ...prevCareer,
@@ -237,6 +238,7 @@ const AddCareer = ({ career, setCareer, setIsValid, resetCount }) => {
             className="w-full rounded p-1 border focus:outline-neutral-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
             type="text"
             placeholder="개발 직군을 입력하세요"
+            maxLength={20}
             value={
               career.job === "개발자" && !career.isWeb ? career.position : ""
             }
@@ -332,7 +334,6 @@ const positionOptions = [
 ];
 
 const skillStackOptions = [
-  { value: "", label: "기술 스택" },
   { value: "HTML/CSS", label: "HTML/CSS" },
   { value: "JavaScript", label: "JavaScript" },
   { value: "TypeScript", label: "TypeScript" },

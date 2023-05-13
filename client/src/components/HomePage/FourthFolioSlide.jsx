@@ -8,7 +8,7 @@ import profileImgDefault from "/profile/profile-dark.png";
 import styles from "./HomePage.module.css";
 const host = import.meta.env.VITE_SERVER_HOST;
 
-function FourthFolioSlide() {
+const FourthFolioSlide = () => {
   const { data, error, loading } = useAxiosGet(`${host}/user/list`);
   const firstRef = useRef(null);
 
@@ -25,7 +25,6 @@ function FourthFolioSlide() {
       if (entry.isIntersecting) {
         entry.target.style.opacity = "1";
         observer.unobserve(entry.target);
-        console.log(entry.target);
       }
     });
   });
@@ -51,7 +50,7 @@ function FourthFolioSlide() {
         현재 <span className="text-[#9dcaf5]">Folioverse</span>에 등록된
       </h3>
       <h3 className="absolute top-16 left-[50%] w-[800px] translate-x-[-50%] ">
-      <span className="text-[#9dcaf5]">프로필</span>을 확인해보세요.
+        <span className="text-[#9dcaf5]">프로필</span>을 확인해보세요.
       </h3>
       <div
         className={`${styles.userList}  overflow-y-hidden absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-[rgba(33,33,33,0.8)] backdrop-blur-[10px] w-[900px] h-[320px] px-[25px] mt-[20px] z-10 rounded-[10px]`}
@@ -88,6 +87,6 @@ function FourthFolioSlide() {
       </div>
     </div>
   );
-}
+};
 
 export default FourthFolioSlide;

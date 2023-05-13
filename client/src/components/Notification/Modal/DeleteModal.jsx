@@ -1,16 +1,22 @@
+//담당 : 이승현
+
 import { useEffect, useState } from "react";
 import { useQueryDelete } from "../../../utils/useQuery";
 
 const DeleteModal = ({ id, toggleOpen }) => {
   const [isValid, setIsVaid] = useState(false);
   const [input, setInput] = useState("");
-  const { deleteMutate } = useQueryDelete(`/auth`);
+  const { deleteMutate, isLoading } = useQueryDelete(`/auth`);
 
   const deleteUser = () => {
     deleteMutate(id, {
       onSuccess: (data) => {
         if (data.result) {
           localStorage.removeItem("token");
+          localStorage.removeItem("mvpStore");
+          localStorage.removeItem("themeStore");
+          localStorage.removeItem("reactQueryDevtoolsSortFn");
+          localStorage.removeItem("reactQueryDevtoolsOpen");
           location.href = "/";
         } else {
           console.log("회원 탈퇴에 실패하였습니다.");
@@ -47,7 +53,7 @@ const DeleteModal = ({ id, toggleOpen }) => {
         아래에 "계정 삭제" 를 입력하세요
       </label>
       <input
-        className={`block w-full p-1 rounded m-3 focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300`}
+        className={`block w-full border p-1 rounded my-3 rounded-lg focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-600 dark:text-neutral-300`}
         type="text"
         onChange={(e) => setInput(e.target.value)}
         maxLength={5}
@@ -58,7 +64,7 @@ const DeleteModal = ({ id, toggleOpen }) => {
         className={`text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 ${
           !isValid && "bg-red-900 hover:bg-red-900"
         }`}
-        disabled={!isValid}
+        disabled={!isValid || isLoading}
         onClick={deleteUser}
       >
         네 삭제하겠습니다

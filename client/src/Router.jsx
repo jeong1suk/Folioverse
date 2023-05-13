@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import UserPage from "./components/UserPage/UserPage";
 import ErrPage from "./components/ErrPage";
+import Authorized from "./components/Login/Authorized";
 
 const Router = () => {
   return (
@@ -20,6 +21,8 @@ const Router = () => {
       <Route path="/my-page" element={<UserPage />} />
       <Route path="/error/:type" element={<ErrPage />} />
       <Route path="/user-page/:id" element={<UserPage />} />
+      <Route path="/authorized/*" element={<Authorized />} />
+      <Route path="*" element={<ErrPage />} />
     </Routes>
   );
 };

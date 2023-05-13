@@ -9,16 +9,28 @@ class DailyMetrics {
   }
 
   static async upDateCount(user_id, condition, sign) {
+    const date = new Date();
+    date.setHours(date.getHours() + 9);
     const metrics = await DailyMetricsModel.findOne({
       user_id,
-      date: `${new Date().toISOString().substr(0, 10)}`,
+      date: `${date.toISOString().substr(0, 10)}`,
     });
+
+    const checkCondition = (condition, i) => {
+      if (condition === "follow") {
+        metrics.follow_count += i;
+      } else if (condition === "like") {
+        metrics.like_count += i;
+      } else if (condition === "visit") {
+        metrics.visit_count += i;
+      }
+    };
 
     // condition === follow, visit, like
     if (sign === "+") {
-      metrics[`${condition}_count`] += 1;
+      checkCondition(condition, 1);
     } else if (sign === "-") {
-      metrics[`${condition}_count`] -= i;
+      checkCondition(condition, -1);
     }
     metrics.save();
   }

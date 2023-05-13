@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "../../../utils/useQuery";
+import moment from "moment";
 
 const Certificate = ({
   setEditState,
@@ -10,7 +11,10 @@ const Certificate = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/certificate", "getCertificate");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/certificate", "getCertificate", {
+    enabled: !!isToken,
+  });
 
   const [ceriticateData, setCertificateData] = useState(null);
 
@@ -28,12 +32,20 @@ const Certificate = ({
       _id: item._id,
     });
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return moment(date).format("YYYY-MM-DD");
+  };
+
   return (
     <ul>
       {ceriticateData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          }`}
         >
           <div>
             <p className="flex justify-between mb-2">
@@ -63,7 +75,7 @@ const Certificate = ({
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              {item.date}
+              {formatDate(item.date)}
             </p>
             <p
               className={`text-sm text-neutral-400 dark:text-${

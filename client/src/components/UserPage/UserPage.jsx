@@ -1,15 +1,17 @@
 //담당 : 이승현
 
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQueryGet } from "../../utils/useQuery";
 import Mvp from "./Mvp";
 import Profile from "./Profile";
-import { useEffect } from "react";
-import { useQueryGet } from "../../utils/useQuery";
 import MvpSelector from "./MvpSelector";
 import PdfReader from "./SpeedDial/PdfReader";
 import SpeedDial from "./SpeedDial/SpeedDial";
 import PostList from "./PostList";
 import useModalStore from "../../store/modalStore";
+import useStyleClassStore from "../../store/styleClassStore";
+import mvpSelectStore from "../../store/mvpSelectStore";
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -29,11 +31,11 @@ const UserPage = () => {
   });
 
   const followInfoQuery = useQueryGet(`/follow/${id}`, "getFollowInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const likeInfoQuery = useQueryGet(`/like/${id}`, "getLikeInfo", {
-    enabled: !!id,
+    enabled: !!id && !!isToken,
   });
 
   const { data: myInfo } = myInfoQuery;
@@ -41,6 +43,11 @@ const UserPage = () => {
   const { data: othersInfo } = othersInfoQuery;
   const { data: followInfo } = followInfoQuery;
   const { data: likeInfo } = likeInfoQuery;
+
+  const educationState = mvpSelectStore((state) => state.education);
+  const careerState = mvpSelectStore((state) => state.career);
+  const awardState = mvpSelectStore((state) => state.award);
+  const certificateState = mvpSelectStore((state) => state.certificate);
 
   useEffect(() => {
     if (!localStorage.getItem("token") && !id) {
@@ -54,8 +61,16 @@ const UserPage = () => {
     }
   }, [params]);
 
+  const bgColor = useStyleClassStore((state) => state.bgColor);
+
+  useEffect(() => {
+    console.log(othersData?.career);
+  }, [othersData?.career]);
+
   return (
-    <div className="flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row dark:bg-neutral-800 min-h-screen">
+    <div
+      className={`flex-col py-5 px-2 sm:px-12 lg:px-40 xl:px-60 2xl:px-80 flex md:flex-row min-h-screen ${bgColor}`}
+    >
       <div className="basis-1/4 px-5 mb-2">
         <div className="sticky top-20">
           <Profile
@@ -68,24 +83,30 @@ const UserPage = () => {
             <MvpSelector />
           </div>
           <PostList id={id ?? myInfo?._id} />
-          <div className={id ? "hidden" : ""}>
-            <MessageBoxButton />
-          </div>
           <div>
             <VisitorBookButton othersId={id} />
           </div>
         </div>
       </div>
-      <main className="basis-3/4 ml-5">
-        <div className="lg:flex flew-row mb-2">
-          <div className="basis-1/2 mr-1">
+      <main className="basis-3/4">
+        <div
+          className={`lg:flex${
+            othersData?.education.length < 1 ||
+            othersData?.career.length < 1 ||
+            !educationState ||
+            !careerState
+              ? "-row"
+              : ""
+          } flex-row mb-4`}
+        >
+          <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"학력"}
               othersData={othersData?.education}
               customClass="h-full"
             />
           </div>
-          <div className="basis-1/2 ml-1">
+          <div className="basis-1/2 lg:ml-1">
             <Mvp
               title={"직업 및 경력"}
               othersData={othersData?.career}
@@ -94,15 +115,24 @@ const UserPage = () => {
           </div>
         </div>
         <Mvp title={"프로젝트"} othersData={othersData?.project} />
-        <div className="lg:flex flew-row mb-2">
-          <div className="basis-1/2 mr-1">
+        <div
+          className={`lg:flex${
+            othersData?.award.length < 1 ||
+            othersData?.certificate.length < 1 ||
+            !awardState ||
+            !certificateState
+              ? "-row"
+              : ""
+          } flew-row mb-2`}
+        >
+          <div className="basis-1/2 lg:mr-1">
             <Mvp
               title={"수상 이력"}
               othersData={othersData?.award}
               customClass="h-full"
             />
           </div>
-          <div className="basis-1/2 ml-1">
+          <div className="basis-1/2 lg:ml-1">
             <Mvp
               title={"자격증"}
               othersData={othersData?.certificate}
@@ -121,30 +151,18 @@ const UserPage = () => {
   );
 };
 
-const MessageBoxButton = () => {
-  const setModal = useModalStore((state) => state.setModal);
-  return (
-    <button
-      className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
-      onClick={() => {
-        setModal("", "messageBox");
-      }}
-    >
-      쪽지함 열기
-    </button>
-  );
-};
-
 const VisitorBookButton = ({ othersId }) => {
   const setModal = useModalStore((state) => state.setModal);
   return (
     <button
-      className="text-sm w-full p-3 rounded border mt-3 hover:bg-blue-200 dark:bg-neutral-700 dark:text-neutral-300 dark:border-0 dark:hover:bg-neutral-600"
+      className={
+        "w-full mt-2 rounded-xl text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+      }
       onClick={() => {
         setModal(othersId, "visitorBook");
       }}
     >
-      {othersId ? "방명록 작성" : "방명록 열기"}
+      방명록
     </button>
   );
 };

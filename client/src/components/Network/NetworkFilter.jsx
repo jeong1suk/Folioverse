@@ -1,76 +1,217 @@
 // 정주현
-
-function NetworkFilter({ sortBy, setSortBy }) {
-  function handleFilter(e) {
-    if (sortBy.includes(e.target.value)) {
-      let newArr = [...sortBy];
-      newArr.splice(newArr.indexOf(e.target.value), 1);
-      return setSortBy(newArr);
-    } else {
-      let newArr = [...sortBy];
-      newArr.push(e.target.value);
-      return setSortBy(newArr);
-    }
-  }
+import { useRef, useState } from "react";
+import FilterDropMenu from "./FilterDownMenu";
+import useOnClickOutside from "../Layout/useOnClickOutside";
+const NetworkFilter = ({ sortBy, setSortBy }) => {
+  const [isTechStackFocused, setIsTechStackFocused] = useState(false);
+  const ref = useRef();
   const bgColor = "bg-white dark:bg-[#1a1a1a]";
   const boxColor = "bg-[#d8d8d8] dark:bg-[#333333]";
   const borderColor = "border-solid border-[#9b9b9b] dark:border-[#575757]";
   const fontColorA = "text-[#3e3e3e] dark:text-[#fff]";
-
   const filterItemStyle = `text-xs font-light ${fontColorA} ${boxColor} px-[10px] py-[5px] mx-[5px] rounded-[10px]`;
   const btnDisabled = `box-border border bg-transparent font-light text-sm m-[3px] px-3.5 py-[3px] rounded-[20px]  `;
   const btnEnabled = `bg-transparent font-light text-sm m-[3px] px-3.5 py-[3px] rounded-[20px] box-border border ${borderColor} ${bgColor} ${fontColorA}`;
+  useOnClickOutside(ref, () => setIsTechStackFocused(false));
+  const skillStackOptions = [
+    "HTML/CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Vue",
+    "Angular",
+    "Svelte",
+    "JQuery",
+    "NodeJs",
+    "ExpressJs",
+    "NestJs",
+    "NextJS",
+    "Remix",
+    "SvelteKit",
+    "Python",
+    "Django",
+    "Flask",
+    "FastApi",
+    "Java",
+    "Spring",
+    "ReactNative",
+    "Fluter",
+    "Kotilin",
+    "Swift",
+    "Docker",
+    "AWS",
+    "Firebase",
+    "Dart",
+    "Rust",
+    "C",
+    "C++",
+    "C#",
+    "Git",
+    "GitHub",
+    "RestAPI",
+    "GraphQL",
+    "Linux",
+    "TensorFlow",
+  ];
+  const stackHandleFilter = (e) => {
+    if (skillStackOptions.includes(e.target.value)) {
+      if (sortBy?.techStack.includes(e.target.value)) {
+        let arr = [...sortBy.techStack];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, techStack: arr });
+      }
+      return setSortBy({
+        ...sortBy,
+        techStack: [...sortBy.techStack, e.target.value],
+      });
+    }
+  };
+
+  const handleFilter = (e) => {
+    if (
+      e.target.value.includes("비개발자") ||
+      e.target.value.includes("개발자")
+    ) {
+      if (sortBy?.job.includes(e.target.value)) {
+        let arr = [...sortBy.job];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, job: arr });
+      }
+      return setSortBy({ ...sortBy, job: [...sortBy.job, e.target.value] });
+    }
+    if (
+      e.target.value.includes("신입 - 1년 미만") ||
+      e.target.value.includes("경력 - 1년 이상") ||
+      e.target.value.includes("경력 - 5년 이상")
+    ) {
+      if (sortBy?.yearly.includes(e.target.value)) {
+        let arr = [...sortBy.yearly];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, yearly: arr });
+      }
+      return setSortBy({
+        ...sortBy,
+        yearly: [...sortBy.yearly, e.target.value],
+      });
+    }
+
+    if (
+      e.target.value.includes("프론트엔드") ||
+      e.target.value.includes("백엔드") ||
+      e.target.value.includes("풀스택")
+    ) {
+      if (sortBy?.position.includes(e.target.value)) {
+        let arr = [...sortBy?.position];
+        arr.splice(arr.indexOf(e.target.value), 1);
+        return setSortBy({ ...sortBy, position: arr });
+      }
+      return setSortBy({
+        ...sortBy,
+        position: [...sortBy.position, e.target.value],
+      });
+    }
+  };
   return (
     <div
-      className={`w-[1150px] h-auto mt-2.5 m-auto p-2.5 rounded-[5px] bg-transparent ${fontColorA}`}
+      className={`w-[fit-content] h-auto mt-2.5 m-auto p-2.5 rounded-[5px] bg-transparent ${fontColorA}`}
     >
       <h2 className="ml-[10px]">필터</h2>
       <div className={`mt-[5px]`}>
         <button
-          className={sortBy.includes("비전공자") ? btnEnabled : btnDisabled}
-          value="비전공자"
+          className={sortBy.job.includes("비개발자") ? btnEnabled : btnDisabled}
+          value="비개발자"
           onClick={handleFilter}
         >
-          비전공자
+          비개발자
         </button>
         <button
-          className={sortBy.includes("전공자") ? btnEnabled : btnDisabled}
-          value="전공자"
+          className={sortBy.job.includes("개발자") ? btnEnabled : btnDisabled}
+          value="개발자"
           onClick={handleFilter}
         >
-          전공자
+          개발자
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={
+            sortBy.yearly.includes("신입 - 1년 미만") ? btnEnabled : btnDisabled
+          }
+          value="신입 - 1년 미만"
+          onClick={handleFilter}
+        >
+          신입 - 1년 미만
         </button>
         <button
-          className={sortBy.includes("신입개발자") ? btnEnabled : btnDisabled}
-          value="신입개발자"
+          className={
+            sortBy.yearly.includes("경력 - 1년 이상") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 1년 이상"
           onClick={handleFilter}
         >
-          신입개발자
+          경력 - 1년 이상
         </button>
         <button
-          className={sortBy.includes("경력개발자") ? btnEnabled : btnDisabled}
-          value="경력개발자"
+          className={
+            sortBy.yearly.includes("경력 - 5년 이상") ? btnEnabled : btnDisabled
+          }
+          value="경력 - 5년 이상"
           onClick={handleFilter}
         >
-          경력개발자(1년 이상)
+          경력 - 5년 이상
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          className={
+            sortBy.position.includes("프론트엔드") ? btnEnabled : btnDisabled
+          }
+          value="프론트엔드"
+          onClick={handleFilter}
+        >
+          프론트엔드
         </button>
         <button
-          className={sortBy.includes("숙련개발자") ? btnEnabled : btnDisabled}
-          value="숙련개발자"
+          className={
+            sortBy.position.includes("백엔드") ? btnEnabled : btnDisabled
+          }
+          value="백엔드"
           onClick={handleFilter}
         >
-          숙련개발자(5년 이상)
+          백엔드
         </button>
-        {/* 프론트, 백엔드, 풀스택 추가 */}
+        <button
+          className={
+            sortBy.position.includes("풀스택") ? btnEnabled : btnDisabled
+          }
+          value="풀스택"
+          onClick={handleFilter}
+        >
+          풀스택
+        </button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <div ref={ref} className="inline-block relative">
+          <button
+            className={btnDisabled}
+            onClick={() => setIsTechStackFocused(!isTechStackFocused)}
+          >
+            {isTechStackFocused ? "기술스택 △" : "기술스택 ▽"}
+          </button>
+          {isTechStackFocused && (
+            <FilterDropMenu
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              skillStackOptions={skillStackOptions}
+            />
+          )}
+        </div>
       </div>
       <div className="mt-[10px]">
-        {sortBy.length > 0 &&
-          sortBy.map((item, index) => {
+        {sortBy.techStack.length > 0 &&
+          sortBy.techStack.map((item, index) => {
             return (
               <button
                 key={index}
                 className={filterItemStyle}
-                onClick={handleFilter}
+                onClick={stackHandleFilter}
                 value={item}
               >
                 {item}
@@ -80,5 +221,5 @@ function NetworkFilter({ sortBy, setSortBy }) {
       </div>
     </div>
   );
-}
+};
 export default NetworkFilter;

@@ -1,14 +1,19 @@
-import { useState } from "react";
-import { useQueryPatch } from "../../../utils/useQuery";
+//담당 : 이승현
+
+import { useRef, useState } from "react";
 import { useQueryClient } from "react-query";
+import { useQueryPatch } from "../../../utils/useQuery";
 import useToastStore from "../../../store/toastStore";
 
 const WritePostModal = ({ toggleOpen }) => {
-  const { mutate } = useQueryPatch("/post", "put");
+  const { mutate, isLoading: loadingWrite } = useQueryPatch("/post", "put");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const queryClient = useQueryClient();
   const setToast = useToastStore((state) => state.setToast);
+
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +24,8 @@ const WritePostModal = ({ toggleOpen }) => {
           setToast("게시글이 추가되었습니다", "success");
           queryClient.invalidateQueries("getPost");
           toggleOpen();
+          titleRef.current.value = "";
+          descriptionRef.current.value = "";
         },
       }
     );
@@ -33,6 +40,7 @@ const WritePostModal = ({ toggleOpen }) => {
           type="text"
           className="w-full rounded border p-1 focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-800 dark:border-cyan-950 dark:text-neutral-300"
           onChange={(e) => setTitle(e.target.value)}
+          ref={titleRef}
         />
       </div>
       <div>
@@ -42,12 +50,14 @@ const WritePostModal = ({ toggleOpen }) => {
           cols="30"
           rows="10"
           onChange={(e) => setDescription(e.target.value)}
+          ref={descriptionRef}
         ></textarea>
       </div>
       <div className="text-center mt-2">
         <button
           className="border px-2 py-1 rounded mx-1 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-600"
           onClick={onSubmit}
+          disabled={loadingWrite}
         >
           저장
         </button>

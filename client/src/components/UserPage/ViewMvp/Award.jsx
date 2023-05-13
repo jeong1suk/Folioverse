@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useQueryGet } from "./../../../utils/useQuery";
+import moment from "moment";
 
 const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
-  const { data } = useQueryGet("/award", "getAward");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/award", "getAward", { enabled: !!isToken });
 
   const [awardData, setAwardData] = useState(null);
 
@@ -21,12 +23,20 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
       _id: item._id,
     });
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return moment(date).format("YYYY-MM-DD");
+  };
+
   return (
     <ul>
       {awardData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          } `}
         >
           <div>
             <p className="flex justify-between mb-2">
@@ -56,7 +66,7 @@ const Award = ({ setEditState, award, setAward, isPdf, othersData }) => {
                 !isPdf && "neutral-300"
               } leading-10`}
             >
-              {item.date}
+              {formatDate(item.date)}
             </p>
           </div>
         </li>

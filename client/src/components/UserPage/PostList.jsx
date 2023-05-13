@@ -9,11 +9,13 @@ const PostList = ({ id }) => {
       <button
         data-dropdown-toggle="dropdownSearch"
         data-dropdown-placement="bottom"
-        className="w-full text-black border dark:border-0 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center justify-center dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:focus:ring-black"
+        className={
+          "w-full mt-1 rounded-xl text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+        }
         type="button"
         onClick={() => setModal(id, "post")}
       >
-        글 목록 보기
+        미니 블로그
       </button>
     </div>
   );

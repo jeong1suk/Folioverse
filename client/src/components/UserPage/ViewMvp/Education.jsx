@@ -10,7 +10,10 @@ const Education = ({
   isPdf,
   othersData,
 }) => {
-  const { data } = useQueryGet("/education", "getEducation");
+  const isToken = localStorage.getItem("token");
+  const { data } = useQueryGet("/education", "getEducation", {
+    enabled: !!isToken,
+  });
 
   const [educationData, setEducationData] = useState(null);
 
@@ -34,7 +37,9 @@ const Education = ({
       {educationData?.map((item) => (
         <li
           key={item._id}
-          className="text-black border p-3 rounded mt-2 dark:border-cyan-950"
+          className={`text-black border p-3 rounded-xl mt-2 dark:bg-${
+            isPdf ? "white" : "neutral-800 dark:border-neutral-600"
+          }`}
         >
           <div>
             <p className="flex justify-between mb-2">

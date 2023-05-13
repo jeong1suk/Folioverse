@@ -6,10 +6,20 @@ import cors from "cors";
 import { initializePassport } from "./middlewares/passport/index.js";
 import dailyMetrics from "./dailyEvent/dailyMetrics.js";
 import cron from "node-cron";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
-app.use(cors());
+const clientHost = process.env.CLIENT_HOST;
+const corsOptions = {
+  origin: clientHost,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const passport = initializePassport();
@@ -28,9 +38,14 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 정각마다 dailyMetrics 모듈 실행
-const job = cron.schedule("0 0 * * *", dailyMetrics);
-job.start();
+app.get("/api/test", (req, res) => {
+  dailyMetrics();
+  res.send("goot test");
+});
+
+// 정각(인데 오류가 조금 있어서 0시 5분)에 dailyMetrics 모듈 실행
+// const job = cron.schedule("5 0 * * *", dailyMetrics);
+// job.start();
 
 app.listen(3000, () => {
   console.log("3000번 포트에서 Express 서버 실행중");

@@ -8,7 +8,8 @@ import useModalStore from "../../store/modalStore";
 const EditUserInfo = ({ data }) => {
   const [content, setContent] = useState(false);
   const [password, setPassword] = useState("");
-  const { mutate } = useQueryPatch(`/auth/check-password`, "post");
+  const [vaild, IsValid] = useState(false);
+  const { mutate, isLoading } = useQueryPatch(`/auth/check-password`, "post");
   const setToast = useToastStore((state) => state.setToast);
 
   const onSubmit = (e) => {
@@ -26,9 +27,13 @@ const EditUserInfo = ({ data }) => {
     setPassword("");
   };
 
+  useEffect(() => {
+    IsValid(password ? true : false);
+  }, [password]);
+
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 dark:border-cyan-950">
+      <h1 className="text-2xl border-b-2 pb-2 dark:border-neutral-800">
         회원 정보 수정
       </h1>
       <section className="pt-5">
@@ -38,7 +43,7 @@ const EditUserInfo = ({ data }) => {
             <form className="flex flex-row items-center mt-3 w-screen sm:w-full">
               <input type="text" className="hidden" autoComplete="username" />
               <input
-                className="border mx-1 rounded p-1 text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300"
+                className="border mx-1 rounded p-1 text-black focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-300"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="new-password"
@@ -47,8 +52,11 @@ const EditUserInfo = ({ data }) => {
                 maxLength={20}
               />
               <button
-                className="border py-1 px-3 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950"
+                className={`border py-1 px-3 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800 ${
+                  !vaild && "cursor-not-allowed"
+                }`}
                 onClick={onSubmit}
+                disabled={!vaild || isLoading}
               >
                 확인
               </button>
@@ -62,7 +70,7 @@ const EditUserInfo = ({ data }) => {
 };
 
 const EditContent = ({ content, data }) => {
-  const { mutate } = useQueryPatch(`/user/${data?._id}`, "patch");
+  const { mutate, isLoading } = useQueryPatch(`/user/${data?._id}`, "patch");
   const formRef = useRef();
 
   const [password, setPassword] = useState("");
@@ -105,7 +113,7 @@ const EditContent = ({ content, data }) => {
   }, [password, password2]);
 
   const defaultInputStyle =
-    "focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-cyan-950 dark:text-neutral-300";
+    "focus:outline-neutral-300 focus:outline-neutral-500 dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-300";
   const validInputStyle = "border-green-500 outline-green-500";
   const invalidInputStyle = "border-red-500 outline-red-500";
 
@@ -152,9 +160,9 @@ const EditContent = ({ content, data }) => {
         <button
           className={`${
             !isValid && "bg-gray-100 dark:bg-neutral-600 cursor-not-allowed"
-          } border py-1 px-2 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-cyan-950`}
+          } border py-1 px-2 rounded hover:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-800`}
           onClick={onSubmit}
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
           변경
         </button>

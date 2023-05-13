@@ -2,10 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import FirstGreet from "./FirstGreet";
-import SecondSlide from "./SecondProfile";
+import SecondProfile from "./SecondProfile";
 import firstimg from "/homepage/1.png";
-import FourthFolioSlide from "./FourthFolioSlide";
-function HomePage() {
+import ThirdFolioSlide from "./ThirdFolioSlide";
+import FourthFooter from "./FourthFooter";
+
+const HomePage = () => {
   const bgRef = useRef(null);
 
   const observer = new IntersectionObserver((entry) => {
@@ -23,20 +25,22 @@ function HomePage() {
   }, []);
   return (
     <div className="overflow-hidden w-full">
+      <div className="absolute top-0 w-full h-[70px] bg-[#000] z-0"></div>
+      {/* Header부분 공백가리기 */}
       <img
         ref={bgRef}
         className="w-[1700px] absolute top-[-300px] left-[50%] translate-x-[-50%] z-0 opacity-0 transition-all duration-500 ease-in-out"
         src={firstimg}
         alt="성운"
       />
-      <div className="grid grid-cols-1 w-full mx-auto gap-[1500px] bg-[#000]">
+      <div className="grid grid-cols-1 w-full mx-auto gap-[700px] bg-[#000]">
         <FirstGreet />
-        <SecondSlide />
-        <FourthFolioSlide />
-        <div className="font-bold text-[50px] text-white m-auto">Footer</div>
+        <SecondProfile />
+        <ThirdFolioSlide />
+        <FourthFooter />
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;

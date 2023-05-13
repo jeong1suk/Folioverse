@@ -1,24 +1,21 @@
 //담당 : 이승현
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart } from "chart.js/auto";
 import { useQueryGet } from "../../utils/useQuery";
+import moment from "moment";
 
 Chart.register(CategoryScale);
 
 const UserStats = ({ data }) => {
-  const { data: chartData } = useQueryGet(
-    `/user/weekly-metrics/${data?._id}`,
-    "getChart",
-    {
-      enabled: !!data,
-    }
-  );
+  const { data: chartData } = useQueryGet(`/user/weekly-metrics`, "getChart", {
+    enabled: !!data,
+  });
 
   return (
     <div className="dark:text-white">
-      <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-cyan-950">
+      <h1 className="text-2xl border-b-2 pb-2 mb-5 dark:border-neutral-800">
         통계
       </h1>
       <ul className="flex flex-row justify-evenly">
@@ -45,18 +42,17 @@ const UserStats = ({ data }) => {
 const UserChart = ({ chartData }) => {
   const chartConfig = useMemo(() => {
     const endDate = new Date();
-    const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-
+    const startDate = new Date(endDate.getTime() - 6 * 24 * 60 * 60 * 1000);
     const labels = [];
     const visitorData = [];
     const followerData = [];
     const likeData = [];
 
     for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-      const dateString = d.toISOString().slice(0, 10);
+      const dateString = moment(d).format("YYYY-MM-DD");
       labels.push(dateString);
 
-      const dayData = chartData.find((item) => item.date === dateString);
+      const dayData = chartData?.find((item) => item.date === dateString);
 
       if (dayData) {
         visitorData.push(dayData.visit_count);

@@ -1,11 +1,10 @@
 // 정주현
 
 import { useEffect, useRef } from "react";
-import profileIntroImg from "/homepage/profileExample.png";
 import secondImg from "/homepage/2.png";
 import SecondCommunity from "./SecondCommunity";
 
-function SecondSlide() {
+const SecondProfile = () => {
   const imgRef = useRef(null);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
@@ -44,7 +43,7 @@ function SecondSlide() {
           ref={ref2}
           className={`delay-[200ms] ${h2style} left-[-70px] relative`}
         >
-          <span className="text-[#9dcaf5]">여러가지 기능</span>을 이용해보세요.
+          <span className="text-[#9dcaf5]">여러가지 기능</span>을 이용해보세요
         </h2>
       </div>
       <div
@@ -55,6 +54,6 @@ function SecondSlide() {
       </div>
     </div>
   );
-}
+};
 
-export default SecondSlide;
+export default SecondProfile;
